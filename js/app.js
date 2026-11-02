@@ -447,7 +447,7 @@ function renderConceptWalkthrough(unitId) {
   } else if (unitId === "ch13-decision") {
     container.innerHTML = `
       <div class="concept-card">
-        <h3 style="color: #38bdf8; font-size: 1.15rem; margin-bottom: 0.6rem;">🌳 決策準則心態視覺化 (Decision Criteria Spotlight)</h3>
+        <h3 style="color: #38bdf8; font-size: 1.15rem; margin-bottom: 0.6rem;">⚖️ 決策準則心態視覺化 (Decision Criteria Spotlight)</h3>
         <p style="color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 1rem;">
           面對未來不確定情境，四種經典準則體現了四種截然不同的決策哲學。<br>
           請點擊下方按鈕，矩陣會為您打上即時聚焦光圈，呈現演算法挑選方案的過程：
@@ -502,7 +502,7 @@ function renderConceptWalkthrough(unitId) {
         <p style="color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 1rem;">
           ${
             isU3
-              ? "貝氏定理用於藉由新獲得的測試資訊，逆向修正先驗機率為事後後悔（後驗機率）。特別注意：互斥非零必相依！連續型隨機變數單點機率恆為 0。"
+              ? "貝氏定理用於藉由新獲得的測試資訊，逆向修正先驗機率為事後機率（後驗機率）。特別注意：互斥非零必相依！連續型隨機變數單點機率恆為 0。"
               : "線性規劃極值點定理：最佳解必出現在可行解區域的頂點！敏感度分析透過等利潤線斜率夾在相交兩邊界斜率之間，決定係數容許變動範圍。"
           }
         </p>
@@ -744,10 +744,10 @@ window.setDecisionSpotlight = function (mode) {
   } else if (mode === "minimax_regret") {
     tableBox.innerHTML = `
       <table class="decision-table">
-        <tr><th>機會損失矩陣 (遺憾值)</th><th>S1 (基基準100)</th><th>S2 (基準50)</th><th>S3 (基準40)</th><th>方案最大遺憾</th></tr>
+        <tr><th>機會損失矩陣 (遺憾值)</th><th>S1 (基準100)</th><th>S2 (基準50)</th><th>S3 (基準40)</th><th>方案最大遺憾</th></tr>
         <tr><td>方案 A</td><td>0</td><td>10</td><td class="cell-spotlight">60</td><td>60</td></tr>
-        <tr><td>方案 B</td><td class="cell-spotlight">30</td><td>0</td><td class="cell-spotlight">30</td><td>30</td></tr>
-        <tr><td>方案 C</td><td class="cell-winner">50</td><td>0</td><td>0</td><td class="cell-winner">50</td></tr>
+        <tr><td>方案 B</td><td class="cell-spotlight">30</td><td>0</td><td class="cell-spotlight">30</td><td class="cell-winner">30 (最小遺憾)</td></tr>
+        <tr><td>方案 C</td><td class="cell-spotlight">50</td><td>0</td><td>0</td><td>50</td></tr>
       </table>
     `;
     expBox.innerHTML = "💔 <strong>最大機會損失最小化 (Minimax Regret)</strong>：行最大減各格算遺憾值。各方案最大遺憾 A:60, B:30, C:50。取最小遺憾 30 $\\implies$ <strong>選方案 B（最壞遺憾僅 30 萬）</strong>！";

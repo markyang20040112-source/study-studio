@@ -53,12 +53,25 @@ def test_scope_and_rules():
     # Unit 3 Level 4 must have q-u3-l4-02 (企3B 楊亞恩作業 EX1 & EX2 Bayes' theorem only)
     assert 'id: "q-u3-l4-02"' in q_code, "Missing q-u3-l4-02 in Unit 3!"
     assert "企3B 作業 EX1 & EX2" in q_code, "q-u3-l4-02 title must reference 企3B 作業 EX1 & EX2"
+    assert "0.675" in q_code, "q-u3-l4-02 must include P(BS) = 0.675"
+    assert "0.325" in q_code, "q-u3-l4-02 must include P(BF) = 0.325"
+    assert "14/15" in q_code, "q-u3-l4-02 must include P(AS|BS) = 14/15"
+    assert "14/65" in q_code, "q-u3-l4-02 must include P(AS|BF) = 14/65"
 
     # Unit 6 must contain Homework 1107 Question 3 payoff matrix problem
     assert 'id: "q-u6-l4-01"' in q_code, "Missing q-u6-l4-01 in Unit 6!"
     assert "作業 1107 題三" in q_code, "Unit 6 Level 4 must feature Homework 1107 Q3"
+    assert 'id: "q-u6-l4-02"' in q_code, "Missing q-u6-l4-02 in Unit 6!"
+    assert "correctAnswer: 7.0" in q_code or "correctAnswer: 7" in q_code, "q-u6-l4-02 correctAnswer must be 7"
 
-    print("✓ Scope and knowledge base rules verified (Ch 6.3 excluded, percentile board note verified, 6 units present, Unit 3 Bayes boss verified, Unit 6 13.2 strict scope verified).")
+    # Verify app.js spotlight table correctness
+    with open("js/app.js", "r", encoding="utf-8") as f:
+        app_js = f.read()
+    assert "基基準" not in app_js, "Typo '基基準' found in js/app.js!"
+    assert "事後後悔（後驗機率）" not in app_js, "Typo '事後後悔（後驗機率）' found in js/app.js!"
+    assert '<td>方案 B</td><td class="cell-spotlight">30</td><td>0</td><td class="cell-spotlight">30</td><td class="cell-winner">30 (最小遺憾)</td>' in app_js, "Scheme B must be marked as cell-winner in Minimax Regret spotlight!"
+
+    print("✓ Scope and knowledge base rules verified (Ch 6.3 excluded, percentile board note verified, 6 units present, Unit 3 Bayes boss verified, Unit 6 13.2 strict scope and spotlight table verified).")
 
 def test_html_and_cdn():
     with open("index.html", "r", encoding="utf-8") as f:
