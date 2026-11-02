@@ -1554,18 +1554,203 @@ window.setDecisionSpotlight = function (mode) {
     expBox.innerHTML = "⚖️ <strong>機率均等準則 (Laplace)</strong>：假設三種景氣機率各 1/3，求期望獲利 $\\implies$ <strong>選方案 C（平均 46.67 萬最高）</strong>！";
   } else if (mode === "minimax_regret") {
     tableBox.innerHTML = `
-      <table class="decision-table">
-        <tr><th>機會損失矩陣 (遺憾值)</th><th>S1 (基準100)</th><th>S2 (基準50)</th><th>S3 (基準40)</th><th>方案最大遺憾</th></tr>
-        <tr><td>方案 A</td><td>0</td><td>10</td><td class="cell-spotlight">60</td><td>60</td></tr>
-        <tr><td>方案 B</td><td class="cell-spotlight">30</td><td>0</td><td class="cell-spotlight">30</td><td class="cell-winner">30 (最小遺憾)</td></tr>
-        <tr><td>方案 C</td><td class="cell-spotlight">50</td><td>0</td><td>0</td><td>50</td></tr>
-      </table>
+      <!-- 步驟切換頁籤 (支援全覽、單步檢視，iPad / 手機友善) -->
+      <div class="regret-step-tabs">
+        <button class="btn btn-sm btn-primary" id="btnRegretAll" onclick="setRegretStepView('all')">📑 兩步完整轉換流程 (全覽)</button>
+        <button class="btn btn-sm btn-secondary" id="btnRegretStep1" onclick="setRegretStepView('step1')">第 1 步：原始收益與情境基準</button>
+        <button class="btn btn-sm btn-secondary" id="btnRegretStep2" onclick="setRegretStepView('step2')">第 2 步：遺憾計算與決策</button>
+      </div>
+
+      <div class="regret-step-container">
+        <!-- 第 1 步：原始收益/付償矩陣 -->
+        <div class="regret-step-card" id="regretStep1Card">
+          <div class="regret-step-header">
+            <span class="regret-step-tag">第 1 步</span>
+            <span class="regret-step-title">原始收益/付償矩陣（Original Payoff Matrix）</span>
+            <div class="regret-step-subtitle">
+              先檢視各方案在各景氣情境下的原始獲利，並在直行底部找出<strong>「各情境最佳獲利基準 (Column Max $V_j^*$)」</strong>：
+            </div>
+          </div>
+          <div style="overflow-x: auto; -webkit-overflow-scrolling: touch;">
+            <table class="decision-table">
+              <thead>
+                <tr>
+                  <th>方案 \\ 景氣情境</th>
+                  <th>繁榮 (S1)</th>
+                  <th>平平 (S2)</th>
+                  <th>蕭條 (S3)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="font-weight: 700;">方案 A</td>
+                  <td class="cell-spotlight">100</td>
+                  <td>40</td>
+                  <td>-20</td>
+                </tr>
+                <tr>
+                  <td style="font-weight: 700;">方案 B</td>
+                  <td>70</td>
+                  <td class="cell-spotlight">50</td>
+                  <td>10</td>
+                </tr>
+                <tr>
+                  <td style="font-weight: 700;">方案 C</td>
+                  <td>50</td>
+                  <td class="cell-spotlight">50</td>
+                  <td class="cell-spotlight">40</td>
+                </tr>
+                <tr class="regret-benchmark-row">
+                  <th style="background: rgba(16, 185, 129, 0.18); color: #34d399; font-weight: 700; border-top: 2px solid #10b981;">
+                    各情境最佳獲利基準<br>
+                    <span style="font-size: 0.78rem; font-weight: normal; color: #a7f3d0;">(Column Max $V_j^*$)</span>
+                  </th>
+                  <td class="cell-winner" style="font-size: 1.05rem;">
+                    $S_1 = \\mathbf{100}$
+                    <div style="font-size: 0.74rem; color: #a7f3d0; margin-top: 2px;">$\\max(100, 70, 50)$</div>
+                  </td>
+                  <td class="cell-winner" style="font-size: 1.05rem;">
+                    $S_2 = \\mathbf{50}$
+                    <div style="font-size: 0.74rem; color: #a7f3d0; margin-top: 2px;">$\\max(40, 50, 50)$</div>
+                  </td>
+                  <td class="cell-winner" style="font-size: 1.05rem;">
+                    $S_3 = \\mathbf{40}$
+                    <div style="font-size: 0.74rem; color: #a7f3d0; margin-top: 2px;">$\\max(-20, 10, 40)$</div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div style="text-align: right; margin-top: 0.65rem;" id="step1NextPrompt">
+            <button class="btn btn-sm btn-primary" onclick="setRegretStepView('step2')">前往第 2 步：計算機會損失矩陣 →</button>
+          </div>
+        </div>
+
+        <!-- 向下轉換引導箭頭 / 轉換公式卡 -->
+        <div class="regret-transition-banner" id="regretTransitionBanner">
+          <div class="regret-arrow-down">⬇️ 向下轉換引導：各情境基準 $V_j^*$ 減去 該格原始獲利 $V_{ij}$ ⬇️</div>
+          <div class="regret-formula-box">
+            <span class="regret-formula-title">📐 機會損失（遺憾值）核心定義公式</span>
+            $$\\text{機會損失（遺憾值）} = \\text{該情境最高獲利 } V_j^* - \\text{該方案獲利 } V_{ij}$$
+            <div class="regret-formula-desc">
+              💡 <strong>管理決策哲學</strong>：代表「如果早知道未來是這個情境，我少賺了多少？」（當選到該情境最高獲利方案時遺憾值為 0；若選方案 A 遇蕭條，少賺了 $40 - (-20) = 60$ 萬）。
+            </div>
+          </div>
+        </div>
+
+        <!-- 第 2 步：機會損失矩陣轉換與最大遺憾 -->
+        <div class="regret-step-card" id="regretStep2Card">
+          <div class="regret-step-header">
+            <span class="regret-step-tag regret-step-tag-green">第 2 步</span>
+            <span class="regret-step-title">機會損失矩陣轉換與最大遺憾（Regret Matrix & Minimax Selection）</span>
+            <div class="regret-step-subtitle">
+              將每格計算出的遺憾值填入矩陣，向右列出各方案的<strong>「最大遺憾 (Row Max)」</strong>，最後挑選受傷最輕（遺憾最小）的方案：
+            </div>
+          </div>
+          <div style="overflow-x: auto; -webkit-overflow-scrolling: touch;">
+            <table class="decision-table">
+              <thead>
+                <tr>
+                  <th>機會損失矩陣<br><span style="font-size: 0.76rem; font-weight: normal; color: #94a3b8;">($R_{ij} = V_j^* - V_{ij}$)</span></th>
+                  <th>繁榮 (S1)<br><span style="font-size: 0.76rem; color: #34d399;">$V_1^* = 100$</span></th>
+                  <th>平平 (S2)<br><span style="font-size: 0.76rem; color: #34d399;">$V_2^* = 50$</span></th>
+                  <th>蕭條 (S3)<br><span style="font-size: 0.76rem; color: #34d399;">$V_3^* = 40$</span></th>
+                  <th style="background: rgba(99, 102, 241, 0.25); color: #c7d2fe;">方案最大遺憾<br><span style="font-size: 0.76rem; font-weight: normal;">(Row Max)</span></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="font-weight: 700;">方案 A</td>
+                  <td><div class="regret-cell-val">0</div><div class="regret-cell-calc">$100 - 100 = 0$</div></td>
+                  <td><div class="regret-cell-val">10</div><div class="regret-cell-calc">$50 - 40 = 10$</div></td>
+                  <td class="cell-spotlight"><div class="regret-cell-val">60</div><div class="regret-cell-calc">$40 - (-20) = 60$</div></td>
+                  <td class="cell-spotlight"><div class="regret-cell-val">60</div><div style="font-size: 0.74rem; color: #94a3b8;">$\\max(0, 10, 60)$</div></td>
+                </tr>
+                <tr>
+                  <td style="font-weight: 700;">方案 B</td>
+                  <td class="cell-spotlight"><div class="regret-cell-val">30</div><div class="regret-cell-calc">$100 - 70 = 30$</div></td>
+                  <td><div class="regret-cell-val">0</div><div class="regret-cell-calc">$50 - 50 = 0$</div></td>
+                  <td class="cell-spotlight"><div class="regret-cell-val">30</div><div class="regret-cell-calc">$40 - 10 = 30$</div></td>
+                  <td class="cell-winner"><div class="regret-cell-val">30</div><div style="font-size: 0.74rem; color: #34d399; font-weight: 700;">(最小遺憾 🏆)</div></td>
+                </tr>
+                <tr>
+                  <td style="font-weight: 700;">方案 C</td>
+                  <td class="cell-spotlight"><div class="regret-cell-val">50</div><div class="regret-cell-calc">$100 - 50 = 50$</div></td>
+                  <td><div class="regret-cell-val">0</div><div class="regret-cell-calc">$50 - 50 = 0$</div></td>
+                  <td><div class="regret-cell-val">0</div><div class="regret-cell-calc">$40 - 40 = 0$</div></td>
+                  <td class="cell-spotlight"><div class="regret-cell-val">50</div><div style="font-size: 0.74rem; color: #94a3b8;">$\\max(50, 0, 0)$</div></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="regret-decision-banner">
+            <div style="font-size: 1.05rem; font-weight: 700; color: #34d399; margin-bottom: 0.35rem;">
+              🏆 決策結論：選方案 B（最壞遺憾僅 30 萬）！
+            </div>
+            <div style="font-size: 0.88rem; color: #e2e8f0; line-height: 1.5;">
+              各方案最大遺憾分別為 A: 60 萬、B: 30 萬、C: 50 萬。<br>
+              依最大機會損失最小化準則：$$\\min(60, 30, 50) = 30 \\implies \\mathbf{選方案 B}$$
+              雖然方案 B 在各情境都不是第一名，但能確保在任何可能情境下，少賺金額最高不超過 30 萬，是典型「輸得起、最壞情況受傷最輕」的穩健決策！
+            </div>
+          </div>
+          <div style="text-align: left; margin-top: 0.65rem;" id="step2PrevPrompt">
+            <button class="btn btn-sm btn-secondary" onclick="setRegretStepView('step1')">← 返回第 1 步原始收益矩陣</button>
+          </div>
+        </div>
+      </div>
     `;
-    expBox.innerHTML = "💔 <strong>最大機會損失最小化 (Minimax Regret)</strong>：行最大減各格算遺憾值。各方案最大遺憾 A:60, B:30, C:50。取最小遺憾 30 $\\implies$ <strong>選方案 B（最壞遺憾僅 30 萬）</strong>！";
+    expBox.innerHTML = "💔 <strong>最大機會損失最小化 (Minimax Regret)</strong>：經歷「第 1 步取各行最大基準 $V_j^*$」$\\to$「轉換公式 $R_{ij} = V_j^* - V_{ij}$」$\\to$「第 2 步各列最大遺憾中取最小 $\\min(60, 30, 50) = 30$」$\\implies$ <strong>選方案 B（最壞遺憾僅 30 萬）</strong>！";
   }
 
   renderMath(expBox);
   renderMath(tableBox);
+};
+
+// 支援機會損失兩步切換 (all, step1, step2)
+window.setRegretStepView = function (step) {
+  const card1 = document.getElementById("regretStep1Card");
+  const banner = document.getElementById("regretTransitionBanner");
+  const card2 = document.getElementById("regretStep2Card");
+  const btnAll = document.getElementById("btnRegretAll");
+  const btn1 = document.getElementById("btnRegretStep1");
+  const btn2 = document.getElementById("btnRegretStep2");
+  const pNext = document.getElementById("step1NextPrompt");
+  const pPrev = document.getElementById("step2PrevPrompt");
+  if (!card1 || !card2) return;
+
+  if (step === "step1") {
+    card1.style.display = "block";
+    if (banner) banner.style.display = "none";
+    card2.style.display = "none";
+    if (pNext) pNext.style.display = "block";
+    if (btnAll) btnAll.className = "btn btn-sm btn-secondary";
+    if (btn1) btn1.className = "btn btn-sm btn-primary";
+    if (btn2) btn2.className = "btn btn-sm btn-secondary";
+  } else if (step === "step2") {
+    card1.style.display = "none";
+    if (banner) banner.style.display = "none";
+    card2.style.display = "block";
+    if (pPrev) pPrev.style.display = "block";
+    if (btnAll) btnAll.className = "btn btn-sm btn-secondary";
+    if (btn1) btn1.className = "btn btn-sm btn-secondary";
+    if (btn2) btn2.className = "btn btn-sm btn-primary";
+  } else {
+    // all
+    card1.style.display = "block";
+    if (banner) banner.style.display = "block";
+    card2.style.display = "block";
+    if (pNext) pNext.style.display = "none";
+    if (pPrev) pPrev.style.display = "none";
+    if (btnAll) btnAll.className = "btn btn-sm btn-primary";
+    if (btn1) btn1.className = "btn btn-sm btn-secondary";
+    if (btn2) btn2.className = "btn btn-sm btn-secondary";
+  }
+
+  const tableBox = document.getElementById("decisionTableContainer");
+  if (tableBox && typeof renderMath === "function") {
+    renderMath(tableBox);
+  }
 };
 
 // ==========================================

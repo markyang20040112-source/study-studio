@@ -5,3 +5,5 @@ dist/
 *.log
 course_materials/
 tools/
+__pycache__/
+*.pyc

@@ -69,9 +69,18 @@ def test_scope_and_rules():
         app_js = f.read()
     assert "基基準" not in app_js, "Typo '基基準' found in js/app.js!"
     assert "事後後悔（後驗機率）" not in app_js, "Typo '事後後悔（後驗機率）' found in js/app.js!"
-    assert '<td>方案 B</td><td class="cell-spotlight">30</td><td>0</td><td class="cell-spotlight">30</td><td class="cell-winner">30 (最小遺憾)</td>' in app_js, "Scheme B must be marked as cell-winner in Minimax Regret spotlight!"
+    # Verify Minimax Regret 2-step table transformation
+    assert "各情境最佳獲利基準" in app_js, "Minimax Regret must have Step 1 benchmark row '各情境最佳獲利基準'!"
+    assert "Column Max" in app_js, "Minimax Regret must include Column Max benchmark indicator!"
+    assert "機會損失（遺憾值）" in app_js, "Minimax Regret must have transition formula banner!"
+    assert "方案 B" in app_js and "cell-winner" in app_js, "Scheme B must be marked as cell-winner in Minimax Regret spotlight!"
+    assert "(最小遺憾 🏆)" in app_js, "Scheme B must have 最小遺憾 winner badge!"
+    assert "選方案 B（最壞遺憾僅 30 萬）" in app_js, "Minimax Regret must feature Scheme B winner takeaway banner!"
+    assert "100 - 70 = 30" in app_js, "Minimax Regret must include cell derivation breakdown (100 - 70 = 30)!"
+    assert "40 - (-20) = 60" in app_js, "Minimax Regret must include negative payoff derivation breakdown (40 - (-20) = 60)!"
+    assert "setRegretStepView" in app_js, "Minimax Regret must include setRegretStepView step toggle function!"
 
-    print("✓ Scope and knowledge base rules verified (Ch 6.3 excluded, percentile board note verified, 6 units present, Unit 3 Bayes boss verified, Unit 6 13.2 strict scope and spotlight table verified).")
+    print("✓ Scope and knowledge base rules verified (Ch 6.3 excluded, percentile board note verified, 6 units present, Unit 3 Bayes boss verified, Unit 6 13.2 strict scope and 2-step regret spotlight table verified).")
 
 def test_html_and_cdn():
     with open("index.html", "r", encoding="utf-8") as f:
