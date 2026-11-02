@@ -273,3 +273,136 @@
   margin: 0.2rem;
 }
 
+/* ========================================================
+   觀念圖解視覺卡片與輔助樣式 (Visual Diagrams & Rich Cards)
+   ======================================================== */
+.visual-card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1rem;
+  margin: 1rem 0;
+}
+
+.visual-card {
+  background: rgba(15, 23, 42, 0.75);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 1.15rem;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.visual-card:hover {
+  border-color: rgba(99, 102, 241, 0.5);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+}
+
+.visual-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.65rem;
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.formula-box {
+  background: rgba(15, 23, 42, 0.85);
+  border-left: 4px solid var(--accent-indigo);
+  border-radius: 8px;
+  padding: 0.85rem 1.1rem;
+  margin: 0.85rem 0;
+}
+
+.callout-box {
+  border-radius: 8px;
+  padding: 0.85rem 1.1rem;
+  margin: 0.85rem 0;
+  font-size: 0.9rem;
+  line-height: 1.55;
+}
+
+.callout-amber {
+  background: rgba(245, 158, 11, 0.08);
+  border-left: 4px solid #f59e0b;
+  border: 1px solid rgba(245, 158, 11, 0.25);
+  border-left-width: 4px;
+  color: #fef3c7;
+}
+
+.callout-emerald {
+  background: rgba(16, 185, 129, 0.08);
+  border-left: 4px solid #10b981;
+  border: 1px solid rgba(16, 185, 129, 0.25);
+  border-left-width: 4px;
+  color: #d1fae5;
+}
+
+.callout-sky {
+  background: rgba(56, 189, 248, 0.08);
+  border-left: 4px solid #38bdf8;
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  border-left-width: 4px;
+  color: #e0f2fe;
+}
+
+.callout-rose {
+  background: rgba(244, 63, 94, 0.08);
+  border-left: 4px solid #f43f5e;
+  border: 1px solid rgba(244, 63, 94, 0.25);
+  border-left-width: 4px;
+  color: #ffe4e6;
+}
+
+.svg-diagram-container {
+  width: 100%;
+  max-width: 600px;
+  margin: 1rem auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.svg-diagram-container svg {
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.3));
+}
+
+.p-gauge-bar {
+  display: flex;
+  border-radius: 8px;
+  overflow: hidden;
+  height: 28px;
+  margin: 0.75rem 0;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-align: center;
+  line-height: 28px;
+}
+
+.p-zone-01 {
+  flex: 1;
+  background: #10b981;
+  color: #064e3b;
+}
+
+.p-zone-05 {
+  flex: 4;
+  background: #06b6d4;
+  color: #083344;
+}
+
+.p-zone-10 {
+  flex: 5;
+  background: #f59e0b;
+  color: #451a03;
+}
+
+.p-zone-fail {
+  flex: 90;
+  background: #334155;
+  color: #94a3b8;
+}
+
+

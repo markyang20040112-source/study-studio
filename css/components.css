@@ -162,42 +162,73 @@
   transition: width 0.3s ease;
 }
 
-/* Level 分頁階梯標籤 */
+/* Level 分頁階梯標籤 (Responsive & Multi-line on Tablet/Mobile) */
 .level-tabs {
   display: flex;
+  flex-wrap: wrap;
   gap: 0.5rem;
-  overflow-x: auto;
-  padding-bottom: 0.5rem;
   margin-bottom: 1.5rem;
-  scrollbar-width: thin;
+  padding-bottom: 0.25rem;
+  overflow: visible;
 }
 
 .level-tab {
-  padding: 0.65rem 1rem;
+  flex: 1 1 110px;
+  min-width: 0;
+  min-height: 52px;
+  padding: 0.5rem 0.6rem;
   border-radius: 10px;
   background: var(--bg-secondary);
   color: var(--text-secondary);
   border: 1px solid var(--border-color);
   font-weight: 600;
-  font-size: 0.9rem;
-  white-space: nowrap;
   cursor: pointer;
   transition: all 0.2s ease;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 0.4rem;
+  justify-content: center;
+  gap: 0.15rem;
+  text-align: center;
+  white-space: normal;
+  overflow: visible;
+  line-height: 1.25;
+  -webkit-appearance: none;
+}
+
+.level-tab .tab-badge,
+.level-tab span:first-child {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  opacity: 0.85;
+}
+
+.level-tab .tab-title,
+.level-tab span:last-child {
+  font-size: 0.9rem;
+  font-weight: 700;
+  white-space: nowrap;
 }
 
 .level-tab:hover {
   color: var(--text-primary);
   border-color: var(--border-light);
+  background: var(--bg-card-hover);
 }
 
 .level-tab.active {
   background: var(--accent-indigo);
   color: #ffffff;
   border-color: var(--accent-indigo);
-  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.35);
+}
+
+.level-tab.active .tab-badge,
+.level-tab.active span:first-child {
+  color: #c7d2fe;
+  opacity: 1;
 }
 
 /* 主題目卡片 (Question Card) */
@@ -531,5 +562,18 @@
   }
   .interactive-widget-box {
     padding: 0.85rem;
+  }
+  .level-tab {
+    flex: 1 1 calc(33.333% - 0.5rem);
+    padding: 0.45rem 0.35rem;
+    min-height: 48px;
+  }
+  .level-tab .tab-badge,
+  .level-tab span:first-child {
+    font-size: 0.72rem;
+  }
+  .level-tab .tab-title,
+  .level-tab span:last-child {
+    font-size: 0.82rem;
   }
 }

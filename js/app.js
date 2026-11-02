@@ -274,33 +274,111 @@ function renderConceptWalkthrough(unitId) {
 
   if (unitId === "ch02-descriptive") {
     container.innerHTML = `
+      <!-- Card 1: 集中趨勢指標與極端值陷阱 -->
       <div class="concept-card">
-        <h3 style="color: #38bdf8; font-size: 1.15rem; margin-bottom: 0.6rem;">💡 商業起手式：為什麼算年增率不能用算術平均？</h3>
-        <p style="color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 1rem;">
-          假設一家手搖飲店第一年資本由 100 萬暴賺翻倍為 200 萬（成長率 +100%），第二年經營不善虧損 50% 跌回 100 萬。
-          若使用「算術平均數」：(+100% - 50%) / 2 = <strong>+25%</strong>。表面上看似每年大賺 25%，但資本實際上<strong>完全沒增加（淨利為 0）</strong>！
-          這正是因為算術平均忽略了前期縮水對後期的複利累乘效應，必定高估實質成長！商業評估跨期成長必須使用<strong>幾何平均數 (CAGR)</strong>。
+        <div class="visual-card-header">
+          <span style="color: #38bdf8; font-size: 1.15rem;">💡 集中趨勢指標 (Central Tendency) & 極端值受害實例</span>
+          <span class="badge badge-mastered">核心必考</span>
+        </div>
+        <p style="color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 0.75rem;">
+          在敘述統計中，「平均數」並非萬能。當樣本中出現少數超大或超小數值時，算術平均數會被強烈拉扯，徹底失去對母體中央代表性！
         </p>
 
-        <div style="background: rgba(15, 23, 42, 0.6); padding: 1rem; border-radius: 10px; border-left: 4px solid #6366f1; margin-bottom: 1.5rem;">
-          <div style="font-weight: 700; color: #a5b4fc; margin-bottom: 0.4rem;">CAGR 跨期公式拆解</div>
-          $$CAGR = \\sqrt[t]{\\frac{V_t}{V_0}} - 1 = \\left( \\frac{V_t}{V_0} \\right)^{\\frac{1}{t}} - 1$$
-          <div style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.4rem;">
-            其中 $V_t$ 為終期數值、$V_0$ 為初期數值、$t$ 為相差跨越期數（112 年 - 108 年 = 4 年）。
+        <div class="visual-card-grid">
+          <div class="visual-card">
+            <div style="font-weight: 700; color: #a5b4fc; margin-bottom: 0.4rem;">算術平均數 (Arithmetic Mean)</div>
+            $$\\bar{X} = \\frac{1}{n} \\sum_{i=1}^n X_i$$
+            <div style="font-size: 0.85rem; color: #94a3b8; margin-top: 0.4rem;">
+              優點為計算納入每一筆數據，但<strong>致命缺點：對極端值極度敏感（極易受拉扯）</strong>！
+            </div>
+          </div>
+          <div class="visual-card">
+            <div style="font-weight: 700; color: #34d399; margin-bottom: 0.4rem;">中位數 (Median) 與眾數 (Mode)</div>
+            $$\\text{Median} = \\text{排序後第 } 50 \\text{ 百分位數 (Q2)}$$
+            <div style="font-size: 0.85rem; color: #94a3b8; margin-top: 0.4rem;">
+              中位數僅依賴位置排序，<strong>具抗極端值穩健性 (Robustness)</strong>；眾數為出現頻率最高者。
+            </div>
           </div>
         </div>
 
-        <h3 style="color: #38bdf8; font-size: 1.15rem; margin-bottom: 0.6rem;">📏 課堂板書唯一標準：百分位數動態尺規 (Percentile Ruler)</h3>
-        <p style="color: var(--text-secondary); font-size: 0.95rem;">
+        <div class="callout-box callout-rose">
+          <div style="font-weight: 700; margin-bottom: 0.4rem;">🚨 極端值拉扯震撼實例：5 位員工與空降 CEO 的薪資陷阱</div>
+          <p style="font-size: 0.9rem; margin-bottom: 0.5rem;">
+            某新創公司原本 5 位基層工程師的月薪為：<code style="color: #f43f5e;">[38k, 40k, 42k, 45k, 45k]</code>。<br>
+            此時：<strong>算術平均數 = 42k</strong>，<strong>中位數 = 42k</strong>（兩者完美吻合，極具代表性）。
+          </p>
+          <p style="font-size: 0.9rem; margin-bottom: 0.5rem;">
+            隔月空降一位百萬月薪 CEO（月薪 <strong style="color: #f43f5e;">1,000k</strong>），資料變為：<code style="color: #f43f5e;">[38k, 40k, 42k, 45k, 45k, 1000k]</code>：
+          </p>
+          <ul style="padding-left: 1.25rem; font-size: 0.88rem; line-height: 1.6;">
+            <li>算術平均數瞬間暴增至：<strong>201.7k</strong>！（全公司 83% 的員工薪資都遠低於平均數，平均數已淪為欺騙求職者的假象！）</li>
+            <li>中位數僅微幅移動至：<strong>43.5k</strong>！（忠實反映真實員工的水準，不受百萬 CEO 影響）。</li>
+          </ul>
+        </div>
+
+        <div class="callout-box callout-amber">
+          <div style="font-weight: 700; margin-bottom: 0.3rem;">📌 分佈偏態與指標位置定律（考場必背心法）</div>
+          <ul style="padding-left: 1.25rem; font-size: 0.88rem; line-height: 1.6;">
+            <li><strong>右偏分佈 (正偏態，長尾在右側極大值)</strong>：$\\text{Mean} > \\text{Median} > \\text{Mode}$（極大值把平均數往右拉高）</li>
+            <li><strong>對稱常態分佈</strong>：$\\text{Mean} = \\text{Median} = \\text{Mode}$（三者完全重疊）</li>
+            <li><strong>左偏分佈 (負偏態，長尾在左側極小值)</strong>：$\\text{Mean} < \\text{Median} < \\text{Mode}$（極小值把平均數往左拉低）</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Card 2: 複合年均成長率 CAGR -->
+      <div class="concept-card">
+        <div class="visual-card-header">
+          <span style="color: #38bdf8; font-size: 1.15rem;">📈 複合年均成長率 (CAGR) vs 算術平均高估陷阱</span>
+          <span class="badge badge-mastered">商務核心</span>
+        </div>
+        <p style="color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 0.75rem;">
+          假設一家連鎖手搖飲店第一年資本由 100 萬暴賺翻倍為 200 萬（成長率 +100%），第二年經營不善虧損 50% 跌回 100 萬。<br>
+          若使用「算術平均數」：$(+100\\% - 50\\%) / 2 = \\mathbf{+25\\%}$。表面上看似每年大賺 25%，但資本實際上<strong>完全沒增加（實質獲利為 0）</strong>！<br>
+          因為算術平均忽略了前期本金縮水對後期的複利累乘效應，必定高估實質成長！評估跨期複利必須使用<strong>幾何平均數 (CAGR)</strong>。
+        </p>
+
+        <div class="formula-box">
+          <div style="font-weight: 700; color: #a5b4fc; margin-bottom: 0.4rem;">CAGR 跨期公式解析</div>
+          $$CAGR = \\sqrt[t]{\\frac{V_t}{V_0}} - 1 = \\left( \\frac{V_t}{V_0} \\right)^{\\frac{1}{t}} - 1$$
+          <div style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 0.4rem;">
+            在本例中：$t = 2$，初期 $V_0 = 100$，終期 $V_t = 100$：
+            $$CAGR = \\left(\\frac{100}{100}\\right)^{\\frac{1}{2}} - 1 = 1 - 1 = \\mathbf{0\\%}$$
+            實質反映資本兩年來淨成長率為 0%！
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 3: 百分位數動態尺規 -->
+      <div class="concept-card">
+        <div class="visual-card-header">
+          <span style="color: #38bdf8; font-size: 1.15rem;">📏 課堂板書唯一標準：百分位數動態尺規 (0.5 乾淨步進)</span>
+          <span class="badge badge-review">板書唯一真理</span>
+        </div>
+        <p style="color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 0.5rem;">
           課堂板書 IMG_0130 明確規定位置公式為：<strong>\\(L_x = \\frac{x}{100}(n - 1) + 1\\)</strong>，非整數項採線性內插。
-          請試著拖動下方百分比滑桿，觀察位置游標與相鄰整數點內插之動態變化：
+        </p>
+        <p style="color: #cbd5e1; font-size: 0.88rem; margin-bottom: 0.75rem;">
+          💡 <strong>尺規位置直覺化</strong>：下方滑桿直接以 <strong>0.5</strong> 乾淨步進（從 1.0 開始至 9.0），計算出之小數項 $0.d$ 皆為 0.0 或 0.5，算出的內插值清爽俐落：
         </p>
 
         <!-- 百分位數互動微元件 -->
         <div class="interactive-widget-box ruler-container">
-          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
-            <label style="font-weight: 600; color: #cbd5e1;">目標百分位數 (x)：<span id="rulerPctVal" style="color: #38bdf8; font-family: var(--font-mono); font-size: 1.1rem;">70</span>%</label>
-            <input type="range" id="rulerSlider" min="1" max="99" value="70" style="width: 200px; cursor: pointer;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem; flex-wrap: wrap; gap: 0.5rem;">
+            <label style="font-weight: 600; color: #cbd5e1;">
+              目標位置 \\(L\\)：<span id="rulerPctVal" style="color: #38bdf8; font-family: var(--font-mono); font-size: 1.1rem;">50% (L = 5.0)</span>
+            </label>
+            <div style="display: flex; align-items: center; gap: 0.5rem;">
+              <button class="btn btn-secondary" style="padding: 0.3rem 0.6rem; min-height: 36px; font-size: 0.8rem;" onclick="stepRuler(-0.5)">◀ -0.5</button>
+              <input type="range" id="rulerSlider" min="1.0" max="9.0" step="0.5" value="5.0" style="width: 180px; cursor: pointer;">
+              <button class="btn btn-secondary" style="padding: 0.3rem 0.6rem; min-height: 36px; font-size: 0.8rem;" onclick="stepRuler(+0.5)">+0.5 ▶</button>
+            </div>
+          </div>
+
+          <div style="display: flex; gap: 0.4rem; flex-wrap: wrap; margin-bottom: 0.75rem;">
+            <button class="btn btn-secondary" style="padding: 0.25rem 0.5rem; font-size: 0.78rem; min-height: 32px;" onclick="setRulerPos(3.0)">Q1 第 1 四分位數 (L=3.0, P25)</button>
+            <button class="btn btn-secondary" style="padding: 0.25rem 0.5rem; font-size: 0.78rem; min-height: 32px;" onclick="setRulerPos(5.0)">中位數 Median (L=5.0, P50)</button>
+            <button class="btn btn-secondary" style="padding: 0.25rem 0.5rem; font-size: 0.78rem; min-height: 32px;" onclick="setRulerPos(7.0)">Q3 第 3 四分位數 (L=7.0, P75)</button>
           </div>
 
           <div style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0.5rem;">
@@ -313,8 +391,95 @@ function renderConceptWalkthrough(unitId) {
           </div>
 
           <!-- 即時計算與內插看板 -->
-          <div style="background: rgba(30, 41, 59, 0.9); padding: 0.75rem 1rem; border-radius: 8px; font-family: var(--font-mono); font-size: 0.9rem;" id="rulerResultBox">
+          <div style="background: rgba(30, 41, 59, 0.9); padding: 0.75rem 1rem; border-radius: 8px; font-family: var(--font-mono); font-size: 0.88rem; line-height: 1.6;" id="rulerResultBox">
             <!-- 動態算式 -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 4: 離散趨勢指標完整宇宙 -->
+      <div class="concept-card">
+        <div class="visual-card-header">
+          <span style="color: #38bdf8; font-size: 1.15rem;">📐 離散趨勢指標完整宇宙 (Measures of Dispersion)</span>
+          <span class="badge badge-mastered">公式全解析</span>
+        </div>
+        <p style="color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 1rem;">
+          集中趨勢只告訴我們「重心在哪」，而離散程度則呈現「風險與波動有多大」。
+        </p>
+
+        <div class="visual-card-grid">
+          <div class="visual-card">
+            <div style="font-weight: 700; color: #a5b4fc; margin-bottom: 0.4rem;">樣本變異數 ($S^2$) 為什麼除以 $n-1$？</div>
+            $$S^2 = \\frac{\\sum_{i=1}^n (X_i - \\bar{X})^2}{n - 1}$$
+            <div style="font-size: 0.85rem; color: #94a3b8; margin-top: 0.4rem;">
+              <strong>貝索校正 (Bessel's Correction)</strong>：計算離差平方和已消耗了估計值 $\\bar{X}$，少掉了 1 個自由度。若除以 $n$ 會系統性低估母體變異數；除以 $n-1$ 才能得到母體變異數 $\\sigma^2$ 的<strong>不偏估計量 (Unbiased Estimator)</strong>！
+            </div>
+          </div>
+
+          <div class="visual-card">
+            <div style="font-weight: 700; color: #34d399; margin-bottom: 0.4rem;">樣本標準差 ($S$)</div>
+            $$S = \\sqrt{S^2} = \\sqrt{\\frac{\\sum (X_i - \\bar{X})^2}{n - 1}}$$
+            <div style="font-size: 0.85rem; color: #94a3b8; margin-top: 0.4rem;">
+              將變異數開根號，將單位<strong>還原至與原始觀測值完全相同的度量單位</strong>（如由元² 變為 元），方便直觀解釋與繪圖。
+            </div>
+          </div>
+        </div>
+
+        <!-- 常態分佈經驗法則 SVG 視覺圖解 -->
+        <div class="visual-card" style="margin-top: 1rem;">
+          <div style="font-weight: 700; color: #38bdf8; margin-bottom: 0.5rem;">🔔 常態分佈經驗法則 (Empirical Rule 68% - 95% - 99.7%)</div>
+          <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0.5rem;">
+            僅適用於<strong>鐘形對稱常態分佈</strong>；若非對稱分佈則須依據<strong>柴比氏定理 (Chebyshev)</strong>（任何分佈在 $\\bar{X} \\pm kS$ 內至少佔 $1 - 1/k^2$，當 $k=2$ 時至少 $75\\%$）。
+          </p>
+
+          <div class="svg-diagram-container">
+            <svg viewBox="0 0 540 180" xmlns="http://www.w3.org/2000/svg">
+              <path d="M 45 150 Q 150 148 220 50 Q 270 20 320 50 Q 390 148 495 150 Z" fill="rgba(16, 185, 129, 0.15)"/>
+              <path d="M 120 150 Q 180 140 230 55 Q 270 20 310 55 Q 360 140 420 150 Z" fill="rgba(6, 182, 212, 0.25)"/>
+              <path d="M 195 150 Q 230 110 250 40 Q 270 20 290 40 Q 310 110 345 150 Z" fill="rgba(99, 102, 241, 0.4)"/>
+              <path d="M 20 150 C 120 150 180 140 230 55 C 250 20 270 20 290 20 C 310 20 330 55 350 55 C 400 140 460 150 520 150" fill="none" stroke="#6366f1" stroke-width="2.5"/>
+              <line x1="20" y1="150" x2="520" y2="150" stroke="#475569" stroke-width="1.5"/>
+              <line x1="270" y1="20" x2="270" y2="150" stroke="#f8fafc" stroke-width="1.5" stroke-dasharray="3,3"/>
+              <text x="270" y="165" font-size="11" fill="#f8fafc" font-weight="700" text-anchor="middle">X̄</text>
+              <line x1="195" y1="90" x2="195" y2="150" stroke="#818cf8" stroke-width="1" stroke-dasharray="2,2"/>
+              <text x="195" y="165" font-size="10" fill="#a5b4fc" text-anchor="middle">X̄ - 1S</text>
+              <line x1="345" y1="90" x2="345" y2="150" stroke="#818cf8" stroke-width="1" stroke-dasharray="2,2"/>
+              <text x="345" y="165" font-size="10" fill="#a5b4fc" text-anchor="middle">X̄ + 1S</text>
+              <line x1="120" y1="130" x2="120" y2="150" stroke="#38bdf8" stroke-width="1" stroke-dasharray="2,2"/>
+              <text x="120" y="165" font-size="10" fill="#38bdf8" text-anchor="middle">X̄ - 2S</text>
+              <line x1="420" y1="130" x2="420" y2="150" stroke="#38bdf8" stroke-width="1" stroke-dasharray="2,2"/>
+              <text x="420" y="165" font-size="10" fill="#38bdf8" text-anchor="middle">X̄ + 2S</text>
+              <text x="45" y="165" font-size="10" fill="#34d399" text-anchor="middle">X̄ - 3S</text>
+              <text x="495" y="165" font-size="10" fill="#34d399" text-anchor="middle">X̄ + 3S</text>
+              <rect x="235" y="60" width="70" height="20" rx="4" fill="rgba(15, 23, 42, 0.85)" stroke="#6366f1"/>
+              <text x="270" y="74" font-size="11" fill="#c7d2fe" font-weight="700" text-anchor="middle">≈ 68.3%</text>
+              <rect x="225" y="95" width="90" height="20" rx="4" fill="rgba(15, 23, 42, 0.85)" stroke="#06b6d4"/>
+              <text x="270" y="109" font-size="11" fill="#67e8f9" font-weight="700" text-anchor="middle">≈ 95.4%</text>
+              <rect x="215" y="125" width="110" height="20" rx="4" fill="rgba(15, 23, 42, 0.85)" stroke="#10b981"/>
+              <text x="270" y="139" font-size="11" fill="#6ee7b7" font-weight="700" text-anchor="middle">≈ 99.7%</text>
+            </svg>
+          </div>
+        </div>
+
+        <div class="visual-card-grid" style="margin-top: 1rem;">
+          <div class="visual-card">
+            <div style="font-weight: 700; color: #fbbf24; margin-bottom: 0.4rem;">變異係數 (Coefficient of Variation, CV)</div>
+            $$CV = \\frac{S}{\\bar{X}} \\times 100\\%$$
+            <div style="font-size: 0.85rem; color: #94a3b8; margin-top: 0.4rem;">
+              <strong>無因次指標（無單位）</strong>，消除尺度差異！專門用於跨尺度比較相對波動程度。<br>
+              <strong>經典對照</strong>：高價股 $1000 \\pm 50$ ($CV = 5\\%$) vs 水餃股 $10 \\pm 2$ ($CV = 20\\%$)。水餃股看似波動僅 2 元，但其<strong>相對風險高達高價股的 4 倍</strong>！
+            </div>
+          </div>
+
+          <div class="visual-card">
+            <div style="font-weight: 700; color: #a78bfa; margin-bottom: 0.4rem;">四分位距 (IQR) 與盒鬚圖圍欄</div>
+            $$IQR = Q_3 - Q_1 = P_{75} - P_{25}$$
+            <div style="font-size: 0.85rem; color: #94a3b8; margin-top: 0.4rem;">
+              涵蓋中間 50% 核心觀測值，不受極端值影響。<br>
+              <strong>異常值判定圍欄 (Outlier Fences)</strong>：
+              $$\\text{下界} = Q_1 - 1.5 \\times IQR, \\quad \\text{上界} = Q_3 + 1.5 \\times IQR$$
+              落在圍欄外的數據點即為統計離群值 (Outliers)！
+            </div>
           </div>
         </div>
 
@@ -339,24 +504,88 @@ function renderConceptWalkthrough(unitId) {
     initPercentileRulerWidget();
   } else if (unitId === "ch02-similarity") {
     container.innerHTML = `
+      <!-- Card 1: 2x2 列聯表與屬性分流 -->
       <div class="concept-card">
-        <h3 style="color: #38bdf8; font-size: 1.15rem; margin-bottom: 0.6rem;">🎯 核心心法：拿掉 a！SMC vs Jaccard 雙 0 實驗器</h3>
-        <p style="color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 1rem;">
-          在二元列聯表中，<strong>a 代表「雙 0（兩者皆無）」</strong>，<strong>d 代表「雙 1（兩者皆有）」</strong>。<br>
-          在電商購物籃中，任兩位顧客「都沒買」的商品（a）有幾萬種！若用 SMC，海量的雙 0 會把相似度灌水到 0.99，毫無鑑別力！
-          因此板書 IMG_0131 特別註記：<strong>「拿掉 a：當 a 這筆資料不重要時，使用雅卡爾指數 (Jaccard)！」</strong>
+        <div class="visual-card-header">
+          <span style="color: #38bdf8; font-size: 1.15rem;">📊 二元屬性 2x2 列聯表 (Binary Contingency Table)</span>
+          <span class="badge badge-mastered">核心結構</span>
+        </div>
+        <p style="color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 0.75rem;">
+          在顧客購買紀錄、使用者行為特徵等二元（0/1）資料中，我們透過 2x2 列聯表統計兩物件之間的四種可能狀態：
         </p>
+
+        <div class="contingency-table-wrapper">
+          <table class="contingency-table">
+            <tr>
+              <th colspan="2" rowspan="2" style="background: #0f172a;">二元屬性列聯表</th>
+              <th colspan="2" style="background: #1e293b;">物件 2 (乙顧客)</th>
+              <th rowspan="2" style="background: #0f172a;">合計</th>
+            </tr>
+            <tr>
+              <th>1 (有購買 / 具備)</th>
+              <th>0 (未購買 / 無)</th>
+            </tr>
+            <tr>
+              <th rowspan="2" style="background: #1e293b; padding: 0.5rem;">物件 1 (甲顧客)</th>
+              <td style="font-weight: 600;">1 (有購買)</td>
+              <td class="cell-dual-one"><strong>d</strong> (雙 1：兩者皆有)</td>
+              <td class="cell-single-c"><strong>c</strong> (甲有、乙無)</td>
+              <td class="cell-total">c + d</td>
+            </tr>
+            <tr>
+              <td style="font-weight: 600;">0 (未購買)</td>
+              <td class="cell-single-b"><strong>b</strong> (甲無、乙有)</td>
+              <td class="cell-dual-zero"><strong>a</strong> (雙 0：兩者皆無)</td>
+              <td class="cell-total">a + b</td>
+            </tr>
+            <tr>
+              <th colspan="2" style="background: #0f172a;">合計</th>
+              <td class="cell-total">b + d</td>
+              <td class="cell-total">a + c</td>
+              <td class="cell-total" style="color: #38bdf8; font-weight: 700;">N = a+b+c+d</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+
+      <!-- Card 2: SMC vs Jaccard 雙雄對決 -->
+      <div class="concept-card">
+        <div class="visual-card-header">
+          <span style="color: #38bdf8; font-size: 1.15rem;">⚖️ 簡單匹配係數 (SMC) vs 雅卡爾指數 (Jaccard)</span>
+          <span class="badge badge-review">關鍵判別</span>
+        </div>
+
+        <div class="visual-card-grid">
+          <div class="visual-card">
+            <div style="font-weight: 700; color: #38bdf8; margin-bottom: 0.4rem;">簡單匹配係數 (SMC)</div>
+            $$SMC = \\frac{a + d}{a + b + c + d} = \\frac{\\text{雙無 } a + \\text{雙有 } d}{N}$$
+            <div style="font-size: 0.85rem; color: #94a3b8; margin-top: 0.4rem;">
+              <strong>適用：對稱性二元屬性 (Symmetric)</strong><br>
+              0 與 1 地位完全平等，雙方「都沒有 (a)」與「都有 (d)」具備同等的分析價值（例如：性別、工廠品管合格 0/不合格 1）。
+            </div>
+          </div>
+
+          <div class="visual-card">
+            <div style="font-weight: 700; color: #34d399; margin-bottom: 0.4rem;">雅卡爾指數 (Jaccard)</div>
+            $$Jaccard = \\frac{d}{b + c + d} = \\frac{\\text{雙有 } d}{\\text{總有效事件 (排除 } a)}$$
+            <div style="font-size: 0.85rem; color: #94a3b8; margin-top: 0.4rem;">
+              <strong>適用：非對稱稀疏二元屬性 (Asymmetric)</strong><br>
+              1 代表關鍵正向事件（買過、點擊、感染），而 0 僅代表沒買。<strong>海量的雙 0 (a) 毫無參考價值，必須直接「拿掉 a」！</strong>
+            </div>
+          </div>
+        </div>
 
         <!-- 雙 0 動態實驗器 -->
         <div class="interactive-widget-box">
-          <div style="font-weight: 700; color: #cbd5e1; margin-bottom: 0.75rem;">🧪 雙 0 膨脹微實驗器</div>
+          <div style="font-weight: 700; color: #cbd5e1; margin-bottom: 0.75rem;">🧪 核心心法：拿掉 a！雙 0 膨脹微實驗器</div>
           <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0.75rem;">
-            目前設定：甲乙都買了 2 件 (d=2)，甲買乙未買 2 件 (c=2)，甲未買乙買 1 件 (b=1)。點擊按鈕增加「都沒買 (a)」的數量，觀察兩者變化：
+            固定設定：甲乙都買了 2 件 (d=2)，甲買乙未買 2 件 (c=2)，甲未買乙買 1 件 (b=1)。點擊切換未買商品數 (a)：
           </p>
           <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem; flex-wrap: wrap;">
-            <button class="btn btn-secondary" onclick="adjustDualZero(5)">a = 5 (小型超市)</button>
-            <button class="btn btn-secondary" onclick="adjustDualZero(50)">a = 50 (中型百貨)</button>
-            <button class="btn btn-secondary" onclick="adjustDualZero(500)">a = 500 (電商巨頭)</button>
+            <button class="btn btn-secondary" onclick="adjustDualZero(5)">a = 5 (小型超商)</button>
+            <button class="btn btn-secondary" onclick="adjustDualZero(50)">a = 50 (中型超市)</button>
+            <button class="btn btn-secondary" onclick="adjustDualZero(500)">a = 500 (大型量販)</button>
+            <button class="btn btn-secondary" onclick="adjustDualZero(5000)">a = 5000 (電商巨頭)</button>
           </div>
 
           <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;" id="dualZeroMetrics">
@@ -366,17 +595,29 @@ function renderConceptWalkthrough(unitId) {
           </div>
         </div>
 
+        <div class="callout-box callout-sky" style="margin-top: 1rem;">
+          <div style="font-weight: 700; margin-bottom: 0.3rem;">🔄 相似度與距離之互補方程式 (Distance = 1 - Similarity)</div>
+          <p style="font-size: 0.88rem; margin-bottom: 0.4rem;">
+            距離（相異度 Dissimilarity）衡量物件間的差距。相似度越大，距離越小：
+          </p>
+          $$d_{SMC} = 1 - SMC = \\frac{b + c}{a + b + c + d}, \\quad d_{Jaccard} = 1 - Jaccard = \\frac{b + c}{b + c + d}$$
+          <div style="font-size: 0.82rem; color: #94a3b8;">
+            特質：距離介於 $0$ 到 $1$ 之間。完全相同時距離為 0，完全相反時距離為 1。
+          </div>
+        </div>
+
+        <!-- 觀念 Checkpoint -->
         <div style="margin-top: 1.5rem; padding-top: 1.25rem; border-top: 1px dashed var(--border-color);">
           <div style="font-weight: 700; color: #fbbf24; margin-bottom: 0.5rem;">🎯 觀念確認 Checkpoint</div>
           <p style="font-size: 0.9rem; margin-bottom: 0.75rem;">
-            下列何種情境「應優先選用 SMC 而非 Jaccard」？
+            下列何種商務情境「應優先選用 SMC 而非 Jaccard」？
           </p>
           <div style="display: flex; gap: 0.5rem; flex-direction: column;" id="u2CheckpointOptions">
             <button class="btn btn-secondary" style="text-align: left; justify-content: flex-start;" onclick="checkU2Checkpoint(this, false)">
-              A. 串流平台千萬首歌曲之共同收聽紀錄（極為稀疏）
+              A. 串流影音平台千萬首歌曲之共同收聽紀錄（極為稀疏）
             </button>
             <button class="btn btn-secondary" style="text-align: left; justify-content: flex-start;" onclick="checkU2Checkpoint(this, true)">
-              B. 工廠品質規格檢驗（雙方皆無缺陷『雙 0』代表共同合規，具備高度管理價值）
+              B. 工廠精密零件規格檢驗（雙方皆無缺陷『雙 0』代表共同合規，具備高度管理價值）
             </button>
           </div>
           <div id="u2CheckpointFeedback" style="margin-top: 0.5rem;"></div>
@@ -387,43 +628,366 @@ function renderConceptWalkthrough(unitId) {
     elContentArea.appendChild(container);
     renderMath(container);
     adjustDualZero(5);
-  } else if (unitId === "ch06-regression") {
+  } else if (unitId === "ch03-probability") {
     container.innerHTML = `
+      <!-- Card 1: 機率法則與互斥相依陷阱 -->
       <div class="concept-card">
-        <h3 style="color: #38bdf8; font-size: 1.15rem; margin-bottom: 0.6rem;">📈 判定係數 R² 陷阱與板書 IMG_0131 精闢解讀</h3>
-        <p style="color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 1rem;">
-          在多元線性迴歸中，只要隨便多塞入一個自變數，最小平方法 (OLS) 的數學特性保證 <strong>$R^2$ 永遠單調不減</strong>（只會上升或持平）！
-          因此板書特別打叉註記：<strong>「$R^2 \\rightarrow$ 模型的解釋能力；資料多，解釋能力不一定上升！」</strong><br>
-          為了防止自欺欺人，必須看 <strong>調整後判定係數 ($R^2_{adj}$)</strong>，它會對自變數所消耗的自由度施加懲罰。
+        <div class="visual-card-header">
+          <span style="color: #38bdf8; font-size: 1.15rem;">🎲 機率四大運算法則與相依性陷阱</span>
+          <span class="badge badge-mastered">考場核心</span>
+        </div>
+        <p style="color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 0.75rem;">
+          機率運算的基礎來自集合論，清楚掌握事件之間的關係是解出推論統計題目的第一步：
         </p>
 
-        <div style="background: rgba(15, 23, 42, 0.7); border: 1px solid var(--border-color); border-radius: 10px; padding: 1rem; margin-bottom: 1.5rem;">
-          <h4 style="color: #a5b4fc; margin-bottom: 0.5rem;">板書 P-值判斷門檻速查表</h4>
-          <table style="width: 100%; border-collapse: collapse; font-size: 0.9rem;">
-            <tr style="border-bottom: 1px solid var(--border-color); color: #cbd5e1;">
-              <th style="padding: 0.5rem; text-align: left;">顯著水準 α</th>
-              <th style="padding: 0.5rem; text-align: left;">信心水準</th>
-              <th style="padding: 0.5rem; text-align: left;">商務判定解讀</th>
-            </tr>
-            <tr style="border-bottom: 1px solid rgba(51, 65, 85, 0.4);">
-              <td style="padding: 0.5rem; font-family: var(--font-mono); color: #38bdf8;">0.05</td>
-              <td style="padding: 0.5rem;">95% (通常標準)</td>
-              <td style="padding: 0.5rem; color: #34d399;">p < 0.05 即達統計顯著性</td>
-            </tr>
-            <tr>
-              <td style="padding: 0.5rem; font-family: var(--font-mono); color: #38bdf8;">0.01</td>
-              <td style="padding: 0.5rem;">99% (高規格標準)</td>
-              <td style="padding: 0.5rem; color: #34d399;">極具顯著性，強烈拒絕 H0</td>
-            </tr>
-          </table>
+        <div class="visual-card-grid">
+          <div class="visual-card">
+            <div style="font-weight: 700; color: #38bdf8; margin-bottom: 0.4rem;">聯集加法定理 (Union)</div>
+            $$P(A \\cup B) = P(A) + P(B) - P(A \\cap B)$$
+            <div style="font-size: 0.85rem; color: #94a3b8; margin-top: 0.4rem;">
+              若 $A$ 與 $B$ 互斥，則交集 $P(A \\cap B) = 0$。
+            </div>
+          </div>
+
+          <div class="visual-card">
+            <div style="font-weight: 700; color: #34d399; margin-bottom: 0.4rem;">條件機率 (Conditional)</div>
+            $$P(A|B) = \\frac{P(A \\cap B)}{P(B)}$$
+            <div style="font-size: 0.85rem; color: #94a3b8; margin-top: 0.4rem;">
+              乘法法則：$P(A \\cap B) = P(A|B) \\cdot P(B)$。
+            </div>
+          </div>
         </div>
 
-        <h3 style="color: #38bdf8; font-size: 1.15rem; margin-bottom: 0.6rem;">✖️ 交互作用項 (Interaction Term)：斜率非平行效應</h3>
-        <p style="color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 1rem;">
-          模型：$\\hat{Y} = b_0 + b_1 X_1 + b_2 X_2 + b_3 (X_1 \\cdot X_2)$。<br>
-          若 $b_3$ 的 $p$-值小於 $0.05$，代表自變數 $X_1$ 對 $Y$ 的邊際影響力<strong>會隨著 $X_2$ 的多寡而放大或縮小</strong>。在圖形上，不同組別的迴歸線呈現<strong>非平行交叉</strong>！
+        <div class="callout-box callout-rose">
+          <div style="font-weight: 700; margin-bottom: 0.4rem;">🚨 考場必殺陷阱：互斥且非零機率必為「相依 (Dependent)」！</div>
+          <p style="font-size: 0.9rem; line-height: 1.6;">
+            <strong>互斥 (Mutually Exclusive)</strong>：$A \\cap B = \\emptyset \\implies P(A \\cap B) = 0$。<br>
+            <strong>獨立 (Independent)</strong>：$P(A \\cap B) = P(A) \\cdot P(B)$。<br>
+            若 $P(A) > 0$ 且 $P(B) > 0$，其乘積 $P(A)P(B) > 0 \\ne 0$！兩者絕不可能同時成立！<br>
+            <strong>直覺解讀</strong>：若 A 發生了，B 絕對不可能發生（B 發生機率瞬間降為 0）。得知 A 發生，強烈改變了 B 的機率，因此<strong>必然相依</strong>！
+          </p>
+        </div>
+      </div>
+
+      <!-- Card 2: 全機率定理與樹狀分割 -->
+      <div class="concept-card">
+        <div class="visual-card-header">
+          <span style="color: #38bdf8; font-size: 1.15rem;">🌳 全機率定理 (Law of Total Probability) 空間分割</span>
+          <span class="badge badge-mastered">貝氏分母</span>
+        </div>
+        <p style="color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 0.75rem;">
+          當樣本空間 $S$ 被互斥且完備的子事件 $A_1, A_2, \\dots, A_k$ 完全分割時（$\\sum P(A_i) = 1$），任何事件 $B$ 的邊際總機率為所有可能途徑之和：
         </p>
 
+        <div class="formula-box">
+          <div style="font-weight: 700; color: #a5b4fc; margin-bottom: 0.4rem;">全機率定理分解公式</div>
+          $$P(B) = \\sum_{i=1}^k P(A_i \\cap B) = \\sum_{i=1}^k P(B|A_i) \\cdot P(A_i)$$
+        </div>
+
+        <!-- 樹狀分支圖 SVG -->
+        <div class="svg-diagram-container">
+          <svg viewBox="0 0 520 180" xmlns="http://www.w3.org/2000/svg">
+            <!-- 根節點 -->
+            <circle cx="50" cy="90" r="18" fill="#6366f1"/>
+            <text x="50" y="94" font-size="11" fill="#ffffff" font-weight="700" text-anchor="middle">S</text>
+
+            <!-- 先驗分支線 -->
+            <line x1="68" y1="80" x2="180" y2="40" stroke="#818cf8" stroke-width="2"/>
+            <text x="120" y="50" font-size="10" fill="#a5b4fc" text-anchor="middle">P(A1)</text>
+
+            <line x1="68" y1="90" x2="180" y2="90" stroke="#818cf8" stroke-width="2"/>
+            <text x="120" y="85" font-size="10" fill="#a5b4fc" text-anchor="middle">P(A2)</text>
+
+            <line x1="68" y1="100" x2="180" y2="140" stroke="#818cf8" stroke-width="2"/>
+            <text x="120" y="130" font-size="10" fill="#a5b4fc" text-anchor="middle">P(A3)</text>
+
+            <!-- 中間 A 節點 -->
+            <rect x="180" y="25" width="45" height="30" rx="6" fill="#1e293b" stroke="#6366f1" stroke-width="1.5"/>
+            <text x="202" y="44" font-size="11" fill="#f8fafc" font-weight="700" text-anchor="middle">A1</text>
+
+            <rect x="180" y="75" width="45" height="30" rx="6" fill="#1e293b" stroke="#6366f1" stroke-width="1.5"/>
+            <text x="202" y="94" font-size="11" fill="#f8fafc" font-weight="700" text-anchor="middle">A2</text>
+
+            <rect x="180" y="125" width="45" height="30" rx="6" fill="#1e293b" stroke="#6366f1" stroke-width="1.5"/>
+            <text x="202" y="144" font-size="11" fill="#f8fafc" font-weight="700" text-anchor="middle">A3</text>
+
+            <!-- 條件分支線 -->
+            <line x1="225" y1="40" x2="350" y2="40" stroke="#06b6d4" stroke-width="1.5"/>
+            <text x="285" y="32" font-size="10" fill="#67e8f9" text-anchor="middle">P(B|A1)</text>
+
+            <line x1="225" y1="90" x2="350" y2="90" stroke="#06b6d4" stroke-width="1.5"/>
+            <text x="285" y="82" font-size="10" fill="#67e8f9" text-anchor="middle">P(B|A2)</text>
+
+            <line x1="225" y1="140" x2="350" y2="140" stroke="#06b6d4" stroke-width="1.5"/>
+            <text x="285" y="132" font-size="10" fill="#67e8f9" text-anchor="middle">P(B|A3)</text>
+
+            <!-- 右側結果標籤 -->
+            <text x="360" y="44" font-size="11" fill="#34d399" font-weight="700">P(A1 ∩ B)</text>
+            <text x="360" y="94" font-size="11" fill="#34d399" font-weight="700">P(A2 ∩ B)</text>
+            <text x="360" y="144" font-size="11" fill="#34d399" font-weight="700">P(A3 ∩ B)</text>
+
+            <!-- 匯總箭頭 -->
+            <path d="M 450 40 Q 480 90 450 140" fill="none" stroke="#f59e0b" stroke-width="2" stroke-dasharray="3,3"/>
+            <text x="490" y="95" font-size="11" fill="#fbbf24" font-weight="700" text-anchor="middle">Σ = P(B)</text>
+          </svg>
+        </div>
+      </div>
+
+      <!-- Card 3: 貝氏定理與偽陽性直覺案例 -->
+      <div class="concept-card">
+        <div class="visual-card-header">
+          <span style="color: #38bdf8; font-size: 1.15rem;">🧬 貝氏定理 (Bayes' Theorem) 逆向推論之神</span>
+          <span class="badge badge-review">作業高頻考點</span>
+        </div>
+        <p style="color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 0.75rem;">
+          貝氏定理的核心本質是：<strong>以新獲得的檢驗證據（Likelihood），逆向修正最初的先驗信念（Prior），得到事後後驗機率（Posterior）</strong>。
+        </p>
+
+        <div class="formula-box">
+          <div style="font-weight: 700; color: #a5b4fc; margin-bottom: 0.4rem;">貝氏逆向推論公式</div>
+          $$P(A_i|B) = \\frac{P(B|A_i) P(A_i)}{P(B)} = \\frac{P(B|A_i) P(A_i)}{\\sum_{j=1}^k P(B|A_j) P(A_j)}$$
+        </div>
+
+        <div class="callout-box callout-amber">
+          <div style="font-weight: 700; margin-bottom: 0.4rem;">💡 罕見疾病快篩「偽陽性悖論」直覺解析 (Medical Screening Walkthrough)</div>
+          <p style="font-size: 0.9rem; margin-bottom: 0.5rem;">
+            某罕見傳染病之人口盛行率為 $1\\%$（$P(D) = 0.01$，健康者 $P(H) = 0.99$）。<br>
+            醫院快篩準確度（敏感度）高達 $95\\%$（$P(+|D) = 0.95$），健康者的偽陽性率為 $5\\%$（$P(+|H) = 0.05$）。<br>
+            <strong>若小明快篩呈陽性 (+)，他真正罹病的機率為何？</strong>
+          </p>
+          <div style="background: rgba(15, 23, 42, 0.6); padding: 0.75rem; border-radius: 6px; font-size: 0.88rem; line-height: 1.6;">
+            <strong>想像隨機抽檢 1,000 人：</strong>
+            <ul style="padding-left: 1.25rem;">
+              <li>患病者 10 人 $\\to$ 測出陽性者為 $10 \\times 0.95 = \\mathbf{9.5 \\text{ 人}}$（真陽性）</li>
+              <li>健康者 990 人 $\\to$ 被誤判陽性者為 $990 \\times 0.05 = \\mathbf{49.5 \\text{ 人}}$（偽陽性！）</li>
+              <li>所有驗出陽性總人數 $= 9.5 + 49.5 = \\mathbf{59 \\text{ 人}}$</li>
+            </ul>
+            $$P(\\text{患病 } D | \\text{陽性 } +) = \\frac{9.5}{59} \\approx \\mathbf{16.1\\%}$$
+            <strong>直覺結論</strong>：即使快篩宣稱有 95% 準確率，測出陽性真正患病的機率竟然只有 <strong>16.1%</strong>！因為健康族群基數極大，即使 5% 誤判累積的人數（49.5）也遠多於真病患（9.5）！
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 4: 3.6 常見機率分配極速對照卡 -->
+      <div class="concept-card">
+        <div class="visual-card-header">
+          <span style="color: #38bdf8; font-size: 1.15rem;">⚡ 3.6 常見機率分配極速對照卡 (PMF vs PDF)</span>
+          <span class="badge badge-mastered">速查必背</span>
+        </div>
+
+        <div class="visual-card-grid">
+          <div class="visual-card">
+            <div style="font-weight: 700; color: #a5b4fc; margin-bottom: 0.4rem;">二項分配 (Binomial) - 離散型</div>
+            $$P(X=x) = \\binom{n}{x} p^x (1-p)^{n-x}$$
+            <div style="font-size: 0.85rem; color: #94a3b8; margin-top: 0.4rem;">
+              $n$ 次獨立白努利試驗。<br>
+              <strong>期望值</strong>：$E[X] = np$<br>
+              <strong>變異數</strong>：$Var(X) = np(1-p)$
+            </div>
+          </div>
+
+          <div class="visual-card">
+            <div style="font-weight: 700; color: #34d399; margin-bottom: 0.4rem;">卜瓦松分配 (Poisson) - 離散型</div>
+            $$P(X=x) = \\frac{e^{-\\lambda} \\lambda^x}{x!}$$
+            <div style="font-size: 0.85rem; color: #94a3b8; margin-top: 0.4rem;">
+              單位時間或空間內稀有事件發生次數。<br>
+              <strong>期望值等於變異數</strong>：$E[X] = \\lambda, Var(X) = \\lambda$！
+            </div>
+          </div>
+
+          <div class="visual-card">
+            <div style="font-weight: 700; color: #38bdf8; margin-bottom: 0.4rem;">常態分配 (Normal) - 連續型</div>
+            $$X \\sim N(\\mu, \\sigma^2) \\implies Z = \\frac{X - \\mu}{\\sigma} \\sim N(0, 1)$$
+            <div style="font-size: 0.85rem; color: #94a3b8; margin-top: 0.4rem;">
+              鐘形對稱，標準化公式 $Z = \\frac{X - \\mu}{\\sigma}$。<br>
+              68-95-99.7 經驗法則基礎。
+            </div>
+          </div>
+
+          <div class="visual-card">
+            <div style="font-weight: 700; color: #f59e0b; margin-bottom: 0.4rem;">指數分配 (Exponential) - 連續型</div>
+            $$f(x) = \\lambda e^{-\\lambda x} \\quad (x \\ge 0)$$
+            <div style="font-size: 0.85rem; color: #94a3b8; margin-top: 0.4rem;">
+              獨立事件相繼發生之等待時間。<br>
+              <strong>無記憶性 (Memoryless)</strong>，期望值 $E[X] = 1/\\lambda$。
+            </div>
+          </div>
+        </div>
+
+        <div class="callout-box callout-rose" style="margin-top: 1rem;">
+          <div style="font-weight: 700; margin-bottom: 0.2rem;">★ 連續型隨機變數關鍵鐵律：單點機率恆為零！</div>
+          $$P(X = c) = 0 \\implies P(a \\le X \\le b) = P(a < X < b)$$
+          連續型變數的機率為「機率密度函數 (PDF) 曲線下之面積」，單一垂直線條無寬度故面積恆為 0！
+        </div>
+
+        <!-- 觀念 Checkpoint -->
+        <div style="margin-top: 1.5rem; padding-top: 1.25rem; border-top: 1px dashed var(--border-color);">
+          <div style="font-weight: 700; color: #fbbf24; margin-bottom: 0.5rem;">🎯 觀念確認 Checkpoint</div>
+          <p style="font-size: 0.9rem; margin-bottom: 0.75rem;">
+            若事件 A 與事件 B 互斥，且 $P(A) = 0.4$、$P(B) = 0.5$，請問 A 與 B 是否獨立？
+          </p>
+          <div style="display: flex; gap: 0.5rem; flex-direction: column;" id="u3CheckpointOptions">
+            <button class="btn btn-secondary" style="text-align: left; justify-content: flex-start;" onclick="checkU3Checkpoint(this, false)">
+              A. 獨立（互斥表示兩者各走各的路，互不影響）
+            </button>
+            <button class="btn btn-secondary" style="text-align: left; justify-content: flex-start;" onclick="checkU3Checkpoint(this, true)">
+              B. 相依（互斥非零必相依！因 A 發生則 B 機率降為 0，強烈相依）
+            </button>
+          </div>
+          <div id="u3CheckpointFeedback" style="margin-top: 0.5rem;"></div>
+        </div>
+      </div>
+    `;
+
+    elContentArea.appendChild(container);
+    renderMath(container);
+  } else if (unitId === "ch06-regression") {
+    container.innerHTML = `
+      <!-- Card 1: 五大假定 -->
+      <div class="concept-card">
+        <div class="visual-card-header">
+          <span style="color: #38bdf8; font-size: 1.15rem;">🛡️ 線性迴歸五大基本假定 (5 Assumptions of OLS)</span>
+          <span class="badge badge-mastered">計量基石</span>
+        </div>
+        <p style="color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 0.75rem;">
+          最小平方法 (OLS) 的統計推論與信賴區間，全部奠基在下列五大假定上：
+        </p>
+
+        <div class="visual-card-grid">
+          <div class="visual-card">
+            <div style="font-weight: 700; color: #a5b4fc; margin-bottom: 0.3rem;">1. 線性關係 (Linearity)</div>
+            <div style="font-size: 0.85rem; color: #94a3b8;">
+              應變數 $Y$ 與各自變數 $X_j$ 呈現線性組合。殘差圖中殘差點應隨機散佈於 0 兩側，<strong>不可呈現 U 型拋物線或彎曲趨勢</strong>。
+            </div>
+          </div>
+
+          <div class="visual-card">
+            <div style="font-weight: 700; color: #34d399; margin-bottom: 0.3rem;">2. 殘差常態性 (Normality)</div>
+            <div style="font-size: 0.85rem; color: #94a3b8;">
+              誤差項 $\\epsilon_i \\sim N(0, \\sigma^2)$。檢驗工具為 <strong>常態機率圖 (Normal Q-Q Plot)</strong>，若資料點緊密貼合 45 度對角線即代表符合。
+            </div>
+          </div>
+
+          <div class="visual-card">
+            <div style="font-weight: 700; color: #fbbf24; margin-bottom: 0.3rem;">3. 無完全共線性 (No Multicollinearity)</div>
+            <div style="font-size: 0.85rem; color: #94a3b8;">
+              自變數之間不可高度相關。指標：<strong>變異數膨脹因子 $VIF < 5$</strong>（若 $VIF \\ge 10$ 代表嚴重共線性，自變數過度重疊，標準誤失真）。
+            </div>
+          </div>
+
+          <div class="visual-card">
+            <div style="font-weight: 700; color: #f43f5e; margin-bottom: 0.3rem;">4. 同質變異性 (Homoscedasticity)</div>
+            <div style="font-size: 0.85rem; color: #94a3b8;">
+              殘差變異數保持定值 $\\sigma^2$。若殘差隨預測值增大而呈<strong>喇叭狀/漏斗狀擴散</strong>，即違反此假定（異質變異）。
+            </div>
+          </div>
+
+          <div class="visual-card">
+            <div style="font-weight: 700; color: #38bdf8; margin-bottom: 0.3rem;">5. 殘差獨立性 (Independence)</div>
+            <div style="font-size: 0.85rem; color: #94a3b8;">
+              殘差之間互相獨立無自我相關。檢驗統計量：<strong>Durbin-Watson (DW) 接近 2</strong>（若遠小於 2 代表正自相關）。
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2: R² 陷阱與 R²adj -->
+      <div class="concept-card">
+        <div class="visual-card-header">
+          <span style="color: #38bdf8; font-size: 1.15rem;">📈 判定係數 R² 陷阱與板書 IMG_0131 精闢解讀</span>
+          <span class="badge badge-review">板書打叉註記</span>
+        </div>
+        <p style="color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 0.75rem;">
+          在多元線性迴歸中，只要隨便多塞入一個自變數，最小平方法 (OLS) 的數學特性保證 <strong>$R^2$ 永遠單調不減</strong>（只會上升或持平）！<br>
+          因此板書特別打叉註記：<strong>「$R^2 \\rightarrow$ 模型的解釋能力；資料多，解釋能力不一定上升！」</strong><br>
+          為了防止自欺欺人，必須看 <strong>調整後判定係數 ($R^2_{adj}$)</strong>，它會對自變數數量 $k$ 消耗的自由度施加懲罰。
+        </p>
+
+        <div class="visual-card-grid">
+          <div class="visual-card">
+            <div style="font-weight: 700; color: #f43f5e; margin-bottom: 0.4rem;">原始判定係數 $R^2$（易被灌水）</div>
+            $$R^2 = 1 - \\frac{SSE}{SST}$$
+            <div style="font-size: 0.85rem; color: #94a3b8; margin-top: 0.4rem;">
+              只要增加自變數，$SSE$ 絕不可能增加，因此 $R^2$ 必定非降！即使塞入 5 個擲骰子的隨機數，$R^2$ 也會被虛增。
+            </div>
+          </div>
+
+          <div class="visual-card">
+            <div style="font-weight: 700; color: #34d399; margin-bottom: 0.4rem;">調整後判定係數 $R^2_{adj}$（真功夫）</div>
+            $$R^2_{adj} = 1 - \\frac{SSE / (n - k - 1)}{SST / (n - 1)}$$
+            <div style="font-size: 0.85rem; color: #94a3b8; margin-top: 0.4rem;">
+              引入自由度懲罰：只有當新加入變數帶來的邊際變異解釋量<strong>大於自由度損失時</strong>，$R^2_{adj}$ 才會上升！
+            </div>
+          </div>
+        </div>
+
+        <!-- P-value 視覺標尺 -->
+        <div style="margin-top: 1.25rem;">
+          <div style="font-weight: 700; color: #a5b4fc; margin-bottom: 0.4rem;">板書 P-值判斷門檻視覺量表</div>
+          <div class="p-gauge-bar">
+            <div class="p-zone-01" title="p < 0.01: 99% 信心水準極顯著">p&lt;0.01 (99%)</div>
+            <div class="p-zone-05" title="p < 0.05: 95% 信心水準顯著">p&lt;0.05 (95%)</div>
+            <div class="p-zone-10" title="p < 0.10: 90% 邊際顯著">p&lt;0.10 (90%)</div>
+            <div class="p-zone-fail" title="p >= 0.10: 不顯著">p ≥ 0.10 不顯著 (無法拒絕 H0)</div>
+          </div>
+          <div style="display: flex; justify-content: space-between; font-size: 0.8rem; color: #94a3b8;">
+            <span>🟢 0.01：極顯著 (強烈拒絕 H0)</span>
+            <span>🔵 0.05：通認顯著標準</span>
+            <span>🟡 0.10：邊際顯著</span>
+            <span>⚪ ≥ 0.10：不具統計顯著性</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 3: 虛擬變數 k-1 法則與交互作用項 -->
+      <div class="concept-card">
+        <div class="visual-card-header">
+          <span style="color: #38bdf8; font-size: 1.15rem;">🏷️ 虛擬變數 $k-1$ 法則與交互作用項</span>
+          <span class="badge badge-mastered">實務重點</span>
+        </div>
+
+        <div class="visual-card-grid">
+          <div class="visual-card">
+            <div style="font-weight: 700; color: #fbbf24; margin-bottom: 0.4rem;">虛擬變數 $k-1$ 法則</div>
+            <p style="font-size: 0.85rem; color: #cbd5e1; line-height: 1.5;">
+              若一類別自變數有 $k$ 個水準（例如：四季 $k=4$），<strong>只能建立 $k-1 = 3$ 個虛擬變數</strong>！<br>
+              未被定義的第 $k$ 個水準為<strong>「基準組 (Base Category)」</strong>，其效果被常數項 $\\beta_0$ 吸收。<br>
+              若建了 $k$ 個虛擬變數，會引發<strong>「虛擬變數陷阱 (Dummy Variable Trap)」</strong>（矩陣完全共線性，無反矩陣可解）！
+            </p>
+          </div>
+
+          <div class="visual-card">
+            <div style="font-weight: 700; color: #38bdf8; margin-bottom: 0.4rem;">✖️ 交互作用項 (Interaction Term)</div>
+            $$\\hat{Y} = b_0 + b_1 X_1 + b_2 X_2 + b_3 (X_1 \\cdot X_2)$$
+            <p style="font-size: 0.85rem; color: #cbd5e1; line-height: 1.5;">
+              $X_1$ 對 $Y$ 的邊際影響斜率為 $(b_1 + b_3 X_2)$，其效果會隨著 $X_2$ 的數值高低而變動！在幾何圖形上呈現<strong>非平行交叉線</strong>。
+            </p>
+          </div>
+        </div>
+
+        <!-- 交互作用項非平行線 SVG 圖解 -->
+        <div class="svg-diagram-container" style="margin-top: 1rem;">
+          <svg viewBox="0 0 480 180" xmlns="http://www.w3.org/2000/svg">
+            <line x1="50" y1="150" x2="450" y2="150" stroke="#475569" stroke-width="1.5"/>
+            <line x1="50" y1="150" x2="50" y2="20" stroke="#475569" stroke-width="1.5"/>
+            <text x="440" y="165" font-size="11" fill="#94a3b8">X1</text>
+            <text x="35" y="25" font-size="11" fill="#94a3b8">Y</text>
+
+            <!-- 組別 A (X2=0) 平緩線 -->
+            <line x1="50" y1="120" x2="420" y2="60" stroke="#38bdf8" stroke-width="2.5"/>
+            <text x="425" y="60" font-size="10" fill="#38bdf8" font-weight="700">組別 A (X2 = 0，斜率 b1)</text>
+
+            <!-- 組別 B (X2=1) 陡峭線 -->
+            <line x1="50" y1="140" x2="380" y2="25" stroke="#f43f5e" stroke-width="2.5"/>
+            <text x="385" y="25" font-size="10" fill="#f43f5e" font-weight="700">組別 B (X2 = 1，斜率 b1 + b3)</text>
+
+            <!-- 交叉點標記 -->
+            <circle cx="150" cy="103" r="5" fill="#fbbf24"/>
+            <text x="160" y="105" font-size="10" fill="#fbbf24">非平行交叉 (交互作用顯著)</text>
+          </svg>
+        </div>
+
+        <!-- 觀念 Checkpoint -->
         <div style="margin-top: 1.5rem; padding-top: 1.25rem; border-top: 1px dashed var(--border-color);">
           <div style="font-weight: 700; color: #fbbf24; margin-bottom: 0.5rem;">🎯 觀念確認 Checkpoint</div>
           <p style="font-size: 0.9rem; margin-bottom: 0.75rem;">
@@ -444,13 +1008,153 @@ function renderConceptWalkthrough(unitId) {
 
     elContentArea.appendChild(container);
     renderMath(container);
+  } else if (unitId === "ch10-lp") {
+    container.innerHTML = `
+      <!-- Card 1: 圖解法與極值點定理 -->
+      <div class="concept-card">
+        <div class="visual-card-header">
+          <span style="color: #38bdf8; font-size: 1.15rem;">📐 線性規劃圖解法幾何直覺與極值點定理</span>
+          <span class="badge badge-mastered">核心定理</span>
+        </div>
+        <p style="color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 0.75rem;">
+          在二元線性規劃中，每一個限制式半平面共同交集出一個<strong>凸多邊形的可行解區域 (Feasible Region)</strong>。
+        </p>
+
+        <div class="callout-box callout-emerald">
+          <div style="font-weight: 700; margin-bottom: 0.3rem;">👑 極值點定理 (Extreme Point / Corner Point Theorem)</div>
+          <p style="font-size: 0.9rem; line-height: 1.6;">
+            若線性規劃在有界可行解區域內存在最佳解，<strong>最佳解必定發生在可行解區域的頂點（Corner Points / 極值點）上</strong>！<br>
+            <strong>求解四步法</strong>：1. 畫出限制式邊界直線 $\\to$ 2. 塗滿可行解區域 $\\to$ 3. 解聯立方程求所有頂點坐標 $(X_1, X_2)$ $\\to$ 4. 代入目標函數 $Z$ 挑選最大或最小值！
+          </p>
+        </div>
+
+        <!-- 線性規劃圖解法 SVG 圖解 -->
+        <div class="svg-diagram-container">
+          <svg viewBox="0 0 460 220" xmlns="http://www.w3.org/2000/svg">
+            <line x1="50" y1="180" x2="420" y2="180" stroke="#475569" stroke-width="1.5"/>
+            <line x1="50" y1="180" x2="50" y2="20" stroke="#475569" stroke-width="1.5"/>
+            <text x="410" y="195" font-size="11" fill="#94a3b8">X1</text>
+            <text x="35" y="25" font-size="11" fill="#94a3b8">X2</text>
+
+            <!-- 陰影凸多邊形可行解區域 -->
+            <polygon points="50,180 230,180 200,80 50,70" fill="rgba(99, 102, 241, 0.25)" stroke="#6366f1" stroke-width="2"/>
+            <text x="120" y="130" font-size="11" fill="#a5b4fc" font-weight="700">可行解區域</text>
+
+            <!-- 頂點標記 -->
+            <circle cx="50" cy="180" r="5" fill="#38bdf8"/>
+            <text x="30" y="195" font-size="10" fill="#38bdf8">(0, 0)</text>
+
+            <circle cx="230" cy="180" r="5" fill="#38bdf8"/>
+            <text x="235" y="195" font-size="10" fill="#38bdf8">A (4, 0)</text>
+
+            <!-- 最佳解頂點 -->
+            <circle cx="200" cy="80" r="7" fill="#10b981" stroke="#ffffff" stroke-width="1.5"/>
+            <text x="212" y="80" font-size="11" fill="#34d399" font-weight="700">B (3, 2) 🌟 最佳解！</text>
+
+            <circle cx="50" cy="70" r="5" fill="#38bdf8"/>
+            <text x="10" y="65" font-size="10" fill="#38bdf8">C (0, 3)</text>
+
+            <!-- 等利潤線 Isoprofit line -->
+            <line x1="80" y1="20" x2="320" y2="140" stroke="#f59e0b" stroke-width="2" stroke-dasharray="4,4"/>
+            <text x="325" y="145" font-size="10" fill="#fbbf24">Max Z 等利潤線</text>
+          </svg>
+        </div>
+      </div>
+
+      <!-- Card 2: 寬鬆變數 vs 剩餘變數 與 交叉相乘線性化 -->
+      <div class="concept-card">
+        <div class="visual-card-header">
+          <span style="color: #38bdf8; font-size: 1.15rem;">⚖️ 寬鬆變數 vs 剩餘變數 & 比例限制交叉相乘線性化</span>
+          <span class="badge badge-review">手算必考</span>
+        </div>
+
+        <div class="visual-card-grid">
+          <div class="visual-card">
+            <div style="font-weight: 700; color: #38bdf8; margin-bottom: 0.4rem;">寬鬆變數 (Slack, $S \\ge 0$)</div>
+            $$a_1 X_1 + a_2 X_2 + S = b \\quad (\\le \\text{ 限制式})$$
+            <div style="font-size: 0.85rem; color: #94a3b8; margin-top: 0.4rem;">
+              用於「$\\le$ 資源上限」。$S$ 代表<strong>未耗盡之閒置資源</strong>。若 $S = 0$，代表資源被完全吃光，為<strong>緊迫限制 (Binding Constraint / 瓶頸資源)</strong>！
+            </div>
+          </div>
+
+          <div class="visual-card">
+            <div style="font-weight: 700; color: #34d399; margin-bottom: 0.4rem;">剩餘變數 (Surplus, $E \\ge 0$)</div>
+            $$a_1 X_1 + a_2 X_2 - E = b \\quad (\\ge \\text{ 限制式})$$
+            <div style="font-size: 0.85rem; color: #94a3b8; margin-top: 0.4rem;">
+              用於「$\\ge$ 最低需求」。$E$ 代表<strong>超越最低規格的超額產量</strong>。若 $E = 0$，代表剛好達標，為<strong>緊迫限制 (Binding Constraint)</strong>！
+            </div>
+          </div>
+        </div>
+
+        <!-- 公平成性交叉相乘步驟卡 -->
+        <div class="callout-box callout-sky" style="margin-top: 1rem;">
+          <div style="font-weight: 700; margin-bottom: 0.4rem;">🔄 比例限制交叉相乘 4 步線性化 (Linearization Step-by-Step)</div>
+          <p style="font-size: 0.88rem; margin-bottom: 0.5rem;">
+            題目常考：「產品 1 產量必須佔總產量至少 40%」，列式為非線性（未知數在分母）：
+            $$\\frac{X_1}{X_1 + X_2} \\ge 0.4$$
+          </p>
+          <div class="concept-step-grid">
+            <div class="concept-step-card">
+              <span class="concept-step-num">1</span><strong>交叉相乘去分母</strong>
+              <div style="font-size: 0.82rem; color: #cbd5e1; margin-top: 0.2rem;">$X_1 \\ge 0.4(X_1 + X_2)$</div>
+            </div>
+            <div class="concept-step-card">
+              <span class="concept-step-num">2</span><strong>展開括號乘積</strong>
+              <div style="font-size: 0.82rem; color: #cbd5e1; margin-top: 0.2rem;">$X_1 \\ge 0.4X_1 + 0.4X_2$</div>
+            </div>
+            <div class="concept-step-card">
+              <span class="concept-step-num">3</span><strong>同類項移至左側</strong>
+              <div style="font-size: 0.82rem; color: #cbd5e1; margin-top: 0.2rem;">$(1 - 0.4)X_1 - 0.4X_2 \\ge 0$</div>
+            </div>
+            <div class="concept-step-card">
+              <span class="concept-step-num">4</span><strong>標準線性限制式</strong>
+              <div style="font-size: 0.82rem; color: #34d399; font-weight: 700; margin-top: 0.2rem;">$0.6X_1 - 0.4X_2 \\ge 0$ ($3X_1 - 2X_2 \\ge 0$)</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 斜率三明治定理 -->
+        <div class="callout-box callout-amber" style="margin-top: 1rem;">
+          <div style="font-weight: 700; margin-bottom: 0.3rem;">🥪 目標函數斜率敏感度分析 (Slope Sandwich Theorem)</div>
+          <p style="font-size: 0.88rem;">
+            目標函數 $\\text{Max } Z = c_1 X_1 + c_2 X_2$ 之等利潤線斜率為 $m_Z = -\\frac{c_1}{c_2}$。<br>
+            若最佳解由邊界線 $L_1$ (斜率 $m_1$) 與 $L_2$ (斜率 $m_2$) 交會而成：
+            $$\\min(m_1, m_2) \\le -\\frac{c_1}{c_2} \\le \\max(m_1, m_2)$$
+            只要目標函數斜率維持在兩條相交邊界的夾角三明治範圍內，頂點最佳解坐標完全不受影響！
+          </p>
+        </div>
+
+        <!-- 觀念 Checkpoint -->
+        <div style="margin-top: 1.5rem; padding-top: 1.25rem; border-top: 1px dashed var(--border-color);">
+          <div style="font-weight: 700; color: #fbbf24; margin-bottom: 0.5rem;">🎯 觀念確認 Checkpoint</div>
+          <p style="font-size: 0.9rem; margin-bottom: 0.75rem;">
+            在線性規劃圖解法中，若某一資源上限限制式 ($\\le$) 的寬鬆變數為 $S = 0$，代表該資源現狀為何？
+          </p>
+          <div style="display: flex; gap: 0.5rem; flex-direction: column;" id="u5CheckpointOptions">
+            <button class="btn btn-secondary" style="text-align: left; justify-content: flex-start;" onclick="checkU5Checkpoint(this, false)">
+              A. 還有寬裕剩餘未耗盡，非瓶頸資源
+            </button>
+            <button class="btn btn-secondary" style="text-align: left; justify-content: flex-start;" onclick="checkU5Checkpoint(this, true)">
+              B. 恰好完全耗盡，為緊迫限制 (Binding Constraint / 瓶頸資源)
+            </button>
+          </div>
+          <div id="u5CheckpointFeedback" style="margin-top: 0.5rem;"></div>
+        </div>
+      </div>
+    `;
+
+    elContentArea.appendChild(container);
+    renderMath(container);
   } else if (unitId === "ch13-decision") {
     container.innerHTML = `
+      <!-- Card 1: 決策準則心態視覺化 (13.2) -->
       <div class="concept-card">
-        <h3 style="color: #38bdf8; font-size: 1.15rem; margin-bottom: 0.6rem;">⚖️ 決策準則心態視覺化 (Decision Criteria Spotlight)</h3>
-        <p style="color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 1rem;">
-          面對未來不確定情境，四種經典準則體現了四種截然不同的決策哲學。<br>
-          請點擊下方按鈕，矩陣會為您打上即時聚焦光圈，呈現演算法挑選方案的過程：
+        <div class="visual-card-header">
+          <span style="color: #38bdf8; font-size: 1.15rem;">⚖️ 決策準則心態視覺化 (Strictly 13.2 Scope)</span>
+          <span class="badge badge-mastered">無機率決策</span>
+        </div>
+        <p style="color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 0.75rem;">
+          在無法得知未來景氣機率的不確定情境下，四種經典準則體現了四種截然不同的商業決策哲學：
         </p>
 
         <div class="interactive-widget-box">
@@ -470,6 +1174,69 @@ function renderConceptWalkthrough(unitId) {
           </div>
         </div>
 
+        <!-- 4 步遺憾矩陣推導視覺表 -->
+        <div class="callout-box callout-sky" style="margin-top: 1rem;">
+          <div style="font-weight: 700; margin-bottom: 0.4rem;">📋 4 步遺憾矩陣推導視覺表 (Visual 4-Step Transformation)</div>
+          <div class="concept-step-grid">
+            <div class="concept-step-card">
+              <span class="concept-step-num">1</span><strong>原始報償矩陣</strong>
+              <div style="font-size: 0.82rem; color: #cbd5e1; margin-top: 0.2rem;">寫出各方案在各情境下的獲利 $V_{ij}$。</div>
+            </div>
+            <div class="concept-step-card">
+              <span class="concept-step-num">2</span><strong>各行基準最大值</strong>
+              <div style="font-size: 0.82rem; color: #cbd5e1; margin-top: 0.2rem;">鎖定各景氣直行最佳表現 $V_j^* = \\max_i V_{ij}$。</div>
+            </div>
+            <div class="concept-step-card">
+              <span class="concept-step-num">3</span><strong>計算機會損失</strong>
+              <div style="font-size: 0.82rem; color: #cbd5e1; margin-top: 0.2rem;">$R_{ij} = V_j^* - V_{ij} \\ge 0$（少賺了多少即為遺憾）。</div>
+            </div>
+            <div class="concept-step-card">
+              <span class="concept-step-num">4</span><strong>各列最大取最小</strong>
+              <div style="font-size: 0.82rem; color: #34d399; font-weight: 700; margin-top: 0.2rem;">找出各方案最慘遺憾，挑選受傷最輕方案！</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 獲利矩陣 vs 成本矩陣 對照表 -->
+        <div class="visual-card" style="margin-top: 1rem;">
+          <div style="font-weight: 700; color: #a5b4fc; margin-bottom: 0.5rem;">💰 獲利矩陣 (Profit) vs 成本矩陣 (Cost) 轉換全對照</div>
+          <div style="overflow-x: auto;">
+            <table class="decision-table" style="min-width: 520px;">
+              <tr>
+                <th>決策指標</th>
+                <th>獲利矩陣 (數字越大多好)</th>
+                <th>成本 / 損失矩陣 (數字越小越好)</th>
+              </tr>
+              <tr>
+                <td style="font-weight: 700;">樂觀準則 (Optimistic)</td>
+                <td>$\\max_i (\\max_j V_{ij})$ (大中取大)</td>
+                <td style="color: #38bdf8;">$\\min_i (\\min_j C_{ij})$ (小中取小)</td>
+              </tr>
+              <tr>
+                <td style="font-weight: 700;">悲觀準則 (Conservative)</td>
+                <td>$\\max_i (\\min_j V_{ij})$ (小中取大)</td>
+                <td style="color: #38bdf8;">$\\min_i (\\max_j C_{ij})$ (大中取小)</td>
+              </tr>
+              <tr>
+                <td style="font-weight: 700;">遺憾值基準 (Benchmark)</td>
+                <td>各行取最大值：$V_j^* = \\max_i V_{ij}$</td>
+                <td style="color: #38bdf8;">各行取最小值：$C_j^* = \\min_i C_{ij}$</td>
+              </tr>
+              <tr>
+                <td style="font-weight: 700;">遺憾值公式 (Regret)</td>
+                <td>$R_{ij} = V_j^* - V_{ij}$ (少賺的錢)</td>
+                <td style="color: #38bdf8;">$R_{ij} = C_{ij} - C_j^*$ (多花的冤枉錢)</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+
+        <div class="callout-box callout-amber" style="margin-top: 1rem;">
+          <div style="font-weight: 700; margin-bottom: 0.2rem;">🚫 考試範圍鎖定聲明</div>
+          本科考試範圍嚴格遵守 13.2 節「不確定情況下之決策準則」，<strong>決策樹、EVPI、EVSI、事後後悔機率 100% 排除</strong>，請安心鎖定四大準則之計算！
+        </div>
+
+        <!-- 觀念 Checkpoint -->
         <div style="margin-top: 1.5rem; padding-top: 1.25rem; border-top: 1px dashed var(--border-color);">
           <div style="font-weight: 700; color: #fbbf24; margin-bottom: 0.5rem;">🎯 觀念確認 Checkpoint</div>
           <p style="font-size: 0.9rem; margin-bottom: 0.75rem;">
@@ -491,39 +1258,6 @@ function renderConceptWalkthrough(unitId) {
     elContentArea.appendChild(container);
     renderMath(container);
     setDecisionSpotlight("maximax");
-  } else {
-    // 單元三或五通用觀念引導
-    const isU3 = unitId === "ch03-probability";
-    container.innerHTML = `
-      <div class="concept-card">
-        <h3 style="color: #38bdf8; font-size: 1.15rem; margin-bottom: 0.6rem;">
-          ${isU3 ? "🎲 機率法則與貝氏定理倒推" : "📐 線性規劃圖解法與敏感度分析"}
-        </h3>
-        <p style="color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 1rem;">
-          ${
-            isU3
-              ? "貝氏定理用於藉由新獲得的測試資訊，逆向修正先驗機率為事後機率（後驗機率）。特別注意：互斥非零必相依！連續型隨機變數單點機率恆為 0。"
-              : "線性規劃極值點定理：最佳解必出現在可行解區域的頂點！敏感度分析透過等利潤線斜率夾在相交兩邊界斜率之間，決定係數容許變動範圍。"
-          }
-        </p>
-
-        <div style="background: rgba(15, 23, 42, 0.6); padding: 1rem; border-radius: 10px; border-left: 4px solid #6366f1; margin-bottom: 1.5rem;">
-          <div style="font-weight: 700; color: #a5b4fc; margin-bottom: 0.4rem;">核心必考速記</div>
-          ${
-            isU3
-              ? "$$P(A_i|B) = \\frac{P(B|A_i)P(A_i)}{\\sum P(B|A_j)P(A_j)}$$"
-              : "$$\\text{Max } Z = c_1 x_1 + c_2 x_2 \\implies m_1 \\le -\\frac{c_1}{c_2} \\le m_2$$"
-          }
-        </div>
-
-        <button class="btn btn-primary" onclick="switchToLevel1()">
-          🚀 理解完畢，直接進入 Level 1 實戰練習！
-        </button>
-      </div>
-    `;
-
-    elContentArea.appendChild(container);
-    renderMath(container);
   }
 }
 
@@ -561,6 +1295,23 @@ window.checkU2Checkpoint = function (btn, isCorrect) {
   }
 };
 
+window.checkU3Checkpoint = function (btn, isCorrect) {
+  const fb = document.getElementById("u3CheckpointFeedback");
+  if (isCorrect) {
+    btn.className = "btn btn-emerald";
+    fb.innerHTML = `
+      <div style="color: #34d399; font-size: 0.88rem; margin-top: 0.4rem;">
+        🎉 考點抓得極準！互斥且非零機率必相依（因 A 發生則 B 發生機率直接降為 0，強烈相依）！
+      </div>
+      <button class="btn btn-primary" style="margin-top: 0.75rem;" onclick="switchToLevel1()">進入 Level 1 實戰練習 →</button>
+    `;
+  } else {
+    btn.className = "btn btn-amber";
+    fb.innerHTML = `<div style="color: #fbbf24; font-size: 0.88rem; margin-top: 0.4rem;">互斥事件在非零機率下絕不可能獨立！因 P(A∩B)=0 ≠ P(A)P(B)=0.20。</div>`;
+  }
+  renderMath(fb);
+};
+
 window.checkU4Checkpoint = function (btn, isCorrect) {
   const fb = document.getElementById("u4CheckpointFeedback");
   if (isCorrect) {
@@ -574,6 +1325,22 @@ window.checkU4Checkpoint = function (btn, isCorrect) {
   } else {
     btn.className = "btn btn-amber";
     fb.innerHTML = `<div style="color: #fbbf24; font-size: 0.88rem; margin-top: 0.4rem;">最小平方法保證原始 R² 絕不可能下跌！</div>`;
+  }
+};
+
+window.checkU5Checkpoint = function (btn, isCorrect) {
+  const fb = document.getElementById("u5CheckpointFeedback");
+  if (isCorrect) {
+    btn.className = "btn btn-emerald";
+    fb.innerHTML = `
+      <div style="color: #34d399; font-size: 0.88rem; margin-top: 0.4rem;">
+        🎉 正確！寬鬆變數 S = 0 代表資源全數用盡，是為緊迫限制（Binding Constraint）！
+      </div>
+      <button class="btn btn-primary" style="margin-top: 0.75rem;" onclick="switchToLevel1()">進入 Level 1 實戰練習 →</button>
+    `;
+  } else {
+    btn.className = "btn btn-amber";
+    fb.innerHTML = `<div style="color: #fbbf24; font-size: 0.88rem; margin-top: 0.4rem;">S > 0 才有剩餘；S = 0 代表已達上限緊迫約束。</div>`;
   }
 };
 
@@ -600,7 +1367,7 @@ window.switchToLevel1 = function () {
   renderMainContent();
 };
 
-// 百分位數動態尺規微元件驅動
+// 百分位數動態尺規微元件驅動 (0.5 乾淨步進)
 function initPercentileRulerWidget() {
   const data = [10, 15, 18, 24, 30, 36, 42, 50, 60];
   const n = data.length;
@@ -610,12 +1377,14 @@ function initPercentileRulerWidget() {
   const resBox = document.getElementById("rulerResultBox");
 
   function update() {
-    const x = parseInt(slider.value, 10);
-    pctVal.textContent = x;
+    if (!slider || !track || !resBox || !pctVal) return;
+    const L = parseFloat(slider.value); // 乾淨 0.5 步進：1.0, 1.5, ..., 9.0
+    const x = ((L - 1) / (n - 1)) * 100;
+    const cleanX = Number.isInteger(x) ? x : Math.round(x * 100) / 100;
+    pctVal.textContent = `${cleanX}% (L = ${L.toFixed(1)})`;
 
-    const L = (x / 100) * (n - 1) + 1;
     const p = Math.floor(L);
-    const d = L - p;
+    const d = Math.round((L - p) * 10) / 10;
     const x_p = data[p - 1];
     const x_p1 = p < n ? data[p] : data[n - 1];
     const interpVal = Math.round((x_p + d * (x_p1 - x_p)) * 100) / 100;
@@ -642,18 +1411,38 @@ function initPercentileRulerWidget() {
     cursor.className = "ruler-cursor-line";
     cursor.style.left = `calc(${pctPos}% + 1rem - (${pctPos * 0.32}px))`;
     cursor.innerHTML = `
-      <div class="ruler-cursor-tag">L${x} = ${L.toFixed(2)}</div>
+      <div class="ruler-cursor-tag">L = ${L.toFixed(1)}</div>
     `;
     track.appendChild(cursor);
 
     resBox.innerHTML = `
-      <div style="color: #38bdf8; margin-bottom: 0.3rem;">板書位置推導：L_${x} = (${x}/100) * (9 - 1) + 1 = <strong>${L.toFixed(2)}</strong></div>
-      <div style="color: #cbd5e1;">整數項 p = ${p} (X${p} = ${x_p})，小數項 0.d = ${d.toFixed(2)} (X${p < n ? p+1 : p} = ${x_p1})</div>
-      <div style="color: #34d399; font-weight: 700; margin-top: 0.3rem;">
-        線性內插數值：P_${x} = ${x_p} + ${d.toFixed(2)} * (${x_p1} - ${x_p}) = <strong>${interpVal}</strong>
+      <div style="color: #38bdf8; margin-bottom: 0.35rem;">
+        板書位置推導：\\(L_{${cleanX}} = \\frac{${cleanX}}{100}(9 - 1) + 1 = \\mathbf{${L.toFixed(1)}}\\)
+      </div>
+      <div style="color: #cbd5e1; margin-bottom: 0.35rem;">
+        整數項 \\(p = ${p}\\)（\\(X_{${p}} = ${x_p}\\)），小數項 \\(0.d = ${d.toFixed(1)}\\)（\\(X_{${p < n ? p + 1 : p}} = ${x_p1}\\)）
+      </div>
+      <div style="color: #34d399; font-weight: 700;">
+        線性內插數值：\\(P_{${cleanX}} = ${x_p} + ${d.toFixed(1)} \\times (${x_p1} - ${x_p}) = \\mathbf{${interpVal}}\\)
       </div>
     `;
+    renderMath(resBox);
   }
+
+  window.setRulerPos = function (pos) {
+    if (!slider) return;
+    slider.value = pos;
+    update();
+  };
+
+  window.stepRuler = function (delta) {
+    if (!slider) return;
+    let next = parseFloat(slider.value) + delta;
+    if (next < 1.0) next = 1.0;
+    if (next > 9.0) next = 9.0;
+    slider.value = next;
+    update();
+  };
 
   slider.oninput = update;
   update();
