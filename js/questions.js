@@ -45,10 +45,10 @@ const UNITS = [
   },
   {
     id: "ch13-decision",
-    name: "單元六：不確定決策準則與決策樹",
+    name: "單元六：不確定情況下之決策準則",
     shortName: "決策分析",
-    icon: "🌳",
-    desc: "樂觀/悲觀/機會損失最小化、兩階段決策樹逆向回推與 EVSI"
+    icon: "⚖️",
+    desc: "13.2 不確定決策準則：樂觀(Maximax)、悲觀(Maximin)、Laplace、最大機會損失最小化(Minimax Regret) 與報酬矩陣"
   }
 ];
 
@@ -317,6 +317,30 @@ const RAW_QUESTIONS = [
     }
   },
 
+  {
+    id: "q-u1-l4-02",
+    unit: "ch02-descriptive",
+    unitName: "敘述統計與成長率",
+    level: 4,
+    type: "numeric",
+    title: "綜合敘述統計手算：變異數、標準差與變異係數 (CV)",
+    questionPrompt: "某半導體晶圓廠檢驗 6 片晶圓的表面厚度微米數（已由小至大排序）：\n`[48, 50, 52, 54, 56, 58]`（$n = 6$）。品管經理欲評估該製程的離散程度。\n請依序手算：\n(1) 樣本平均數 $\\bar{X}$\n(2) 離均差平方和 $\\sum (X_i - \\bar{X})^2$\n(3) 樣本變異數 $S^2$（注意自由度除以 $n - 1$）\n(4) 樣本標準差 $S = \\sqrt{S^2}$\n(5) 變異係數 $CV = \\frac{S}{\\bar{X}} \\times 100\\%$\n請輸入此樣本之「變異係數 CV（%）」（請四捨五入至小數點後兩位）。",
+    givenData: {
+      "排序數列": "[48, 50, 52, 54, 56, 58]",
+      "樣本數 n": "6"
+    },
+    options: null,
+    correctAnswer: 7.06,
+    unitLabel: "%",
+    tolerance: 0.05,
+    formulaHint: "S^2 = \\frac{\\sum (X_i - \\bar{X})^2}{n - 1}, \\quad S = \\sqrt{S^2}, \\quad CV = \\frac{S}{\\bar{X}} \\times 100\\%",
+    fullSolution: "【步驟一：計算樣本平均數】\n$\\bar{X} = \\frac{48 + 50 + 52 + 54 + 56 + 58}{6} = \\frac{318}{6} = 53.0$ 微米。\n\n【步驟二：計算各點離均差與平方和】\n- $(48 - 53)^2 = (-5)^2 = 25$\n- $(50 - 53)^2 = (-3)^2 = 9$\n- $(52 - 53)^2 = (-1)^2 = 1$\n- $(54 - 53)^2 = (+1)^2 = 1$\n- $(56 - 53)^2 = (+3)^2 = 9$\n- $(58 - 53)^2 = (+5)^2 = 25$\n離均差平方和 $\\sum (X_i - \\bar{X})^2 = 25 + 9 + 1 + 1 + 9 + 25 = 70$。\n\n【步驟三：計算樣本變異數 (自由度除以 n - 1)】\n$S^2 = \\frac{70}{6 - 1} = \\frac{70}{5} = 14.0$。\n\n【步驟四：計算樣本標準差】\n$S = \\sqrt{14} \\approx 3.74166$ 微米。\n\n【步驟五：計算變異係數 CV】\n$CV = \\frac{S}{\\bar{X}} = \\frac{3.74166}{53.0} \\approx 0.070597 = 7.06\\%$。\n\n【商務意涵】CV 消除平均數尺度影響，僅約 7.06%，製程相對穩定。",
+    cramSummary: {
+      conceptName: "綜合敘述統計計算全流程",
+      keyTakeaway: "樣本變異數除以 n-1（此題 70/5=14）。標準差開根號為 3.7417。CV = S/X̄ = 7.06%。"
+    }
+  },
+
   // ==========================================
   // 單元二：距離與相似度度量 (ch02-similarity)
   // ==========================================
@@ -455,6 +479,158 @@ const RAW_QUESTIONS = [
     }
   },
 
+  {
+    id: "q-u2-l1-02",
+    unit: "ch02-similarity",
+    unitName: "距離與相似度度量",
+    level: 1,
+    type: "mcq",
+    title: "距離與相似度互補關係及幾何距離度量",
+    questionPrompt: "關於特徵空間中兩樣本點的「相似度 (Similarity)」與「距離 (Distance)」，以及常見幾何距離度量之統計特性，下列敘述何者完全正確？",
+    givenData: null,
+    options: [
+      {
+        key: "A",
+        text: "相似度與距離呈現同向正比變動，兩者數值愈大代表樣本彼此愈接近",
+        distractorFeedback: "顛倒了！距離愈遠，相似度愈低，兩者呈反比關係。"
+      },
+      {
+        key: "B",
+        text: "距離與相似度具備互補反比關係，通常定義距離 $D = 1 - S$；歐氏距離即為明氏距離（Minkowski Distance）在 $k=2$ 時之特例",
+        distractorFeedback: null
+      },
+      {
+        key: "C",
+        text: "曼哈頓距離（Manhattan Distance）計算的是兩點之間的直線直線幾何位移，為 $L_2$ 範數",
+        distractorFeedback: "直線幾何位移為歐氏距離 ($L_2$)；曼哈頓距離為格狀街區位移 ($L_1$)。"
+      },
+      {
+        key: "D",
+        text: "只有在二元屬性資料中才能計算距離，連續數值型資料只能計算相似度",
+        distractorFeedback: "連續數值型資料有豐富的距離公式（歐氏、曼哈頓等），兩者皆可度量。"
+      }
+    ],
+    correctAnswer: "B",
+    formulaHint: "D = 1 - S, \quad d_{Minkowski} = \left( \sum |X_i - Y_i|^k \right)^{1/k}",
+    fullSolution: "【步驟一：距離與相似度哲學】距離與相似度是同一枚硬幣的兩面：距離愈近，相似度愈高。在標準化空間中，通常定義 $D = 1 - S$。\n【步驟二：明氏幾何族群】明氏距離公式中，當 $k=1$ 時為曼哈頓距離（絕對值和），當 $k=2$ 時為歐幾里得距離（平方和開根號），當 $k \\to \\infty$ 時為柴比雪夫最大值距離。\n【步驟三：結論】選項 (B) 正確揭示了兩者之互補定義與幾何關聯。",
+    cramSummary: {
+      conceptName: "距離與相似度互補關係",
+      keyTakeaway: "D = 1 - S！明氏距離 k=1 為曼哈頓，k=2 為歐氏距離。"
+    }
+  },
+  {
+    id: "q-u2-l1-03",
+    unit: "ch02-similarity",
+    unitName: "距離與相似度度量",
+    level: 1,
+    type: "mcq",
+    title: "距離計算前標準化 (Z-Score) 的必要性",
+    questionPrompt: "資料科學家在進行客戶分群時，特徵欄位包含「客戶年齡（20~70 歲）」與「年收入（30 萬~300 萬元）」。若未對資料進行標準化直接計算歐氏距離，將會導致何種嚴重偏誤？",
+    givenData: null,
+    options: [
+      {
+        key: "A",
+        text: "年齡變數因數值較小，在平方和中會完全主宰距離計算",
+        distractorFeedback: "數值小者在差額平方中會被淹沒，無法主宰距離。"
+      },
+      {
+        key: "B",
+        text: "年收入因數值規模遠大於年齡，其差額平方將完全主導歐氏距離，使年齡特徵實質失去作用",
+        distractorFeedback: null
+      },
+      {
+        key: "C",
+        text: "歐氏距離計算結果會變成負數",
+        distractorFeedback: "歐氏距離平方和開根號恆為非負數，絕不可能為負。"
+      },
+      {
+        key: "D",
+        text: "導致 Jaccard 相似係數無法計算",
+        distractorFeedback: "Jaccard 是用於二元屬性，本題為連續型變數，無直接因果關係。"
+      }
+    ],
+    correctAnswer: "B",
+    formulaHint: "Z = \frac{X - \bar{X}}{S}, \quad d(X,Y) = \sqrt{\sum (Z_{xi} - Z_{yi})^2}",
+    fullSolution: "【步驟一：尺度不均的衝擊】年齡差距最大 50 歲，平方僅 2,500；年收入差距可達 2,000,000 元，平方高達 $4 \times 10^{12}$。未標準化前，年收入的平方差將徹底淹沒年齡差！\n【步驟二：標準化解方】必須透過 Z-Score ($Z = (X - \bar{X}) / S$) 將各變數轉為平均為 0、標準差為 1 的無因次標準變數，各特徵方能公平參與距離權重。\n【步驟三：結論】選項 (B) 說明了特徵量綱主宰的致命盲點。",
+    cramSummary: {
+      conceptName: "連續距離標準化 (Z-Score)",
+      keyTakeaway: "單位規模不同必先標準化！否則大數值變數（如年薪）會完全抹殺小數值變數（如年齡）。"
+    }
+  },
+  {
+    id: "q-u2-l2-03",
+    unit: "ch02-similarity",
+    unitName: "距離與相似度度量",
+    level: 2,
+    type: "numeric",
+    title: "二維歐氏距離 (Euclidean Distance) 快算",
+    questionPrompt: "某電商平台將兩位受訪者的特徵向量定義為 $(X_1, X_2)$，其中顧客甲的向量為 $A = (3, 7)$，顧客乙的向量為 $B = (7, 10)$。請計算顧客甲與顧客乙之間的「歐氏距離 (Euclidean Distance)」數值。",
+    givenData: {
+      "顧客甲特徵向量 A": "(3, 7)",
+      "顧客乙特徵向量 B": "(7, 10)"
+    },
+    options: null,
+    correctAnswer: 5.0,
+    unitLabel: "",
+    tolerance: 0.05,
+    formulaHint: "d(A, B) = \sqrt{(X_1 - Y_1)^2 + (X_2 - Y_2)^2}",
+    fullSolution: "【步驟一：代入歐氏距離公式】\n$d(A, B) = \sqrt{(7 - 3)^2 + (10 - 7)^2}$。\n【步驟二：逐步計算差額平方】\n- 第一維度差額平方：$(7 - 3)^2 = 4^2 = 16$\n- 第二維度差額平方：$(10 - 7)^2 = 3^2 = 9$\n【步驟三：求和開根號】\n$d(A, B) = \sqrt{16 + 9} = \sqrt{25} = 5.0$。\n【步驟四：結論】甲與乙在特徵空間中的直線歐氏距離恰好為 5.0。",
+    cramSummary: {
+      conceptName: "二維歐氏距離計算",
+      keyTakeaway: "d = sqrt[(x1 - y1)^2 + (x2 - y2)^2]。本題 sqrt(4^2 + 3^2) = sqrt(25) = 5.0。"
+    }
+  },
+  {
+    id: "q-u2-l3-02",
+    unit: "ch02-similarity",
+    unitName: "距離與相似度度量",
+    level: 3,
+    type: "numeric",
+    title: "二元雅卡爾距離 (Jaccard Distance) 計算",
+    questionPrompt: "比對甲、乙兩位使用者對 8 款手機 App 的下載紀錄（1 為下載，0 為未下載）：\n- 使用者甲：`[1, 1, 0, 0, 1, 1, 0, 0]`\n- 使用者乙：`[1, 0, 1, 0, 1, 0, 0, 0]`\n請先建構二元列聯表次數，再計算兩位使用者之間的「雅卡爾距離 (Jaccard Distance = 1 - Jaccard Index)」。（四捨五入至小數點後兩位）",
+    givenData: {
+      "App 總數 N": "8",
+      "使用者甲紀錄": "[1, 1, 0, 0, 1, 1, 0, 0]",
+      "使用者乙紀錄": "[1, 0, 1, 0, 1, 0, 0, 0]"
+    },
+    options: null,
+    correctAnswer: 0.60,
+    unitLabel: "",
+    tolerance: 0.02,
+    formulaHint: "D_{Jaccard} = 1 - \frac{d}{b + c + d} = \frac{b + c}{b + c + d}",
+    fullSolution: "【步驟一：逐項比對 8 款 App】\n- App 1: (1, 1) -> 雙1 (d)\n- App 2: (1, 0) -> 甲1乙0 (c)\n- App 3: (0, 1) -> 甲0乙1 (b)\n- App 4: (0, 0) -> 雙0 (a)\n- App 5: (1, 1) -> 雙1 (d)\n- App 6: (1, 0) -> 甲1乙0 (c)\n- App 7: (0, 0) -> 雙0 (a)\n- App 8: (0, 0) -> 雙0 (a)\n【步驟二：統計次數】\n- 雙 1 項目 $d = 2$ (App 1, 5)\n- 甲 1 乙 0 項目 $c = 2$ (App 2, 6)\n- 甲 0 乙 1 項目 $b = 1$ (App 3)\n- 雙 0 項目 $a = 3$ (App 4, 7, 8)\n【步驟三：計算 Jaccard 相似度與距離】\n- $Jaccard = \frac{d}{b + c + d} = \frac{2}{1 + 2 + 2} = \frac{2}{5} = 0.40$。\n- 雅卡爾距離 $D_{Jaccard} = 1 - 0.40 = 0.60$（亦即 $\frac{b + c}{b + c + d} = \frac{3}{5} = 0.60$）。\n【步驟四：結論】兩人之 Jaccard 距離為 0.60。",
+    cramSummary: {
+      conceptName: "Jaccard 距離換算",
+      keyTakeaway: "D_Jaccard = 1 - Jaccard = (b + c) / (b + c + d)。本題 (1 + 2) / 5 = 0.60。"
+    }
+  },
+  {
+    id: "q-u2-l4-01",
+    unit: "ch02-similarity",
+    unitName: "距離與相似度度量",
+    level: 4,
+    type: "numeric",
+    title: "推薦系統雙 0 稀釋效應 (Dilution) 與 SMC 灌水檢驗",
+    questionPrompt: "某大型串流影音平台分析兩位深度影迷對片庫的觀看清單。在原先聚焦的 10 部精選電影中：\n兩人共同看過 3 部 ($d = 3$)，甲看過乙未看 2 部 ($c = 2$)，乙看過甲未看 1 部 ($b = 1$)，兩人皆未看 4 部 ($a = 4$)。\n此時平台資料庫擴充導入了 90 部冷門老電影，而兩位影迷對這 90 部老電影皆「完全未觀看」（使得雙 0 項目 $a$ 增加 90，變為 $a' = 94$，總部數 $N' = 100$）。\n請計算資料庫擴充後兩人之「新 SMC 數值」（請輸入四捨五入至小數點後兩位之數值，如 0.97）。",
+    givenData: {
+      "擴充後雙0次數 a'": "94",
+      "甲0乙1次數 b": "1",
+      "甲1乙0次數 c": "2",
+      "雙1次數 d": "3",
+      "擴充後總片數 N'": "100"
+    },
+    options: null,
+    correctAnswer: 0.97,
+    unitLabel: "",
+    tolerance: 0.01,
+    formulaHint: "SMC' = \frac{a' + d}{N'} = \frac{94 + 3}{100}, \quad Jaccard' = \frac{d}{b + c + d} = \frac{3}{6}",
+    fullSolution: "【步驟一：回顧擴充前的數據】\n- 擴充前總數 $N = 10$。\n- 擴充前 $SMC = (4 + 3) / 10 = 0.70$。\n- 擴充前 $Jaccard = 3 / (1 + 2 + 3) = 3 / 6 = 0.50$。\n\n【步驟二：計算擴充 90 部未看電影後的新指標】\n- 新總數 $N' = 94 + 1 + 2 + 3 = 100$。\n- 新 $SMC' = \frac{a' + d}{N'} = \frac{94 + 3}{100} = \frac{97}{100} = 0.97$。\n- 新 $Jaccard' = \frac{d}{b + c + d} = \frac{3}{1 + 2 + 3} = \frac{3}{6} = 0.50$。\n\n【步驟三：深度商務反思】\n兩位影迷本質上的觀影重疊度根本毫無改變（依然是 3 部共同、3 部差異）。但 SMC 卻因為海量雙 0 老電影的湧入，相似度從 0.70 暴衝灌水至 0.97（97% 一致！），完全喪失了演算法分群的敏感度！而 Jaccard 堅決排除 $a$，依然穩健定格在 0.50。這正是板書強調在稀疏資料中必用 Jaccard 的經典實證！",
+    cramSummary: {
+      conceptName: "雙 0 稀釋膨脹實證",
+      keyTakeaway: "新增 90 筆無關雙 0，SMC 被灌水至 97/100 = 0.97；而 Jaccard 排除 a 依然定格 0.50。"
+    }
+  },
+
   // ==========================================
   // 單元三：機率論與貝氏定理 (ch03-probability)
   // ==========================================
@@ -587,6 +763,161 @@ const RAW_QUESTIONS = [
     }
   },
 
+  {
+    id: "q-u3-l1-03",
+    unit: "ch03-probability",
+    unitName: "機率論與貝氏定理",
+    level: 1,
+    type: "mcq",
+    title: "機率加法法則與互斥獨立真理",
+    questionPrompt: "某連鎖量販店統計顧客購買行為，已知顧客購買牛奶的機率為 $P(M) = 0.60$，購買麵包的機率為 $P(B) = 0.50$，同時購買牛奶與麵包的機率為 $P(M \cap B) = 0.30$。下列敘述何者完全正確？",
+    givenData: null,
+    options: [
+      {
+        key: "A",
+        text: "顧客至少購買牛奶或麵包其中一種的機率為 $P(M \cup B) = 0.80$",
+        distractorFeedback: null
+      },
+      {
+        key: "B",
+        text: "因為 $P(M \cap B) > 0$，代表購買牛奶與購買麵包彼此互斥",
+        distractorFeedback: "互斥是指交集機率為 0！交集大於 0 表示非互斥。"
+      },
+      {
+        key: "C",
+        text: "顧客在已購買麵包的條件下購買牛奶的機率為 0.50",
+        distractorFeedback: "條件機率 P(M|B) = P(M ∩ B) / P(B) = 0.30 / 0.50 = 0.60。"
+      },
+      {
+        key: "D",
+        text: "顧客既不買牛奶也不買麵包的機率為 0.30",
+        distractorFeedback: "兩者皆未購買之機率為 1 - P(M ∪ B) = 1 - 0.80 = 0.20。"
+      }
+    ],
+    correctAnswer: "A",
+    formulaHint: "P(M \cup B) = P(M) + P(B) - P(M \cap B)",
+    fullSolution: "【步驟一：加法法則求聯集】\n$P(M \cup B) = P(M) + P(B) - P(M \cap B) = 0.60 + 0.50 - 0.30 = 0.80$。故 (A) 正確！\n【步驟二：互斥檢定】\n因為 $P(M \cap B) = 0.30 \ne 0$，兩事件非互斥。故 (B) 錯。\n【步驟三：條件機率檢定】\n$P(M|B) = \frac{P(M \cap B)}{P(B)} = \frac{0.30}{0.50} = 0.60$。故 (C) 錯。\n【步驟四：狄摩根餘事檢定】\n$P(M^c \cap B^c) = 1 - P(M \cup B) = 1 - 0.80 = 0.20$。故 (D) 錯。",
+    cramSummary: {
+      conceptName: "機率加法定理",
+      keyTakeaway: "P(A ∪ B) = P(A) + P(B) - P(A ∩ B)！本題 0.60 + 0.50 - 0.30 = 0.80。"
+    }
+  },
+  {
+    id: "q-u3-l2-02",
+    unit: "ch03-probability",
+    unitName: "機率論與貝氏定理",
+    level: 2,
+    type: "numeric",
+    title: "聯集機率與餘事機率手算",
+    questionPrompt: "某軟體公司統計內部伺服器運行日誌，發現某日網路連線異常的機率為 $P(A) = 0.35$，資料庫讀寫逾時的機率為 $P(B) = 0.25$。兩者同時發生的機率為 $P(A \cap B) = 0.10$。請計算該日「系統完全正常（即網路與資料庫皆未發生異常）」的機率 $P(A^c \cap B^c)$（以小數表示，如 0.50）。",
+    givenData: {
+      "網路異常機率 P(A)": "0.35",
+      "資料庫逾時機率 P(B)": "0.25",
+      "同時異常機率 P(A ∩ B)": "0.10"
+    },
+    options: null,
+    correctAnswer: 0.50,
+    unitLabel: "",
+    tolerance: 0.02,
+    formulaHint: "P(A^c \cap B^c) = 1 - P(A \cup B) = 1 - [P(A) + P(B) - P(A \cap B)]",
+    fullSolution: "【步驟一：求至少有一項異常之聯集機率】\n$P(A \cup B) = P(A) + P(B) - P(A \cap B) = 0.35 + 0.25 - 0.10 = 0.50$。\n【步驟二：求完全正常（餘事）之機率】\n根據狄摩根定律：$P(A^c \cap B^c) = P((A \cup B)^c) = 1 - P(A \cup B) = 1 - 0.50 = 0.50$。\n【步驟三：結論】該日系統完全正常之機率恰好為 0.50 (50%)。",
+    cramSummary: {
+      conceptName: "餘事機率與聯集",
+      keyTakeaway: "完全正常 = 1 - 至少一項異常 = 1 - (0.35 + 0.25 - 0.10) = 0.50。"
+    }
+  },
+  {
+    id: "q-u3-l2-03",
+    unit: "ch03-probability",
+    unitName: "機率論與貝氏定理",
+    level: 2,
+    type: "numeric",
+    title: "二項分配期望值與標準差",
+    questionPrompt: "某網路電商的行銷廣告點擊轉換率為 $p = 0.20$。今業務部門隨機抽取 $n = 100$ 名點擊廣告的訪客，令隨機變數 $X$ 代表最終下單購買的人數。請計算該隨機變數 $X$ 的「標準差 $\\sigma$」。",
+    givenData: {
+      "試驗次數 n": "100",
+      "成功下單機率 p": "0.20"
+    },
+    options: null,
+    correctAnswer: 4.0,
+    unitLabel: "人",
+    tolerance: 0.05,
+    formulaHint: "\sigma = \sqrt{Var(X)} = \sqrt{n p (1 - p)}",
+    fullSolution: "【步驟一：二項分配公式】\n隨機變數 $X \sim Binomial(n = 100, p = 0.20)$。\n- 期望值：$E(X) = n p = 100 \times 0.20 = 20$ 人。\n- 變異數：$Var(X) = n p (1 - p) = 100 \times 0.20 \times (1 - 0.20) = 20 \times 0.80 = 16.0$。\n【步驟二：求標準差】\n標準差 $\sigma = \sqrt{Var(X)} = \sqrt{16} = 4.0$ 人。\n【步驟三：結論】下單人數的標準差為 4.0 人。",
+    cramSummary: {
+      conceptName: "二項分配標準差",
+      keyTakeaway: "Var(X) = np(1-p) = 100*0.2*0.8 = 16。標準差開根號 sqrt(16) = 4.0。"
+    }
+  },
+  {
+    id: "q-u3-l3-02",
+    unit: "ch03-probability",
+    unitName: "機率論與貝氏定理",
+    level: 3,
+    type: "numeric",
+    title: "三產線品質良率貝氏機率逆向更新",
+    questionPrompt: "某筆記型電腦工廠擁有 A、B、C 三條生產線，產能分別佔全廠產量的 $50\\%$、$30\\%$、$20\\%$。已知三條產線的不良品率分別為：A 產線 $2\\%$、B 產線 $3\\%$、C 產線 $5\\%$。品管人員在成品倉庫隨機抽驗一台筆電發現為「不良品（Defect）」，請依貝氏定理求該不良品是由「C 產線」所生產的後驗機率 $P(C|Defect)$（以百分比 % 表示，四捨五入至小數點後兩位）。",
+    givenData: {
+      "A產線市佔與不良率": "P(A)=0.50, P(D|A)=0.02",
+      "B產線市佔與不良率": "P(B)=0.30, P(D|B)=0.03",
+      "C產線市佔與不良率": "P(C)=0.20, P(D|C)=0.05"
+    },
+    options: null,
+    correctAnswer: 34.48,
+    unitLabel: "%",
+    tolerance: 0.1,
+    formulaHint: "P(C|D) = \frac{P(D|C)P(C)}{P(D|A)P(A) + P(D|B)P(B) + P(D|C)P(C)}",
+    fullSolution: "【步驟一：全機率分解各產線之不良品貢獻度】\n- 產線 A 聯合機率：$P(D \cap A) = P(D|A)P(A) = 0.02 \times 0.50 = 0.010$\n- 產線 B 聯合機率：$P(D \cap B) = P(D|B)P(B) = 0.03 \times 0.30 = 0.009$\n- 產線 C 聯合機率：$P(D \cap C) = P(D|C)P(C) = 0.05 \times 0.20 = 0.010$\n【步驟二：求全廠總不良品機率 (分母)】\n$P(D) = 0.010 + 0.009 + 0.010 = 0.029$ (2.9%)。\n【步驟三：貝氏定理求 C 產線後驗機率】\n$P(C|D) = \frac{P(D \cap C)}{P(D)} = \frac{0.010}{0.029} = \frac{10}{29} \approx 0.344827 = 34.48\\%$。\n【步驟四：商務結論】C 產線雖然產能僅佔 20%，但因不良率高達 5%，一旦抽驗出瑕疵，有 34.48% 的後驗機率歸咎於 C 產線！",
+    cramSummary: {
+      conceptName: "三分割貝氏更新",
+      keyTakeaway: "分母 P(D) = 0.010 + 0.009 + 0.010 = 0.029。C 後驗機率 0.010/0.029 = 34.48%。"
+    }
+  },
+  {
+    id: "q-u3-l4-01",
+    unit: "ch03-probability",
+    unitName: "機率論與貝氏定理",
+    level: 4,
+    type: "numeric",
+    title: "罕見詐欺交易偽陽性悖論 (Rare Event False Positive Paradox)",
+    questionPrompt: "某數位銀行建立 AI 信用卡反洗錢監測模型。全行交易中僅有 $0.1\\%$ 為「真實洗錢交易」（即先驗機率 $P(Fraud) = 0.001$，正常交易 $P(Legit) = 0.999$）。AI 模型具備高達 $95\\%$ 的命中率（即 $P(Alert|Fraud) = 0.95$），但對正常交易亦有 $1\\%$ 的誤報率（即 $P(Alert|Legit) = 0.01$）。若系統今日對某筆交易發出「洗錢警報 (Alert)」，請計算該筆交易「確實為洗錢」的真實後驗機率 $P(Fraud|Alert)$（%）。（四捨五入至小數點後兩位）",
+    givenData: {
+      "洗錢先驗 P(Fraud)": "0.001",
+      "正常先驗 P(Legit)": "0.999",
+      "警報命中率 P(Alert|Fraud)": "0.95",
+      "正常誤報率 P(Alert|Legit)": "0.01"
+    },
+    options: null,
+    correctAnswer: 8.68,
+    unitLabel: "%",
+    tolerance: 0.1,
+    formulaHint: "P(Fraud|Alert) = \frac{P(Alert|Fraud)P(Fraud)}{P(Alert|Fraud)P(Fraud) + P(Alert|Legit)P(Legit)}",
+    fullSolution: "【步驟一：計算真警報與假警報聯合機率】\n- 真警報聯合機率：$P(Alert \cap Fraud) = 0.95 \times 0.001 = 0.00095$\n- 假警報（正常被誤判）聯合機率：$P(Alert \cap Legit) = 0.01 \times 0.999 = 0.00999$\n【步驟二：全機率求總警報率 (分母)】\n$P(Alert) = 0.00095 + 0.00999 = 0.01094$。\n【步驟三：貝氏定理求真實洗錢機率】\n$P(Fraud|Alert) = \frac{0.00095}{0.01094} \approx 0.086837 = 8.68\\%$。\n【步驟四：管理反思（偽陽性悖論）】\n即便 AI 辨識準確率高達 95%、誤報率僅 1%，但因為罕見事件的母體基底太小（0.1%），絕大多數的警報其實都是正常交易誤報！收到警報後真實為洗錢的機率不到 9%！這就是風控領域知名的「偽陽性悖論」。",
+    cramSummary: {
+      conceptName: "偽陽性悖論貝氏計算",
+      keyTakeaway: "分子真洗錢 0.00095，分母總警報 0.01094。後驗機率僅 8.68%！不可迷信高準確率。"
+    }
+  },
+  {
+    id: "q-u3-l4-02",
+    unit: "ch03-probability",
+    unitName: "機率論與貝氏定理",
+    level: 4,
+    type: "self-check",
+    title: "作業必出魔王題：兩階段分店試驗與貝氏定理全機率逆向更新（企3B 作業 EX1 & EX2）",
+    questionPrompt: "【情境描述】某國際知名連鎖品牌評估進入台灣市場，規劃以下策略：\n- 若直接全面開設分店，預估市場全面成功先驗機率為 $P(AS) = 0.70$，全面失敗先驗機率為 $P(AF) = 0.30$。\n- 公司考慮先成立一家分店進行局部市場試驗。根據海外歷史經驗之檢測可靠度（條件機率）：\n  * 若全面開店會成功，則分店試驗成功的條件機率為 $P(BS|AS) = 0.90 \\implies P(BF|AS) = 0.10$。\n  * 若全面開店會失敗，則分店試驗失敗的條件機率為 $P(BF|AF) = 0.85 \\implies P(BS|AF) = 0.15$。\n【請推導回答】（依作業 EX2 要求，純粹貝氏定理機率推導，不涉及決策樹折現與 EVSI）：\n(1) 利用全機率定理（Law of Total Probability），計算分店試驗成功 $P(BS)$ 與分店試驗失敗 $P(BF)$ 的邊界機率。\n(2) 利用貝氏定理（Bayes' Theorem），計算在觀察到分店試驗結果後的四大後驗機率：$P(AS|BS)$、$P(AF|BS)$、$P(AS|BF)$、$P(AF|BF)$。",
+    givenData: {
+      "全面開店先驗機率": "P(AS) = 0.70, P(AF) = 0.30",
+      "分店試驗條件精度": "P(BS|AS) = 0.90, P(BF|AF) = 0.85"
+    },
+    formulaHint: "P(BS) = P(BS|AS)P(AS) + P(BS|AF)P(AF), \\quad P(AS|BS) = \\frac{P(BS|AS)P(AS)}{P(BS)}",
+    fullSolution: "【Step 1：全機率定理計算邊界機率】\n- 分店試驗成功機率：\n  $$P(BS) = P(BS|AS)P(AS) + P(BS|AF)P(AF) = (0.90 \\times 0.70) + (0.15 \\times 0.30) = 0.630 + 0.045 = 0.675 \\quad (67.5\\%)$$ \n- 分店試驗失敗機率：\n  $$P(BF) = P(BF|AS)P(AS) + P(BF|AF)P(AF) = (0.10 \\times 0.70) + (0.85 \\times 0.30) = 0.070 + 0.255 = 0.325 \\quad (32.5\\%)$$ \n*(驗算完備性：$P(BS) + P(BF) = 0.675 + 0.325 = 1.000$ 正確)*\n\n【Step 2：貝氏定理更新四大後驗機率】\n- 情況一：若分店試驗傳來「成功」訊息 (BS)：\n  1. 全面開店成功後驗機率：\n     $$P(AS|BS) = \\frac{P(BS \\cap AS)}{P(BS)} = \\frac{P(BS|AS)P(AS)}{P(BS)} = \\frac{0.630}{0.675} = \\frac{14}{15} \\approx 0.9333 \\quad (93.33\\%)$$ \n  2. 全面開店失敗後驗機率：\n     $$P(AF|BS) = 1 - P(AS|BS) = \\frac{1}{15} \\approx 0.0667 \\quad (6.67\\%)$$ \n- 情況二：若分店試驗傳來「失敗」訊息 (BF)：\n  3. 全面開店成功後驗機率：\n     $$P(AS|BF) = \\frac{P(BF \\cap AS)}{P(BF)} = \\frac{P(BF|AS)P(AS)}{P(BF)} = \\frac{0.070}{0.325} = \\frac{14}{65} \\approx 0.2154 \\quad (21.54\\%)$$ \n  4. 全面開店失敗後驗機率：\n     $$P(AF|BF) = 1 - P(AS|BF) = \\frac{51}{65} \\approx 0.7846 \\quad (78.46\\%)$$ \n\n【Step 3：管理決策洞察與範圍界定】\n- 透過開設一家分店的小額試驗，能大幅降低展店風險：試驗成功將使展店成功機率由先驗的 70% 躍升至 93.33%；試驗失敗則使成功機率遽降至 21.54%（失敗風險高達 78.46%）。\n- **嚴格範圍界定**：本題出自企3B 楊亞恩作業 EX1 & EX2，老師作業僅要求推導邊界機率與四個後驗機率。決策樹逆向折現 (Backward Induction)、分支修剪 (Pruning) 與樣本情報價值 (EVSI) 屬於 Ch 13.4 完全超綱，期末考絕不出題！",
+    cramSummary: {
+      conceptName: "貝氏定理與全機率逆向更新 (企3B作業)",
+      keyTakeaway: "P(BS)=0.675, P(BF)=0.325。後驗機率 P(AS|BS)=14/15 (93.33%), P(AS|BF)=14/65 (21.54%)！切勿擴展決策樹或 EVSI（超綱）。"
+    }
+  },
+
   // ==========================================
   // 單元四：迴歸分析與交互作用 (ch06-regression)
   // (注意：6.3 羅吉斯迴歸 100% 排除！)
@@ -693,6 +1024,182 @@ const RAW_QUESTIONS = [
     cramSummary: {
       conceptName: "判定係數 R² 公式",
       keyTakeaway: "R² = SSR / SST = 可解釋變異 / 總變異。本題 820 / 1000 = 0.82。"
+    }
+  },
+
+  {
+    id: "q-u4-l1-03",
+    unit: "ch06-regression",
+    unitName: "迴歸分析與交互作用",
+    level: 1,
+    type: "mcq",
+    title: "迴歸殘差假定 (LINE) 與漏斗形殘差圖判讀",
+    questionPrompt: "在普通最小平方法 (OLS) 線性迴歸模型中，若繪製殘差對預測值之散佈圖（Residual Plot），發現殘差點呈現由左向右逐漸散開的「漏斗形狀（橫向擴大）」，這表示模型嚴重違反了下列哪一項統計基本假定？",
+    givenData: null,
+    options: [
+      {
+        key: "A",
+        text: "違反同質變異性假定（Equal Variance / Homoscedasticity），存在異質變異",
+        distractorFeedback: null
+      },
+      {
+        key: "B",
+        text: "違反自變數常態性假定",
+        distractorFeedback: "OLS 假定的是『殘差項』常態分配，而非自變數常態分配。"
+      },
+      {
+        key: "C",
+        text: "違反模型可逆性假定",
+        distractorFeedback: "迴歸無此基本假定名稱。"
+      },
+      {
+        key: "D",
+        text: "證明判定係數 $R^2$ 必定大於 0.99",
+        distractorFeedback: "漏斗形殘差圖代表模型變異不穩定，與 R² 數值大小無必然關係。"
+      }
+    ],
+    correctAnswer: "A",
+    formulaHint: "Var(e_i) = \sigma^2 \quad (\text{Homoscedasticity})",
+    fullSolution: "【步驟一：LINE 四大假定】\nOLS 迴歸殘差必須滿足：\n1. Linearity（線性關係）\n2. Independence（獨立性，無自我相關）\n3. Normality（常態分配）\n4. Equal Variance（同分散性 / 同值變異，即誤差項變異數固定為常數 $\sigma^2$）。\n【步驟二：圖形判讀】\n當殘差散佈圖呈現漏斗形（隨預測值增大而上下發散），表示誤差變異數隨尺度改變，此現象稱為「異質變異（Heteroscedasticity）」，會使係數標準誤失真，導致 t 檢定與 p-value 不可信！",
+    cramSummary: {
+      conceptName: "LINE 假定與異質變異",
+      keyTakeaway: "殘差漏斗形 = 違反同值變異（異質變異）！理想殘差應均勻隨機散佈於 0 軸兩側。"
+    }
+  },
+  {
+    id: "q-u4-l2-02",
+    unit: "ch06-regression",
+    unitName: "迴歸分析與交互作用",
+    level: 2,
+    type: "numeric",
+    title: "簡單線性迴歸斜率與截距手算",
+    questionPrompt: "某連鎖超商分析廣告支出 $X$（萬元）對門市營收 $Y$（萬元）之影響，收集 10 家門市數據計算得：\n$\\bar{X} = 10, \\quad \\bar{Y} = 50, \\quad SS_{xx} = \\sum (X_i - \\bar{X})^2 = 40, \\quad SS_{xy} = \\sum (X_i - \\bar{X})(Y_i - \\bar{Y}) = 120$。\n請依最小平方法公式計算迴歸方程式的「截距項 $b_0$」。",
+    givenData: {
+      "X平均數 X̄": "10",
+      "Y平均數 Ȳ": "50",
+      "離均差平方和 SSxx": "40",
+      "離均差乘積和 SSxy": "120"
+    },
+    options: null,
+    correctAnswer: 20.0,
+    unitLabel: "萬元",
+    tolerance: 0.05,
+    formulaHint: "b_1 = \frac{SS_{xy}}{SS_{xx}}, \quad b_0 = \bar{Y} - b_1 \bar{X}",
+    fullSolution: "【步驟一：計算斜率 b1】\n$b_1 = \frac{SS_{xy}}{SS_{xx}} = \frac{120}{40} = 3.0$。\n（經濟意涵：廣告支出每增加 1 萬元，預期營收平均增加 3.0 萬元）。\n【步驟二：計算截距 b0（利用迴歸線必過重心 (X̄, Ȳ)】\n$b_0 = \bar{Y} - b_1 \bar{X} = 50 - 3.0 \times 10 = 50 - 30 = 20.0$ 萬元。\n【步驟三：完整模型方程式】\n$\hat{Y} = 20.0 + 3.0 X$。截距項為 20.0 萬元。",
+    cramSummary: {
+      conceptName: "OLS 斜率與截距公式",
+      keyTakeaway: "b1 = SSxy / SSxx = 120/40 = 3.0。b0 = Ȳ - b1*X̄ = 50 - 3*10 = 20.0。"
+    }
+  },
+  {
+    id: "q-u4-l2-03",
+    unit: "ch06-regression",
+    unitName: "迴歸分析與交互作用",
+    level: 2,
+    type: "numeric",
+    title: "變異分解 (ANOVA) 與判定係數 R² 計算",
+    questionPrompt: "某計量模型評估產品研發預算對專利產出的解釋力，總樣本數 $n = 25$。計算結果顯示依變數的總變異平方和為 $SST = 500$，而未被模型解釋的殘差平方和為 $SSE = 125$。請計算該模型之「判定係數 $R^2$」（四捨五入至小數點後兩位）。",
+    givenData: {
+      "總平方和 SST": "500",
+      "殘差平方和 SSE": "125",
+      "樣本數 n": "25"
+    },
+    options: null,
+    correctAnswer: 0.75,
+    unitLabel: "",
+    tolerance: 0.02,
+    formulaHint: "R^2 = 1 - \frac{SSE}{SST} = \frac{SSR}{SST}",
+    fullSolution: "【步驟一：變異量分解恆等式】\n$SST = SSR + SSE \implies SSR = SST - SSE = 500 - 125 = 375$。\n【步驟二：計算判定係數 R²】\n$R^2 = \frac{SSR}{SST} = \frac{375}{500} = 0.75$（或直接以 $1 - \frac{SSE}{SST} = 1 - \frac{125}{500} = 1 - 0.25 = 0.75$）。\n【步驟三：商務結論】\n該迴歸模型成功解釋了專利產出 $75\\%$ 的總變異，擬合度優良。",
+    cramSummary: {
+      conceptName: "R² 變異分解計算法",
+      keyTakeaway: "R² = 1 - SSE/SST = 1 - 125/500 = 0.75。SSR = 500 - 125 = 375。"
+    }
+  },
+  {
+    id: "q-u4-l3-01",
+    unit: "ch06-regression",
+    unitName: "迴歸分析與交互作用",
+    level: 3,
+    type: "numeric",
+    title: "交互作用項調節邊際斜率計算",
+    questionPrompt: "某電子商務平台建立營收預測模型：\n$$\\hat{Y} = 10 + 4 X_1 + 6 X_2 + 1.5 (X_1 \\cdot X_2)$$\n其中 $X_1$ 為行銷折價券面額（百元），$X_2$ 為會員等級（1 到 5 級）。\n若某目標客群的會員等級為 $X_2 = 4$，請問此時行銷折價券 $X_1$ 每增加 1 單位，對營收 $\\hat{Y}$ 的邊際增加效果（即邊際斜率 $\\frac{\\Delta \\hat{Y}}{\\Delta X_1}$）為何？",
+    givenData: {
+      "迴歸方程式": "Ŷ = 10 + 4*X1 + 6*X2 + 1.5*(X1*X2)",
+      "指定會員等級 X2": "4"
+    },
+    options: null,
+    correctAnswer: 10.0,
+    unitLabel: "萬元",
+    tolerance: 0.05,
+    formulaHint: "\frac{\partial \hat{Y}}{\partial X_1} = b_1 + b_3 X_2",
+    fullSolution: "【步驟一：求 X1 對 Y 的邊際效應導數】\n$\frac{\partial \hat{Y}}{\partial X_1} = b_1 + b_3 X_2 = 4 + 1.5 X_2$。\n【步驟二：代入會員等級 X2 = 4】\n邊際斜率 $= 4 + 1.5 \times 4 = 4 + 6.0 = 10.0$。\n【步驟三：統計與商務意涵】\n交互作用項係數 $1.5 > 0$ 代表正向加乘效應。當會員等級越高時，折價券激勵買氣的邊際效益越大！在等級 4 的高階會員身上，每發 1 單位折價券能創造 10.0 單位的營收增幅。",
+    cramSummary: {
+      conceptName: "交互作用邊際斜率求導",
+      keyTakeaway: "邊際效應 = b1 + b3*X2。本題 4 + 1.5*4 = 10.0。斜率隨調節變數改變！"
+    }
+  },
+  {
+    id: "q-u4-l3-02",
+    unit: "ch06-regression",
+    unitName: "迴歸分析與交互作用",
+    level: 3,
+    type: "mcq",
+    title: "調整後判定係數 (R²_adj) 自由度懲罰機制",
+    questionPrompt: "某計量分析師在原有包含 2 個有效自變數（$R^2 = 0.65$）的模型中，硬是額外加入 3 個與依變數毫無關聯的雜訊變數。下列有關自由度、殘差平方和與 $R^2_{adj}$ 的統計變化，何者完全符合學理？",
+    givenData: null,
+    options: [
+      {
+        key: "A",
+        text: "殘差自由度 $n - k - 1$ 減少，且新增變數未顯著降低 $SSE$，使得懲罰項增大，導致 $R^2_{adj}$ 明顯下滑",
+        distractorFeedback: null
+      },
+      {
+        key: "B",
+        text: "總變異量 $SST$ 會因變數增加而等比例放大",
+        distractorFeedback: "SST 僅由依變數 Y 自身決定，自變數如何增減都不會改變 SST！"
+      },
+      {
+        key: "C",
+        text: "原始 $R^2$ 會因自由度懲罰而降低至 0.65 以下",
+        distractorFeedback: "板書紅叉強調：原始 R² 單調不減，絕不可能因為加變數而下跌！"
+      },
+      {
+        key: "D",
+        text: "調整後判定係數 $R^2_{adj}$ 永遠不可能小於 0",
+        distractorFeedback: "當模型極度惡劣時，R²_adj 是有可能被懲罰至負值的。"
+      }
+    ],
+    correctAnswer: "A",
+    formulaHint: "R^2_{adj} = 1 - \left[ \frac{SSE / (n - k - 1)}{SST / (n - 1)} \right]",
+    fullSolution: "【步驟一：板書核心論點】板書 IMG_0131 特別註明：「$R^2 \to$ 模型的解釋能力；資料多，解釋能力不一定上升！」\n【步驟二：數學機轉】每多加入一個變數，分母自由度 $n - k - 1$ 就減少 1。若新變數為雜訊，$SSE$ 縮小幅度極其微弱，無法彌補自由度的消耗，使得均方誤差 $MSE = SSE / (n-k-1)$ 變大，最終拉低 $R^2_{adj}$！\n【步驟三：結論】選項 (A) 完美詮釋了 $R^2_{adj}$ 防範過度配適的懲罰原理。",
+    cramSummary: {
+      conceptName: "R²_adj 懲罰雜訊變數",
+      keyTakeaway: "瞎加無關變數：原始 R² 只升不降，但 R²_adj 必然受自由度懲罰而下跌！"
+    }
+  },
+  {
+    id: "q-u4-l4-01",
+    unit: "ch06-regression",
+    unitName: "迴歸分析與交互作用",
+    level: 4,
+    type: "numeric",
+    title: "迴歸變異數分析表 (ANOVA Table) 與 F 檢定統計量重建",
+    questionPrompt: "某顧問公司建立員工績效多元迴歸模型（自變數個數 $k = 3$，樣本數 $n = 34$）。\n已知該模型的迴歸變異數分析表摘要如下：\n- 總平方和 $SST = 800$\n- 殘差平方和 $SSE = 200$\n請依據變異數分析原理計算該多元迴歸模型的「整體檢定 $F$ 統計量（$F$-statistic）」（四捨五入至小數點後兩位）。",
+    givenData: {
+      "自變數個數 k": "3",
+      "樣本數 n": "34",
+      "總平方和 SST": "800",
+      "殘差平方和 SSE": "200"
+    },
+    options: null,
+    correctAnswer: 30.0,
+    unitLabel: "",
+    tolerance: 0.1,
+    formulaHint: "F = \frac{MSR}{MSE} = \frac{SSR / k}{SSE / (n - k - 1)}",
+    fullSolution: "【步驟一：變異量與自由度拆解】\n1. 迴歸平方和：$SSR = SST - SSE = 800 - 200 = 600$。\n2. 迴歸自由度：$df_R = k = 3$。\n3. 殘差自由度：$df_E = n - k - 1 = 34 - 3 - 1 = 30$。\n\n【步驟二：計算均方 (Mean Square)】\n- 迴歸均方：$MSR = \frac{SSR}{df_R} = \frac{600}{3} = 200.0$。\n- 殘差均方：$MSE = \frac{SSE}{df_E} = \frac{200}{30} = \frac{20}{3} \approx 6.6667$。\n\n【步驟三：計算 F 統計量】\n$F = \frac{MSR}{MSE} = \frac{200}{6.6667} = \frac{200}{20/3} = 200 \times \frac{3}{20} = 30.0$。\n\n【步驟四：統計推論結論】\n$F = 30.0$ 遠大於臨界值，對應之 $p$-value 趨近於 0（遠小於 0.01），強烈拒絕虛無假說，代表整體迴歸模型極具顯著解釋力！",
+    cramSummary: {
+      conceptName: "ANOVA F 統計量手算",
+      keyTakeaway: "SSR = 600, dfR = 3 -> MSR = 200。SSE = 200, dfE = 30 -> MSE = 6.6667。F = 200 / 6.6667 = 30.0。"
     }
   },
 
@@ -826,13 +1333,127 @@ const RAW_QUESTIONS = [
     }
   },
 
+  {
+    id: "q-u5-l1-02",
+    unit: "ch10-lp",
+    unitName: "線性規劃與敏感度分析",
+    level: 1,
+    type: "mcq",
+    title: "極值點定理與等利潤線平移法幾何意涵",
+    questionPrompt: "在雙變數線性規劃（$x_1, x_2 \\ge 0$）的圖解法求解過程中，關於「可行解區域」與「最佳解」的幾何關係，下列敘述何者完全正確？",
+    givenData: null,
+    options: [
+      {
+        key: "A",
+        text: "若線性規劃問題存在唯一最佳解，則該解必然位於可行解多邊形的內部幾何中心",
+        distractorFeedback: "錯誤！線性函數的極值必然發生在多邊形的外圍邊界或頂點，不可能在內部中心。"
+      },
+      {
+        key: "B",
+        text: "最佳解必出現在可行解區域的頂點（極值點）；若等利潤線與某條緊縮邊界線平行重合，則存在多重最佳解",
+        distractorFeedback: null
+      },
+      {
+        key: "C",
+        text: "可行解區域必定為非凸多邊形，故最佳解可能出現在任何凹角處",
+        distractorFeedback: "線性不等式交集之可行解區域保證為『凸多邊形 (Convex)』，絕無凹角。"
+      },
+      {
+        key: "D",
+        text: "只有當所有限制條件皆為等號時，才能使用等利潤線平移法",
+        distractorFeedback: "不等式限制式才是圖解法最典型的應用場景。"
+      }
+    ],
+    correctAnswer: "B",
+    formulaHint: "\text{Extreme Point Theorem: Optima at Corner Points}",
+    fullSolution: "【步驟一：極值點定理 (Corner Point Theorem)】\n由於目標函數與限制條件皆為線性，可行解空間必定為凸集合（Convex Set）。最佳解若存在，必然出現在可行解多邊形的頂點（極值點）上！\n【步驟二：多重最佳解幾何條件】\n若等利潤線的斜率恰好等於某條緊縮限制線的斜率，當等利潤線平移至該邊界時，整條線段上的所有點皆產生相同的最大利潤，此時具備無限多組最佳解（多重最佳解）。\n【步驟三：結論】選項 (B) 完全正確。",
+    cramSummary: {
+      conceptName: "極值點定理與多重解",
+      keyTakeaway: "最佳解必在頂點！若等利潤線與邊界斜率重合平行，則產生多重最佳解。"
+    }
+  },
+  {
+    id: "q-u5-l2-02",
+    unit: "ch10-lp",
+    unitName: "線性規劃與敏感度分析",
+    level: 2,
+    type: "numeric",
+    title: "超額變數 (Surplus Variable) 計算",
+    questionPrompt: "某營養調配問題要求每日蛋白質最低攝取量限制為：$$4 x_1 + 5 x_2 \\ge 60$$\n目前調配方案決定使用 $x_1 = 10$ 單位的第一種食材與 $x_2 = 6$ 單位的第二種食材。請計算該限制條件在目前方案下的「超額變數（Surplus Variable $E_1$）」數值。",
+    givenData: {
+      "限制條件": "4*x1 + 5*x2 >= 60",
+      "目前解 (x1, x2)": "(10, 6)"
+    },
+    options: null,
+    correctAnswer: 10.0,
+    unitLabel: "單位",
+    tolerance: 0.05,
+    formulaHint: "a_1 x_1 + a_2 x_2 - E_1 = b_1 \iff E_1 = a_1 x_1 + a_2 x_2 - b_1",
+    fullSolution: "【步驟一：超額變數定義】\n對於「$\\ge$」大於等於型限制式，超額變數 $E_1 \\ge 0$ 代表實際提供量超越最低門檻的超額部分，標準式為：\n$4 x_1 + 5 x_2 - E_1 = 60$。\n【步驟二：代入目前方案坐標】\n實際提供量 $= 4(10) + 5(6) = 40 + 30 = 70$ 單位。\n【步驟三：計算超額量】\n$E_1 = 70 - 60 = 10$ 單位。\n【步驟四：結論】超額變數為 10 單位（代表比每日最低門檻多攝取了 10 單位蛋白質）。",
+    cramSummary: {
+      conceptName: "超額變數 E 計算",
+      keyTakeaway: ">= 限制式扣除超額變數 E。E = 實際值 - 門檻 = 70 - 60 = 10。"
+    }
+  },
+  {
+    id: "q-u5-l3-03",
+    unit: "ch10-lp",
+    unitName: "線性規劃與敏感度分析",
+    level: 3,
+    type: "numeric",
+    title: "敏感度分析目標函數係數容許變動上限",
+    questionPrompt: "某工廠求解生產利潤極大化：$\\text{Max } Z = c_1 x_1 + 30 x_2$。\n圖解法求得唯一最佳解出現在兩條緊縮限制線的交點頂點：\n- 限制線 1：$2 x_1 + 3 x_2 = 120$（斜率 $m_1 = -2/3$）\n- 限制線 2：$4 x_1 + 2 x_2 = 160$（斜率 $m_2 = -4/2 = -2$）\n根據斜率夾擠準則，目標函數線斜率 $-\\frac{c_1}{30}$ 必須介於兩邊界斜率之間（$-2 \\le -\\frac{c_1}{30} \\le -\\frac{2}{3}$）。\n請計算在維持該頂點坐標為最佳解的前提下，產品 1 的單位利潤 $c_1$ 之「容許變動上限（Maximum Allowable Value）」。",
+    givenData: {
+      "目標函數": "Max Z = c1*x1 + 30*x2",
+      "限制線 1 斜率 m1": "-2/3",
+      "限制線 2 斜率 m2": "-2"
+    },
+    options: null,
+    correctAnswer: 60.0,
+    unitLabel: "元",
+    tolerance: 0.1,
+    formulaHint: "-2 \le -\frac{c_1}{30} \le -\frac{2}{3} \iff 20 \le c_1 \le 60",
+    fullSolution: "【步驟一：列出斜率夾擠不等式】\n目標函數等利潤線斜率為 $m_{obj} = -\\frac{c_1}{c_2} = -\\frac{c_1}{30}$。\n為維持交點頂點為唯一最佳解，目標斜率必須夾在兩條緊縮限制線斜率之間：\n$$-2 \\le -\\frac{c_1}{30} \\le -\\frac{2}{3}$$\n\n【步驟二：兩端同乘 -30（注意不等號轉向）】\n$$(-2) \\times (-30) \\ge c_1 \\ge \\left(-\\frac{2}{3}\\right) \\times (-30)$$\n$$60 \\ge c_1 \\ge 20 \iff 20 \\le c_1 \\le 60$$\n\n【步驟三：求容許上限】\n$c_1$ 的容許範圍為 $[20, 60]$，故容許上限為 60 元。\n若 $c_1 > 60$，等利潤線會過度陡峭，最佳解將跳躍轉移至其他頂點！",
+    cramSummary: {
+      conceptName: "敏感度係數斜率夾擠",
+      keyTakeaway: "斜率夾擠 -2 <= -c1/30 <= -2/3。同乘 -30 轉向得 20 <= c1 <= 60。上限為 60。"
+    }
+  },
+  {
+    id: "q-u5-l4-02",
+    unit: "ch10-lp",
+    unitName: "線性規劃與敏感度分析",
+    level: 4,
+    type: "numeric",
+    title: "影子價格 (Shadow Price) 與產能擴充利潤效益評估",
+    questionPrompt: "某機械製造商求解生產線性規劃，最佳解總利潤為 $Z^* = 45,000$ 元。系統敏感度報表顯示：\n- 限制式 1（組裝機時上限 200 小時）：屬於緊縮限制，影子價格（Dual Price）為每小時 $150$ 元，容許增加量為 $40$ 小時。\n- 限制式 2（測試機時上限 160 小時）：屬於非緊縮限制，差額變數（Slack）為 $25$ 小時，影子價格為 $0$ 元。\n今生產部主管若花費總成本 $3,000$ 元租賃設備，將組裝機時上限增加 $30$ 小時（仍在容許範圍內），請問扣除租賃成本後，公司能獲得的「淨利潤增加額」為何（元）？",
+    givenData: {
+      "組裝機時影子價格": "150 元/小時",
+      "增加組裝工時": "30 小時",
+      "設備租賃成本": "3,000 元",
+      "測試機時影子價格": "0 元/小時"
+    },
+    options: null,
+    correctAnswer: 1500.0,
+    unitLabel: "元",
+    tolerance: 1.0,
+    formulaHint: "\Delta Z = (\text{Shadow Price} \times \Delta b) - \text{Cost}",
+    fullSolution: "【步驟一：理解影子價格之經濟意涵】\n影子價格代表在容許變動範圍內，該項資源上限每增加 1 單位，目標利潤 $Z$ 可增加之邊際金額。\n本題組裝機時為緊縮限制，每多 1 小時可多賺 150 元。\n\n【步驟二：計算總營收/毛利增加額】\n增加 30 小時組裝機時（小於容許上限 40 小時，影子價格依然有效）：\n$\Delta Z_{gross} = 150 \text{ 元/小時} \times 30 \text{ 小時} = 4,500$ 元。\n\n【步驟三：扣除取得該資源之租賃成本】\n淨利潤增加額 $= 4,500 - 3,000 = 1,500$ 元。\n\n【步驟四：商務決策結論】\n淨利潤增加 1,500 元為正值，此擴充產能決策在經濟效益上完全可行且值得執行！",
+    cramSummary: {
+      conceptName: "影子價格擴產效益",
+      keyTakeaway: "毛利增加 = 影子價格 150 * 30 = 4,500。淨利增加 = 4,500 - 成本 3,000 = 1,500 元。"
+    }
+  },
+
   // ==========================================
-  // 單元六：不確定決策準則與決策樹 (ch13-decision)
+  // ==========================================
+  // 單元六：不確定情況下之決策準則 (ch13-decision)
+  // (嚴格鎖定 13.2 決策準則：Maximax, Maximin, Laplace, Minimax Regret；決策樹與 EVSI 100% 排除！)
   // ==========================================
   {
     id: "q-u6-l1-01",
     unit: "ch13-decision",
-    unitName: "不確定決策準則與決策樹",
+    unitName: "不確定情況下之決策準則",
     level: 1,
     type: "mcq",
     title: "最大機會損失最小化 (Minimax Regret) 哲學辨析",
@@ -869,9 +1490,48 @@ const RAW_QUESTIONS = [
     }
   },
   {
+    id: "q-u6-l1-02",
+    unit: "ch13-decision",
+    unitName: "不確定情況下之決策準則",
+    level: 1,
+    type: "mcq",
+    title: "成本矩陣與利潤矩陣之不確定準則差異辨析",
+    questionPrompt: "在決策分析中，當報酬矩陣的數值代表「生產成本（數值越小越好）」而非「營業利潤（數值越大越好）」時，關於 13.2 不確定情況下決策準則之應用，下列敘述何者完全正確？",
+    givenData: null,
+    options: [
+      {
+        key: "A",
+        text: "無論利潤或成本矩陣，樂觀準則恆為尋找各方案最大值中之最大者 (Maximax)",
+        distractorFeedback: "成本情境下成本越低越好，樂觀者期盼成本最低，應採小中取小 (Minimin)。"
+      },
+      {
+        key: "B",
+        text: "成本矩陣下，樂觀準則為小中取小 (Minimin)；悲觀準則為防範最壞情境，應挑選各方案最大成本中之最小者 (Minimax)",
+        distractorFeedback: null
+      },
+      {
+        key: "C",
+        text: "成本矩陣因數值皆為支出，無法計算機會損失（遺憾值）",
+        distractorFeedback: "成本矩陣同樣可算機會損失：該情境下該方案成本減去該情境最低成本。"
+      },
+      {
+        key: "D",
+        text: "機率均等準則 (Laplace) 在成本矩陣下應選擇各情境平均成本最高之方案",
+        distractorFeedback: "成本矩陣下，Laplace 準則應選擇平均成本「最低」之方案。"
+      }
+    ],
+    correctAnswer: "B",
+    formulaHint: "\\text{利潤: 樂觀=Maximax, 悲觀=Maximin；成本: 樂觀=Minimin, 悲觀=Minimax}",
+    fullSolution: "【步驟一：利潤矩陣（望大）vs. 成本矩陣（望小）】\n- 利潤矩陣：數值代表營收或獲利，追求極大化。\n  * 樂觀準則：大中取大 (Maximax)。\n  * 悲觀準則：小中取大 (Maximin)。\n- 成本矩陣：數值代表支出或損耗，追求極小化。\n  * 樂觀準則：極度樂觀期盼成本最低，採「小中取小 (Minimin)」。\n  * 悲觀準則：保守防守、規避最大災難，先看各方案的最壞情況（各列最大成本），再從中挑選最小者，採「大中取小 (Minimax)」。\n\n【步驟二：結論】選項 (B) 敘述完全正確。",
+    cramSummary: {
+      conceptName: "成本矩陣 vs 利潤矩陣準則對照",
+      keyTakeaway: "利潤望大：樂觀=大中取大(Maximax)，悲觀=小中取大(Maximin)。成本望小：樂觀=小中取小(Minimin)，悲觀=大中取小(Minimax)！"
+    }
+  },
+  {
     id: "q-u6-l2-01",
     unit: "ch13-decision",
-    unitName: "不確定決策準則與決策樹",
+    unitName: "不確定情況下之決策準則",
     level: 2,
     type: "mcq",
     title: "不確定準則快速判讀（樂觀 / 悲觀 / Laplace）",
@@ -912,9 +1572,57 @@ const RAW_QUESTIONS = [
     }
   },
   {
+    id: "q-u6-l2-02",
+    unit: "ch13-decision",
+    unitName: "不確定情況下之決策準則",
+    level: 2,
+    type: "numeric",
+    title: "機會損失 (後悔值) 快速計算",
+    questionPrompt: "某超商面對兩種天氣（晴天 S1、雨天 S2）的冰品叫貨獲利矩陣如下：\n- 方案 A（大量叫貨）：晴天獲利 80 萬元，雨天獲利 10 萬元\n- 方案 B（保守叫貨）：晴天獲利 45 萬元，雨天獲利 35 萬元\n若最終大自然為「雨天 (S2)」，而超商當初選擇了「方案 A」，請問該方案在雨天情境下所產生的「機會損失（後悔值 Regret）」為多少萬元？",
+    givenData: {
+      "方案 A 獲利 (晴天, 雨天)": "(80, 10)",
+      "方案 B 獲利 (晴天, 雨天)": "(45, 35)",
+      "實際發生情境": "雨天 (S2)"
+    },
+    options: null,
+    correctAnswer: 25.0,
+    unitLabel: "萬元",
+    tolerance: 0.05,
+    formulaHint: "R_{ij} = \\max_k(V_{kj}) - V_{ij}",
+    fullSolution: "【步驟一：找出雨天 (S2) 情境下的全場最大獲利】\n- 方案 A 獲利：10 萬元\n- 方案 B 獲利：35 萬元\n雨天最大獲利 $M_2 = \\max(10, 35) = 35$ 萬元（即當天下雨時，最佳選擇是方案 B）。\n\n【步驟二：計算方案 A 的後悔值】\n後悔值 = 該狀態最佳獲利 - 方案 A 獲利：\n$R_{A, S2} = 35 - 10 = 25$ 萬元。\n\n【步驟三：結論】\n方案 A 在雨天時產生的機會損失為 25 萬元。",
+    cramSummary: {
+      conceptName: "機會損失單格外算法",
+      keyTakeaway: "後悔值 = 該列/欄最佳 - 當前方案。雨天最佳 35，方案 A 拿 10，後悔 35 - 10 = 25 萬。"
+    }
+  },
+  {
+    id: "q-u6-l2-03",
+    unit: "ch13-decision",
+    unitName: "不確定情況下之決策準則",
+    level: 2,
+    type: "numeric",
+    title: "機率均等準則 (Laplace Criterion) 方案平均獲利計算",
+    questionPrompt: "某零售商面對三種可能市場景氣（繁榮 S1、平平 S2、衰退 S3），考慮推出新策略 A。在三種景氣下的獲利預估如下：\n- 繁榮 S1：獲利 180 萬元\n- 平平 S2：獲利 90 萬元\n- 衰退 S3：獲利 30 萬元\n在完全無法預知各景氣發生機率的不確定情況下，若決策者採「機率均等準則（Laplace Criterion）」，請計算策略 A 的期望平均獲利為多少萬元？",
+    givenData: {
+      "繁榮 S1 獲利": "180 萬元",
+      "平平 S2 獲利": "90 萬元",
+      "衰退 S3 獲利": "30 萬元"
+    },
+    options: null,
+    correctAnswer: 100.0,
+    unitLabel: "萬元",
+    tolerance: 0.1,
+    formulaHint: "Avg(d_i) = \\frac{1}{N} \\sum_{j=1}^N V(d_i, s_j)",
+    fullSolution: "【步驟一：機率均等準則原理】\n根據充分理由原則（Principle of Insufficient Reason），若無足夠資訊認定哪種情境更容易發生，則假設各情境發生機率相等（$P = 1/3$）。\n\n【步驟二：計算算術平均獲利】\n$$Avg(A) = \\frac{180 + 90 + 30}{3} = \\frac{300}{3} = 100.0\\text{ 萬元}$$\n\n【步驟三：結論】策略 A 之 Laplace 平均期望獲利為 100.0 萬元。",
+    cramSummary: {
+      conceptName: "Laplace 均等獲利計算",
+      keyTakeaway: "Laplace 準則假設各狀態等機率：(180 + 90 + 30) / 3 = 100.0 萬元。"
+    }
+  },
+  {
     id: "q-u6-l3-01",
     unit: "ch13-decision",
-    unitName: "不確定決策準則與決策樹",
+    unitName: "不確定情況下之決策準則",
     level: 3,
     type: "mcq",
     title: "最大機會損失最小化矩陣完整求解",
@@ -928,12 +1636,12 @@ const RAW_QUESTIONS = [
       {
         key: "A",
         text: "挑選 S1，最大機會損失為 50",
-        distractorFeedback: "S1 在高需求時遺憾為 250 - 50 = 200，非常龐大。"
+        distractorFeedback: "S1 最大遺憾為 200，非 50。"
       },
       {
         key: "B",
         text: "挑選 S2，最大機會損失為 130",
-        distractorFeedback: "130 不是所有方案的最大遺憾中最小的。"
+        distractorFeedback: "S2 最大遺憾為 130，但 70 < 130，S3 遺憾更小。"
       },
       {
         key: "C",
@@ -955,24 +1663,71 @@ const RAW_QUESTIONS = [
     }
   },
   {
+    id: "q-u6-l3-02",
+    unit: "ch13-decision",
+    unitName: "不確定情況下之決策準則",
+    level: 3,
+    type: "numeric",
+    title: "成本矩陣下之最大機會損失 (Minimax Regret) 手算",
+    questionPrompt: "某物流公司考慮三種配送車隊擴建方案（D1, D2, D3），未來面臨三種油價情境（S1 低油價、S2 中油價、S3 高油價）的「營運總成本矩陣（萬元）」如下：\n- D1 方案成本：S1=40, S2=65, S3=90\n- D2 方案成本：S1=50, S2=60, S3=80\n- D3 方案成本：S1=70, S2=70, S3=75\n在「最大機會損失最小化準則」下，各情境的理想基準為該情境之「最低成本」。請問最優決策方案的「最大機會損失」數值為多少萬元？",
+    givenData: {
+      "D1 成本 (S1, S2, S3)": "(40, 65, 90)",
+      "D2 成本 (S1, S2, S3)": "(50, 60, 80)",
+      "D3 成本 (S1, S2, S3)": "(70, 70, 75)"
+    },
+    options: null,
+    correctAnswer: 10.0,
+    unitLabel: "萬元",
+    tolerance: 0.1,
+    formulaHint: "R(d_i, s_j) = C(d_i, s_j) - \\min_k C(d_k, s_j)",
+    fullSolution: "【步驟一：找出各情境行之最低成本（最佳基準）】\n- S1 低油價最低成本：$\\min(40, 50, 70) = 40$\n- S2 中油價最低成本：$\\min(65, 60, 70) = 60$\n- S3 高油價最低成本：$\\min(90, 80, 75) = 75$\n\n【步驟二：建構成本矩陣之機會損失（後悔值）】\n注意：成本情境下，遺憾值 $= \\text{當前方案成本} - \\text{行最低成本}$：\n- D1: S1(40-40=0), S2(65-60=5), S3(90-75=15) $\\implies$ 最大遺憾 $= 15$\n- D2: S1(50-40=10), S2(60-60=0), S3(80-75=5) $\\implies$ 最大遺憾 $= 10$\n- D3: S1(70-40=30), S2(70-60=10), S3(75-75=0) $\\implies$ 最大遺憾 $= 30$\n\n【步驟三：選取最大遺憾之最小者】\n各方案最大機會損失為 $\\{15, 10, 30\\}$，最小者為 10（對應方案為 D2）。\n故最優方案的最大機會損失為 10 萬元。",
+    cramSummary: {
+      conceptName: "成本矩陣後悔值計算",
+      keyTakeaway: "成本遺憾 = 該格成本 - 行最低成本！最大遺憾：D1=15, D2=10, D3=30。最小為 10 (D2)！"
+    }
+  },
+  {
     id: "q-u6-l4-01",
     unit: "ch13-decision",
-    unitName: "不確定決策準則與決策樹",
+    unitName: "不確定情況下之決策準則",
     level: 4,
     type: "self-check",
-    title: "作業必出魔王題：兩階段概念店試驗與貝氏逆向決策樹（含分支修剪與 EVSI）",
-    questionPrompt: "【情境描述】某連鎖健身品牌評估進軍新都會區，決策選項如下：\n- 方案 1：先開 1 家概念體驗館試驗（耗資 200 萬元），再依測試成敗決定全面拓點或退出。\n- 方案 2：直接全面開設 15 家門市（全面成功獲利 6,000 萬元；全面失敗虧損 3,000 萬元）。\n- 方案 3：完全放棄（獲利為 0）。\n【先驗與測試精度】\n- 全面成功先驗機率 $P(AS) = 0.60$，$P(AF) = 0.40$。\n- 概念店成功條件機率：$P(BS|AS) = 0.80$；概念店失敗條件機率：$P(BF|AF) = 0.85$。\n【請推導回答】\n(1) 邊界機率 $P(BS)$、$P(BF)$ 及後驗機率 $P(AS|BS)$、$P(AS|BF)$。\n(2) 利用逆向期望值回推法（Backward Induction），分析概念店失敗時是否應修剪分支（Pruning）？求各方案總期望收益與樣本資訊期望價值（EVSI），給出最優決策建議。",
+    title: "作業必出魔王題：四策略三情境報酬矩陣與四種不確定決策準則綜合評估（作業 1107 題三實戰）",
+    questionPrompt: "【情境描述】A 公司行銷經理評估四項促銷策略（S1, S2, S3, S4），競爭者 B 公司可能採取三種競爭行動（CA1, CA2, CA3）。在完全無法得知各行動機率下，獲利報酬矩陣（萬元）如下：\n- CA1：S1 = 13, S2 = 9, S3 = 24, S4 = 18\n- CA2：S1 = 14, S2 = 15, S3 = 21, S4 = 14\n- CA3：S1 = 11, S2 = 18, S3 = 15, S4 = 28\n【請依序完整推導回答以下四小題】：\n(1) 樂觀準則（Maximax）：列出各策略最大獲利，並指出所選策略。\n(2) 悲觀準則（Maximin）：列出各策略最差獲利，並指出所選策略。\n(3) 機率均等準則（Laplace）：計算各策略平均獲利，並指出所選策略。\n(4) 最大機會損失最小化準則（Minimax Regret）：請完整建構機會損失矩陣（Regret Matrix），列出各方案的最大機會損失數值，並指出最終選定之促銷策略與其最大遺憾值。（完全對齊作業 1107 第 3 題）",
     givenData: {
-      "先驗機率": "P(AS) = 0.60, P(AF) = 0.40",
-      "條件機率": "P(BS|AS) = 0.80, P(BF|AF) = 0.85",
-      "獲利/虧損": "成功 +6,000 萬, 失敗 -3,000 萬",
-      "試驗成本": "200 萬元"
+      "CA1 獲利 (S1, S2, S3, S4)": "(13, 9, 24, 18)",
+      "CA2 獲利 (S1, S2, S3, S4)": "(14, 15, 21, 14)",
+      "CA3 獲利 (S1, S2, S3, S4)": "(11, 18, 15, 28)"
     },
-    formulaHint: "EMV = \\sum p_i V_i, \\quad EVSI = EMV_{\\text{有資訊無成本}} - EMV_{\\text{無資訊最佳}}",
-    fullSolution: "【Step 1：全機率計算邊界機率】\n- 概念店成功機率：\n  $P(BS) = 0.80 \\times 0.60 + 0.15 \\times 0.40 = 0.48 + 0.06 = 0.54$\n- 概念店失敗機率：\n  $P(BF) = 0.20 \\times 0.60 + 0.85 \\times 0.40 = 0.12 + 0.34 = 0.46$\n\n【Step 2：貝氏定理更新後驗機率】\n- 概念店成功下全面成功：$P(AS|BS) = 0.48 / 0.54 = 8/9 \\approx 0.8889$\n- 概念店失敗下全面成功：$P(AS|BF) = 0.12 / 0.46 = 6/23 \\approx 0.2609$\n\n【Step 3：末端決策節點期望值與分支修剪 (Pruning)】\n- 若概念店成功：\n  開店期望值 $= (8/9)(6000) + (1/9)(-3000) = 5000 - 333.33 = +5,000$ 萬元。\n  不開店獲利 $= 0$。\n  $\\implies$ 必選擇全面開店，節點價值 $= +5,000$ 萬元。\n- 若概念店失敗：\n  若仍開店期望值 $= (6/23)(6000) + (17/23)(-3000) = -652.17$ 萬元 $< 0$。\n  若不開店獲利 $= 0$。\n  $\\implies$ 理性決策者必定及時止損不開店（修剪開店分支！），節點價值 $= 0$ 萬元！\n\n【Step 4：方案總期望值逆向回推】\n- 方案 3（不進入）：獲利 $= 0$ 萬元。\n- 方案 2（直接設店）：$EMV_2 = 0.60(6000) + 0.40(-3000) = 3600 - 1200 = +2,400$ 萬元。\n- 方案 1（先開概念店）：\n  $EMV_1 = -200 + [0.54 \\times 5000 + 0.46 \\times 0] = -200 + 2700 = +2,500$ 萬元。\n\n【Step 5：EVSI 與最佳策略】\n- $EVSI = 2700 - 2400 = 300$ 萬元。\n- 因 $EVSI (300 萬) >$ 測試成本 (200 萬)，試驗具高度經濟價值！\n- 最佳決策：**選擇方案 1（先開概念店）**。成功時全面拓點，失敗時果斷止損退出！",
+    formulaHint: "R(d_i, s_j) = \\max_k(V_{kj}) - V_{ij}",
+    fullSolution: "【Step 1：樂觀準則 (Maximax)】\n- 尋求各方案在所有情境下的最大獲利：\n  * S1 最大獲利：$\\max(13, 14, 11) = 14$\n  * S2 最大獲利：$\\max(9, 15, 18) = 18$\n  * S3 最大獲利：$\\max(24, 21, 15) = 24$\n  * S4 最大獲利：$\\max(18, 14, 28) = 28$\n- 大中取大：$\\max(14, 18, 24, 28) = 28 \\implies$ **選擇策略 S4**。\n\n【Step 2：悲觀準則 (Maximin)】\n- 尋求各方案在所有情境下的最差（最小）獲利：\n  * S1 最差獲利：$\\min(13, 14, 11) = 11$\n  * S2 最差獲利：$\\min(9, 15, 18) = 9$\n  * S3 最差獲利：$\\min(24, 21, 15) = 15$\n  * S4 最差獲利：$\\min(18, 14, 28) = 14$\n- 小中取大（保底最好）：$\\max(11, 9, 15, 14) = 15 \\implies$ **選擇策略 S3**。\n\n【Step 3：機率均等準則 (Laplace)】\n- 假設 CA1, CA2, CA3 機率皆為 $1/3$，計算各方案平均獲利：\n  * $Avg(S1) = (13 + 14 + 11) / 3 = 38 / 3 \\approx 12.67$\n  * $Avg(S2) = (9 + 15 + 18) / 3 = 42 / 3 = 14.00$\n  * $Avg(S3) = (24 + 21 + 15) / 3 = 60 / 3 = 20.00$\n  * $Avg(S4) = (18 + 14 + 28) / 3 = 60 / 3 = 20.00$\n- 挑選平均最高者：$20.00 \\implies$ **策略 S3 與 S4 並列最佳**。\n\n【Step 4：最大機會損失最小化準則 (Minimax Regret)（作業 1107 題三原題）】\n1. 找出各情境行之最大獲利：\n   - CA1 行最大：$\\max(13, 9, 24, 18) = 24$\n   - CA2 行最大：$\\max(14, 15, 21, 14) = 21$\n   - CA3 行最大：$\\max(11, 18, 15, 28) = 28$\n2. 建構機會損失矩陣 $R_{ij} = \\text{行最大} - \\text{該格獲利}$：\n   - CA1：S1 = 24-13 = 11；S2 = 24-9 = 15；S3 = 24-24 = 0；S4 = 24-18 = 6\n   - CA2：S1 = 21-14 = 7；S2 = 21-15 = 6；S3 = 21-21 = 0；S4 = 21-14 = 7\n   - CA3：S1 = 28-11 = 17；S2 = 28-18 = 10；S3 = 28-15 = 13；S4 = 28-28 = 0\n3. 找出各策略之最大機會損失（列最大遺憾）：\n   - S1 最大遺憾：$\\max(11, 7, 17) = 17$\n   - S2 最大遺憾：$\\max(15, 6, 10) = 15$\n   - S3 最大遺憾：$\\max(0, 0, 13) = 13$\n   - S4 最大遺憾：$\\max(6, 7, 0) = 7$\n4. 選取最大遺憾之最小者：\n   $$\\min(17, 15, 13, 7) = 7$$\n   因此，在最大機會損失最小化準則下，行銷經理**必選策略 S4（其最大機會損失為 7）**！\n   *(完全吻合作業 1107 官方參考解答)*",
     cramSummary: {
-      conceptName: "貝氏決策樹與分支修剪",
-      keyTakeaway: "概念店失敗時全面開店 EMV = -652 萬 < 0，必定剪枝選擇 0！方案 1 總 EMV = -200 + 2700 = +2500 萬 > 2400 萬。"
+      conceptName: "四準則綜合實戰評估 (作業1107題三)",
+      keyTakeaway: "Maximax選S4(28)，Maximin選S3(15)，Laplace選S3&S4(20)，Minimax Regret選S4(最大遺憾7最小)！"
+    }
+  },
+  {
+    id: "q-u6-l4-02",
+    unit: "ch13-decision",
+    unitName: "不確定情況下之決策準則",
+    level: 4,
+    type: "numeric",
+    title: "四策略不確定報酬矩陣之 Minimax Regret 最優解數值手算（作業 1107 題三）",
+    questionPrompt: "承接作業 1107 題三情境：A 公司行銷經理評估促銷策略（S1-S4），面對 B 公司的三種競爭行動（CA1-CA3），獲利矩陣如下：\n- CA1：S1=13, S2=9, S3=24, S4=18\n- CA2：S1=14, S2=15, S3=21, S4=14\n- CA3：S1=11, S2=18, S3=15, S4=28\n請依據「最大機會損失最小化準則（Minimax Regret）」，計算出各策略的最大機會損失，並輸入最終所選定最優策略的「最大機會損失數值」（萬元）。",
+    givenData: {
+      "CA1 獲利 (S1, S2, S3, S4)": "(13, 9, 24, 18)",
+      "CA2 獲利 (S1, S2, S3, S4)": "(14, 15, 21, 14)",
+      "CA3 獲利 (S1, S2, S3, S4)": "(11, 18, 15, 28)"
+    },
+    options: null,
+    correctAnswer: 7.0,
+    unitLabel: "萬元",
+    tolerance: 0.1,
+    formulaHint: "\\min_i \\max_j [\\max_k V_{kj} - V_{ij}]",
+    fullSolution: "【步驟一：找出各情境行最大值】\n- CA1 最大：24\n- CA2 最大：21\n- CA3 最大：28\n\n【步驟二：計算各策略的最大後悔值】\n- S1 最大後悔：$\\max(24-13, 21-14, 28-11) = \\max(11, 7, 17) = 17$\n- S2 最大後悔：$\\max(24-9, 21-15, 28-18) = \\max(15, 6, 10) = 15$\n- S3 最大後悔：$\\max(24-24, 21-21, 28-15) = \\max(0, 0, 13) = 13$\n- S4 最大後悔：$\\max(24-18, 21-14, 28-28) = \\max(6, 7, 0) = 7$\n\n【步驟三：取最小最大後悔值】\n各方案最大後悔值為 $\\{17, 15, 13, 7\\}$，最小值為 7，對應之最佳策略為 S4。\n故最優方案的最大機會損失為 7 萬元。",
+    cramSummary: {
+      conceptName: "Minimax Regret 矩陣數值精算",
+      keyTakeaway: "各策略最大後悔：S1=17, S2=15, S3=13, S4=7。最小為 7 (選S4)！"
     }
   }
 ];

@@ -45,7 +45,20 @@ def test_scope_and_rules():
     ]
     for u in expected_units:
         assert f'id: "{u}"' in q_code or f"'{u}'" in q_code, f"Missing unit: {u}"
-    print("✓ Scope and knowledge base rules verified (Ch 6.3 excluded, percentile board note verified, 6 units present).")
+
+    # Unit 6 scope audit: must be 13.2 (不確定情況下之決策準則)
+    assert 'name: "單元六：不確定情況下之決策準則"' in q_code, "Unit 6 name must be '單元六：不確定情況下之決策準則'"
+    assert "不確定決策準則與決策樹" not in q_code, "Obsolete '不確定決策準則與決策樹' still found in q_code!"
+
+    # Unit 3 Level 4 must have q-u3-l4-02 (企3B 楊亞恩作業 EX1 & EX2 Bayes' theorem only)
+    assert 'id: "q-u3-l4-02"' in q_code, "Missing q-u3-l4-02 in Unit 3!"
+    assert "企3B 作業 EX1 & EX2" in q_code, "q-u3-l4-02 title must reference 企3B 作業 EX1 & EX2"
+
+    # Unit 6 must contain Homework 1107 Question 3 payoff matrix problem
+    assert 'id: "q-u6-l4-01"' in q_code, "Missing q-u6-l4-01 in Unit 6!"
+    assert "作業 1107 題三" in q_code, "Unit 6 Level 4 must feature Homework 1107 Q3"
+
+    print("✓ Scope and knowledge base rules verified (Ch 6.3 excluded, percentile board note verified, 6 units present, Unit 3 Bayes boss verified, Unit 6 13.2 strict scope verified).")
 
 def test_html_and_cdn():
     with open("index.html", "r", encoding="utf-8") as f:
