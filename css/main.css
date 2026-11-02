@@ -1,0 +1,167 @@
+/* ========================================================
+   main.css - 商業分析學習工作坊 核心基礎樣式與版面配置
+   ======================================================== */
+
+:root {
+  --bg-primary: #0f172a;       /* Slate 900 */
+  --bg-secondary: #1e293b;     /* Slate 800 */
+  --bg-card: #1e293b;          /* Slate 800 */
+  --bg-card-hover: #334155;    /* Slate 700 */
+  --border-color: #334155;     /* Slate 700 */
+  --border-light: #475569;     /* Slate 600 */
+
+  --text-primary: #f8fafc;     /* Slate 50 */
+  --text-secondary: #94a3b8;   /* Slate 400 */
+  --text-muted: #64748b;       /* Slate 500 */
+
+  --accent-indigo: #6366f1;    /* Indigo 500 */
+  --accent-indigo-hover: #4f46e5;
+  --accent-emerald: #10b981;   /* Emerald 500 - 精通 🟢 */
+  --accent-amber: #f59e0b;     /* Amber 500 - 需加強 🟡 */
+  --accent-rose: #f43f5e;      /* Rose 500 */
+  --accent-cyan: #06b6d4;      /* Cyan 500 */
+
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+
+  --min-touch-target: 48px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html, body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  line-height: 1.6;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* 觸控規格：所有按鈕、選項至少 48px 高度 */
+button, input, select, .touch-target {
+  min-height: var(--min-touch-target);
+  min-width: var(--min-touch-target);
+  font-family: inherit;
+}
+
+/* 主應用程式容器 */
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* 頂部全域導覽列 */
+.global-header {
+  background: rgba(15, 23, 42, 0.95);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border-color);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  padding: 0.75rem 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.brand-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-weight: 700;
+  font-size: 1.15rem;
+  color: var(--text-primary);
+  text-decoration: none;
+}
+
+.brand-badge .logo-icon {
+  width: 32px;
+  height: 32px;
+  background: linear-gradient(135deg, #6366f1, #06b6d4);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* 雙欄版面配置 (Desktop & Tablet Split View >= 1024px) */
+.main-layout {
+  display: flex;
+  flex: 1;
+  max-width: 1600px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* 左側單元導覽欄 (35% on >= 1024px) */
+.sidebar-col {
+  width: 100%;
+  max-width: 420px;
+  background: var(--bg-primary);
+  border-right: 1px solid var(--border-color);
+  padding: 1.25rem;
+  overflow-y: auto;
+  height: calc(100vh - 65px);
+  position: sticky;
+  top: 65px;
+}
+
+/* 右側作答核心區 (65% on >= 1024px) */
+.content-col {
+  flex: 1;
+  padding: 1.5rem 2rem;
+  overflow-y: auto;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding-bottom: 6rem; /* 預留底部空間給手機 Floating Bar */
+}
+
+/* 平板與手機響應式斷點 (< 1024px) */
+@media (max-width: 1023px) {
+  .main-layout {
+    flex-direction: column;
+  }
+
+  .sidebar-col {
+    max-width: 100%;
+    height: auto;
+    position: static;
+    border-right: none;
+    border-bottom: 1px solid var(--border-color);
+    padding: 1rem;
+  }
+
+  .content-col {
+    padding: 1rem;
+  }
+}
+
+/* 滾動條美化 */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--border-light);
+}

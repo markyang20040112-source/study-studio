@@ -1,0 +1,133 @@
+/* ========================================================
+   math.css - KaTeX 數學公式優化與互動圖解微元件
+   ======================================================== */
+
+.katex {
+  font-size: 1.05em;
+  color: #f1f5f9;
+}
+
+.katex-display {
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 0.5rem 0;
+  margin: 0.75rem 0;
+  scrollbar-width: thin;
+}
+
+/* 互動百分位數尺規微元件 (Percentile Ruler Widget) */
+.ruler-container {
+  padding: 1rem 0;
+}
+
+.ruler-track {
+  position: relative;
+  height: 40px;
+  background: #1e293b;
+  border-radius: 8px;
+  margin: 1.5rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1rem;
+  border: 1px solid #334155;
+}
+
+.ruler-point {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+}
+
+.ruler-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #475569;
+  border: 2px solid #0f172a;
+  transition: all 0.2s ease;
+}
+
+.ruler-dot.active-neighbor {
+  background: #f59e0b;
+  transform: scale(1.3);
+  box-shadow: 0 0 10px rgba(245, 158, 11, 0.6);
+}
+
+.ruler-label {
+  font-size: 0.75rem;
+  font-family: var(--font-mono);
+  color: #94a3b8;
+  margin-top: 4px;
+}
+
+.ruler-cursor-line {
+  position: absolute;
+  top: -8px;
+  bottom: -8px;
+  width: 3px;
+  background: #38bdf8;
+  border-radius: 2px;
+  box-shadow: 0 0 12px #38bdf8;
+  z-index: 5;
+  transition: left 0.1s ease;
+}
+
+.ruler-cursor-tag {
+  position: absolute;
+  top: -28px;
+  transform: translateX(-50%);
+  background: #0284c7;
+  color: #ffffff;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+/* 決策準則心態視覺化矩陣聚焦 (Decision Spotlight) */
+.decision-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+  font-size: 0.95rem;
+}
+
+.decision-table th, .decision-table td {
+  padding: 0.75rem 1rem;
+  text-align: center;
+  border: 1px solid #334155;
+}
+
+.decision-table th {
+  background: #1e293b;
+  color: #cbd5e1;
+  font-weight: 600;
+}
+
+.decision-table td {
+  background: #0f172a;
+  font-family: var(--font-mono);
+  transition: all 0.25s ease;
+}
+
+/* 聚焦點亮光圈 */
+.cell-spotlight {
+  background: rgba(99, 102, 241, 0.3) !important;
+  color: #38bdf8 !important;
+  font-weight: 700;
+  border-color: #6366f1 !important;
+  box-shadow: inset 0 0 12px rgba(99, 102, 241, 0.5);
+}
+
+.cell-winner {
+  background: rgba(16, 185, 129, 0.35) !important;
+  color: #34d399 !important;
+  font-weight: 800;
+  border: 2px solid #10b981 !important;
+  box-shadow: inset 0 0 16px rgba(16, 185, 129, 0.6);
+}

@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>商業分析 (BA) 互動複習系統 | Study Studio</title>
+
+  <!-- KaTeX 數學公式即時渲染 CDN -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+
+  <!-- 本地模組化 CSS -->
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/math.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- 頂部全域功能列 -->
+    <header class="global-header">
+      <a href="#" class="brand-badge" id="btnLogo">
+        <div class="logo-icon">📊</div>
+        <div>
+          <span>BA Study Studio</span>
+          <span style="font-size: 0.75rem; color: var(--text-secondary); display: block; font-weight: normal;">商業分析階梯式刷題</span>
+        </div>
+      </a>
+
+      <div class="header-actions">
+        <!-- 🎯 弱點清剿模式開關 -->
+        <button id="btnWeaknessMode" class="btn btn-secondary touch-target" title="只做 🟡 需加強題目">
+          <span>🎯</span>
+          <span class="desktop-text">弱點清剿</span>
+        </button>
+
+        <!-- ⚡ 考前救急包 -->
+        <button id="btnQuickCram" class="btn btn-amber touch-target" title="考前 30 分鐘救急衝刺">
+          <span>⚡</span>
+          <span class="desktop-text">考前救急</span>
+        </button>
+
+        <!-- 📊 戰力分析儀表板 -->
+        <button id="btnDashboard" class="btn btn-primary touch-target" title="掌握度與戰力分析">
+          <span>📊</span>
+          <span class="desktop-text">戰力分析</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- 主體雙欄排版 (>= 1024px 平板/桌面分割視圖) -->
+    <main class="main-layout">
+      <!-- 左側欄：單元導覽與全域掌握度 (35%) -->
+      <aside class="sidebar-col" id="sidebarCol">
+        <!-- 全域精通進度概覽 -->
+        <div style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 12px; padding: 1rem; margin-bottom: 1.25rem;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+            <span style="font-weight: 700; font-size: 0.9rem; color: var(--text-secondary);">全域精通度 (Mastery)</span>
+            <span id="overallMasteryText" style="font-family: var(--font-mono); font-weight: 700; color: #10b981; font-size: 1.1rem;">0%</span>
+          </div>
+          <div class="unit-progress-container" style="height: 8px;">
+            <div id="overallProgressBar" class="unit-progress-bar" style="width: 0%;"></div>
+          </div>
+          <div style="display: flex; justify-content: space-between; margin-top: 0.75rem; font-size: 0.8rem;">
+            <span style="color: #34d399;">🟢 精通: <strong id="statMasteredCount">0</strong></span>
+            <span style="color: #fbbf24;">🟡 需加強: <strong id="statReviewCount">0</strong></span>
+            <span style="color: #94a3b8;">⚪ 未作答: <strong id="statUnattemptedCount">0</strong></span>
+          </div>
+        </div>
+
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+          <h2 style="font-size: 0.95rem; font-weight: 700; color: var(--text-secondary); text-transform: uppercase;">複習單元選單</h2>
+          <span id="activeModeBadge" class="badge badge-unattempted">全部單元</span>
+        </div>
+
+        <!-- 6 大單元清單 -->
+        <div class="unit-list" id="unitListContainer">
+          <!-- 由 js/app.js 動態渲染 -->
+        </div>
+
+        <!-- 側邊欄底部資料備份捷徑 -->
+        <div style="margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--border-color); display: flex; gap: 0.5rem;">
+          <button id="btnExportSidebar" class="btn btn-secondary" style="flex: 1; font-size: 0.8rem; padding: 0.4rem;" title="匯出學習紀錄 JSON">
+            💾 備份進度
+          </button>
+          <button id="btnResetSidebar" class="btn btn-secondary" style="font-size: 0.8rem; padding: 0.4rem; color: #f43f5e;" title="重設全部紀錄">
+            🔄 重置
+          </button>
+        </div>
+      </aside>
+
+      <!-- 右側欄：階梯分頁與題目核心作答區 (65%) -->
+      <section class="content-col" id="contentCol">
+        <!-- 單元標題資訊 -->
+        <div id="unitHeaderArea" style="margin-bottom: 1.25rem;">
+          <!-- 由 js/app.js 動態注入單元標題與簡介 -->
+        </div>
+
+        <!-- Level 階梯分頁導覽 -->
+        <nav class="level-tabs" id="levelTabsContainer">
+          <button class="level-tab active" data-level="0">
+            <span>🌟 Level 0</span>
+            <span>觀念探索</span>
+          </button>
+          <button class="level-tab" data-level="1">
+            <span>🎯 Level 1</span>
+            <span>觀念選擇</span>
+          </button>
+          <button class="level-tab" data-level="2">
+            <span>⚡ Level 2</span>
+            <span>手算快打</span>
+          </button>
+          <button class="level-tab" data-level="3">
+            <span>🔥 Level 3</span>
+            <span>綜合實戰</span>
+          </button>
+          <button class="level-tab" data-level="4">
+            <span>👑 Level 4</span>
+            <span>作業魔王</span>
+          </button>
+        </nav>
+
+        <!-- 核心內容展示區 (Level 0 探索 or Level 1-4 題目) -->
+        <div id="contentArea">
+          <!-- 由 js/app.js 動態載入 -->
+        </div>
+      </section>
+    </main>
+
+    <!-- ⚡ 考前 30 分鐘救急包彈出視窗 (Quick Cram Modal) -->
+    <div id="cramModal" class="modal-overlay" style="display: none;">
+      <div class="modal-content">
+        <div class="modal-header">
+          <div style="display: flex; align-items: center; gap: 0.5rem;">
+            <span style="font-size: 1.5rem;">⚡</span>
+            <div>
+              <h3 style="font-size: 1.2rem; font-weight: 700; color: #f59e0b;">考前 30 分鐘衝刺救急包</h3>
+              <p style="font-size: 0.85rem; color: var(--text-secondary);">精準彙整您所有標記為 🟡（需加強）之錯題考點與速記公式</p>
+            </div>
+          </div>
+          <button id="btnCloseCramModal" class="btn btn-secondary btn-icon" style="min-width: 40px; min-height: 40px;">✕</button>
+        </div>
+        <div id="cramModalBody" style="display: flex; flex-direction: column; gap: 1rem;">
+          <!-- 動態載入 🟡 錯題精華卡 -->
+        </div>
+      </div>
+    </div>
+
+    <!-- 📊 戰力分析儀表板彈出視窗 (Analytics Dashboard Modal) -->
+    <div id="dashboardModal" class="modal-overlay" style="display: none;">
+      <div class="modal-content">
+        <div class="modal-header">
+          <div style="display: flex; align-items: center; gap: 0.5rem;">
+            <span style="font-size: 1.5rem;">📊</span>
+            <div>
+              <h3 style="font-size: 1.2rem; font-weight: 700; color: #6366f1;">學習戰力分析儀表板</h3>
+              <p style="font-size: 0.85rem; color: var(--text-secondary);">6 大單元掌握度診斷與進度備份管理</p>
+            </div>
+          </div>
+          <button id="btnCloseDashboardModal" class="btn btn-secondary btn-icon" style="min-width: 40px; min-height: 40px;">✕</button>
+        </div>
+        <div id="dashboardModalBody">
+          <!-- 動態載入掌握度長條圖與診斷分析 -->
+        </div>
+      </div>
+    </div>
+
+    <!-- 手機底部浮動操作列 (< 768px) -->
+    <div class="mobile-floating-bar">
+      <button id="btnMobileWeakness" class="btn btn-secondary touch-target" style="flex: 1; padding: 0.5rem;">
+        🎯 弱點
+      </button>
+      <button id="btnMobileCram" class="btn btn-amber touch-target" style="flex: 1; padding: 0.5rem;">
+        ⚡ 救急
+      </button>
+      <button id="btnMobileDashboard" class="btn btn-primary touch-target" style="flex: 1; padding: 0.5rem;">
+        📊 戰力
+      </button>
+    </div>
+  </div>
+
+  <!-- 應用程式邏輯模組 -->
+  <script src="js/questions.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
