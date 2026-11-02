@@ -405,4 +405,43 @@
   color: #94a3b8;
 }
 
+/* 觸控優化：百分位數滑桿 (iPad / 觸控螢幕友善) */
+#rulerSlider {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 8px;
+  background: #334155;
+  border-radius: 4px;
+  outline: none;
+  touch-action: pan-y;
+}
+
+#rulerSlider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #38bdf8;
+  cursor: pointer;
+  border: 2px solid #ffffff;
+  box-shadow: 0 0 8px rgba(56, 189, 248, 0.7);
+  transition: transform 0.15s ease, background-color 0.15s ease;
+}
+
+#rulerSlider::-webkit-slider-thumb:active {
+  transform: scale(1.2);
+  background: #0284c7;
+}
+
+#rulerSlider::-moz-range-thumb {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #38bdf8;
+  cursor: pointer;
+  border: 2px solid #ffffff;
+  box-shadow: 0 0 8px rgba(56, 189, 248, 0.7);
+}
+
 

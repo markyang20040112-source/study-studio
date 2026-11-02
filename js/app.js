@@ -581,11 +581,11 @@ function renderConceptWalkthrough(unitId) {
           <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0.75rem;">
             固定設定：甲乙都買了 2 件 (d=2)，甲買乙未買 2 件 (c=2)，甲未買乙買 1 件 (b=1)。點擊切換未買商品數 (a)：
           </p>
-          <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem; flex-wrap: wrap;">
-            <button class="btn btn-secondary" onclick="adjustDualZero(5)">a = 5 (小型超商)</button>
-            <button class="btn btn-secondary" onclick="adjustDualZero(50)">a = 50 (中型超市)</button>
-            <button class="btn btn-secondary" onclick="adjustDualZero(500)">a = 500 (大型量販)</button>
-            <button class="btn btn-secondary" onclick="adjustDualZero(5000)">a = 5000 (電商巨頭)</button>
+          <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem; flex-wrap: wrap;" id="dualZeroButtonsContainer">
+            <button class="btn btn-primary" data-a="5" onclick="adjustDualZero(5)">a = 5 (小型超商)</button>
+            <button class="btn btn-secondary" data-a="50" onclick="adjustDualZero(50)">a = 50 (中型超市)</button>
+            <button class="btn btn-secondary" data-a="500" onclick="adjustDualZero(500)">a = 500 (大型量販)</button>
+            <button class="btn btn-secondary" data-a="5000" onclick="adjustDualZero(5000)">a = 5000 (電商巨頭)</button>
           </div>
 
           <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;" id="dualZeroMetrics">
@@ -958,7 +958,7 @@ function renderConceptWalkthrough(unitId) {
 
           <div class="visual-card">
             <div style="font-weight: 700; color: #38bdf8; margin-bottom: 0.4rem;">✖️ 交互作用項 (Interaction Term)</div>
-            $$\\hat{Y} = b_0 + b_1 X_1 + b_2 X_2 + b_3 (X_1 \\cdot X_2)$$
+            $$\\hat{Y} = b_0 + b_1 X_1 + b_2 X_2 + b_3 (X_1 \\cdot X_2) \\quad \\text{或 } \\hat{Y} = a + Z_1 X_1 + Z_2 X_2 + Z_3 (X_1 X_2)$$
             <p style="font-size: 0.85rem; color: #cbd5e1; line-height: 1.5;">
               $X_1$ 對 $Y$ 的邊際影響斜率為 $(b_1 + b_3 X_2)$，其效果會隨著 $X_2$ 的數值高低而變動！在幾何圖形上呈現<strong>非平行交叉線</strong>。
             </p>
@@ -1115,12 +1115,15 @@ function renderConceptWalkthrough(unitId) {
 
         <!-- 斜率三明治定理 -->
         <div class="callout-box callout-amber" style="margin-top: 1rem;">
-          <div style="font-weight: 700; margin-bottom: 0.3rem;">🥪 目標函數斜率敏感度分析 (Slope Sandwich Theorem)</div>
-          <p style="font-size: 0.88rem;">
+          <div style="font-weight: 700; margin-bottom: 0.3rem;">🥪 目標函數斜率敏感度分析：三明治夾角 vs 軸截點單邊界</div>
+          <p style="font-size: 0.88rem; line-height: 1.6;">
             目標函數 $\\text{Max } Z = c_1 X_1 + c_2 X_2$ 之等利潤線斜率為 $m_Z = -\\frac{c_1}{c_2}$。<br>
+            <strong>1. 兩條資源限制式交會之頂點（雙邊三明治）</strong>：<br>
             若最佳解由邊界線 $L_1$ (斜率 $m_1$) 與 $L_2$ (斜率 $m_2$) 交會而成：
             $$\\min(m_1, m_2) \\le -\\frac{c_1}{c_2} \\le \\max(m_1, m_2)$$
-            只要目標函數斜率維持在兩條相交邊界的夾角三明治範圍內，頂點最佳解坐標完全不受影響！
+            只要目標函數斜率維持在兩相交邊界夾角三明治範圍內，最佳解頂點坐標完全不變！<br>
+            <strong>2. 坐標軸截點頂點（單邊界 Axis Intercept Single-Sided Bound）</strong>：<br>
+            若最佳解落在坐標軸截點上（如 $(X_1, 0)$，由非負限制 $X_2 \\ge 0$ 與一條限制式相交），敏感度範圍為<strong>單側邊界（如 $-\\frac{c_1}{c_2} \\le m_1$）</strong>，僅受單一邊界線約束！
           </p>
         </div>
 
@@ -1158,11 +1161,11 @@ function renderConceptWalkthrough(unitId) {
         </p>
 
         <div class="interactive-widget-box">
-          <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1rem;">
-            <button class="btn btn-primary" onclick="setDecisionSpotlight('maximax')">🌟 樂觀準則 (Maximax)</button>
-            <button class="btn btn-secondary" onclick="setDecisionSpotlight('maximin')">🛡️ 悲觀準則 (Maximin)</button>
-            <button class="btn btn-secondary" onclick="setDecisionSpotlight('laplace')">⚖️ 機率均等 (Laplace)</button>
-            <button class="btn btn-secondary" onclick="setDecisionSpotlight('minimax_regret')">💔 機會損失最小化 (Minimax Regret)</button>
+          <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1rem;" id="decisionButtonsContainer">
+            <button class="btn btn-primary" data-mode="maximax" onclick="setDecisionSpotlight('maximax')">🌟 樂觀準則 (Maximax)</button>
+            <button class="btn btn-secondary" data-mode="maximin" onclick="setDecisionSpotlight('maximin')">🛡️ 悲觀準則 (Maximin)</button>
+            <button class="btn btn-secondary" data-mode="laplace" onclick="setDecisionSpotlight('laplace')">⚖️ 機率均等 (Laplace)</button>
+            <button class="btn btn-secondary" data-mode="minimax_regret" onclick="setDecisionSpotlight('minimax_regret')">💔 機會損失最小化 (Minimax Regret)</button>
           </div>
 
           <div id="decisionTableContainer">
@@ -1437,7 +1440,7 @@ function initPercentileRulerWidget() {
 
   window.stepRuler = function (delta) {
     if (!slider) return;
-    let next = parseFloat(slider.value) + delta;
+    let next = Math.round((parseFloat(slider.value) + delta) * 2) / 2;
     if (next < 1.0) next = 1.0;
     if (next > 9.0) next = 9.0;
     slider.value = next;
@@ -1445,6 +1448,7 @@ function initPercentileRulerWidget() {
   };
 
   slider.oninput = update;
+  slider.onchange = update;
   update();
 }
 
@@ -1454,6 +1458,15 @@ window.adjustDualZero = function (a) {
   const N = a + b + c + d;
   const smc = ((a + d) / N).toFixed(4);
   const jaccard = (d / (b + c + d)).toFixed(4);
+
+  const btns = document.querySelectorAll("#dualZeroButtonsContainer button");
+  btns.forEach((btn) => {
+    if (parseInt(btn.getAttribute("data-a"), 10) === a) {
+      btn.className = "btn btn-primary";
+    } else {
+      btn.className = "btn btn-secondary";
+    }
+  });
 
   const container = document.getElementById("dualZeroMetrics");
   const exp = document.getElementById("dualZeroExplanation");
@@ -1493,6 +1506,15 @@ window.setDecisionSpotlight = function (mode) {
   const tableBox = document.getElementById("decisionTableContainer");
   const expBox = document.getElementById("decisionExplanationBox");
   if (!tableBox) return;
+
+  const btns = document.querySelectorAll("#decisionButtonsContainer button");
+  btns.forEach((btn) => {
+    if (btn.getAttribute("data-mode") === mode) {
+      btn.className = "btn btn-primary";
+    } else {
+      btn.className = "btn btn-secondary";
+    }
+  });
 
   const rawMatrix = [
     { name: "方案 A", s1: 100, s2: 40, s3: -20 },
@@ -1541,6 +1563,9 @@ window.setDecisionSpotlight = function (mode) {
     `;
     expBox.innerHTML = "💔 <strong>最大機會損失最小化 (Minimax Regret)</strong>：行最大減各格算遺憾值。各方案最大遺憾 A:60, B:30, C:50。取最小遺憾 30 $\\implies$ <strong>選方案 B（最壞遺憾僅 30 萬）</strong>！";
   }
+
+  renderMath(expBox);
+  renderMath(tableBox);
 };
 
 // ==========================================
