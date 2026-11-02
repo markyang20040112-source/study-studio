@@ -8,6 +8,7 @@ let currentUnitId = "ch02-descriptive";
 let currentLevel = 0;
 let isWeaknessMode = false;
 let dynamicQuestionCache = {}; // 暫存動態隨機題
+let mcqOptionShuffledCache = {}; // 暫存打散後的選項（防死背）
 
 // DOM 元素快取
 let elUnitListContainer;
@@ -58,6 +59,7 @@ document.addEventListener("DOMContentLoaded", () => {
 // ==========================================
 // 數學公式渲染輔助函式 (KaTeX)
 // ==========================================
+let isKaTeXPending = false;
 function renderMath(container) {
   if (!container) return;
   if (window.renderMathInElement) {
@@ -74,6 +76,18 @@ function renderMath(container) {
     } catch (e) {
       console.warn("KaTeX render error:", e);
     }
+  } else if (!isKaTeXPending) {
+    isKaTeXPending = true;
+    const retry = (attempts = 0) => {
+      if (window.renderMathInElement) {
+        isKaTeXPending = false;
+        if (elContentArea) renderMath(elContentArea);
+      } else if (attempts < 20) {
+        setTimeout(() => retry(attempts + 1), 150);
+      }
+    };
+    window.addEventListener("load", () => retry(0));
+    setTimeout(() => retry(0), 200);
   }
 }
 
@@ -137,6 +151,7 @@ function setupGlobalActions() {
     if (confirm("確定要重設所有作答進度與掌握度紀錄嗎？此動作無法復原。")) {
       StudyStorage.resetAll();
       dynamicQuestionCache = {};
+      mcqOptionShuffledCache = {};
       renderSidebarUnits();
       updateProgressUI();
       renderMainContent();
@@ -850,13 +865,23 @@ function createQuestionCard(q, originalQ, indexNum) {
   let interactiveHtml = "";
 
   if (q.type === "mcq") {
-    // 選項洗牌 (動態洗牌防死背)
-    const options = [...q.options];
-    // 使用題目 id 搭配固定偽隨機確保作答間不狂跳，但重新整理時可隨機
+    // 選項洗牌 (動態洗牌防死背，依 Blueprint 6.2 實作)
+    if (!mcqOptionShuffledCache[originalQ.id]) {
+      const copy = [...q.options];
+      for (let i = copy.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [copy[i], copy[j]] = [copy[j], copy[i]];
+      }
+      mcqOptionShuffledCache[originalQ.id] = copy;
+    }
+    const options = mcqOptionShuffledCache[originalQ.id];
+    const displayLetters = ["A", "B", "C", "D", "E"];
+
     interactiveHtml = `
       <div class="options-container" id="options-${originalQ.id}">
         ${options
-          .map((opt) => {
+          .map((opt, optIdx) => {
+            const letter = displayLetters[optIdx] || opt.key;
             const isSelected = qState.lastSelected === opt.key;
             let optClass = "option-btn";
             if (isSelected) {
@@ -864,8 +889,8 @@ function createQuestionCard(q, originalQ, indexNum) {
             }
             return `
               <div>
-                <button class="${optClass}" onclick="handleMcqSelect('${originalQ.id}', '${opt.key}')">
-                  <span class="option-key">${opt.key}</span>
+                <button class="${optClass}" data-key="${opt.key}" onclick="handleMcqSelect('${originalQ.id}', '${opt.key}')">
+                  <span class="option-key">${letter}</span>
                   <span style="flex: 1;">${opt.text}</span>
                 </button>
                 <div id="distractor-${originalQ.id}-${opt.key}" style="display: ${isSelected && opt.distractorFeedback ? "block" : "none"};">
@@ -984,7 +1009,7 @@ window.handleMcqSelect = function (qId, selectedKey) {
   if (card) {
     const opts = card.querySelectorAll(".option-btn");
     opts.forEach((btn) => {
-      const key = btn.querySelector(".option-key").textContent.trim();
+      const key = btn.getAttribute("data-key");
       btn.className = "option-btn";
       if (key === selectedKey) {
         btn.classList.add(isCorrect ? "selected-correct" : "selected-wrong");
@@ -1027,24 +1052,51 @@ window.submitNumericAnswer = function (qId) {
     return;
   }
 
-  // 支援分數格式輸入 (例如 14/15)
-  let userNum = NaN;
-  if (rawVal.includes("/")) {
-    const parts = rawVal.split("/");
-    if (parts.length === 2) {
-      userNum = parseFloat(parts[0]) / parseFloat(parts[1]);
-    }
-  } else {
-    userNum = parseFloat(rawVal);
+  // 去除千分位逗點及多餘空白，支援例如 "1,600" 或 "8,640"
+  let cleanVal = rawVal.replace(/,/g, "").trim();
+
+  // 支援結尾含百分比符號，例如 "50%" 或 "81.82 %"
+  let hasPercentSign = false;
+  if (cleanVal.endsWith("%")) {
+    hasPercentSign = true;
+    cleanVal = cleanVal.slice(0, -1).trim();
   }
 
-  if (isNaN(userNum)) {
+  // 支援分數格式輸入 (例如 14/15 或 1,600/2)
+  let userNum = NaN;
+  if (cleanVal.includes("/")) {
+    const parts = cleanVal.split("/");
+    if (parts.length === 2) {
+      const num = parseFloat(parts[0].trim());
+      const den = parseFloat(parts[1].trim());
+      if (den !== 0 && !isNaN(num) && !isNaN(den)) {
+        userNum = num / den;
+      }
+    }
+  } else {
+    userNum = parseFloat(cleanVal);
+  }
+
+  if (isNaN(userNum) || !isFinite(userNum)) {
     feedbackEl.innerHTML = `<div style="color: #f43f5e; font-size: 0.88rem;">請輸入合法的數字格式！</div>`;
     return;
   }
 
   const tol = q.tolerance !== null && q.tolerance !== undefined ? q.tolerance : 0.05;
-  const isCorrect = Math.abs(userNum - q.correctAnswer) <= tol;
+  let isCorrect = Math.abs(userNum - q.correctAnswer) <= tol;
+
+  // 百分比與比率小數容許轉換 (例如題目單位為 % 且標準答案為 50，若輸入 0.5 亦算正確；反之亦然)
+  if (!isCorrect && q.unitLabel === "%") {
+    if (q.correctAnswer > 1 && Math.abs(userNum * 100 - q.correctAnswer) <= tol) {
+      isCorrect = true;
+    } else if (q.correctAnswer <= 1 && Math.abs(userNum / 100 - q.correctAnswer) <= tol) {
+      isCorrect = true;
+    }
+  } else if (!isCorrect && hasPercentSign) {
+    if (Math.abs(userNum - q.correctAnswer) <= tol || Math.abs(userNum / 100 - q.correctAnswer) <= tol) {
+      isCorrect = true;
+    }
+  }
 
   const currentSt = StudyStorage.getQuestionState(qId);
   let newStatus = "review_needed";
@@ -1125,19 +1177,31 @@ window.randomizeCardParam = function (qId, dynamicType) {
   const merged = { ...originalQ, ...dynamicQ };
   dynamicQuestionCache[qId] = merged;
 
-  // 重置作答狀態與輸入框
+  // 徹底重置作答狀態為未作答，讓使用者有機會在新題目贏得 🟢 已精通
   StudyStorage.updateQuestionState(qId, {
+    status: "unattempted",
+    userAttempts: 0,
     lastSelected: null,
     hintViewed: false
   });
 
+  // 取得原卡片在當前階梯中的題目序號 indexNum
+  let indexNum = 1;
+  const filtered = RAW_QUESTIONS.filter((q) => q.unit === originalQ.unit && q.level === originalQ.level);
+  const foundIdx = filtered.findIndex((q) => q.id === qId);
+  if (foundIdx !== -1) {
+    indexNum = foundIdx + 1;
+  }
+
   // 局部重新繪製卡片
   const oldCard = document.getElementById(`card-${qId}`);
   if (oldCard) {
-    const newCard = createQuestionCard(merged, originalQ, 1);
+    const newCard = createQuestionCard(merged, originalQ, indexNum);
     oldCard.replaceWith(newCard);
     renderMath(newCard);
   }
+
+  updateProgressUI();
 };
 
 // 自評打分 (Level 3/4)
@@ -1293,6 +1357,7 @@ window.handleFileImport = function (input) {
     if (res.success) {
       alert("學習紀錄已成功匯入！");
       dynamicQuestionCache = {};
+      mcqOptionShuffledCache = {};
       renderSidebarUnits();
       updateProgressUI();
       renderMainContent();
