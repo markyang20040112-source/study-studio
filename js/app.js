@@ -1621,8 +1621,8 @@ window.setDecisionSpotlight = function (mode) {
               </tbody>
             </table>
           </div>
-          <div style="text-align: right; margin-top: 0.65rem;" id="step1NextPrompt">
-            <button class="btn btn-sm btn-primary" onclick="setRegretStepView('step2')">前往第 2 步：計算機會損失矩陣 →</button>
+          <div style="display: none; text-align: right; margin-top: 0.65rem;" id="step1NextPrompt">
+            <button class="btn btn-sm btn-primary" onclick="setRegretStepView('step2', true)">前往第 2 步：計算機會損失矩陣 →</button>
           </div>
         </div>
 
@@ -1671,7 +1671,7 @@ window.setDecisionSpotlight = function (mode) {
                   <td class="cell-spotlight"><div class="regret-cell-val">30</div><div class="regret-cell-calc">$100 - 70 = 30$</div></td>
                   <td><div class="regret-cell-val">0</div><div class="regret-cell-calc">$50 - 50 = 0$</div></td>
                   <td class="cell-spotlight"><div class="regret-cell-val">30</div><div class="regret-cell-calc">$40 - 10 = 30$</div></td>
-                  <td class="cell-winner"><div class="regret-cell-val">30</div><div style="font-size: 0.74rem; color: #34d399; font-weight: 700;">(最小遺憾 🏆)</div></td>
+                  <td class="cell-winner"><div class="regret-cell-val">30</div><div style="font-size: 0.74rem; color: #a7f3d0;">$\\max(30, 0, 30)$</div><div style="font-size: 0.74rem; color: #34d399; font-weight: 700;">(最小遺憾 🏆)</div></td>
                 </tr>
                 <tr>
                   <td style="font-weight: 700;">方案 C</td>
@@ -1690,12 +1690,12 @@ window.setDecisionSpotlight = function (mode) {
             </div>
             <div style="font-size: 0.88rem; color: #e2e8f0; line-height: 1.5;">
               各方案最大遺憾分別為 A: 60 萬、B: 30 萬、C: 50 萬。<br>
-              依最大機會損失最小化準則：$$\\min(60, 30, 50) = 30 \\implies \\mathbf{選方案 B}$$
+              依最大機會損失最小化準則：$$\\min(60, 30, 50) = 30 \\implies \\text{\\textbf{選方案 B}}$$
               雖然方案 B 在各情境都不是第一名，但能確保在任何可能情境下，少賺金額最高不超過 30 萬，是典型「輸得起、最壞情況受傷最輕」的穩健決策！
             </div>
           </div>
-          <div style="text-align: left; margin-top: 0.65rem;" id="step2PrevPrompt">
-            <button class="btn btn-sm btn-secondary" onclick="setRegretStepView('step1')">← 返回第 1 步原始收益矩陣</button>
+          <div style="display: none; text-align: left; margin-top: 0.65rem;" id="step2PrevPrompt">
+            <button class="btn btn-sm btn-secondary" onclick="setRegretStepView('step1', true)">← 返回第 1 步原始收益矩陣</button>
           </div>
         </div>
       </div>
@@ -1708,7 +1708,7 @@ window.setDecisionSpotlight = function (mode) {
 };
 
 // 支援機會損失兩步切換 (all, step1, step2)
-window.setRegretStepView = function (step) {
+window.setRegretStepView = function (step, shouldScroll = false) {
   const card1 = document.getElementById("regretStep1Card");
   const banner = document.getElementById("regretTransitionBanner");
   const card2 = document.getElementById("regretStep2Card");
@@ -1717,6 +1717,7 @@ window.setRegretStepView = function (step) {
   const btn2 = document.getElementById("btnRegretStep2");
   const pNext = document.getElementById("step1NextPrompt");
   const pPrev = document.getElementById("step2PrevPrompt");
+  const expBox = document.getElementById("decisionExplanationBox");
   if (!card1 || !card2) return;
 
   if (step === "step1") {
@@ -1727,6 +1728,13 @@ window.setRegretStepView = function (step) {
     if (btnAll) btnAll.className = "btn btn-sm btn-secondary";
     if (btn1) btn1.className = "btn btn-sm btn-primary";
     if (btn2) btn2.className = "btn btn-sm btn-secondary";
+    if (expBox) {
+      expBox.innerHTML = "📌 <strong>第 1 步：原始收益與情境基準</strong>：在各景氣情境（直行）中找出最佳獲利基準 $V_j^*$（$S_1=\\mathbf{100}, S_2=\\mathbf{50}, S_3=\\mathbf{40}$）。下一步將以此基準扣除各格獲利，換算出「少賺的機會損失」！";
+      renderMath(expBox);
+    }
+    if (shouldScroll) {
+      card1.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    }
   } else if (step === "step2") {
     card1.style.display = "none";
     if (banner) banner.style.display = "none";
@@ -1735,6 +1743,13 @@ window.setRegretStepView = function (step) {
     if (btnAll) btnAll.className = "btn btn-sm btn-secondary";
     if (btn1) btn1.className = "btn btn-sm btn-secondary";
     if (btn2) btn2.className = "btn btn-sm btn-primary";
+    if (expBox) {
+      expBox.innerHTML = "💔 <strong>第 2 步：機會損失矩陣與決策</strong>：以 $R_{ij} = V_j^* - V_{ij}$ 填妥矩陣，向右找出各方案最大遺憾（A:60, B:30, C:50）。依 $\\min(60, 30, 50) = 30 \\implies$ <strong>選方案 B（最壞遺憾僅 30 萬）</strong>！";
+      renderMath(expBox);
+    }
+    if (shouldScroll) {
+      card2.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    }
   } else {
     // all
     card1.style.display = "block";
@@ -1745,6 +1760,13 @@ window.setRegretStepView = function (step) {
     if (btnAll) btnAll.className = "btn btn-sm btn-primary";
     if (btn1) btn1.className = "btn btn-sm btn-secondary";
     if (btn2) btn2.className = "btn btn-sm btn-secondary";
+    if (expBox) {
+      expBox.innerHTML = "💔 <strong>最大機會損失最小化 (Minimax Regret)</strong>：經歷「第 1 步取各行最大基準 $V_j^*$」$\\to$「轉換公式 $R_{ij} = V_j^* - V_{ij}$」$\\to$「第 2 步各列最大遺憾中取最小 $\\min(60, 30, 50) = 30$」$\\implies$ <strong>選方案 B（最壞遺憾僅 30 萬）</strong>！";
+      renderMath(expBox);
+    }
+    if (shouldScroll) {
+      card1.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    }
   }
 
   const tableBox = document.getElementById("decisionTableContainer");

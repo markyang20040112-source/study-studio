@@ -75,12 +75,21 @@ def test_scope_and_rules():
     assert "機會損失（遺憾值）" in app_js, "Minimax Regret must have transition formula banner!"
     assert "方案 B" in app_js and "cell-winner" in app_js, "Scheme B must be marked as cell-winner in Minimax Regret spotlight!"
     assert "(最小遺憾 🏆)" in app_js, "Scheme B must have 最小遺憾 winner badge!"
+    assert "max(30, 0, 30)" in app_js, "Scheme B must include row max derivation breakdown max(30, 0, 30)!"
     assert "選方案 B（最壞遺憾僅 30 萬）" in app_js, "Minimax Regret must feature Scheme B winner takeaway banner!"
     assert "100 - 70 = 30" in app_js, "Minimax Regret must include cell derivation breakdown (100 - 70 = 30)!"
     assert "40 - (-20) = 60" in app_js, "Minimax Regret must include negative payoff derivation breakdown (40 - (-20) = 60)!"
     assert "setRegretStepView" in app_js, "Minimax Regret must include setRegretStepView step toggle function!"
+    assert 'id="step1NextPrompt"' in app_js and 'display: none' in app_js, "Step navigation prompts must be hidden by default in all view!"
+    assert "📌 <strong>第 1 步：原始收益與情境基準</strong>" in app_js, "setRegretStepView must dynamically update expBox on step1!"
+    assert "💔 <strong>第 2 步：機會損失矩陣與決策</strong>" in app_js, "setRegretStepView must dynamically update expBox on step2!"
+
+    with open("css/math.css", "r", encoding="utf-8") as f:
+        math_css = f.read()
+    assert ".regret-benchmark-row" in math_css, "css/math.css must define .regret-benchmark-row!"
 
     print("✓ Scope and knowledge base rules verified (Ch 6.3 excluded, percentile board note verified, 6 units present, Unit 3 Bayes boss verified, Unit 6 13.2 strict scope and 2-step regret spotlight table verified).")
+
 
 def test_html_and_cdn():
     with open("index.html", "r", encoding="utf-8") as f:
