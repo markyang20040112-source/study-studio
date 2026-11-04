@@ -2045,8 +2045,9 @@ function createQuestionCard(q, originalQ, indexNum) {
 window.handleMcqSelect = function (qId, selectedKey) {
   const originalQ = RAW_QUESTIONS.find((q) => q.id === qId);
   if (!originalQ) return;
+  const q = dynamicQuestionCache[qId] || originalQ;
 
-  const isCorrect = selectedKey === originalQ.correctAnswer;
+  const isCorrect = selectedKey === q.correctAnswer;
   const currentSt = StudyStorage.getQuestionState(qId);
 
   // 初次答對計為 mastered，否則計為 review_needed

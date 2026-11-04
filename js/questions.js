@@ -2561,21 +2561,72 @@ const DYNAMIC_GENERATORS = {
   },
 
   "q-u6-l3-01": function(q) {
+    const matrices = [
+      {
+        d1: { S1: 50, S2: 120, S3: 180, S4: 250 },
+        d2: { S1: 50, S2: 80, S3: 110, S4: 90 },
+        d3: { S1: 50, S2: 40, S3: 10, S4: -30 },
+        colMax: { D1: 250, D2: 110, D3: 50 },
+        regrets: { S1: 200, S2: 130, S3: 70, S4: 80 },
+        ansKey: "C",
+        optC: "挑選 S3 (中度擴產)，其最大機會損失為 70",
+        optD: "挑選 S4 (大幅擴產)，其最大機會損失為 80",
+        bestStrat: "S3 (中度擴產)",
+        minRegret: 70
+      },
+      {
+        d1: { S1: 60, S2: 140, S3: 200, S4: 270 },
+        d2: { S1: 60, S2: 90, S3: 120, S4: 100 },
+        d3: { S1: 60, S2: 50, S3: 20, S4: -20 },
+        colMax: { D1: 270, D2: 120, D3: 60 },
+        regrets: { S1: 210, S2: 130, S3: 70, S4: 80 },
+        ansKey: "C",
+        optC: "挑選 S3 (中度擴產)，其最大機會損失為 70",
+        optD: "挑選 S4 (大幅擴產)，其最大機會損失為 80",
+        bestStrat: "S3 (中度擴產)",
+        minRegret: 70
+      },
+      {
+        d1: { S1: 40, S2: 110, S3: 160, S4: 220 },
+        d2: { S1: 40, S2: 75, S3: 105, S4: 85 },
+        d3: { S1: 40, S2: 30, S3: 15, S4: -10 },
+        colMax: { D1: 220, D2: 105, D3: 40 },
+        regrets: { S1: 180, S2: 110, S3: 60, S4: 50 },
+        ansKey: "D",
+        optC: "挑選 S3 (中度擴產)，其最大機會損失為 60",
+        optD: "挑選 S4 (大幅擴產)，其最大機會損失為 50",
+        bestStrat: "S4 (大幅擴產)",
+        minRegret: 50
+      },
+      {
+        d1: { S1: 70, S2: 150, S3: 180, S4: 210 },
+        d2: { S1: 70, S2: 110, S3: 90, S4: 80 },
+        d3: { S1: 70, S2: 45, S3: 20, S4: -15 },
+        colMax: { D1: 210, D2: 110, D3: 70 },
+        regrets: { S1: 140, S2: 60, S3: 50, S4: 85 },
+        ansKey: "C",
+        optC: "挑選 S3 (中度擴產)，其最大機會損失為 50",
+        optD: "挑選 S4 (大幅擴產)，其最大機會損失為 85",
+        bestStrat: "S3 (中度擴產)",
+        minRegret: 50
+      }
+    ];
+    const pick = matrices[Math.floor(Math.random() * matrices.length)];
     return {
       givenData: {
-        "高需求 D1 各方案獲利": "S1:50, S2:120, S3:180, S4:250",
-        "中需求 D2 各方案獲利": "S1:50, S2:80, S3:110, S4:90",
-        "低需求 D3 各方案獲利": "S1:50, S2:40, S3:10, S4:-30"
+        "高需求 D1 各方案獲利": `S1:${pick.d1.S1}, S2:${pick.d1.S2}, S3:${pick.d1.S3}, S4:${pick.d1.S4}`,
+        "中需求 D2 各方案獲利": `S1:${pick.d2.S1}, S2:${pick.d2.S2}, S3:${pick.d2.S3}, S4:${pick.d2.S4}`,
+        "低需求 D3 各方案獲利": `S1:${pick.d3.S1}, S2:${pick.d3.S2}, S3:${pick.d3.S3}, S4:${pick.d3.S4}`
       },
-      questionPrompt: `某製造商評估四種擴產策略（S1 不擴、S2 小擴、S3 中擴、S4 大擴），報酬矩陣如下：\n- S1: D1=50, D2=50, D3=50\n- S2: D1=120, D2=80, D3=40\n- S3: D1=180, D2=110, D3=10\n- S4: D1=250, D2=90, D3=-30\n請依「最大機會損失最小化準則（Minimax Regret）」挑選最佳策略。`,
+      questionPrompt: `某製造商評估四種擴產策略（S1 不擴、S2 小擴、S3 中擴、S4 大擴），報酬矩陣如下：\n- S1: D1=${pick.d1.S1}, D2=${pick.d2.S1}, D3=${pick.d3.S1}\n- S2: D1=${pick.d1.S2}, D2=${pick.d2.S2}, D3=${pick.d3.S2}\n- S3: D1=${pick.d1.S3}, D2=${pick.d2.S3}, D3=${pick.d3.S3}\n- S4: D1=${pick.d1.S4}, D2=${pick.d2.S4}, D3=${pick.d3.S4}\n請依「最大機會損失最小化準則（Minimax Regret）」挑選最佳策略。`,
       options: [
-        { key: "A", text: "挑選 S1，最大機會損失為 200", distractorFeedback: "S1 最大遺憾 200 過大" },
-        { key: "B", text: "挑選 S2，最大機會損失為 130", distractorFeedback: "70 < 130，S3 遺憾更小" },
-        { key: "C", text: "挑選 S3 (中度擴產)，其最大機會損失為 70", distractorFeedback: null },
-        { key: "D", text: "挑選 S4 (大幅擴產)，其最大機會損失為 80", distractorFeedback: "70 < 80，S3 遺憾更小" }
+        { key: "A", text: `挑選 S1，最大機會損失為 ${pick.regrets.S1}`, distractorFeedback: `S1 最大遺憾 ${pick.regrets.S1} 過大` },
+        { key: "B", text: `挑選 S2，最大機會損失為 ${pick.regrets.S2}`, distractorFeedback: `${pick.minRegret} < ${pick.regrets.S2}，遺憾非最小` },
+        { key: "C", text: pick.optC, distractorFeedback: pick.ansKey === "C" ? null : `${pick.minRegret} < ${pick.regrets.S3}，遺憾非最小` },
+        { key: "D", text: pick.optD, distractorFeedback: pick.ansKey === "D" ? null : `${pick.minRegret} < ${pick.regrets.S4}，遺憾非最小` }
       ],
-      correctAnswer: "C",
-      fullSolution: `【動態題解】\n1. 各需求行最大值：D1=250, D2=110, D3=50。\n2. 各策略最大後悔值：\n   - S1: max(200, 60, 0) = 200\n   - S2: max(130, 30, 10) = 130\n   - S3: max(70, 0, 40) = 70\n   - S4: max(0, 20, 80) = 80\n3. 最小最大後悔值為 70，對應挑選「S3 (中度擴產)」。`
+      correctAnswer: pick.ansKey,
+      fullSolution: `【動態題解】\n1. 各需求行最大值：D1=${pick.colMax.D1}, D2=${pick.colMax.D2}, D3=${pick.colMax.D3}。\n2. 各策略最大後悔值：\n   - S1: max(${pick.colMax.D1 - pick.d1.S1}, ${pick.colMax.D2 - pick.d2.S1}, ${pick.colMax.D3 - pick.d3.S1}) = ${pick.regrets.S1}\n   - S2: max(${pick.colMax.D1 - pick.d1.S2}, ${pick.colMax.D2 - pick.d2.S2}, ${pick.colMax.D3 - pick.d3.S2}) = ${pick.regrets.S2}\n   - S3: max(${pick.colMax.D1 - pick.d1.S3}, ${pick.colMax.D2 - pick.d2.S3}, ${pick.colMax.D3 - pick.d3.S3}) = ${pick.regrets.S3}\n   - S4: max(${pick.colMax.D1 - pick.d1.S4}, ${pick.colMax.D2 - pick.d2.S4}, ${pick.colMax.D3 - pick.d3.S4}) = ${pick.regrets.S4}\n3. 最小最大後悔值為 ${pick.minRegret}，對應挑選「${pick.bestStrat}」。`
     };
   },
 
@@ -2601,19 +2652,23 @@ const DYNAMIC_GENERATORS = {
   },
 
   "q-u6-l4-01": function(q) {
+    const scaleList = [1, 2, 3, 5, 10];
+    const s = scaleList[Math.floor(Math.random() * scaleList.length)];
+    const laplaceS1 = (38 * s / 3).toFixed(2);
+    const laplaceBest = (20 * s).toFixed(1);
     return {
       givenData: {
-        "CA1 獲利 (S1-S4)": "(13, 9, 24, 18)",
-        "CA2 獲利 (S1-S4)": "(14, 15, 21, 14)",
-        "CA3 獲利 (S1-S4)": "(11, 18, 15, 28)"
+        "CA1 獲利 (S1-S4)": `(${13*s}, ${9*s}, ${24*s}, ${18*s})`,
+        "CA2 獲利 (S1-S4)": `(${14*s}, ${15*s}, ${21*s}, ${14*s})`,
+        "CA3 獲利 (S1-S4)": `(${11*s}, ${18*s}, ${15*s}, ${28*s})`
       },
-      questionPrompt: `【作業 1107 題三實戰】四促銷策略（S1-S4）面對對手三行動（CA1-CA3）獲利矩陣：\n- CA1: (13, 9, 24, 18)\n- CA2: (14, 15, 21, 14)\n- CA3: (11, 18, 15, 28)\n請在紙筆上手算完整推導四大不確定決策準則之最優策略：\n(1) 樂觀準則 (Maximax)；\n(2) 悲觀準則 (Maximin)；\n(3) 機率均等準則 (Laplace)；\n(4) 最大機會損失最小化準則 (Minimax Regret)。`,
-      fullSolution: `【動態題解】\n1. 樂觀準則：全場最大獲利 28（選 S4）。\n2. 悲觀準則：各方案最差為 S1:11, S2:9, S3:15, S4:14，取最大 15（選 S3）。\n3. Laplace 準則：平均獲利 S1:12.67, S2:14, S3:20, S4:20（S3 與 S4 並列最佳 20.0 萬）。\n4. Minimax Regret：各策略最大後悔為 S1:17, S2:15, S3:13, S4:7，最小為 7（選 S4）。`
+      questionPrompt: `【作業 1107 題三實戰】四促銷策略（S1-S4）面對對手三行動（CA1-CA3）獲利矩陣：\n- CA1: (${13*s}, ${9*s}, ${24*s}, ${18*s})\n- CA2: (${14*s}, ${15*s}, ${21*s}, ${14*s})\n- CA3: (${11*s}, ${18*s}, ${15*s}, ${28*s})\n請在紙筆上手算完整推導四大不確定決策準則之最優策略：\n(1) 樂觀準則 (Maximax)；\n(2) 悲觀準則 (Maximin)；\n(3) 機率均等準則 (Laplace)；\n(4) 最大機會損失最小化準則 (Minimax Regret)。`,
+      fullSolution: `【動態題解】\n1. 樂觀準則：全場最大獲利 ${28*s}（選 S4）。\n2. 悲觀準則：各方案最差為 S1:${11*s}, S2:${9*s}, S3:${15*s}, S4:${14*s}，取最大 ${15*s}（選 S3）。\n3. Laplace 準則：平均獲利 S1:${laplaceS1}, S2:${14*s}, S3:${20*s}, S4:${20*s}（S3 與 S4 並列最佳 ${laplaceBest} 萬）。\n4. Minimax Regret：各策略最大後悔為 S1:${17*s}, S2:${15*s}, S3:${13*s}, S4:${7*s}，最小為 ${7*s}（選 S4）。`
     };
   },
 
   "q-u6-l4-02": function(q) {
-    const scaleList = [1, 2];
+    const scaleList = [1, 2, 3, 5, 10];
     const s = scaleList[Math.floor(Math.random() * scaleList.length)];
     const ans = 7.0 * s;
     return {

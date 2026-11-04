@@ -92,5 +92,6 @@ print("✓ Empirical Rule coffee example and explicit Q1=L25%, Q3=L75% verified 
 # Test 7: Verify app.js renders randomize button on self-check and mcq as well as numeric
 assert "originalQ.hasDynamicGenerator || originalQ.hasDynamic" in app_js, "app.js must check hasDynamic"
 assert "randomizeCardParam" in app_js, "randomizeCardParam must exist in app.js"
+assert "dynamicQuestionCache[qId] || originalQ" in app_js, "handleMcqSelect/submitNumericAnswer must check dynamicQuestionCache"
 
 print("\n🎉 ALL MATHEMATICAL GENERATORS AND EDGE CASES VERIFIED!")
