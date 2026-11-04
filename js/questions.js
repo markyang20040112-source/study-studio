@@ -485,37 +485,37 @@ const RAW_QUESTIONS = [
     unitName: "距離與相似度度量",
     level: 1,
     type: "mcq",
-    title: "距離與相似度互補關係及幾何距離度量",
-    questionPrompt: "關於特徵空間中兩樣本點的「相似度 (Similarity)」與「距離 (Distance)」，以及常見幾何距離度量之統計特性，下列敘述何者完全正確？",
+    title: "二元列聯表四格參數意涵與公式分母辨析",
+    questionPrompt: "在比對兩位顧客（或兩筆樣本）的 $N$ 個二元屬性時，依課堂板書 IMG_0131 所定義的二元列聯表（$a$ 為雙 0、$b$ 為 A無B有、$c$ 為 A有B無、$d$ 為雙 1），關於 SMC 與 Jaccard 指數的計算結構與分母意涵，下列敘述何者完全正確？",
     givenData: null,
     options: [
       {
         key: "A",
-        text: "相似度與距離呈現同向正比變動，兩者數值愈大代表樣本彼此愈接近",
-        distractorFeedback: "顛倒了！距離愈遠，相似度愈低，兩者呈反比關係。"
+        text: "SMC 與 Jaccard 指數的分母完全相同，皆為總屬性個數 $N = a + b + c + d$",
+        distractorFeedback: "觀念混淆！Jaccard 指數排除雙 0 ($a$)，其分母僅為 $b + c + d = N - a$（聯集），只有 SMC 的分母才是總數 $N$。"
       },
       {
         key: "B",
-        text: "距離與相似度具備互補反比關係，通常定義距離 $D = 1 - S$；歐氏距離即為明氏距離（Minkowski Distance）在 $k=2$ 時之特例",
+        text: "SMC 分母為全特徵數 $a+b+c+d$，而 Jaccard 分母為聯集數 $b+c+d$（即 $N-a$），分子僅保留共同具備之交集 $d$",
         distractorFeedback: null
       },
       {
         key: "C",
-        text: "曼哈頓距離（Manhattan Distance）計算的是兩點之間的直線直線幾何位移，為 $L_2$ 範數",
-        distractorFeedback: "直線幾何位移為歐氏距離 ($L_2$)；曼哈頓距離為格狀街區位移 ($L_1$)。"
+        text: "板書定義中，$a$ 代表雙方皆購買（雙 1），$d$ 代表雙方皆未購買（雙 0）",
+        distractorFeedback: "顛倒了！課堂板書 IMG_0131 明確規範：$a$ 是左上角 $(0,0)$ 雙無，$d$ 才是右下角 $(1,1)$ 雙有。"
       },
       {
         key: "D",
-        text: "只有在二元屬性資料中才能計算距離，連續數值型資料只能計算相似度",
-        distractorFeedback: "連續數值型資料有豐富的距離公式（歐氏、曼哈頓等），兩者皆可度量。"
+        text: "Jaccard 指數的分子包含 $a + d$，因此其計算數值永遠大於或等於 SMC",
+        distractorFeedback: "顛倒了！包含 $a + d$ 的是 SMC 分子；Jaccard 分子僅為 $d$。當存在雙 0 ($a > 0$) 時，Jaccard 數值通常小於 SMC。"
       }
     ],
     correctAnswer: "B",
-    formulaHint: "D = 1 - S, \\quad d_{Minkowski} = \\left( \\sum |X_i - Y_i|^k \\right)^{1/k}",
-    fullSolution: "【步驟一：距離與相似度哲學】距離與相似度是同一枚硬幣的兩面：距離愈近，相似度愈高。在標準化空間中，通常定義 $D = 1 - S$。\n【步驟二：明氏幾何族群】明氏距離公式中，當 $k=1$ 時為曼哈頓距離（絕對值和），當 $k=2$ 時為歐幾里得距離（平方和開根號），當 $k \\to \\infty$ 時為柴比雪夫最大值距離。\n【步驟三：結論】選項 (B) 正確揭示了兩者之互補定義與幾何關聯。",
+    formulaHint: "SMC = \\frac{a+d}{a+b+c+d}, \\quad Jaccard = \\frac{d}{b+c+d} = \\frac{d}{N-a}",
+    fullSolution: "【步驟一：板書列聯表結構】依課堂板書 IMG_0131：\n- $a$：雙方皆為 0（皆無 / 皆未買）\n- $b$：A 為 0、B 為 1（A無 B有）\n- $c$：A 為 1、B 為 0（A有 B無）\n- $d$：雙方皆為 1（皆有 / 皆購買）\n總維度數 $N = a + b + c + d$。\n【步驟二：公式結構對比】\n- SMC（簡單匹配係數）：$\\frac{a+d}{a+b+c+d}$，分母為全部維度 $N$。\n- Jaccard（雅卡爾指數）：$\\frac{d}{b+c+d} = \\frac{d}{N-a}$，分母排除 $a$（僅看至少一方具備的聯集），分子僅留 $d$（雙方皆具備之交集）。\n【步驟三：結論】選項 (B) 精確揭示了兩者分母與分子的本質差異。",
     cramSummary: {
-      conceptName: "距離與相似度互補關係",
-      keyTakeaway: "D = 1 - S！明氏距離 k=1 為曼哈頓，k=2 為歐氏距離。"
+      conceptName: "二元列聯表結構與公式分母",
+      keyTakeaway: "SMC 分母看全部 N=a+b+c+d，分子看雙0加雙1 (a+d)；Jaccard 分母排除 a (b+c+d)，分子只看雙1 (d)。"
     }
   },
   {
@@ -524,37 +524,37 @@ const RAW_QUESTIONS = [
     unitName: "距離與相似度度量",
     level: 1,
     type: "mcq",
-    title: "距離計算前標準化 (Z-Score) 的必要性",
-    questionPrompt: "資料科學家在進行客戶分群時，特徵欄位包含「客戶年齡（20~70 歲）」與「年收入（30 萬~300 萬元）」。若未對資料進行標準化直接計算歐氏距離，將會導致何種嚴重偏誤？",
+    title: "板書「拿掉 a」核心原則之商務應用時機",
+    questionPrompt: "課堂板書 IMG_0131 特別註記核心心法：「拿掉 $a$：當 $a$ 這筆資料不重要時，使用雅卡爾指數（Jaccard）！」依照此一出題與實務原則，下列哪一種情境因其屬性具備「高度稀疏性（Sparse）」且「雙 0（兩者皆無）不具實質資訊價值」，因而最必須「拿掉 $a$」採用 Jaccard 指數？",
     givenData: null,
     options: [
       {
         key: "A",
-        text: "年齡變數因數值較小，在平方和中會完全主宰距離計算",
-        distractorFeedback: "數值小者在差額平方中會被淹沒，無法主宰距離。"
-      },
-      {
-        key: "B",
-        text: "年收入因數值規模遠大於年齡，其差額平方將完全主導歐氏距離，使年齡特徵實質失去作用",
+        text: "串流影音平台分析十萬部電影目錄中，兩位訂閱用戶的觀看偏好重疊度",
         distractorFeedback: null
       },
       {
+        key: "B",
+        text: "人資部門統計全體員工的生理性別（男/女），進行性別比例對稱特徵分析",
+        distractorFeedback: "性別屬於對稱屬性（Symmetric Attribute），雙方皆男 (0,0) 與雙方皆女 (1,1) 同等重要，不應排除 $a$。"
+      },
+      {
         key: "C",
-        text: "歐氏距離計算結果會變成負數",
-        distractorFeedback: "歐氏距離平方和開根號恆為非負數，絕不可能為負。"
+        text: "晶圓半導體廠測試機台針對 100 項嚴苛缺陷代碼之檢測結果（「皆無缺陷」為良率判定的關鍵合格指標）",
+        distractorFeedback: "兩台機台同時「皆無缺陷 (0,0)」是判定一致合格的關鍵依據，$a$ 具備核心品管價值，不可拿掉。"
       },
       {
         key: "D",
-        text: "導致 Jaccard 相似係數無法計算",
-        distractorFeedback: "Jaccard 是用於二元屬性，本題為連續型變數，無直接因果關係。"
+        text: "評估兩名受測者在擲銅板實驗中「正面 (1)」與「反面 (0)」的結果吻合率",
+        distractorFeedback: "擲銅板正反機率各半且對稱，雙反面 (0,0) 與雙正面 (1,1) 權重相同，應採用 SMC 衡量整體符合度。"
       }
     ],
-    correctAnswer: "B",
-    formulaHint: "Z = \\frac{X - \\bar{X}}{S}, \\quad d(X,Y) = \\sqrt{\\sum (Z_{xi} - Z_{yi})^2}",
-    fullSolution: "【步驟一：尺度不均的衝擊】年齡差距最大 50 歲，平方僅 2,500；年收入差距可達 2,000,000 元，平方高達 $4 \\times 10^{12}$。未標準化前，年收入的平方差將徹底淹沒年齡差！\n【步驟二：標準化解方】必須透過 Z-Score ($Z = (X - \\bar{X}) / S$) 將各變數轉為平均為 0、標準差為 1 的無因次標準變數，各特徵方能公平參與距離權重。\n【步驟三：結論】選項 (B) 說明了特徵量綱主宰的致命盲點。",
+    correctAnswer: "A",
+    formulaHint: "Jaccard = \\frac{d}{b+c+d} \\implies \\text{拿掉 } a \\text{（當 } a \\text{ 資料不重要時）}",
+    fullSolution: "【步驟一：板書核心精神】板書 IMG_0131 特別強調：「拿掉 a：當 a 這筆資料不重要時，使用雅卡爾指數！」\n【步驟二：稀疏性與假性高相似度】在串流影音或電商推薦中，影片或商品數成千上萬（海量維度），任何兩位用戶共同「未看過/未購買」的項目 $a$ 高達數萬件。若將 $a$ 計入（使用 SMC），所有用戶間的相似度皆會被雙 0 灌水稀釋至 0.99 以上，失去鑑別力！因此必須「拿掉 $a$」，僅聚焦於至少一人看過的聯集中兩人的共同觀看交集（Jaccard）。\n【步驟三：對照對稱屬性】選項 (B)、(C)、(D) 的雙 0 皆具備對稱實質意義（性別、晶圓合格、硬幣反面），不應盲目拿掉 $a$。",
     cramSummary: {
-      conceptName: "連續距離標準化 (Z-Score)",
-      keyTakeaway: "單位規模不同必先標準化！否則大數值變數（如年薪）會完全抹殺小數值變數（如年齡）。"
+      conceptName: "板書「拿掉 a」使用時機",
+      keyTakeaway: "板書鐵律：資料高度稀疏、雙 0 不代表共同偏好（如海量商品、串流片單）時，必拿掉 a 用 Jaccard！"
     }
   },
   {
