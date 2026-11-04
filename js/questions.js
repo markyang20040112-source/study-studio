@@ -563,21 +563,22 @@ const RAW_QUESTIONS = [
     unitName: "距離與相似度度量",
     level: 2,
     type: "numeric",
-    title: "二維歐氏距離 (Euclidean Distance) 快算",
-    questionPrompt: "某電商平台將兩位受訪者的特徵向量定義為 $(X_1, X_2)$，其中顧客甲的向量為 $A = (3, 7)$，顧客乙的向量為 $B = (7, 10)$。請計算顧客甲與顧客乙之間的「歐氏距離 (Euclidean Distance)」數值。",
+    title: "二元特徵向量自主建表與 Jaccard 相似度計算",
+    questionPrompt: "某電商平台分析甲、乙兩位顧客在 10 項代表性商品類別中的購買紀錄（1 表有購買，0 表未購買）：\n- 顧客甲：`[1, 1, 1, 1, 1, 0, 0, 0, 0, 0]`\n- 顧客乙：`[1, 1, 1, 0, 0, 1, 0, 0, 0, 0]`\n請根據二元關聯列聯表規則，統計兩人之 $a, b, c, d$ 次數，並計算甲與乙之間的「雅卡爾指數（Jaccard Index）」。（四捨五入至小數點後兩位）",
     givenData: {
-      "顧客甲特徵向量 A": "(3, 7)",
-      "顧客乙特徵向量 B": "(7, 10)"
+      "總商品品項數 N": "10",
+      "顧客甲購買向量": "[1, 1, 1, 1, 1, 0, 0, 0, 0, 0]",
+      "顧客乙購買向量": "[1, 1, 1, 0, 0, 1, 0, 0, 0, 0]"
     },
     options: null,
-    correctAnswer: 5.0,
+    correctAnswer: 0.50,
     unitLabel: "",
-    tolerance: 0.05,
-    formulaHint: "d(A, B) = \\sqrt{(X_1 - Y_1)^2 + (X_2 - Y_2)^2}",
-    fullSolution: "【步驟一：代入歐氏距離公式】\n$d(A, B) = \\sqrt{(7 - 3)^2 + (10 - 7)^2}$。\n【步驟二：逐步計算差額平方】\n- 第一維度差額平方：$(7 - 3)^2 = 4^2 = 16$\n- 第二維度差額平方：$(10 - 7)^2 = 3^2 = 9$\n【步驟三：求和開根號】\n$d(A, B) = \\sqrt{16 + 9} = \\sqrt{25} = 5.0$。\n【步驟四：結論】甲與乙在特徵空間中的直線歐氏距離恰好為 5.0。",
+    tolerance: 0.02,
+    formulaHint: "Jaccard = \\frac{d}{b + c + d} = \\frac{d}{N - a}",
+    fullSolution: "【步驟一：逐項比對 10 項商品求列聯表】\n- 商品 1~3：甲=1 且 乙=1 $\\implies$ 雙 1 共同購買 $d = 3$\n- 商品 4~5：甲=1 且 乙=0 $\\implies$ 甲買乙未買 $c = 2$\n- 商品 6：甲=0 且 乙=1 $\\implies$ 乙買甲未買 $b = 1$\n- 商品 7~10：甲=0 且 乙=0 $\\implies$ 雙 0 皆未買 $a = 4$\n總商品數 $N = a + b + c + d = 4 + 1 + 2 + 3 = 10$。\n【步驟二：套用板書 Jaccard 公式】\n$$Jaccard = \\frac{d}{b + c + d} = \\frac{3}{1 + 2 + 3} = \\frac{3}{6} = 0.50$$\n【步驟三：商務意涵】\n依課堂板書 IMG_0131，排除兩者皆未購買之 4 項商品（拿掉 $a=4$），在兩人至少有一方購買之 6 項商品聯集中，有 3 項為共同購買，偏好重疊度為 0.50（50%）。",
     cramSummary: {
-      conceptName: "二維歐氏距離計算",
-      keyTakeaway: "d = sqrt[(x1 - y1)^2 + (x2 - y2)^2]。本題 sqrt(4^2 + 3^2) = sqrt(25) = 5.0。"
+      conceptName: "二元向量建表與 Jaccard 計算",
+      keyTakeaway: "先數出 d(雙1)、c(甲1乙0)、b(甲0乙1)、a(雙0)。Jaccard = d / (b + c + d)。本題 3 / (1 + 2 + 3) = 0.50。"
     }
   },
   {
@@ -586,22 +587,24 @@ const RAW_QUESTIONS = [
     unitName: "距離與相似度度量",
     level: 3,
     type: "numeric",
-    title: "二元雅卡爾距離 (Jaccard Distance) 計算",
-    questionPrompt: "比對甲、乙兩位使用者對 8 款手機 App 的下載紀錄（1 為下載，0 為未下載）：\n- 使用者甲：`[1, 1, 0, 0, 1, 1, 0, 0]`\n- 使用者乙：`[1, 0, 1, 0, 1, 0, 0, 0]`\n請先建構二元列聯表次數，再計算兩位使用者之間的「雅卡爾距離 (Jaccard Distance = 1 - Jaccard Index)」。（四捨五入至小數點後兩位）",
+    title: "電商購物籃雙 0 稀釋灌水效應量化計算（SMC 與 Jaccard 差額）",
+    questionPrompt: "某生鮮量販店分析兩位會員在 20 項特定檔期商品中的二元購買行為。統計結果顯示：\n- 兩人皆購買之品項數 $d = 3$\n- 甲購買但乙未購買之品項數 $c = 2$\n- 乙購買但甲未購買之品項數 $b = 1$\n- 兩人皆未購買之品項數 $a = 14$\n請分別計算兩位會員的簡單匹配係數（SMC）與雅卡爾指數（Jaccard），並計算**因計入雙 0 負匹配項目導致 SMC 比 Jaccard 虛高膨脹了多少**（即求差額 $SMC - Jaccard$）。（四捨五入至小數點後兩位）",
     givenData: {
-      "App 總數 N": "8",
-      "使用者甲紀錄": "[1, 1, 0, 0, 1, 1, 0, 0]",
-      "使用者乙紀錄": "[1, 0, 1, 0, 1, 0, 0, 0]"
+      "總商品數 N": "20",
+      "雙1共同購買數 d": "3",
+      "甲買乙未買數 c": "2",
+      "乙買甲未買數 b": "1",
+      "雙0皆未買數 a": "14"
     },
     options: null,
-    correctAnswer: 0.60,
+    correctAnswer: 0.35,
     unitLabel: "",
     tolerance: 0.02,
-    formulaHint: "D_{Jaccard} = 1 - \\frac{d}{b + c + d} = \\frac{b + c}{b + c + d}",
-    fullSolution: "【步驟一：逐項比對 8 款 App】\n- App 1: (1, 1) -> 雙1 (d)\n- App 2: (1, 0) -> 甲1乙0 (c)\n- App 3: (0, 1) -> 甲0乙1 (b)\n- App 4: (0, 0) -> 雙0 (a)\n- App 5: (1, 1) -> 雙1 (d)\n- App 6: (1, 0) -> 甲1乙0 (c)\n- App 7: (0, 0) -> 雙0 (a)\n- App 8: (0, 0) -> 雙0 (a)\n【步驟二：統計次數】\n- 雙 1 項目 $d = 2$ (App 1, 5)\n- 甲 1 乙 0 項目 $c = 2$ (App 2, 6)\n- 甲 0 乙 1 項目 $b = 1$ (App 3)\n- 雙 0 項目 $a = 3$ (App 4, 7, 8)\n【步驟三：計算 Jaccard 相似度與距離】\n- $Jaccard = \\frac{d}{b + c + d} = \\frac{2}{1 + 2 + 2} = \\frac{2}{5} = 0.40$。\n- 雅卡爾距離 $D_{Jaccard} = 1 - 0.40 = 0.60$（亦即 $\\frac{b + c}{b + c + d} = \\frac{3}{5} = 0.60$）。\n【步驟四：結論】兩人之 Jaccard 距離為 0.60。",
+    formulaHint: "SMC = \\frac{a + d}{N}, \\quad Jaccard = \\frac{d}{b + c + d}, \\quad \\Delta = SMC - Jaccard",
+    fullSolution: "【步驟一：計算簡單匹配係數 SMC（含雙 0）】\n$$SMC = \\frac{a + d}{a + b + c + d} = \\frac{14 + 3}{20} = \\frac{17}{20} = 0.85$$\n【步驟二：計算雅卡爾指數 Jaccard（板書拿掉 a）】\n$$Jaccard = \\frac{d}{b + c + d} = \\frac{3}{1 + 2 + 3} = \\frac{3}{6} = 0.50$$\n【步驟三：量化雙 0 稀釋灌水差距】\n$$\\text{虛高膨脹差額 } \\Delta = SMC - Jaccard = 0.85 - 0.50 = 0.35$$\n【步驟四：商務結論】\n若不依板書規範「拿掉 $a$」，大量未購買的商品（$a=14$）會使相似度從真正的 0.50 被灌水虛增 0.35 至 0.85，嚴重失真！",
     cramSummary: {
-      conceptName: "Jaccard 距離換算",
-      keyTakeaway: "D_Jaccard = 1 - Jaccard = (b + c) / (b + c + d)。本題 (1 + 2) / 5 = 0.60。"
+      conceptName: "雙 0 灌水差額量化 (SMC - Jaccard)",
+      keyTakeaway: "SMC = (a+d)/N = 0.85，Jaccard = d/(b+c+d) = 0.50。虛高灌水差額 = 0.85 - 0.50 = 0.35。"
     }
   },
   {
@@ -2037,29 +2040,39 @@ const DYNAMIC_GENERATORS = {
   },
 
   "q-u2-l2-03": function(q) {
-    const pyth = [
-      { dx: 3, dy: 4, dist: 5.0 },
-      { dx: 6, dy: 8, dist: 10.0 },
-      { dx: 5, dy: 12, dist: 13.0 },
-      { dx: 8, dy: 15, dist: 17.0 },
-      { dx: 9, dy: 12, dist: 15.0 },
-      { dx: 7, dy: 24, dist: 25.0 }
+    const variations = [
+      { d: 3, c: 2, b: 1, a: 4, ans: 0.50,
+        vecA: "[1, 1, 1, 1, 1, 0, 0, 0, 0, 0]",
+        vecB: "[1, 1, 1, 0, 0, 1, 0, 0, 0, 0]" },
+      { d: 2, c: 2, b: 1, a: 5, ans: 0.40,
+        vecA: "[1, 1, 1, 1, 0, 0, 0, 0, 0, 0]",
+        vecB: "[1, 1, 0, 0, 1, 0, 0, 0, 0, 0]" },
+      { d: 4, c: 2, b: 2, a: 2, ans: 0.50,
+        vecA: "[1, 1, 1, 1, 1, 1, 0, 0, 0, 0]",
+        vecB: "[1, 1, 1, 1, 0, 0, 1, 1, 0, 0]" },
+      { d: 3, c: 1, b: 1, a: 5, ans: 0.60,
+        vecA: "[1, 1, 1, 1, 0, 0, 0, 0, 0, 0]",
+        vecB: "[1, 1, 1, 0, 1, 0, 0, 0, 0, 0]" },
+      { d: 2, c: 3, b: 3, a: 2, ans: 0.25,
+        vecA: "[1, 1, 1, 1, 1, 0, 0, 0, 0, 0]",
+        vecB: "[1, 1, 0, 0, 0, 1, 1, 1, 0, 0]" },
+      { d: 1, c: 1, b: 2, a: 6, ans: 0.25,
+        vecA: "[1, 1, 0, 0, 0, 0, 0, 0, 0, 0]",
+        vecB: "[1, 0, 1, 1, 0, 0, 0, 0, 0, 0]" }
     ];
-    const pick = pyth[Math.floor(Math.random() * pyth.length)];
-    const x1 = Math.floor(Math.random() * 6) + 2;
-    const y1 = Math.floor(Math.random() * 6) + 2;
-    const x2 = x1 + pick.dx;
-    const y2 = y1 + pick.dy;
+    const pick = variations[Math.floor(Math.random() * variations.length)];
+    const denom = pick.b + pick.c + pick.d;
     return {
       givenData: {
-        "顧客甲向量 A": `(${x1}, ${y1})`,
-        "顧客乙向量 B": `(${x2}, ${y2})`
+        "總商品品項數 N": "10",
+        "顧客甲購買向量": pick.vecA,
+        "顧客乙購買向量": pick.vecB
       },
-      questionPrompt: `某電商平台將兩位受訪者的特徵向量定義為 $(X_1, X_2)$，其中顧客甲的向量為 $A = (${x1}, ${y1})$，顧客乙的向量為 $B = (${x2}, ${y2})$。請計算顧客甲與顧客乙之間的「歐氏距離 (Euclidean Distance)」。`,
-      correctAnswer: pick.dist,
+      questionPrompt: `某電商平台分析甲、乙兩位顧客在 10 項代表性商品類別中的購買紀錄（1 表有購買，0 表未購買）：\n- 顧客甲：\`${pick.vecA}\`\n- 顧客乙：\`${pick.vecB}\`\n請根據二元關聯列聯表規則，統計兩人之 $a, b, c, d$ 次數，並計算甲與乙之間的「雅卡爾指數（Jaccard Index）」。（四捨五入至小數點後兩位）`,
+      correctAnswer: pick.ans,
       unitLabel: "",
-      tolerance: 0.05,
-      fullSolution: `【動態題解】\n$$d(A, B) = \\sqrt{(${x2} - ${x1})^2 + (${y2} - ${y1})^2} = \\sqrt{${pick.dx}^2 + ${pick.dy}^2} = \\sqrt{${pick.dx*pick.dx + pick.dy*pick.dy}} = ${pick.dist}$$`
+      tolerance: 0.02,
+      fullSolution: `【動態題解】\n1. 逐項比對計數：\n   - 雙 1 共同購買 $d = ${pick.d}$\n   - 甲 1 乙 0 購買 $c = ${pick.c}$\n   - 甲 0 乙 1 購買 $b = ${pick.b}$\n   - 雙 0 皆未買 $a = ${pick.a}$\n2. 套用板書 Jaccard 公式：\n   $$Jaccard = \\frac{d}{b + c + d} = \\frac{${pick.d}}{${pick.b} + ${pick.c} + ${pick.d}} = \\frac{${pick.d}}{${denom}} = ${pick.ans}$$`
     };
   },
 
@@ -2083,26 +2096,28 @@ const DYNAMIC_GENERATORS = {
 
   "q-u2-l3-02": function(q) {
     const combos = [
-      { d: 2, b: 1, c: 2, j: 0.40, dist: 0.60 },
-      { d: 3, b: 2, c: 1, j: 0.50, dist: 0.50 },
-      { d: 1, b: 1, c: 2, j: 0.25, dist: 0.75 },
-      { d: 2, b: 3, c: 3, j: 0.25, dist: 0.75 }
+      { N: 20, d: 3, c: 2, b: 1, a: 14, smc: 0.85, j: 0.50, diff: 0.35 },
+      { N: 20, d: 2, c: 1, b: 1, a: 16, smc: 0.90, j: 0.50, diff: 0.40 },
+      { N: 25, d: 4, c: 3, b: 1, a: 17, smc: 0.84, j: 0.50, diff: 0.34 },
+      { N: 20, d: 3, c: 1, b: 1, a: 15, smc: 0.90, j: 0.60, diff: 0.30 },
+      { N: 20, d: 2, c: 2, b: 1, a: 15, smc: 0.85, j: 0.40, diff: 0.45 },
+      { N: 25, d: 3, c: 2, b: 1, a: 19, smc: 0.88, j: 0.50, diff: 0.38 }
     ];
     const pick = combos[Math.floor(Math.random() * combos.length)];
-    const a = 8 - (pick.b + pick.c + pick.d);
+    const jDenom = pick.b + pick.c + pick.d;
     return {
       givenData: {
-        "總 App 數 N": "8",
-        "雙0未下載數 a": `${a}`,
-        "甲0乙1下載數 b": `${pick.b}`,
-        "甲1乙0下載數 c": `${pick.c}`,
-        "雙1共同下載數 d": `${pick.d}`
+        "總商品數 N": `${pick.N}`,
+        "雙1共同購買數 d": `${pick.d}`,
+        "甲買乙未買數 c": `${pick.c}`,
+        "乙買甲未買數 b": `${pick.b}`,
+        "雙0皆未買數 a": `${pick.a}`
       },
-      questionPrompt: `比對兩位使用者對 8 款手機 App 的下載紀錄，統計顯示：兩人共同下載 $d = ${pick.d}$ 款、甲下載乙未下載 $c = ${pick.c}$ 款、乙下載甲未下載 $b = ${pick.b}$ 款、兩人皆未下載 $a = ${a}$ 款。請計算兩人之「雅卡爾距離 (Jaccard Distance)」。`,
-      correctAnswer: pick.dist,
+      questionPrompt: `某生鮮量販店分析兩位會員在 ${pick.N} 項特定檔期商品中的二元購買行為。統計結果顯示：\n- 兩人皆購買之品項數 $d = ${pick.d}$\n- 甲購買但乙未購買之品項數 $c = ${pick.c}$\n- 乙購買但甲未購買之品項數 $b = ${pick.b}$\n- 兩人皆未購買之品項數 $a = ${pick.a}$\n請分別計算兩位會員的簡單匹配係數（SMC）與雅卡爾指數（Jaccard），並計算**因計入雙 0 負匹配項目導致 SMC 比 Jaccard 虛高膨脹了多少**（即求差額 $SMC - Jaccard$）。（四捨五入至小數點後兩位）`,
+      correctAnswer: pick.diff,
       unitLabel: "",
       tolerance: 0.02,
-      fullSolution: `【動態題解】\n1. $$Jaccard = \\frac{d}{b + c + d} = \\frac{${pick.d}}{${pick.b + pick.c + pick.d}} = ${pick.j}$$\n2. 雅卡爾距離：\n   $$Dist_J = 1 - Jaccard = 1 - ${pick.j} = ${pick.dist}$$`
+      fullSolution: `【動態題解】\n1. 計算 SMC（含雙 0）：\n   $$SMC = \\frac{a + d}{N} = \\frac{${pick.a} + ${pick.d}}{${pick.N}} = \\frac{${pick.a + pick.d}}{${pick.N}} = ${pick.smc}$$\n2. 計算 Jaccard（排除雙 0）：\n   $$Jaccard = \\frac{d}{b + c + d} = \\frac{${pick.d}}{${jDenom}} = ${pick.j}$$\n3. 虛高灌水差額：\n   $$\\Delta = SMC - Jaccard = ${pick.smc} - ${pick.j} = ${pick.diff}$$`
     };
   },
 
