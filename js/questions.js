@@ -511,7 +511,7 @@ const RAW_QUESTIONS = [
       }
     ],
     correctAnswer: "B",
-    formulaHint: "D = 1 - S, \quad d_{Minkowski} = \left( \sum |X_i - Y_i|^k \right)^{1/k}",
+    formulaHint: "D = 1 - S, \\quad d_{Minkowski} = \\left( \\sum |X_i - Y_i|^k \\right)^{1/k}",
     fullSolution: "【步驟一：距離與相似度哲學】距離與相似度是同一枚硬幣的兩面：距離愈近，相似度愈高。在標準化空間中，通常定義 $D = 1 - S$。\n【步驟二：明氏幾何族群】明氏距離公式中，當 $k=1$ 時為曼哈頓距離（絕對值和），當 $k=2$ 時為歐幾里得距離（平方和開根號），當 $k \\to \\infty$ 時為柴比雪夫最大值距離。\n【步驟三：結論】選項 (B) 正確揭示了兩者之互補定義與幾何關聯。",
     cramSummary: {
       conceptName: "距離與相似度互補關係",
@@ -550,8 +550,8 @@ const RAW_QUESTIONS = [
       }
     ],
     correctAnswer: "B",
-    formulaHint: "Z = \frac{X - \bar{X}}{S}, \quad d(X,Y) = \sqrt{\sum (Z_{xi} - Z_{yi})^2}",
-    fullSolution: "【步驟一：尺度不均的衝擊】年齡差距最大 50 歲，平方僅 2,500；年收入差距可達 2,000,000 元，平方高達 $4 \times 10^{12}$。未標準化前，年收入的平方差將徹底淹沒年齡差！\n【步驟二：標準化解方】必須透過 Z-Score ($Z = (X - \bar{X}) / S$) 將各變數轉為平均為 0、標準差為 1 的無因次標準變數，各特徵方能公平參與距離權重。\n【步驟三：結論】選項 (B) 說明了特徵量綱主宰的致命盲點。",
+    formulaHint: "Z = \\frac{X - \\bar{X}}{S}, \\quad d(X,Y) = \\sqrt{\\sum (Z_{xi} - Z_{yi})^2}",
+    fullSolution: "【步驟一：尺度不均的衝擊】年齡差距最大 50 歲，平方僅 2,500；年收入差距可達 2,000,000 元，平方高達 $4 \\times 10^{12}$。未標準化前，年收入的平方差將徹底淹沒年齡差！\n【步驟二：標準化解方】必須透過 Z-Score ($Z = (X - \\bar{X}) / S$) 將各變數轉為平均為 0、標準差為 1 的無因次標準變數，各特徵方能公平參與距離權重。\n【步驟三：結論】選項 (B) 說明了特徵量綱主宰的致命盲點。",
     cramSummary: {
       conceptName: "連續距離標準化 (Z-Score)",
       keyTakeaway: "單位規模不同必先標準化！否則大數值變數（如年薪）會完全抹殺小數值變數（如年齡）。"
@@ -573,8 +573,8 @@ const RAW_QUESTIONS = [
     correctAnswer: 5.0,
     unitLabel: "",
     tolerance: 0.05,
-    formulaHint: "d(A, B) = \sqrt{(X_1 - Y_1)^2 + (X_2 - Y_2)^2}",
-    fullSolution: "【步驟一：代入歐氏距離公式】\n$d(A, B) = \sqrt{(7 - 3)^2 + (10 - 7)^2}$。\n【步驟二：逐步計算差額平方】\n- 第一維度差額平方：$(7 - 3)^2 = 4^2 = 16$\n- 第二維度差額平方：$(10 - 7)^2 = 3^2 = 9$\n【步驟三：求和開根號】\n$d(A, B) = \sqrt{16 + 9} = \sqrt{25} = 5.0$。\n【步驟四：結論】甲與乙在特徵空間中的直線歐氏距離恰好為 5.0。",
+    formulaHint: "d(A, B) = \\sqrt{(X_1 - Y_1)^2 + (X_2 - Y_2)^2}",
+    fullSolution: "【步驟一：代入歐氏距離公式】\n$d(A, B) = \\sqrt{(7 - 3)^2 + (10 - 7)^2}$。\n【步驟二：逐步計算差額平方】\n- 第一維度差額平方：$(7 - 3)^2 = 4^2 = 16$\n- 第二維度差額平方：$(10 - 7)^2 = 3^2 = 9$\n【步驟三：求和開根號】\n$d(A, B) = \\sqrt{16 + 9} = \\sqrt{25} = 5.0$。\n【步驟四：結論】甲與乙在特徵空間中的直線歐氏距離恰好為 5.0。",
     cramSummary: {
       conceptName: "二維歐氏距離計算",
       keyTakeaway: "d = sqrt[(x1 - y1)^2 + (x2 - y2)^2]。本題 sqrt(4^2 + 3^2) = sqrt(25) = 5.0。"
@@ -597,8 +597,8 @@ const RAW_QUESTIONS = [
     correctAnswer: 0.60,
     unitLabel: "",
     tolerance: 0.02,
-    formulaHint: "D_{Jaccard} = 1 - \frac{d}{b + c + d} = \frac{b + c}{b + c + d}",
-    fullSolution: "【步驟一：逐項比對 8 款 App】\n- App 1: (1, 1) -> 雙1 (d)\n- App 2: (1, 0) -> 甲1乙0 (c)\n- App 3: (0, 1) -> 甲0乙1 (b)\n- App 4: (0, 0) -> 雙0 (a)\n- App 5: (1, 1) -> 雙1 (d)\n- App 6: (1, 0) -> 甲1乙0 (c)\n- App 7: (0, 0) -> 雙0 (a)\n- App 8: (0, 0) -> 雙0 (a)\n【步驟二：統計次數】\n- 雙 1 項目 $d = 2$ (App 1, 5)\n- 甲 1 乙 0 項目 $c = 2$ (App 2, 6)\n- 甲 0 乙 1 項目 $b = 1$ (App 3)\n- 雙 0 項目 $a = 3$ (App 4, 7, 8)\n【步驟三：計算 Jaccard 相似度與距離】\n- $Jaccard = \frac{d}{b + c + d} = \frac{2}{1 + 2 + 2} = \frac{2}{5} = 0.40$。\n- 雅卡爾距離 $D_{Jaccard} = 1 - 0.40 = 0.60$（亦即 $\frac{b + c}{b + c + d} = \frac{3}{5} = 0.60$）。\n【步驟四：結論】兩人之 Jaccard 距離為 0.60。",
+    formulaHint: "D_{Jaccard} = 1 - \\frac{d}{b + c + d} = \\frac{b + c}{b + c + d}",
+    fullSolution: "【步驟一：逐項比對 8 款 App】\n- App 1: (1, 1) -> 雙1 (d)\n- App 2: (1, 0) -> 甲1乙0 (c)\n- App 3: (0, 1) -> 甲0乙1 (b)\n- App 4: (0, 0) -> 雙0 (a)\n- App 5: (1, 1) -> 雙1 (d)\n- App 6: (1, 0) -> 甲1乙0 (c)\n- App 7: (0, 0) -> 雙0 (a)\n- App 8: (0, 0) -> 雙0 (a)\n【步驟二：統計次數】\n- 雙 1 項目 $d = 2$ (App 1, 5)\n- 甲 1 乙 0 項目 $c = 2$ (App 2, 6)\n- 甲 0 乙 1 項目 $b = 1$ (App 3)\n- 雙 0 項目 $a = 3$ (App 4, 7, 8)\n【步驟三：計算 Jaccard 相似度與距離】\n- $Jaccard = \\frac{d}{b + c + d} = \\frac{2}{1 + 2 + 2} = \\frac{2}{5} = 0.40$。\n- 雅卡爾距離 $D_{Jaccard} = 1 - 0.40 = 0.60$（亦即 $\\frac{b + c}{b + c + d} = \\frac{3}{5} = 0.60$）。\n【步驟四：結論】兩人之 Jaccard 距離為 0.60。",
     cramSummary: {
       conceptName: "Jaccard 距離換算",
       keyTakeaway: "D_Jaccard = 1 - Jaccard = (b + c) / (b + c + d)。本題 (1 + 2) / 5 = 0.60。"
@@ -623,8 +623,8 @@ const RAW_QUESTIONS = [
     correctAnswer: 0.97,
     unitLabel: "",
     tolerance: 0.01,
-    formulaHint: "SMC' = \frac{a' + d}{N'} = \frac{94 + 3}{100}, \quad Jaccard' = \frac{d}{b + c + d} = \frac{3}{6}",
-    fullSolution: "【步驟一：回顧擴充前的數據】\n- 擴充前總數 $N = 10$。\n- 擴充前 $SMC = (4 + 3) / 10 = 0.70$。\n- 擴充前 $Jaccard = 3 / (1 + 2 + 3) = 3 / 6 = 0.50$。\n\n【步驟二：計算擴充 90 部未看電影後的新指標】\n- 新總數 $N' = 94 + 1 + 2 + 3 = 100$。\n- 新 $SMC' = \frac{a' + d}{N'} = \frac{94 + 3}{100} = \frac{97}{100} = 0.97$。\n- 新 $Jaccard' = \frac{d}{b + c + d} = \frac{3}{1 + 2 + 3} = \frac{3}{6} = 0.50$。\n\n【步驟三：深度商務反思】\n兩位影迷本質上的觀影重疊度根本毫無改變（依然是 3 部共同、3 部差異）。但 SMC 卻因為海量雙 0 老電影的湧入，相似度從 0.70 暴衝灌水至 0.97（97% 一致！），完全喪失了演算法分群的敏感度！而 Jaccard 堅決排除 $a$，依然穩健定格在 0.50。這正是板書強調在稀疏資料中必用 Jaccard 的經典實證！",
+    formulaHint: "SMC' = \\frac{a' + d}{N'} = \\frac{94 + 3}{100}, \\quad Jaccard' = \\frac{d}{b + c + d} = \\frac{3}{6}",
+    fullSolution: "【步驟一：回顧擴充前的數據】\n- 擴充前總數 $N = 10$。\n- 擴充前 $SMC = (4 + 3) / 10 = 0.70$。\n- 擴充前 $Jaccard = 3 / (1 + 2 + 3) = 3 / 6 = 0.50$。\n\n【步驟二：計算擴充 90 部未看電影後的新指標】\n- 新總數 $N' = 94 + 1 + 2 + 3 = 100$。\n- 新 $SMC' = \\frac{a' + d}{N'} = \\frac{94 + 3}{100} = \\frac{97}{100} = 0.97$。\n- 新 $Jaccard' = \\frac{d}{b + c + d} = \\frac{3}{1 + 2 + 3} = \\frac{3}{6} = 0.50$。\n\n【步驟三：深度商務反思】\n兩位影迷本質上的觀影重疊度根本毫無改變（依然是 3 部共同、3 部差異）。但 SMC 卻因為海量雙 0 老電影的湧入，相似度從 0.70 暴衝灌水至 0.97（97% 一致！），完全喪失了演算法分群的敏感度！而 Jaccard 堅決排除 $a$，依然穩健定格在 0.50。這正是板書強調在稀疏資料中必用 Jaccard 的經典實證！",
     cramSummary: {
       conceptName: "雙 0 稀釋膨脹實證",
       keyTakeaway: "新增 90 筆無關雙 0，SMC 被灌水至 97/100 = 0.97；而 Jaccard 排除 a 依然定格 0.50。"
@@ -770,17 +770,17 @@ const RAW_QUESTIONS = [
     level: 1,
     type: "mcq",
     title: "機率加法法則與互斥獨立真理",
-    questionPrompt: "某連鎖量販店統計顧客購買行為，已知顧客購買牛奶的機率為 $P(M) = 0.60$，購買麵包的機率為 $P(B) = 0.50$，同時購買牛奶與麵包的機率為 $P(M \cap B) = 0.30$。下列敘述何者完全正確？",
+    questionPrompt: "某連鎖量販店統計顧客購買行為，已知顧客購買牛奶的機率為 $P(M) = 0.60$，購買麵包的機率為 $P(B) = 0.50$，同時購買牛奶與麵包的機率為 $P(M \\cap B) = 0.30$。下列敘述何者完全正確？",
     givenData: null,
     options: [
       {
         key: "A",
-        text: "顧客至少購買牛奶或麵包其中一種的機率為 $P(M \cup B) = 0.80$",
+        text: "顧客至少購買牛奶或麵包其中一種的機率為 $P(M \\cup B) = 0.80$",
         distractorFeedback: null
       },
       {
         key: "B",
-        text: "因為 $P(M \cap B) > 0$，代表購買牛奶與購買麵包彼此互斥",
+        text: "因為 $P(M \\cap B) > 0$，代表購買牛奶與購買麵包彼此互斥",
         distractorFeedback: "互斥是指交集機率為 0！交集大於 0 表示非互斥。"
       },
       {
@@ -795,8 +795,8 @@ const RAW_QUESTIONS = [
       }
     ],
     correctAnswer: "A",
-    formulaHint: "P(M \cup B) = P(M) + P(B) - P(M \cap B)",
-    fullSolution: "【步驟一：加法法則求聯集】\n$P(M \cup B) = P(M) + P(B) - P(M \cap B) = 0.60 + 0.50 - 0.30 = 0.80$。故 (A) 正確！\n【步驟二：互斥檢定】\n因為 $P(M \cap B) = 0.30 \ne 0$，兩事件非互斥。故 (B) 錯。\n【步驟三：條件機率檢定】\n$P(M|B) = \frac{P(M \cap B)}{P(B)} = \frac{0.30}{0.50} = 0.60$。故 (C) 錯。\n【步驟四：狄摩根餘事檢定】\n$P(M^c \cap B^c) = 1 - P(M \cup B) = 1 - 0.80 = 0.20$。故 (D) 錯。",
+    formulaHint: "P(M \\cup B) = P(M) + P(B) - P(M \\cap B)",
+    fullSolution: "【步驟一：加法法則求聯集】\n$P(M \\cup B) = P(M) + P(B) - P(M \\cap B) = 0.60 + 0.50 - 0.30 = 0.80$。故 (A) 正確！\n【步驟二：互斥檢定】\n因為 $P(M \\cap B) = 0.30 \ne 0$，兩事件非互斥。故 (B) 錯。\n【步驟三：條件機率檢定】\n$P(M|B) = \\frac{P(M \\cap B)}{P(B)} = \\frac{0.30}{0.50} = 0.60$。故 (C) 錯。\n【步驟四：狄摩根餘事檢定】\n$P(M^c \\cap B^c) = 1 - P(M \\cup B) = 1 - 0.80 = 0.20$。故 (D) 錯。",
     cramSummary: {
       conceptName: "機率加法定理",
       keyTakeaway: "P(A ∪ B) = P(A) + P(B) - P(A ∩ B)！本題 0.60 + 0.50 - 0.30 = 0.80。"
@@ -809,7 +809,7 @@ const RAW_QUESTIONS = [
     level: 2,
     type: "numeric",
     title: "聯集機率與餘事機率手算",
-    questionPrompt: "某軟體公司統計內部伺服器運行日誌，發現某日網路連線異常的機率為 $P(A) = 0.35$，資料庫讀寫逾時的機率為 $P(B) = 0.25$。兩者同時發生的機率為 $P(A \cap B) = 0.10$。請計算該日「系統完全正常（即網路與資料庫皆未發生異常）」的機率 $P(A^c \cap B^c)$（以小數表示，如 0.50）。",
+    questionPrompt: "某軟體公司統計內部伺服器運行日誌，發現某日網路連線異常的機率為 $P(A) = 0.35$，資料庫讀寫逾時的機率為 $P(B) = 0.25$。兩者同時發生的機率為 $P(A \\cap B) = 0.10$。請計算該日「系統完全正常（即網路與資料庫皆未發生異常）」的機率 $P(A^c \\cap B^c)$（以小數表示，如 0.50）。",
     givenData: {
       "網路異常機率 P(A)": "0.35",
       "資料庫逾時機率 P(B)": "0.25",
@@ -819,8 +819,8 @@ const RAW_QUESTIONS = [
     correctAnswer: 0.50,
     unitLabel: "",
     tolerance: 0.02,
-    formulaHint: "P(A^c \cap B^c) = 1 - P(A \cup B) = 1 - [P(A) + P(B) - P(A \cap B)]",
-    fullSolution: "【步驟一：求至少有一項異常之聯集機率】\n$P(A \cup B) = P(A) + P(B) - P(A \cap B) = 0.35 + 0.25 - 0.10 = 0.50$。\n【步驟二：求完全正常（餘事）之機率】\n根據狄摩根定律：$P(A^c \cap B^c) = P((A \cup B)^c) = 1 - P(A \cup B) = 1 - 0.50 = 0.50$。\n【步驟三：結論】該日系統完全正常之機率恰好為 0.50 (50%)。",
+    formulaHint: "P(A^c \\cap B^c) = 1 - P(A \\cup B) = 1 - [P(A) + P(B) - P(A \\cap B)]",
+    fullSolution: "【步驟一：求至少有一項異常之聯集機率】\n$P(A \\cup B) = P(A) + P(B) - P(A \\cap B) = 0.35 + 0.25 - 0.10 = 0.50$。\n【步驟二：求完全正常（餘事）之機率】\n根據狄摩根定律：$P(A^c \\cap B^c) = P((A \\cup B)^c) = 1 - P(A \\cup B) = 1 - 0.50 = 0.50$。\n【步驟三：結論】該日系統完全正常之機率恰好為 0.50 (50%)。",
     cramSummary: {
       conceptName: "餘事機率與聯集",
       keyTakeaway: "完全正常 = 1 - 至少一項異常 = 1 - (0.35 + 0.25 - 0.10) = 0.50。"
@@ -842,8 +842,8 @@ const RAW_QUESTIONS = [
     correctAnswer: 4.0,
     unitLabel: "人",
     tolerance: 0.05,
-    formulaHint: "\sigma = \sqrt{Var(X)} = \sqrt{n p (1 - p)}",
-    fullSolution: "【步驟一：二項分配公式】\n隨機變數 $X \sim Binomial(n = 100, p = 0.20)$。\n- 期望值：$E(X) = n p = 100 \times 0.20 = 20$ 人。\n- 變異數：$Var(X) = n p (1 - p) = 100 \times 0.20 \times (1 - 0.20) = 20 \times 0.80 = 16.0$。\n【步驟二：求標準差】\n標準差 $\sigma = \sqrt{Var(X)} = \sqrt{16} = 4.0$ 人。\n【步驟三：結論】下單人數的標準差為 4.0 人。",
+    formulaHint: "\\sigma = \\sqrt{Var(X)} = \\sqrt{n p (1 - p)}",
+    fullSolution: "【步驟一：二項分配公式】\n隨機變數 $X \\sim Binomial(n = 100, p = 0.20)$。\n- 期望值：$E(X) = n p = 100 \\times 0.20 = 20$ 人。\n- 變異數：$Var(X) = n p (1 - p) = 100 \\times 0.20 \\times (1 - 0.20) = 20 \\times 0.80 = 16.0$。\n【步驟二：求標準差】\n標準差 $\\sigma = \\sqrt{Var(X)} = \\sqrt{16} = 4.0$ 人。\n【步驟三：結論】下單人數的標準差為 4.0 人。",
     cramSummary: {
       conceptName: "二項分配標準差",
       keyTakeaway: "Var(X) = np(1-p) = 100*0.2*0.8 = 16。標準差開根號 sqrt(16) = 4.0。"
@@ -866,8 +866,8 @@ const RAW_QUESTIONS = [
     correctAnswer: 34.48,
     unitLabel: "%",
     tolerance: 0.1,
-    formulaHint: "P(C|D) = \frac{P(D|C)P(C)}{P(D|A)P(A) + P(D|B)P(B) + P(D|C)P(C)}",
-    fullSolution: "【步驟一：全機率分解各產線之不良品貢獻度】\n- 產線 A 聯合機率：$P(D \cap A) = P(D|A)P(A) = 0.02 \times 0.50 = 0.010$\n- 產線 B 聯合機率：$P(D \cap B) = P(D|B)P(B) = 0.03 \times 0.30 = 0.009$\n- 產線 C 聯合機率：$P(D \cap C) = P(D|C)P(C) = 0.05 \times 0.20 = 0.010$\n【步驟二：求全廠總不良品機率 (分母)】\n$P(D) = 0.010 + 0.009 + 0.010 = 0.029$ (2.9%)。\n【步驟三：貝氏定理求 C 產線後驗機率】\n$P(C|D) = \frac{P(D \cap C)}{P(D)} = \frac{0.010}{0.029} = \frac{10}{29} \approx 0.344827 = 34.48\\%$。\n【步驟四：商務結論】C 產線雖然產能僅佔 20%，但因不良率高達 5%，一旦抽驗出瑕疵，有 34.48% 的後驗機率歸咎於 C 產線！",
+    formulaHint: "P(C|D) = \\frac{P(D|C)P(C)}{P(D|A)P(A) + P(D|B)P(B) + P(D|C)P(C)}",
+    fullSolution: "【步驟一：全機率分解各產線之不良品貢獻度】\n- 產線 A 聯合機率：$P(D \\cap A) = P(D|A)P(A) = 0.02 \\times 0.50 = 0.010$\n- 產線 B 聯合機率：$P(D \\cap B) = P(D|B)P(B) = 0.03 \\times 0.30 = 0.009$\n- 產線 C 聯合機率：$P(D \\cap C) = P(D|C)P(C) = 0.05 \\times 0.20 = 0.010$\n【步驟二：求全廠總不良品機率 (分母)】\n$P(D) = 0.010 + 0.009 + 0.010 = 0.029$ (2.9%)。\n【步驟三：貝氏定理求 C 產線後驗機率】\n$P(C|D) = \\frac{P(D \\cap C)}{P(D)} = \\frac{0.010}{0.029} = \\frac{10}{29} \\approx 0.344827 = 34.48\\%$。\n【步驟四：商務結論】C 產線雖然產能僅佔 20%，但因不良率高達 5%，一旦抽驗出瑕疵，有 34.48% 的後驗機率歸咎於 C 產線！",
     cramSummary: {
       conceptName: "三分割貝氏更新",
       keyTakeaway: "分母 P(D) = 0.010 + 0.009 + 0.010 = 0.029。C 後驗機率 0.010/0.029 = 34.48%。"
@@ -891,8 +891,8 @@ const RAW_QUESTIONS = [
     correctAnswer: 8.68,
     unitLabel: "%",
     tolerance: 0.1,
-    formulaHint: "P(Fraud|Alert) = \frac{P(Alert|Fraud)P(Fraud)}{P(Alert|Fraud)P(Fraud) + P(Alert|Legit)P(Legit)}",
-    fullSolution: "【步驟一：計算真警報與假警報聯合機率】\n- 真警報聯合機率：$P(Alert \cap Fraud) = 0.95 \times 0.001 = 0.00095$\n- 假警報（正常被誤判）聯合機率：$P(Alert \cap Legit) = 0.01 \times 0.999 = 0.00999$\n【步驟二：全機率求總警報率 (分母)】\n$P(Alert) = 0.00095 + 0.00999 = 0.01094$。\n【步驟三：貝氏定理求真實洗錢機率】\n$P(Fraud|Alert) = \frac{0.00095}{0.01094} \approx 0.086837 = 8.68\\%$。\n【步驟四：管理反思（偽陽性悖論）】\n即便 AI 辨識準確率高達 95%、誤報率僅 1%，但因為罕見事件的母體基底太小（0.1%），絕大多數的警報其實都是正常交易誤報！收到警報後真實為洗錢的機率不到 9%！這就是風控領域知名的「偽陽性悖論」。",
+    formulaHint: "P(Fraud|Alert) = \\frac{P(Alert|Fraud)P(Fraud)}{P(Alert|Fraud)P(Fraud) + P(Alert|Legit)P(Legit)}",
+    fullSolution: "【步驟一：計算真警報與假警報聯合機率】\n- 真警報聯合機率：$P(Alert \\cap Fraud) = 0.95 \\times 0.001 = 0.00095$\n- 假警報（正常被誤判）聯合機率：$P(Alert \\cap Legit) = 0.01 \\times 0.999 = 0.00999$\n【步驟二：全機率求總警報率 (分母)】\n$P(Alert) = 0.00095 + 0.00999 = 0.01094$。\n【步驟三：貝氏定理求真實洗錢機率】\n$P(Fraud|Alert) = \\frac{0.00095}{0.01094} \\approx 0.086837 = 8.68\\%$。\n【步驟四：管理反思（偽陽性悖論）】\n即便 AI 辨識準確率高達 95%、誤報率僅 1%，但因為罕見事件的母體基底太小（0.1%），絕大多數的警報其實都是正常交易誤報！收到警報後真實為洗錢的機率不到 9%！這就是風控領域知名的「偽陽性悖論」。",
     cramSummary: {
       conceptName: "偽陽性悖論貝氏計算",
       keyTakeaway: "分子真洗錢 0.00095，分母總警報 0.01094。後驗機率僅 8.68%！不可迷信高準確率。"
@@ -1059,8 +1059,8 @@ const RAW_QUESTIONS = [
       }
     ],
     correctAnswer: "A",
-    formulaHint: "Var(e_i) = \sigma^2 \quad (\text{Homoscedasticity})",
-    fullSolution: "【步驟一：LINE 四大假定】\nOLS 迴歸殘差必須滿足：\n1. Linearity（線性關係）\n2. Independence（獨立性，無自我相關）\n3. Normality（常態分配）\n4. Equal Variance（同分散性 / 同值變異，即誤差項變異數固定為常數 $\sigma^2$）。\n【步驟二：圖形判讀】\n當殘差散佈圖呈現漏斗形（隨預測值增大而上下發散），表示誤差變異數隨尺度改變，此現象稱為「異質變異（Heteroscedasticity）」，會使係數標準誤失真，導致 t 檢定與 p-value 不可信！",
+    formulaHint: "Var(e_i) = \\sigma^2 \\quad (\\text{Homoscedasticity})",
+    fullSolution: "【步驟一：LINE 四大假定】\nOLS 迴歸殘差必須滿足：\n1. Linearity（線性關係）\n2. Independence（獨立性，無自我相關）\n3. Normality（常態分配）\n4. Equal Variance（同分散性 / 同值變異，即誤差項變異數固定為常數 $\\sigma^2$）。\n【步驟二：圖形判讀】\n當殘差散佈圖呈現漏斗形（隨預測值增大而上下發散），表示誤差變異數隨尺度改變，此現象稱為「異質變異（Heteroscedasticity）」，會使係數標準誤失真，導致 t 檢定與 p-value 不可信！",
     cramSummary: {
       conceptName: "LINE 假定與異質變異",
       keyTakeaway: "殘差漏斗形 = 違反同值變異（異質變異）！理想殘差應均勻隨機散佈於 0 軸兩側。"
@@ -1084,8 +1084,8 @@ const RAW_QUESTIONS = [
     correctAnswer: 20.0,
     unitLabel: "萬元",
     tolerance: 0.05,
-    formulaHint: "b_1 = \frac{SS_{xy}}{SS_{xx}}, \quad b_0 = \bar{Y} - b_1 \bar{X}",
-    fullSolution: "【步驟一：計算斜率 b1】\n$b_1 = \frac{SS_{xy}}{SS_{xx}} = \frac{120}{40} = 3.0$。\n（經濟意涵：廣告支出每增加 1 萬元，預期營收平均增加 3.0 萬元）。\n【步驟二：計算截距 b0（利用迴歸線必過重心 (X̄, Ȳ)】\n$b_0 = \bar{Y} - b_1 \bar{X} = 50 - 3.0 \times 10 = 50 - 30 = 20.0$ 萬元。\n【步驟三：完整模型方程式】\n$\hat{Y} = 20.0 + 3.0 X$。截距項為 20.0 萬元。",
+    formulaHint: "b_1 = \\frac{SS_{xy}}{SS_{xx}}, \\quad b_0 = \\bar{Y} - b_1 \\bar{X}",
+    fullSolution: "【步驟一：計算斜率 b1】\n$b_1 = \\frac{SS_{xy}}{SS_{xx}} = \\frac{120}{40} = 3.0$。\n（經濟意涵：廣告支出每增加 1 萬元，預期營收平均增加 3.0 萬元）。\n【步驟二：計算截距 b0（利用迴歸線必過重心 (X̄, Ȳ)】\n$b_0 = \\bar{Y} - b_1 \\bar{X} = 50 - 3.0 \\times 10 = 50 - 30 = 20.0$ 萬元。\n【步驟三：完整模型方程式】\n$\\hat{Y} = 20.0 + 3.0 X$。截距項為 20.0 萬元。",
     cramSummary: {
       conceptName: "OLS 斜率與截距公式",
       keyTakeaway: "b1 = SSxy / SSxx = 120/40 = 3.0。b0 = Ȳ - b1*X̄ = 50 - 3*10 = 20.0。"
@@ -1108,8 +1108,8 @@ const RAW_QUESTIONS = [
     correctAnswer: 0.75,
     unitLabel: "",
     tolerance: 0.02,
-    formulaHint: "R^2 = 1 - \frac{SSE}{SST} = \frac{SSR}{SST}",
-    fullSolution: "【步驟一：變異量分解恆等式】\n$SST = SSR + SSE \implies SSR = SST - SSE = 500 - 125 = 375$。\n【步驟二：計算判定係數 R²】\n$R^2 = \frac{SSR}{SST} = \frac{375}{500} = 0.75$（或直接以 $1 - \frac{SSE}{SST} = 1 - \frac{125}{500} = 1 - 0.25 = 0.75$）。\n【步驟三：商務結論】\n該迴歸模型成功解釋了專利產出 $75\\%$ 的總變異，擬合度優良。",
+    formulaHint: "R^2 = 1 - \\frac{SSE}{SST} = \\frac{SSR}{SST}",
+    fullSolution: "【步驟一：變異量分解恆等式】\n$SST = SSR + SSE \implies SSR = SST - SSE = 500 - 125 = 375$。\n【步驟二：計算判定係數 R²】\n$R^2 = \\frac{SSR}{SST} = \\frac{375}{500} = 0.75$（或直接以 $1 - \\frac{SSE}{SST} = 1 - \\frac{125}{500} = 1 - 0.25 = 0.75$）。\n【步驟三：商務結論】\n該迴歸模型成功解釋了專利產出 $75\\%$ 的總變異，擬合度優良。",
     cramSummary: {
       conceptName: "R² 變異分解計算法",
       keyTakeaway: "R² = 1 - SSE/SST = 1 - 125/500 = 0.75。SSR = 500 - 125 = 375。"
@@ -1131,8 +1131,8 @@ const RAW_QUESTIONS = [
     correctAnswer: 10.0,
     unitLabel: "萬元",
     tolerance: 0.05,
-    formulaHint: "\frac{\partial \hat{Y}}{\partial X_1} = b_1 + b_3 X_2",
-    fullSolution: "【步驟一：求 X1 對 Y 的邊際效應導數】\n$\frac{\partial \hat{Y}}{\partial X_1} = b_1 + b_3 X_2 = 4 + 1.5 X_2$。\n【步驟二：代入會員等級 X2 = 4】\n邊際斜率 $= 4 + 1.5 \times 4 = 4 + 6.0 = 10.0$。\n【步驟三：統計與商務意涵】\n交互作用項係數 $1.5 > 0$ 代表正向加乘效應。當會員等級越高時，折價券激勵買氣的邊際效益越大！在等級 4 的高階會員身上，每發 1 單位折價券能創造 10.0 單位的營收增幅。",
+    formulaHint: "\\frac{\\partial \\hat{Y}}{\\partial X_1} = b_1 + b_3 X_2",
+    fullSolution: "【步驟一：求 X1 對 Y 的邊際效應導數】\n$\\frac{\\partial \\hat{Y}}{\\partial X_1} = b_1 + b_3 X_2 = 4 + 1.5 X_2$。\n【步驟二：代入會員等級 X2 = 4】\n邊際斜率 $= 4 + 1.5 \\times 4 = 4 + 6.0 = 10.0$。\n【步驟三：統計與商務意涵】\n交互作用項係數 $1.5 > 0$ 代表正向加乘效應。當會員等級越高時，折價券激勵買氣的邊際效益越大！在等級 4 的高階會員身上，每發 1 單位折價券能創造 10.0 單位的營收增幅。",
     cramSummary: {
       conceptName: "交互作用邊際斜率求導",
       keyTakeaway: "邊際效應 = b1 + b3*X2。本題 4 + 1.5*4 = 10.0。斜率隨調節變數改變！"
@@ -1170,7 +1170,7 @@ const RAW_QUESTIONS = [
       }
     ],
     correctAnswer: "A",
-    formulaHint: "R^2_{adj} = 1 - \left[ \frac{SSE / (n - k - 1)}{SST / (n - 1)} \right]",
+    formulaHint: "R^2_{adj} = 1 - \\left[ \\frac{SSE / (n - k - 1)}{SST / (n - 1)} \\right]",
     fullSolution: "【步驟一：板書核心論點】板書 IMG_0131 特別註明：「$R^2 \to$ 模型的解釋能力；資料多，解釋能力不一定上升！」\n【步驟二：數學機轉】每多加入一個變數，分母自由度 $n - k - 1$ 就減少 1。若新變數為雜訊，$SSE$ 縮小幅度極其微弱，無法彌補自由度的消耗，使得均方誤差 $MSE = SSE / (n-k-1)$ 變大，最終拉低 $R^2_{adj}$！\n【步驟三：結論】選項 (A) 完美詮釋了 $R^2_{adj}$ 防範過度配適的懲罰原理。",
     cramSummary: {
       conceptName: "R²_adj 懲罰雜訊變數",
@@ -1195,8 +1195,8 @@ const RAW_QUESTIONS = [
     correctAnswer: 30.0,
     unitLabel: "",
     tolerance: 0.1,
-    formulaHint: "F = \frac{MSR}{MSE} = \frac{SSR / k}{SSE / (n - k - 1)}",
-    fullSolution: "【步驟一：變異量與自由度拆解】\n1. 迴歸平方和：$SSR = SST - SSE = 800 - 200 = 600$。\n2. 迴歸自由度：$df_R = k = 3$。\n3. 殘差自由度：$df_E = n - k - 1 = 34 - 3 - 1 = 30$。\n\n【步驟二：計算均方 (Mean Square)】\n- 迴歸均方：$MSR = \frac{SSR}{df_R} = \frac{600}{3} = 200.0$。\n- 殘差均方：$MSE = \frac{SSE}{df_E} = \frac{200}{30} = \frac{20}{3} \approx 6.6667$。\n\n【步驟三：計算 F 統計量】\n$F = \frac{MSR}{MSE} = \frac{200}{6.6667} = \frac{200}{20/3} = 200 \times \frac{3}{20} = 30.0$。\n\n【步驟四：統計推論結論】\n$F = 30.0$ 遠大於臨界值，對應之 $p$-value 趨近於 0（遠小於 0.01），強烈拒絕虛無假說，代表整體迴歸模型極具顯著解釋力！",
+    formulaHint: "F = \\frac{MSR}{MSE} = \\frac{SSR / k}{SSE / (n - k - 1)}",
+    fullSolution: "【步驟一：變異量與自由度拆解】\n1. 迴歸平方和：$SSR = SST - SSE = 800 - 200 = 600$。\n2. 迴歸自由度：$df_R = k = 3$。\n3. 殘差自由度：$df_E = n - k - 1 = 34 - 3 - 1 = 30$。\n\n【步驟二：計算均方 (Mean Square)】\n- 迴歸均方：$MSR = \\frac{SSR}{df_R} = \\frac{600}{3} = 200.0$。\n- 殘差均方：$MSE = \\frac{SSE}{df_E} = \\frac{200}{30} = \\frac{20}{3} \\approx 6.6667$。\n\n【步驟三：計算 F 統計量】\n$F = \\frac{MSR}{MSE} = \\frac{200}{6.6667} = \\frac{200}{20/3} = 200 \\times \\frac{3}{20} = 30.0$。\n\n【步驟四：統計推論結論】\n$F = 30.0$ 遠大於臨界值，對應之 $p$-value 趨近於 0（遠小於 0.01），強烈拒絕虛無假說，代表整體迴歸模型極具顯著解釋力！",
     cramSummary: {
       conceptName: "ANOVA F 統計量手算",
       keyTakeaway: "SSR = 600, dfR = 3 -> MSR = 200。SSE = 200, dfE = 30 -> MSE = 6.6667。F = 200 / 6.6667 = 30.0。"
@@ -1365,7 +1365,7 @@ const RAW_QUESTIONS = [
       }
     ],
     correctAnswer: "B",
-    formulaHint: "\text{Extreme Point Theorem: Optima at Corner Points}",
+    formulaHint: "\\text{Extreme Point Theorem: Optima at Corner Points}",
     fullSolution: "【步驟一：極值點定理 (Corner Point Theorem)】\n由於目標函數與限制條件皆為線性，可行解空間必定為凸集合（Convex Set）。最佳解若存在，必然出現在可行解多邊形的頂點（極值點）上！\n【步驟二：多重最佳解幾何條件】\n若等利潤線的斜率恰好等於某條緊縮限制線的斜率，當等利潤線平移至該邊界時，整條線段上的所有點皆產生相同的最大利潤，此時具備無限多組最佳解（多重最佳解）。\n【步驟三：結論】選項 (B) 完全正確。",
     cramSummary: {
       conceptName: "極值點定理與多重解",
@@ -1388,7 +1388,7 @@ const RAW_QUESTIONS = [
     correctAnswer: 10.0,
     unitLabel: "單位",
     tolerance: 0.05,
-    formulaHint: "a_1 x_1 + a_2 x_2 - E_1 = b_1 \iff E_1 = a_1 x_1 + a_2 x_2 - b_1",
+    formulaHint: "a_1 x_1 + a_2 x_2 - E_1 = b_1 \\iff E_1 = a_1 x_1 + a_2 x_2 - b_1",
     fullSolution: "【步驟一：超額變數定義】\n對於「$\\ge$」大於等於型限制式，超額變數 $E_1 \\ge 0$ 代表實際提供量超越最低門檻的超額部分，標準式為：\n$4 x_1 + 5 x_2 - E_1 = 60$。\n【步驟二：代入目前方案坐標】\n實際提供量 $= 4(10) + 5(6) = 40 + 30 = 70$ 單位。\n【步驟三：計算超額量】\n$E_1 = 70 - 60 = 10$ 單位。\n【步驟四：結論】超額變數為 10 單位（代表比每日最低門檻多攝取了 10 單位蛋白質）。",
     cramSummary: {
       conceptName: "超額變數 E 計算",
@@ -1412,8 +1412,8 @@ const RAW_QUESTIONS = [
     correctAnswer: 60.0,
     unitLabel: "元",
     tolerance: 0.1,
-    formulaHint: "-2 \le -\frac{c_1}{30} \le -\frac{2}{3} \iff 20 \le c_1 \le 60",
-    fullSolution: "【步驟一：列出斜率夾擠不等式】\n目標函數等利潤線斜率為 $m_{obj} = -\\frac{c_1}{c_2} = -\\frac{c_1}{30}$。\n為維持交點頂點為唯一最佳解，目標斜率必須夾在兩條緊縮限制線斜率之間：\n$$-2 \\le -\\frac{c_1}{30} \\le -\\frac{2}{3}$$\n\n【步驟二：兩端同乘 -30（注意不等號轉向）】\n$$(-2) \\times (-30) \\ge c_1 \\ge \\left(-\\frac{2}{3}\\right) \\times (-30)$$\n$$60 \\ge c_1 \\ge 20 \iff 20 \\le c_1 \\le 60$$\n\n【步驟三：求容許上限】\n$c_1$ 的容許範圍為 $[20, 60]$，故容許上限為 60 元。\n若 $c_1 > 60$，等利潤線會過度陡峭，最佳解將跳躍轉移至其他頂點！",
+    formulaHint: "-2 \\le -\\frac{c_1}{30} \\le -\\frac{2}{3} \\iff 20 \\le c_1 \\le 60",
+    fullSolution: "【步驟一：列出斜率夾擠不等式】\n目標函數等利潤線斜率為 $m_{obj} = -\\frac{c_1}{c_2} = -\\frac{c_1}{30}$。\n為維持交點頂點為唯一最佳解，目標斜率必須夾在兩條緊縮限制線斜率之間：\n$$-2 \\le -\\frac{c_1}{30} \\le -\\frac{2}{3}$$\n\n【步驟二：兩端同乘 -30（注意不等號轉向）】\n$$(-2) \\times (-30) \\ge c_1 \\ge \\left(-\\frac{2}{3}\\right) \\times (-30)$$\n$$60 \\ge c_1 \\ge 20 \\iff 20 \\le c_1 \\le 60$$\n\n【步驟三：求容許上限】\n$c_1$ 的容許範圍為 $[20, 60]$，故容許上限為 60 元。\n若 $c_1 > 60$，等利潤線會過度陡峭，最佳解將跳躍轉移至其他頂點！",
     cramSummary: {
       conceptName: "敏感度係數斜率夾擠",
       keyTakeaway: "斜率夾擠 -2 <= -c1/30 <= -2/3。同乘 -30 轉向得 20 <= c1 <= 60。上限為 60。"
@@ -1437,8 +1437,8 @@ const RAW_QUESTIONS = [
     correctAnswer: 1500.0,
     unitLabel: "元",
     tolerance: 1.0,
-    formulaHint: "\Delta Z = (\text{Shadow Price} \times \Delta b) - \text{Cost}",
-    fullSolution: "【步驟一：理解影子價格之經濟意涵】\n影子價格代表在容許變動範圍內，該項資源上限每增加 1 單位，目標利潤 $Z$ 可增加之邊際金額。\n本題組裝機時為緊縮限制，每多 1 小時可多賺 150 元。\n\n【步驟二：計算總營收/毛利增加額】\n增加 30 小時組裝機時（小於容許上限 40 小時，影子價格依然有效）：\n$\Delta Z_{gross} = 150 \text{ 元/小時} \times 30 \text{ 小時} = 4,500$ 元。\n\n【步驟三：扣除取得該資源之租賃成本】\n淨利潤增加額 $= 4,500 - 3,000 = 1,500$ 元。\n\n【步驟四：商務決策結論】\n淨利潤增加 1,500 元為正值，此擴充產能決策在經濟效益上完全可行且值得執行！",
+    formulaHint: "\\Delta Z = (\\text{Shadow Price} \\times \\Delta b) - \\text{Cost}",
+    fullSolution: "【步驟一：理解影子價格之經濟意涵】\n影子價格代表在容許變動範圍內，該項資源上限每增加 1 單位，目標利潤 $Z$ 可增加之邊際金額。\n本題組裝機時為緊縮限制，每多 1 小時可多賺 150 元。\n\n【步驟二：計算總營收/毛利增加額】\n增加 30 小時組裝機時（小於容許上限 40 小時，影子價格依然有效）：\n$\\Delta Z_{gross} = 150 \\text{ 元/小時} \\times 30 \\text{ 小時} = 4,500$ 元。\n\n【步驟三：扣除取得該資源之租賃成本】\n淨利潤增加額 $= 4,500 - 3,000 = 1,500$ 元。\n\n【步驟四：商務決策結論】\n淨利潤增加 1,500 元為正值，此擴充產能決策在經濟效益上完全可行且值得執行！",
     cramSummary: {
       conceptName: "影子價格擴產效益",
       keyTakeaway: "毛利增加 = 影子價格 150 * 30 = 4,500。淨利增加 = 4,500 - 成本 3,000 = 1,500 元。"
@@ -1736,11 +1736,83 @@ const RAW_QUESTIONS = [
  * 全面題庫動態參數生成器註冊表 (Comprehensive Dynamic Question Generators)
  * 涵蓋等級 2、等級 3 與等級 4 所有計算與推導題，防止死背答案
  */
+// ==========================================
+// 6大跨產業動態商業情境輪播資料庫 (Option B: Scenario Story Rotation)
+// 涵蓋：手搖飲連鎖、生技新藥、半導體晶圓、電子商務、運動健身、雲端串流
+// ==========================================
+const STORY_SCENARIOS = [
+  {
+    industry: "手搖飲連鎖",
+    company: "「茶韻鮮萃」手搖連鎖集團",
+    item: "各旗艦門市單日現萃茶飲銷售杯數",
+    unit: "杯",
+    revenueContext: "手搖飲集團跨國拓點年度總營收",
+    processItem: "門市特調飲品糖度檢測數值",
+    processUnit: "度",
+    firmGrowth: "手搖飲冷鏈物流中心資本額"
+  },
+  {
+    industry: "生技新藥",
+    company: "「達康生醫」臨床新藥研發公司",
+    item: "臨床二期受試者血清抗體濃度效價",
+    unit: "U/mL",
+    revenueContext: "標靶新藥授權金與全球銷售權利金營收",
+    processItem: "批次疫苗製劑純度百分比",
+    processUnit: "%",
+    firmGrowth: "生技新藥研發實驗室初期資本額"
+  },
+  {
+    industry: "半導體晶圓",
+    company: "「極光半導體」晶圓代工大廠",
+    item: "12吋先進製程晶圓表面絕緣阻抗",
+    unit: "歐姆",
+    revenueContext: "先進封裝晶圓代工年營收",
+    processItem: "晶圓表面薄膜平整厚度微米數",
+    processUnit: "微米",
+    firmGrowth: "第三代半導體晶圓廠擴廠資本"
+  },
+  {
+    industry: "電子商務",
+    company: "「購樂多商城」大型電商平台",
+    item: "雙 11 大促銷活動各專案顧客留存天數",
+    unit: "天",
+    revenueContext: "跨境電子商務平台年度交易總額 (GMV)",
+    processItem: "會員促銷滿額客單價數值",
+    processUnit: "百元",
+    firmGrowth: "跨境電商智慧倉儲設立資本額"
+  },
+  {
+    industry: "運動健身",
+    company: "「勁動智能健身」全國連鎖俱樂部",
+    item: "VIP 會員單週高強度間歇運動燃脂大卡",
+    unit: "大卡/10",
+    revenueContext: "連鎖健身會館會費與私教課年營收",
+    processItem: "運動員月均核心肌群重量訓練時數",
+    processUnit: "小時",
+    firmGrowth: "智能健身房旗艦館建置資本額"
+  },
+  {
+    industry: "雲端串流",
+    company: "「星視串流科技」影音雲端平台",
+    item: "全球 CDN 伺服器節點平均響應延遲時間",
+    unit: "毫秒",
+    revenueContext: "影音串流平台全球付費訂閱年營收",
+    processItem: "雲端機房伺服器尖峰算力負載率",
+    processUnit: "%",
+    firmGrowth: "高畫質影音串流雲端伺服器建置資本額"
+  }
+];
+
+function pickStory() {
+  return STORY_SCENARIOS[Math.floor(Math.random() * STORY_SCENARIOS.length)];
+}
+
 const DYNAMIC_GENERATORS = {
   // ==========================================
-  // 單元一：敘述統計與位置量數
+  // 單元一：敘述統計與位置量數 (包含 6 大產業故事輪播)
   // ==========================================
   "q-u1-l2-01": function(q) {
+    const story = pickStory();
     const combos = [
       { v0: 1000, t: 3, ratio: 8, ans: 100 },
       { v0: 1600, t: 4, ratio: 5.0625, ans: 50 },
@@ -1754,19 +1826,21 @@ const DYNAMIC_GENERATORS = {
     const vt = Math.round(pick.v0 * pick.ratio);
     return {
       givenData: {
+        "產業情境": `${story.industry}（${story.company}）`,
         "期初營收 V0": `${pick.v0.toLocaleString()} 萬元`,
         "期末營收 Vt": `${vt.toLocaleString()} 萬元`,
         "跨越期數 t": `${pick.t} 年`
       },
-      questionPrompt: `某連鎖企業年營收由期初的 ${pick.v0.toLocaleString()} 萬元成長為期末的 ${vt.toLocaleString()} 萬元（跨越期數為 ${pick.t} 年）。請計算其營收年增率的幾何平均數（%）。`,
+      questionPrompt: `【${story.industry}跨國拓點】${story.company}之${story.revenueContext}由期初的 ${pick.v0.toLocaleString()} 萬元成長為期末的 ${vt.toLocaleString()} 萬元（跨越期數為 ${pick.t} 年）。請計算其營收年增率的幾何平均數（%）。`,
       correctAnswer: pick.ans,
       unitLabel: "%",
       tolerance: 0.1,
-      fullSolution: `【動態題解】\n\(CAGR = (${vt} / ${pick.v0})^{1/${pick.t}} - 1 = (${pick.ratio})^{1/${pick.t}} - 1 = ${1 + pick.ans/100} - 1 = ${pick.ans}\%\)。`
+      fullSolution: `【動態題解（${story.industry}場景）】\n$$\\text{CAGR} = \\left(\\frac{${vt}}{${pick.v0}}\\right)^{1/${pick.t}} - 1 = (${pick.ratio})^{1/${pick.t}} - 1 = ${1 + pick.ans/100} - 1 = ${pick.ans}\\%$$`
     };
   },
 
   "q-u1-l2-02": function(q) {
+    const story = pickStory();
     const base = Math.floor(Math.random() * 15) + 10;
     const diffs = [5, 4, 6, 6, 6, 8, 10, 12];
     let nums = [base];
@@ -1782,19 +1856,21 @@ const DYNAMIC_GENERATORS = {
     const ans = Math.round((x_p + d * (x_p1 - x_p)) * 100) / 100;
     return {
       givenData: {
+        "產業情境": `${story.industry}（${story.company}）`,
         "排序數列": `[${nums.join(", ")}]`,
         "樣本數 n": `${n}`,
         "目標百分位 x": `${x}`
       },
-      questionPrompt: `現有一組由小至大排序之 9 筆數據：\n\`${nums.join(", ")}\`（$n = 9$）。\n請依課堂板書唯一標準公式求出「第 ${x} 百分位數對應之數值」。`,
+      questionPrompt: `【${story.industry}品管監控】${story.company}抽樣監控 9 筆「${story.item}」（單位：${story.unit}），數據由小至大排序如下：\n\`${nums.join(", ")}\`（$n = 9$）。\n請依課堂板書唯一標準公式求出「第 ${x} 百分位數對應之數值」。`,
       correctAnswer: ans,
-      unitLabel: "",
+      unitLabel: story.unit,
       tolerance: 0.05,
-      fullSolution: `【動態題解】\n1. 位置 \(L_{${x}} = \frac{${x}}{100} \times (9 - 1) + 1 = ${L.toFixed(2)}\)。\n2. 整數項 \(p = ${p}\)，小數項 \(0.d = ${d.toFixed(2)}\)。\n3. 第 ${p} 筆為 ${x_p}，第 ${p+1} 筆為 ${x_p1}。\n4. 內插數值 \(P_{${x}} = ${x_p} + ${d.toFixed(2)} \times (${x_p1} - ${x_p}) = ${ans}\)。`
+      fullSolution: `【動態題解（${story.industry}場景）】\n1. 板書位置公式：\n   $$L_{${x}} = \\frac{${x}}{100} \\times (9 - 1) + 1 = ${L.toFixed(2)}$$\n2. 整數項 $p = ${p}$，小數項 $0.d = ${d.toFixed(2)}$。\n3. 第 ${p} 筆為 ${x_p}，第 ${p+1} 筆為 ${x_p1}。\n4. 線性內插：\n   $$P_{${x}} = ${x_p} + ${d.toFixed(2)} \\times (${x_p1} - ${x_p}) = ${ans}$$`
     };
   },
 
   "q-u1-l2-03": function(q) {
+    const story = pickStory();
     const centers = [20, 25, 30, 40, 50];
     const mean = centers[Math.floor(Math.random() * centers.length)];
     const offsets = [-2, -1, 0, 1, 2];
@@ -1803,18 +1879,20 @@ const DYNAMIC_GENERATORS = {
     const cv = Math.round((s / mean) * 10000) / 100;
     return {
       givenData: {
+        "產業情境": `${story.industry}（${story.company}）`,
         "樣本數值": `[${nums.join(", ")}]`,
         "樣本數 n": "5"
       },
-      questionPrompt: `抽檢 5 批零件數值為：\`${nums.join(", ")}\`。請計算該樣本之「變異係數 CV（%）」（四捨五入至小數後兩位）。`,
+      questionPrompt: `【${story.industry}品質穩定度】${story.company}抽檢 5 批「${story.processItem}」，觀測數據為：\n\`${nums.join(", ")}\`（單位：${story.processUnit}）。請計算該樣本之「變異係數 CV（%）」（四捨五入至小數後兩位）。`,
       correctAnswer: cv,
       unitLabel: "%",
       tolerance: 0.1,
-      fullSolution: `【動態題解】\n1. 平均數 \(\bar{X} = ${mean}\)。\n2. 離均差平方和 \(\sum(X_i - ${mean})^2 = 4 + 1 + 0 + 1 + 4 = 10\)。\n3. 樣本標準差 \(S = \sqrt{10 / 4} = \sqrt{2.5} \approx 1.5811\)。\n4. \(CV = 1.5811 / ${mean} \approx ${cv}\%\)。`
+      fullSolution: `【動態題解（${story.industry}場景）】\n1. 平均數 $\\bar{X} = ${mean}$。\n2. 離均差平方和 $\\sum (X_i - ${mean})^2 = 4 + 1 + 0 + 1 + 4 = 10$。\n3. 樣本標準差 $S = \\sqrt{10 / 4} = \\sqrt{2.5} \\approx 1.5811$。\n4. 變異係數：\n   $$CV = \\frac{S}{\\bar{X}} \\times 100\\% = \\frac{1.5811}{${mean}} \\times 100\\% \\approx ${cv}\\%$$`
     };
   },
 
   "q-u1-l3-01": function(q) {
+    const story = pickStory();
     const combos = [
       { v0: 5000, t: 3, cagr: 20, vt: 8640 },
       { v0: 2000, t: 3, cagr: 20, vt: 3456 },
@@ -1826,19 +1904,21 @@ const DYNAMIC_GENERATORS = {
     const pick = combos[Math.floor(Math.random() * combos.length)];
     return {
       givenData: {
+        "產業情境": `${story.industry}（${story.company}）`,
         "基準年營收 V0": `${pick.v0.toLocaleString()} 萬元`,
         "目標 CAGR": `${pick.cagr}%`,
         "目標跨期 t": `${pick.t} 年`
       },
-      questionPrompt: `某電商平台當前年營收（第 0 年）為 ${pick.v0.toLocaleString()} 萬元。董事會設定未來 ${pick.t} 年的目標複合年成長率（CAGR）需達到 ${pick.cagr}%。請問該平台在第 ${pick.t} 年年末必須達成多少營收規模（萬元）？`,
+      questionPrompt: `【${story.industry}發展戰略】${story.company}當前（第 0 年）${story.revenueContext}為 ${pick.v0.toLocaleString()} 萬元。董事會設定未來 ${pick.t} 年的目標複合年成長率（CAGR）需達到 ${pick.cagr}%。請問該公司在第 ${pick.t} 年年末必須達成多少營收規模（萬元）？`,
       correctAnswer: pick.vt,
       unitLabel: "萬元",
       tolerance: 1.0,
-      fullSolution: `【動態題解】\n由複合成長率公式：\n\(V_t = V_0 \times (1 + CAGR)^t = ${pick.v0} \times (1 + ${pick.cagr/100})^{${pick.t}} = ${pick.vt}\text{ 萬元}\)。`
+      fullSolution: `【動態題解（${story.industry}場景）】\n由複合成長率公式：\n$$V_t = V_0 \\times (1 + \\text{CAGR})^t = ${pick.v0} \\times (1 + ${pick.cagr/100})^{${pick.t}} = ${pick.vt}\\text{ 萬元}$$`
     };
   },
 
   "q-u1-l3-02": function(q) {
+    const story = pickStory();
     const base = Math.floor(Math.random() * 12) + 10;
     const steps = [6, 4, 6, 7, 7, 16, 7, 15];
     let nums = [base];
@@ -1848,19 +1928,21 @@ const DYNAMIC_GENERATORS = {
     const iqr = q3 - q1;
     return {
       givenData: {
+        "產業情境": `${story.industry}（${story.company}）`,
         "已排序數據列 (n=9)": `[${nums.join(", ")}]`,
         "Q1 板書位置 L25%": "3.0",
         "Q3 板書位置 L75%": "7.0"
       },
-      questionPrompt: `現有一組排序後的 9 筆數據：\`${nums.join(", ")}\`（$n = 9$）。請依課堂板書唯一標準位置公式（$L_{25\%} = \frac{25}{100}(n-1)+1$、$L_{75\%} = \frac{75}{100}(n-1)+1$）計算其第 1 四分位數 $Q_1$ 與第 3 四分位數 $Q_3$，並求出「四分位距（IQR）」。`,
+      questionPrompt: `【${story.industry}離散分佈】${story.company}收集 9 筆「${story.item}」（單位：${story.unit}），排序數據如下：\n\`${nums.join(", ")}\`（$n = 9$）。\n請依課堂板書唯一標準位置公式（$L_{25\\%} = \\frac{25}{100}(n-1)+1$、$L_{75\\%} = \\frac{75}{100}(n-1)+1$）計算其第 1 四分位數 $Q_1$ 與第 3 四分位數 $Q_3$，並求出「四分位距（IQR）」。`,
       correctAnswer: iqr,
-      unitLabel: "",
+      unitLabel: story.unit,
       tolerance: 0.1,
-      fullSolution: `【動態題解】\n1. 板書位置公式：\n   \(L_{25\%} = \frac{25}{100}(9 - 1) + 1 = 3.0 \implies Q_1 = X_3 = ${q1}\)\n   \(L_{75\%} = \frac{75}{100}(9 - 1) + 1 = 7.0 \implies Q_3 = X_7 = ${q3}\)\n2. 四分位距 \(IQR = Q_3 - Q_1 = ${q3} - ${q1} = ${iqr}\)。`
+      fullSolution: `【動態題解（${story.industry}場景）】\n1. 板書位置公式：\n   $$L_{25\\%} = \\frac{25}{100}(9 - 1) + 1 = 3.0 \\implies Q_1 = X_3 = ${q1}$$\n   $$L_{75\\%} = \\frac{75}{100}(9 - 1) + 1 = 7.0 \\implies Q_3 = X_7 = ${q3}$$\n2. 四分位距：\n   $$IQR = Q_3 - Q_1 = ${q3} - ${q1} = ${iqr}$$`
     };
   },
 
   "q-u1-l4-01": function(q) {
+    const story = pickStory();
     const sets = [
       { v0: 1000, r: [100, -50, 100, -50], v4: 1000, cagr: 0, arith: 25 },
       { v0: 1000, r: [50, -20, 50, -20], v4: 1440, cagr: 9.54, arith: 15 },
@@ -1870,18 +1952,20 @@ const DYNAMIC_GENERATORS = {
     const pick = sets[Math.floor(Math.random() * sets.length)];
     return {
       givenData: {
+        "產業情境": `${story.industry}（${story.company}）`,
         "初期資本 V0": `${pick.v0} 萬元`,
         "第 1 年成長率": `+${pick.r[0]}%`,
         "第 2 年成長率": `${pick.r[1]}%`,
         "第 3 年成長率": `+${pick.r[2]}%`,
         "第 4 年成長率": `${pick.r[3]}%`
       },
-      questionPrompt: `某新創生技公司成立 4 年，初期資本額為 ${pick.v0} 萬元。各年成長率依序為：第 1 年 +${pick.r[0]}%、第 2 年 ${pick.r[1]}%、第 3 年 +${pick.r[2]}%、第 4 年 ${pick.r[3]}%。\n請在紙筆上完整手算：\n(1) 4 年後之期末資本額 $V_4$；\n(2) 這 4 年成長率之「算術平均數（Arithmetic Mean）」；\n(3) 這 4 年營運之「幾何平均年成長率（CAGR）」。`,
-      fullSolution: `【動態題解】\n1. 期末資本額：\n   \(V_4 = ${pick.v0} \times (1 + ${pick.r[0]/100}) \times (1 + ${pick.r[1]/100}) \times (1 + ${pick.r[2]/100}) \times (1 + ${pick.r[3]/100}) = ${pick.v4}\text{ 萬元}\)。\n2. 算術平均成長率：\n   \(\bar{R}_a = \frac{${pick.r.join(" + ")}} {4} = ${pick.arith}\%\)。\n3. 幾何平均成長率 (CAGR)：\n   \(CAGR = (${pick.v4} / ${pick.v0})^{1/4} - 1 \approx ${pick.cagr}\%\)。`
+      questionPrompt: `【${story.industry}資本擴張】${story.company}成立 4 年，${story.firmGrowth}初期為 ${pick.v0} 萬元。各年成長率依序為：第 1 年 +${pick.r[0]}%、第 2 年 ${pick.r[1]}%、第 3 年 +${pick.r[2]}%、第 4 年 ${pick.r[3]}%。\n請在紙筆上完整手算：\n(1) 4 年後之期末資本額 $V_4$；\n(2) 這 4 年成長率之「算術平均數（Arithmetic Mean）」；\n(3) 這 4 年營運之「幾何平均年成長率（CAGR）」。`,
+      fullSolution: `【動態題解（${story.industry}場景）】\n1. 期末資本額：\n   $$V_4 = ${pick.v0} \\times (1 + ${pick.r[0]/100}) \\times (1 + ${pick.r[1]/100}) \\times (1 + ${pick.r[2]/100}) \\times (1 + ${pick.r[3]/100}) = ${pick.v4}\\text{ 萬元}$$\n2. 算術平均成長率：\n   $$\\bar{R}_a = \\frac{${pick.r.join(" + ")}} {4} = ${pick.arith}\\%$$\n3. 幾何平均成長率 (CAGR)：\n   $$\\text{CAGR} = (${pick.v4} / ${pick.v0})^{1/4} - 1 \\approx ${pick.cagr}\\%$$`
     };
   },
 
   "q-u1-l4-02": function(q) {
+    const story = pickStory();
     const bases = [50, 53, 60, 65, 70];
     const mean = bases[Math.floor(Math.random() * bases.length)];
     const offsets = [-5, -3, -1, 1, 3, 5];
@@ -1889,16 +1973,18 @@ const DYNAMIC_GENERATORS = {
     const s2 = 14.0;
     const s = Math.round(Math.sqrt(14) * 100) / 100;
     const cv = Math.round((Math.sqrt(14) / mean) * 10000) / 100;
+    const displayUnit = story.processUnit === "%" ? "%" : story.processUnit;
     return {
       givenData: {
-        "晶圓厚度樣本 (微米)": `[${nums.join(", ")}]`,
+        "產業情境": `${story.industry}（${story.company}）`,
+        "檢測樣本數值": `[${nums.join(", ")}]`,
         "樣本數 n": "6"
       },
-      questionPrompt: `某半導體晶圓廠檢驗 6 片晶圓的表面厚度微米數（已由小至大排序）：\n\`[${nums.join(", ")}]\`（$n = 6$）。品管經理欲評估該製程的離散程度。\n請依序手算：\n(1) 樣本平均數 $\bar{X}$；\n(2) 離均差平方和 $\sum (X_i - \bar{X})^2$；\n(3) 樣本變異數 $S^2$（不偏估計量，自由度 $n-1$）；\n(4) 樣本標準差 $S$；\n(5) 變異係數 $CV$（%）。\n請在作答框填入「樣本變異數 $S^2$」的數值。`,
+      questionPrompt: `【${story.industry}製程精度】${story.company}檢驗 6 件產品之「${story.processItem}」（單位：${story.processUnit}，已由小至大排序）：\n\`[${nums.join(", ")}]\`（$n = 6$）。品管經理欲評估該製程的離散程度。\n請依序手算：\n(1) 樣本平均數 $\\bar{X}$；\n(2) 離均差平方和 $\\sum (X_i - \\bar{X})^2$；\n(3) 樣本變異數 $S^2$（不偏估計量，自由度 $n-1$）；\n(4) 樣本標準差 $S$；\n(5) 變異係數 $CV$（%）。\n請在作答框填入「樣本變異數 $S^2$」的數值。`,
       correctAnswer: s2,
-      unitLabel: "微米²",
+      unitLabel: `${displayUnit}²`,
       tolerance: 0.1,
-      fullSolution: `【動態題解】\n1. 平均數 \(\bar{X} = \frac{\sum X_i}{6} = ${mean}.0\text{ 微米}\)。\n2. 離均差平方和 \(\sum(X_i - \bar{X})^2 = 25 + 9 + 1 + 1 + 9 + 25 = 70\)。\n3. 樣本變異數 \(S^2 = \frac{70}{6 - 1} = \frac{70}{5} = ${s2}\text{ 微米}^2\)。\n4. 樣本標準差 \(S = \sqrt{14} \approx ${s}\text{ 微米}\)。\n5. 變異係數 \(CV = \frac{S}{\bar{X}} \times 100\% \approx ${cv}\%\)。`
+      fullSolution: `【動態題解（${story.industry}場景）】\n1. 平均數 $\\bar{X} = \\frac{\\sum X_i}{6} = ${mean}.0$ ${displayUnit}。\n2. 離均差平方和 $\\sum(X_i - \\bar{X})^2 = 25 + 9 + 1 + 1 + 9 + 25 = 70$。\n3. 樣本變異數 $$S^2 = \\frac{70}{6 - 1} = \\frac{70}{5} = ${s2}$$。\n4. 樣本標準差 $$S = \\sqrt{14} \\approx ${s}$$。\n5. 變異係數 $$CV = \\frac{S}{\\bar{X}} \\times 100\\% \\approx ${cv}\\%$$。`
     };
   },
 
@@ -1924,7 +2010,7 @@ const DYNAMIC_GENERATORS = {
       correctAnswer: smc,
       unitLabel: "",
       tolerance: 0.02,
-      fullSolution: `【動態題解】\n\(SMC = \frac{a + d}{N} = \frac{${a} + ${d}}{${N}} = \frac{${a+d}}{${N}} = ${smc}\)。`
+      fullSolution: `【動態題解】\n$$SMC = \\frac{a + d}{N} = \\frac{${a} + ${d}}{${N}} = \\frac{${a+d}}{${N}} = ${smc}$$`
     };
   },
 
@@ -1946,7 +2032,7 @@ const DYNAMIC_GENERATORS = {
       correctAnswer: jaccard,
       unitLabel: "",
       tolerance: 0.02,
-      fullSolution: `【動態題解】\nJaccard 排除雙 0 負匹配 $a$：\n\(Jaccard = \frac{d}{b + c + d} = \frac{${d}}{${b} + ${c} + ${d}} = \frac{${d}}{${den}} \approx ${jaccard}\)。`
+      fullSolution: `【動態題解】\nJaccard 排除雙 0 負匹配 $a$：\n$$Jaccard = \\frac{d}{b + c + d} = \\frac{${d}}{${b} + ${c} + ${d}} = \\frac{${d}}{${den}} \\approx ${jaccard}$$`
     };
   },
 
@@ -1973,7 +2059,7 @@ const DYNAMIC_GENERATORS = {
       correctAnswer: pick.dist,
       unitLabel: "",
       tolerance: 0.05,
-      fullSolution: `【動態題解】\n\(d(A, B) = \sqrt{(${x2} - ${x1})^2 + (${y2} - ${y1})^2} = \sqrt{${pick.dx}^2 + ${pick.dy}^2} = \sqrt{${pick.dx*pick.dx + pick.dy*pick.dy}} = ${pick.dist}\)。`
+      fullSolution: `【動態題解】\n$$d(A, B) = \\sqrt{(${x2} - ${x1})^2 + (${y2} - ${y1})^2} = \\sqrt{${pick.dx}^2 + ${pick.dy}^2} = \\sqrt{${pick.dx*pick.dx + pick.dy*pick.dy}} = ${pick.dist}$$`
     };
   },
 
@@ -1991,7 +2077,7 @@ const DYNAMIC_GENERATORS = {
         "總檢驗項目 N": `${s}`
       },
       questionPrompt: `某晶圓代工廠品管部門對兩批出廠晶圓抽檢 ${s} 項嚴格的物理缺陷特徵（1 表存在缺陷，0 表無缺陷/合格）。檢驗結果顯示：兩批晶圓在 ${a} 項缺陷特徵上皆未檢出（雙 0），在 ${d} 項特徵上皆檢出相同缺陷（雙 1），另有 ${bc} 項為單邊檢出。若欲衡量兩批產品在「品質規格一致性」上的契合度，為何此時選用 SMC 比 Jaccard 更具管理合理性？`,
-      fullSolution: `【動態題解】\n1. 在品質品管情境中，『雙 0 代表兩批產品都完美無缺陷、同時合格通過』，這是品質高度一致的關鍵實質成就，絕非無意義的空白！\n2. SMC 分子包含 a（雙方皆合格），本題 SMC = (${a} + ${d}) / ${s} = ${(a+d)/s}，真實反映兩批產品的超高良率吻合度。\n3. 若盲目套用 Jaccard 剔除 a，指標將縮水為 ${d} / (${bc} + ${d}) = ${(d/(bc+d)).toFixed(2)}，嚴重低估其一致性品質。`
+      fullSolution: `【動態題解】\n1. 在品質品管情境中，『雙 0 代表兩批產品都完美無缺陷、同時合格通過』，這是品質高度一致的關鍵實質成就，絕非無意義的空白！\n2. SMC 分子包含 a（雙方皆合格），本題 $SMC = \\frac{${a} + ${d}}{${s}} = ${(a+d)/s}$，真實反映兩批產品的超高良率吻合度。\n3. 若盲目套用 Jaccard 剔除 a，指標將縮水為 $\\frac{${d}}{${bc} + ${d}} = ${(d/(bc+d)).toFixed(2)}$，嚴重低估其一致性品質。`
     };
   },
 
@@ -2016,7 +2102,7 @@ const DYNAMIC_GENERATORS = {
       correctAnswer: pick.dist,
       unitLabel: "",
       tolerance: 0.02,
-      fullSolution: `【動態題解】\n1. \(Jaccard = \frac{d}{b + c + d} = \frac{${pick.d}}{${pick.b + pick.c + pick.d}} = ${pick.j}\)。\n2. 雅卡爾距離 \(Dist_J = 1 - Jaccard = 1 - ${pick.j} = ${pick.dist}\)。`
+      fullSolution: `【動態題解】\n1. $$Jaccard = \\frac{d}{b + c + d} = \\frac{${pick.d}}{${pick.b + pick.c + pick.d}} = ${pick.j}$$\n2. 雅卡爾距離：\n   $$Dist_J = 1 - Jaccard = 1 - ${pick.j} = ${pick.dist}$$`
     };
   },
 
@@ -2037,7 +2123,7 @@ const DYNAMIC_GENERATORS = {
       correctAnswer: smc,
       unitLabel: "",
       tolerance: 0.005,
-      fullSolution: `【動態題解】\n全片庫總數 \(N = ${a_new} + 1 + 2 + 3 = ${N_new}\)。\n\(SMC = \frac{${a_new} + ${d}}{${N_new}} = \frac{${a_new + d}}{${N_new}} \approx ${smc}\)。\n（說明：因巨量雙 0 稀釋，SMC 虛高至 0.99 以上，失去鑑別度！）`
+      fullSolution: `【動態題解】\n全片庫總數 $$N = ${a_new} + 1 + 2 + 3 = ${N_new}$$\n$$SMC = \\frac{${a_new} + ${d}}{${N_new}} = \\frac{${a_new + d}}{${N_new}} \\approx ${smc}$$\n（說明：因巨量雙 0 稀釋，SMC 虛高至 0.99 以上，失去鑑別度！）`
     };
   },
 
@@ -2064,7 +2150,7 @@ const DYNAMIC_GENERATORS = {
       correctAnswer: ans,
       unitLabel: "%",
       tolerance: 0.1,
-      fullSolution: `【動態題解】\n1. 全機率 \(P(T^+) = (${pT_D} \times ${pD}) + (${pT_G} \times ${pG}) = ${num.toFixed(3)} + ${(pT_G*pG).toFixed(3)} = ${den.toFixed(3)}\)。\n2. 後驗機率 \(P(D|T^+) = ${num.toFixed(3)} / ${den.toFixed(3)} \approx ${ans}\%\)。`
+      fullSolution: `【動態題解】\n1. 全機率：\n   $$P(T^+) = (${pT_D} \\times ${pD}) + (${pT_G} \\times ${pG}) = ${num.toFixed(3)} + ${(pT_G*pG).toFixed(3)} = ${den.toFixed(3)}$$\n2. 後驗機率：\n   $$P(D|T^+) = \\frac{${num.toFixed(3)}}{${den.toFixed(3)}} \\approx ${ans}\\%$$`
     };
   },
 
@@ -2083,11 +2169,11 @@ const DYNAMIC_GENERATORS = {
         "資料庫逾時機率 P(B)": `${pick.pB}`,
         "同時發生機率 P(A∩B)": `${pick.pAB}`
       },
-      questionPrompt: `伺服器運行日誌統計顯示：網路連線異常機率為 $P(A) = ${pick.pA}$，資料庫讀寫逾時機率為 $P(B) = ${pick.pB}$，兩者同時發生機率為 $P(A \cap B) = ${pick.pAB}$。請問伺服器出現「至少一種異常」的聯集機率 $P(A \cup B)$ 為何？`,
+      questionPrompt: `伺服器運行日誌統計顯示：網路連線異常機率為 $P(A) = ${pick.pA}$，資料庫讀寫逾時機率為 $P(B) = ${pick.pB}$，兩者同時發生機率為 $P(A \\cap B) = ${pick.pAB}$。請問伺服器出現「至少一種異常」的聯集機率 $P(A \\cup B)$ 為何？`,
       correctAnswer: pick.ans,
       unitLabel: "",
       tolerance: 0.02,
-      fullSolution: `【動態題解】\n由加法定律：\n\(P(A \cup B) = P(A) + P(B) - P(A \cap B) = ${pick.pA} + ${pick.pB} - ${pick.pAB} = ${pick.ans}\)。`
+      fullSolution: `【動態題解】\n由加法定律：\n$$P(A \\cup B) = P(A) + P(B) - P(A \\cap B) = ${pick.pA} + ${pick.pB} - ${pick.pAB} = ${pick.ans}$$`
     };
   },
 
@@ -2110,7 +2196,7 @@ const DYNAMIC_GENERATORS = {
       correctAnswer: pick.ans,
       unitLabel: "人",
       tolerance: 0.1,
-      fullSolution: `【動態題解】\n二項分配期望值公式：\(E(X) = n \cdot p = ${pick.n} \times ${pick.p} = ${pick.ans}\text{ 人}\)。`
+      fullSolution: `【動態題解】\n二項分配期望值公式：$$E(X) = n \\cdot p = ${pick.n} \\times ${pick.p} = ${pick.ans}\\text{ 人}$$`
     };
   },
 
@@ -2133,7 +2219,7 @@ const DYNAMIC_GENERATORS = {
       correctAnswer: pick.ans,
       unitLabel: "%",
       tolerance: 0.1,
-      fullSolution: `【動態題解】\n1. 全機率分母 \(P(D) = (${pick.pA} \times ${pick.dA}) + (${pick.pB} \times ${pick.dB}) = ${pick.den}\)。\n2. 分子 \(P(B \cap D) = ${pick.pB} \times ${pick.dB} = ${pick.num}\)。\n3. 後驗機率 \(P(B|D) = ${pick.num} / ${pick.den} = ${pick.ans}\%\)。`
+      fullSolution: `【動態題解】\n1. 全機率分母：\n   $$P(D) = (${pick.pA} \\times ${pick.dA}) + (${pick.pB} \\times ${pick.dB}) = ${pick.den}$$\n2. 分子：\n   $$P(B \\cap D) = ${pick.pB} \\times ${pick.dB} = ${pick.num}$$\n3. 後驗機率：\n   $$P(B|D) = \\frac{${pick.num}}{${pick.den}} = ${pick.ans}\\%$$`
     };
   },
 
@@ -2155,7 +2241,7 @@ const DYNAMIC_GENERATORS = {
       correctAnswer: pick.ans,
       unitLabel: "%",
       tolerance: 0.1,
-      fullSolution: `【動態題解】\n1. 全機率 \(P(D) = (${pick.pA}\times${pick.dA}) + (${pick.pB}\times${pick.dB}) + (${pick.pC}\times${pick.dC}) = ${den.toFixed(4)}\)。\n2. 分子 \(P(B \cap D) = ${num.toFixed(4)}\)。\n3. 後驗 \(P(B|D) = ${num.toFixed(4)} / ${den.toFixed(4)} \approx ${pick.ans}\%\)。`
+      fullSolution: `【動態題解】\n1. 全機率：\n   $$P(D) = (${pick.pA}\\times${pick.dA}) + (${pick.pB}\\times${pick.dB}) + (${pick.pC}\\times${pick.dC}) = ${den.toFixed(4)}$$\n2. 分子：\n   $$P(B \\cap D) = ${num.toFixed(4)}$$\n3. 後驗：\n   $$P(B|D) = \\frac{${num.toFixed(4)}}{${den.toFixed(4)}} \\approx ${pick.ans}\\%$$`
     };
   },
 
@@ -2180,7 +2266,7 @@ const DYNAMIC_GENERATORS = {
       correctAnswer: pick.ans,
       unitLabel: "%",
       tolerance: 0.1,
-      fullSolution: `【動態題解】\n1. 分子（真盜刷警報）\(= ${pick.sens} \times ${pick.pF} = ${num.toFixed(5)}\)。\n2. 分母（總警報機率）\(= ${num.toFixed(5)} + (${pick.fa} \times ${pNF.toFixed(3)}) = ${den.toFixed(5)}\)。\n3. 後驗機率 \(P(F|Alarm) = ${num.toFixed(5)} / ${den.toFixed(5)} \approx ${pick.ans}\%\)。`
+      fullSolution: `【動態題解】\n1. 分子（真盜刷警報）：\n   $$${pick.sens} \\times ${pick.pF} = ${num.toFixed(5)}$$\n2. 分母（總警報機率）：\n   $$${num.toFixed(5)} + (${pick.fa} \\times ${pNF.toFixed(3)}) = ${den.toFixed(5)}$$\n3. 後驗機率：\n   $$P(F|\\text{Alarm}) = \\frac{${num.toFixed(5)}}{${den.toFixed(5)}} \\approx ${pick.ans}\\%$$`
     };
   },
 
@@ -2197,7 +2283,7 @@ const DYNAMIC_GENERATORS = {
         "分店試驗條件精度": `P(BS|AS) = ${pick.pBS_AS}, P(BF|AF) = ${pick.pBF_AF}`
       },
       questionPrompt: `【企3B 作業 EX1 & EX2 動態題】某連鎖手搖飲品牌評估展店：全面開店成功先驗機率 $P(AS) = ${pick.pAS}$，失敗 $P(AF) = ${pick.pAF}$。先行開設分店試驗的精度為：$P(BS|AS) = ${pick.pBS_AS}$，$P(BF|AF) = ${pick.pBF_AF}$。\n請在紙筆上完整手算：\n(1) 分店試驗成功的全機率 $P(BS)$；\n(2) 當分店成功時全面開店成功之條件機率 $P(AS|BS)$；\n(3) 當分店失敗時全面開店成功之條件機率 $P(AS|BF)$。`,
-      fullSolution: `【動態題解】\n1. 全機率定理：\n   \(P(BS) = (${pick.pBS_AS} \times ${pick.pAS}) + (${(1-pick.pBF_AF).toFixed(2)} \times ${pick.pAF}) = ${pick.pBS}\)。\n2. 後驗機率：\n   \(P(AS|BS) = \frac{${pick.pBS_AS} \times ${pick.pAS}}{${pick.pBS}} \approx ${pick.pAS_BS}\)。\n   \(P(AS|BF) = \frac{${(1-pick.pBS_AS).toFixed(2)} \times ${pick.pAS}}{${(1-pick.pBS).toFixed(3)}} \approx ${pick.pAS_BF}\)。`
+      fullSolution: `【動態題解】\n1. 全機率定理：\n   $$P(BS) = (${pick.pBS_AS} \\times ${pick.pAS}) + (${(1-pick.pBF_AF).toFixed(2)} \\times ${pick.pAF}) = ${pick.pBS}$$\n2. 後驗機率：\n   $$P(AS|BS) = \\frac{${pick.pBS_AS} \\times ${pick.pAS}}{${pick.pBS}} \\approx ${pick.pAS_BS}$$\n   $$P(AS|BF) = \\frac{${(1-pick.pBS_AS).toFixed(2)} \\times ${pick.pAS}}{${(1-pick.pBS).toFixed(3)}} \\approx ${pick.pAS_BF}$$`
     };
   },
 
@@ -2222,7 +2308,7 @@ const DYNAMIC_GENERATORS = {
       correctAnswer: pick.r2,
       unitLabel: "",
       tolerance: 0.02,
-      fullSolution: `【動態題解】\n\(SSR = SST - SSE = ${pick.sst} - ${pick.sse} = ${pick.ssr}\)。\n\(R^2 = \frac{SSR}{SST} = 1 - \frac{SSE}{SST} = 1 - \frac{${pick.sse}}{${pick.sst}} = ${pick.r2}\)。`
+      fullSolution: `【動態題解】\n$$SSR = SST - SSE = ${pick.sst} - ${pick.sse} = ${pick.ssr}$$\n$$R^2 = \\frac{SSR}{SST} = 1 - \\frac{SSE}{SST} = 1 - \\frac{${pick.sse}}{${pick.sst}} = ${pick.r2}$$`
     };
   },
 
@@ -2241,11 +2327,11 @@ const DYNAMIC_GENERATORS = {
         "X̄ (廣告支出平均)": `${pick.xbar}`,
         "Ȳ (營收平均)": `${pick.ybar}`
       },
-      questionPrompt: `某連鎖餐飲建立廣告支出 $X$ 對營收 $Y$ 的迴歸模型：$SS_{xy} = ${pick.ssxy}$，$SS_{xx} = ${pick.ssxx}$，廣告平均 $\bar{X} = ${pick.xbar}$ 萬元，營收平均 $\bar{Y} = ${pick.ybar}$ 萬元。請計算該迴歸直線的「截距項 $b_0$」（萬元）。`,
+      questionPrompt: `某連鎖餐飲建立廣告支出 $X$ 對營收 $Y$ 的迴歸模型：$SS_{xy} = ${pick.ssxy}$，$SS_{xx} = ${pick.ssxx}$，廣告平均 $\\bar{X} = ${pick.xbar}$ 萬元，營收平均 $\\bar{Y} = ${pick.ybar}$ 萬元。請計算該迴歸直線的「截距項 $b_0$」（萬元）。`,
       correctAnswer: pick.b0,
       unitLabel: "萬元",
       tolerance: 0.05,
-      fullSolution: `【動態題解】\n1. 斜率 \(b_1 = \frac{SS_{xy}}{SS_{xx}} = \frac{${pick.ssxy}}{${pick.ssxx}} = ${pick.b1}\)。\n2. 截距 \(b_0 = \bar{Y} - b_1 \bar{X} = ${pick.ybar} - (${pick.b1} \times ${pick.xbar}) = ${pick.b0}\text{ 萬元}\)。`
+      fullSolution: `【動態題解】\n1. 斜率：\n   $$b_1 = \\frac{SS_{xy}}{SS_{xx}} = \\frac{${pick.ssxy}}{${pick.ssxx}} = ${pick.b1}$$\n2. 截距：\n   $$b_0 = \\bar{Y} - b_1 \\bar{X} = ${pick.ybar} - (${pick.b1} \\times ${pick.xbar}) = ${pick.b0}\\text{ 萬元}$$`
     };
   },
 
@@ -2267,7 +2353,7 @@ const DYNAMIC_GENERATORS = {
       correctAnswer: pick.r2,
       unitLabel: "",
       tolerance: 0.02,
-      fullSolution: `【動態題解】\n\(R^2 = 1 - \frac{SSE}{SST} = 1 - \frac{${pick.sse}}{${pick.sst}} = ${pick.r2}\)。`
+      fullSolution: `【動態題解】\n$$R^2 = 1 - \\frac{SSE}{SST} = 1 - \\frac{${pick.sse}}{${pick.sst}} = ${pick.r2}$$`
     };
   },
 
@@ -2285,11 +2371,11 @@ const DYNAMIC_GENERATORS = {
         "迴歸方程式": `Ŷ = 10 + ${pick.b1}*X1 + 6*X2 + ${pick.b3}*(X1*X2)`,
         "指定會員等級 X2": `${pick.x2}`
       },
-      questionPrompt: `某平台營收預測模型：$\hat{Y} = 10 + ${pick.b1} X_1 + 6 X_2 + ${pick.b3} (X_1 \cdot X_2)$，其中 $X_1$ 為折價券面額，$X_2$ 為會員等級。若目標客群會員等級為 $X_2 = ${pick.x2}$，請問 $X_1$ 每增加 1 單位對營收的邊際增加效果（邊際斜率 $\frac{\Delta \hat{Y}}{\Delta X_1}$）為何？`,
+      questionPrompt: `某平台營收預測模型：$\\hat{Y} = 10 + ${pick.b1} X_1 + 6 X_2 + ${pick.b3} (X_1 \\cdot X_2)$，其中 $X_1$ 為折價券面額，$X_2$ 為會員等級。若目標客群會員等級為 $X_2 = ${pick.x2}$，請問 $X_1$ 每增加 1 單位對營收的邊際增加效果（邊際斜率 $\\frac{\\Delta \\hat{Y}}{\\Delta X_1}$）為何？`,
       correctAnswer: pick.ans,
       unitLabel: "萬元",
       tolerance: 0.05,
-      fullSolution: `【動態題解】\n邊際斜率求導：\(\frac{\partial \hat{Y}}{\partial X_1} = b_1 + b_3 X_2 = ${pick.b1} + ${pick.b3}(${pick.x2}) = ${pick.ans}\text{ 萬元}\)。`
+      fullSolution: `【動態題解】\n邊際斜率求導：\n$$\\frac{\\partial \\hat{Y}}{\\partial X_1} = b_1 + b_3 X_2 = ${pick.b1} + ${pick.b3}(${pick.x2}) = ${pick.ans}\\text{ 萬元}$$`
     };
   },
 
@@ -2324,7 +2410,7 @@ const DYNAMIC_GENERATORS = {
       correctAnswer: pick.ans,
       unitLabel: "",
       tolerance: 0.02,
-      fullSolution: `【動態題解】\n\(R^2_{adj} = 1 - \left[ \frac{SSE / (n - k - 1)}{SST / (n - 1)} \right] = 1 - \left[ \frac{${pick.sse} / ${df_e}}{${pick.sst} / ${df_t}} \right] = 1 - \left[ \frac{${mse.toFixed(4)}}{${mst.toFixed(4)}} \right] \approx ${pick.ans}\)。`
+      fullSolution: `【動態題解】\n$$R^2_{adj} = 1 - \\left[ \\frac{SSE / (n - k - 1)}{SST / (n - 1)} \\right] = 1 - \\left[ \\frac{${pick.sse} / ${df_e}}{${pick.sst} / ${df_t}} \\right] = 1 - \\left[ \\frac{${mse.toFixed(4)}}{${mst.toFixed(4)}} \\right] \\approx ${pick.ans}$$`
     };
   },
 
@@ -2345,11 +2431,11 @@ const DYNAMIC_GENERATORS = {
         "目標函數": `Max Z = ${pick.c1}*x1 + ${pick.c2}*x2`,
         "限制條件": "2*x1 + x2 <= 16; x1 + 2*x2 <= 14"
       },
-      questionPrompt: `考慮線性規劃：$\text{極大化 } Z = ${pick.c1} x_1 + ${pick.c2} x_2$，受限於 $2 x_1 + x_2 \le 16$ 與 $x_1 + 2 x_2 \le 14$（$x_1, x_2 \ge 0$）。圖解法已求得最佳頂點出現在兩限制線交點 $(6, 4)$。請計算該頂點之最大總利潤 $Z$。`,
+      questionPrompt: `考慮線性規劃：$\\text{極大化 } Z = ${pick.c1} x_1 + ${pick.c2} x_2$，受限於 $2 x_1 + x_2 \\le 16$ 與 $x_1 + 2 x_2 \\le 14$（$x_1, x_2 \\ge 0$）。圖解法已求得最佳頂點出現在兩限制線交點 $(6, 4)$。請計算該頂點之最大總利潤 $Z$。`,
       correctAnswer: pick.ans,
       unitLabel: "萬元",
       tolerance: 0.1,
-      fullSolution: `【動態題解】\n代入最佳頂點 $(6, 4)$：\n\(Z^* = ${pick.c1}(6) + ${pick.c2}(4) = ${pick.c1*6} + ${pick.c2*4} = ${pick.ans}\text{ 萬元}\)。`
+      fullSolution: `【動態題解】\n代入最佳頂點 $(6, 4)$：\n$$Z^* = ${pick.c1}(6) + ${pick.c2}(4) = ${pick.c1*6} + ${pick.c2*4} = ${pick.ans}\\text{ 萬元}$$`
     };
   },
 
@@ -2368,11 +2454,11 @@ const DYNAMIC_GENERATORS = {
         "限制條件": "4*x1 + 5*x2 >= 60",
         "目前解 (x1, x2)": `(${pick.x1}, ${pick.x2})`
       },
-      questionPrompt: `蛋白質最低攝取量限制式：$$4 x_1 + 5 x_2 \ge 60$$\n目前調配使用 $x_1 = ${pick.x1}$ 單位、$x_2 = ${pick.x2}$ 單位。請計算該限制條件在目前方案下的「超額變數（Surplus Variable $E_1$）」數值。`,
+      questionPrompt: `蛋白質最低攝取量限制式：$$4 x_1 + 5 x_2 \\ge 60$$\n目前調配使用 $x_1 = ${pick.x1}$ 單位、$x_2 = ${pick.x2}$ 單位。請計算該限制條件在目前方案下的「超額變數（Surplus Variable $E_1$）」數值。`,
       correctAnswer: pick.ans,
       unitLabel: "單位",
       tolerance: 0.05,
-      fullSolution: `【動態題解】\n超額變數 \(E_1 = 4(${pick.x1}) + 5(${pick.x2}) - 60 = ${lhs} - 60 = ${pick.ans}\text{ 單位}\)。`
+      fullSolution: `【動態題解】\n超額變數：\n$$E_1 = 4(${pick.x1}) + 5(${pick.x2}) - 60 = ${lhs} - 60 = ${pick.ans}\\text{ 單位}$$`
     };
   },
 
@@ -2389,7 +2475,7 @@ const DYNAMIC_GENERATORS = {
         "目標函數": `Min Z = ${pick.c1}*X1 + ${pick.c2}*X2`,
         "限制式": "2*X1 + 3*X2 >= 12; X1 + X2 >= 5"
       },
-      questionPrompt: `無人車搬運成本極小化：$$\text{極小化 } Z = ${pick.c1} X_1 + ${pick.c2} X_2$$\n受限於 $2 X_1 + 3 X_2 \ge 12$ 與 $X_1 + X_2 \ge 5$（$X_1, X_2 \ge 0$）。可行解頂點有 $(6, 0)$、$(3, 2)$、$(0, 5)$。請計算達成最低總成本之最佳解 $Z$ 數值。`,
+      questionPrompt: `無人車搬運成本極小化：$$\\text{極小化 } Z = ${pick.c1} X_1 + ${pick.c2} X_2$$\n受限於 $2 X_1 + 3 X_2 \\ge 12$ 與 $X_1 + X_2 \\ge 5$（$X_1, X_2 \\ge 0$）。可行解頂點有 $(6, 0)$、$(3, 2)$、$(0, 5)$。請計算達成最低總成本之最佳解 $Z$ 數值。`,
       correctAnswer: pick.ans,
       unitLabel: "萬元",
       tolerance: 0.1,
@@ -2407,8 +2493,8 @@ const DYNAMIC_GENERATORS = {
         "目標函數": `Max Z = c1*x1 + ${c2}*x2`,
         "邊界斜率": "m1 = -1/2, m2 = -2"
       },
-      questionPrompt: `承接線性規劃：$\text{Max } Z = c_1 x_1 + ${c2} x_2$，最佳頂點落在點 $D(6, 4)$，該點由兩條緊縮邊界 $x_1 + 2 x_2 = 14$（斜率 $-1/2$）與 $2 x_1 + x_2 = 16$（斜率 $-2$）相交而成。\n若欲使原最佳頂點維持不變，請在紙筆上完整求出 $c_1$ 的允許變動範圍（Range of Optimality）。`,
-      fullSolution: `【動態題解】\n等利潤線斜率夾擠：\n$$-2 \le -\frac{c_1}{${c2}} \le -\frac{1}{2}$$\n同乘以 $-${c2}$（不等號轉向）：\n$$${upper} \ge c_1 \ge ${lower} \iff ${lower} \le c_1 \le ${upper}$$`
+      questionPrompt: `承接線性規劃：$\\text{Max } Z = c_1 x_1 + ${c2} x_2$，最佳頂點落在點 $D(6, 4)$，該點由兩條緊縮邊界 $x_1 + 2 x_2 = 14$（斜率 $-1/2$）與 $2 x_1 + x_2 = 16$（斜率 $-2$）相交而成。\n若欲使原最佳頂點維持不變，請在紙筆上完整求出 $c_1$ 的允許變動範圍（Range of Optimality）。`,
+      fullSolution: `【動態題解】\n等利潤線斜率夾擠：\n$$-2 \\le -\\frac{c_1}{${c2}} \\le -\\frac{1}{2}$$\n同乘以 $-${c2}$（不等號轉向）：\n$$${upper} \\ge c_1 \\ge ${lower} \\iff ${lower} \\le c_1 \\le ${upper}$$`
     };
   },
 
@@ -2422,11 +2508,11 @@ const DYNAMIC_GENERATORS = {
         "限制線 1 斜率": "-2/3",
         "限制線 2 斜率": "-2"
       },
-      questionPrompt: `工廠生產利潤極大化：$\text{Max } Z = c_1 x_1 + ${c2} x_2$。最佳解落在斜率分別為 $-2/3$ 與 $-2$ 的兩條緊縮限制線交點頂點上。根據斜率夾擠準則（$-2 \le -\frac{c_1}{${c2}} \le -\frac{2}{3}$），請計算產品 1 單位利潤 $c_1$ 之「容許變動上限」。`,
+      questionPrompt: `工廠生產利潤極大化：$\\text{Max } Z = c_1 x_1 + ${c2} x_2$。最佳解落在斜率分別為 $-2/3$ 與 $-2$ 的兩條緊縮限制線交點頂點上。根據斜率夾擠準則（$-2 \\le -\\frac{c_1}{${c2}} \\le -\\frac{2}{3}$），請計算產品 1 單位利潤 $c_1$ 之「容許變動上限」。`,
       correctAnswer: upper,
       unitLabel: "元",
       tolerance: 0.1,
-      fullSolution: `【動態題解】\n由 $-2 \le -\frac{c_1}{${c2}}$ 同乘 $-${c2}$ 得 $c_1 \le 2 \times ${c2} = ${upper}$。\n故 $c_1$ 變動上限為 ${upper} 元。`
+      fullSolution: `【動態題解】\n由 $-2 \\le -\\frac{c_1}{${c2}}$ 同乘 $-${c2}$ 得 $c_1 \\le 2 \\times ${c2} = ${upper}$。\n故 $c_1$ 變動上限為 ${upper} 元。`
     };
   },
 
@@ -2443,7 +2529,7 @@ const DYNAMIC_GENERATORS = {
         "公平比例條件": `(xA1+xA2)/${pick.A} = (xB1+xB2)/${pick.B} = (xC1+xC2)/${pick.C}`
       },
       questionPrompt: `【情境描述】科學園區管委會為 A、B、C 三個廠區規劃生產面積，廠房面積分別為 A: ${pick.A}、B: ${pick.B}、C: ${pick.C} 公頃。【公平條款】**三個廠區各自的「總生產面積與其廠房面積」的比例要求完全相等**。\n請在紙筆上完整寫出該公平比例限制式之無分母線性化等式。`,
-      fullSolution: `【動態題解】\n連比例式：\(\frac{x_{A1} + x_{A2}}{${pick.A}} = \frac{x_{B1} + x_{B2}}{${pick.B}} = \frac{x_{C1} + x_{C2}}{${pick.C}}\)。\n交叉相乘線性化：\n1. A 與 B 比：\(${pick.B}(x_{A1} + x_{A2}) - ${pick.A}(x_{B1} + x_{B2}) = 0\)\n2. B 與 C 比：\(${pick.C}(x_{B1} + x_{B2}) - ${pick.B}(x_{C1} + x_{C2}) = 0\)`
+      fullSolution: `【動態題解】\n連比例式：\n$$\\frac{x_{A1} + x_{A2}}{${pick.A}} = \\frac{x_{B1} + x_{B2}}{${pick.B}} = \\frac{x_{C1} + x_{C2}}{${pick.C}}$$\n交叉相乘線性化：\n1. A 與 B 比：$$${pick.B}(x_{A1} + x_{A2}) - ${pick.A}(x_{B1} + x_{B2}) = 0$$\n2. B 與 C 比：$$${pick.C}(x_{B1} + x_{B2}) - ${pick.B}(x_{C1} + x_{C2}) = 0$$`
     };
   },
 
@@ -2466,7 +2552,7 @@ const DYNAMIC_GENERATORS = {
       correctAnswer: pick.net,
       unitLabel: "元",
       tolerance: 1.0,
-      fullSolution: `【動態題解】\n1. 產能擴充帶來之毛利增加 \(= ${pick.shadow} \times ${pick.delta} = ${gross}\text{ 元}\)。\n2. 扣除擴充成本 \(= ${gross} - ${pick.cost} = ${pick.net}\text{ 元}\)。`
+      fullSolution: `【動態題解】\n1. 產能擴充帶來之毛利增加：\n   $$${pick.shadow} \\times ${pick.delta} = ${gross}\\text{ 元}$$\n2. 扣除擴充成本：\n   $$${gross} - ${pick.cost} = ${pick.net}\\text{ 元}$$`
     };
   },
 
@@ -2532,7 +2618,7 @@ const DYNAMIC_GENERATORS = {
       correctAnswer: pick.ans,
       unitLabel: "萬元",
       tolerance: 0.05,
-      fullSolution: `【動態題解】\n1. 雨天全場最佳獲利 \(= \max(${pick.vA[1]}, ${pick.vB[1]}) = ${pick.max2}\text{ 萬元}\)。\n2. 方案 A 後悔值 \(= ${pick.max2} - ${pick.vA[1]} = ${pick.ans}\text{ 萬元}\)。`
+      fullSolution: `【動態題解】\n1. 雨天全場最佳獲利：\n   $$\\max(${pick.vA[1]}, ${pick.vB[1]}) = ${pick.max2}\\text{ 萬元}$$\n2. 方案 A 後悔值：\n   $$${pick.max2} - ${pick.vA[1]} = ${pick.ans}\\text{ 萬元}$$`
     };
   },
 
@@ -2556,7 +2642,7 @@ const DYNAMIC_GENERATORS = {
       correctAnswer: pick.ans,
       unitLabel: "萬元",
       tolerance: 0.1,
-      fullSolution: `【動態題解】\nLaplace 假設各情境等機率：\n\(Avg = \frac{${pick.v[0]} + ${pick.v[1]} + ${pick.v[2]}}{3} = \frac{${sum}}{3} = ${pick.ans}\text{ 萬元}\)。`
+      fullSolution: `【動態題解】\nLaplace 假設各情境等機率：\n$$Avg = \\frac{${pick.v[0]} + ${pick.v[1]} + ${pick.v[2]}}{3} = \\frac{${sum}}{3} = ${pick.ans}\\text{ 萬元}$$`
     };
   },
 
@@ -2685,6 +2771,7 @@ const DYNAMIC_GENERATORS = {
     };
   }
 };
+
 
 /**
  * 動態參數生成器呼叫介面

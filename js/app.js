@@ -469,7 +469,7 @@ function renderConceptWalkthrough(unitId) {
           <div style="font-weight: 700; color: #38bdf8; margin-bottom: 0.5rem;">🔔 常態分佈經驗法則 (Empirical Rule 68% - 95% - 99.7%)</div>
           <p style="font-size: 0.88rem; color: #e2e8f0; margin-bottom: 0.6rem; line-height: 1.6;">
             <strong>【核心直觀意義：衡量數據圍繞平均數聚集的密集程度】</strong><br>
-            這三個關鍵百分比揭示了常態資料<strong>「有多密集地聚攏在平均值 $\bar{X}$ 周遭」</strong>。在對稱鐘形分佈下，離平均值越近的區間密度最高，超過 $3S$ 以外的極端值機率趨近於零！
+            這三個關鍵百分比揭示了常態資料<strong>「有多密集地聚攏在平均值 $\\bar{X}$ 周遭」</strong>。在對稱鐘形分佈下，離平均值越近的區間密度最高，超過 $3S$ 以外的極端值機率趨近於零！
           </p>
 
           <div class="svg-diagram-container">
@@ -504,14 +504,14 @@ function renderConceptWalkthrough(unitId) {
           <div style="background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(56, 189, 248, 0.35); border-radius: 8px; padding: 0.85rem; margin-top: 0.75rem;">
             <div style="font-weight: 700; color: #38bdf8; font-size: 0.92rem; margin-bottom: 0.4rem;">☕ 實務商務案例：連鎖超商外帶咖啡充填容量品管</div>
             <div style="font-size: 0.85rem; color: #cbd5e1; line-height: 1.7;">
-              假設某超商自動咖啡機之充填容量服從常態分佈，平均充填量 $\bar{X} = 300\text{ ml}$，樣本標準差 $S = 10\text{ ml}$：
+              假設某超商自動咖啡機之充填容量服從常態分佈，平均充填量 $\\bar{X} = 300\\text{ ml}$，樣本標準差 $S = 10\\text{ ml}$：
               <ul style="margin: 0.3rem 0 0.3rem 1.25rem; padding: 0;">
-                <li><strong style="color: #a5b4fc;">$\bar{X} \pm 1S$（$290 \sim 310\text{ ml}$）</strong>：約有 <strong>$68.3\%$</strong>（超過三分之二）的咖啡杯容量落在這段最核心範圍內。</li>
-                <li><strong style="color: #38bdf8;">$\bar{X} \pm 2S$（$280 \sim 320\text{ ml}$）</strong>：涵蓋高達 <strong>$95.4\%$</strong> 的咖啡，僅有約 $4.6\%$ 會偏離此區間（品管合格標準常設於此）。</li>
-                <li><strong style="color: #34d399;">$\bar{X} \pm 3S$（$270 \sim 330\text{ ml}$）</strong>：幾乎涵蓋全部杯子（<strong>$99.7\%$</strong>）！若出現容量 $< 270\text{ ml}$（嚴重偷工減料顧客客訴）或 $> 330\text{ ml}$（滿溢燙傷）的極端異常杯數<strong>合計不到 $0.3\%$</strong>（每 1,000 杯中不到 3 杯），一旦出現即可認定為設備故障或極端異常！</li>
+                <li><strong style="color: #a5b4fc;">$\\bar{X} \\pm 1S$（$290 \\sim 310\\text{ ml}$）</strong>：約有 <strong>$68.3\\%$</strong>（超過三分之二）的咖啡杯容量落在這段最核心範圍內。</li>
+                <li><strong style="color: #38bdf8;">$\\bar{X} \\pm 2S$（$280 \\sim 320\\text{ ml}$）</strong>：涵蓋高達 <strong>$95.4\\%$</strong> 的咖啡，僅有約 $4.6\\%$ 會偏離此區間（品管合格標準常設於此）。</li>
+                <li><strong style="color: #34d399;">$\\bar{X} \\pm 3S$（$270 \\sim 330\\text{ ml}$）</strong>：幾乎涵蓋全部杯子（<strong>$99.7\\%$</strong>）！若出現容量 $< 270\\text{ ml}$（嚴重偷工減料顧客客訴）或 $> 330\\text{ ml}$（滿溢燙傷）的極端異常杯數<strong>合計不到 $0.3\\%$</strong>（每 1,000 杯中不到 3 杯），一旦出現即可認定為設備故障或極端異常！</li>
               </ul>
               <div style="font-size: 0.8rem; color: #94a3b8; margin-top: 0.4rem; border-top: 1px dashed rgba(255,255,255,0.15); padding-top: 0.4rem;">
-                ⚠️ <strong>柴比氏定理對比 (Chebyshev)</strong>：若為<strong>任意非對稱分佈</strong>，則不能用經驗法則，須改用柴比氏定理（在 $\bar{X} \pm kS$ 內至少佔 $1 - 1/k^2$，當 $k=2$ 時至少 $75\%$）。
+                ⚠️ <strong>柴比氏定理對比 (Chebyshev)</strong>：若為<strong>任意非對稱分佈</strong>，則不能用經驗法則，須改用柴比氏定理（在 $\\bar{X} \\pm kS$ 內至少佔 $1 - 1/k^2$，當 $k=2$ 時至少 $75\\%$）。
               </div>
             </div>
           </div>
@@ -534,10 +534,10 @@ function renderConceptWalkthrough(unitId) {
               涵蓋中間 50% 核心觀測值，不受極端值影響。<br>
               <strong>📐 板書唯一標準位置公式（依課堂唯一規範）</strong>：
               <div style="background: rgba(15, 23, 42, 0.65); padding: 0.5rem 0.75rem; border-radius: 6px; margin: 0.4rem 0; border: 1px solid rgba(167, 139, 250, 0.3);">
-                • <strong>$Q_1$（第一四分位數）</strong> $= P_{25} \implies$ 板書位置公式：<strong>$L_{25\%} = \\frac{25}{100}(n-1) + 1$</strong><br>
-                • <strong>$Q_2$（第二四分位數 / 中位數）</strong> $= P_{50} \implies$ 板書位置公式：<strong>$L_{50\%} = \\frac{50}{100}(n-1) + 1$</strong><br>
-                • <strong>$Q_3$（第三四分位數）</strong> $= P_{75} \implies$ 板書位置公式：<strong>$L_{75\%} = \\frac{75}{100}(n-1) + 1$</strong><br>
-                • <strong>計算順序</strong>：先用板書位置算出 $L_{25\%}$ 與 $L_{75\%}$ 後，經線性內插求得數值 $Q_1$ 與 $Q_3$，再相減算出 $IQR = Q_3 - Q_1$！
+                • <strong>$Q_1$（第一四分位數）</strong> $= P_{25} \\implies$ 板書位置公式：<strong>$L_{25} = L_{25\\%} = \\frac{25}{100}(n-1) + 1$</strong><br>
+                • <strong>$Q_2$（第二四分位數 / 中位數）</strong> $= P_{50} \\implies$ 板書位置公式：<strong>$L_{50} = L_{50\\%} = \\frac{50}{100}(n-1) + 1$</strong><br>
+                • <strong>$Q_3$（第三四分位數）</strong> $= P_{75} \\implies$ 板書位置公式：<strong>$L_{75} = L_{75\\%} = \\frac{75}{100}(n-1) + 1$</strong><br>
+                • <strong>計算順序</strong>：先用板書位置算出 $L_{25\\%}$ 與 $L_{75\\%}$ 後，經線性內插求得數值 $Q_1$ 與 $Q_3$，再相減算出 $IQR = Q_3 - Q_1$！
               </div>
               <strong>🚨 異常值判定圍欄 (Outlier Fences)</strong>：
               $$\\text{下界} = Q_1 - 1.5 \\times IQR, \\quad \\text{上界} = Q_3 + 1.5 \\times IQR$$
