@@ -112,6 +112,29 @@ html = """<!DOCTYPE html>
             if (state.status !== "mastered") {
               results.submissionErrors.push({ id: q.id, error: `Expected status mastered, got ${state.status}` });
             }
+            // Additional test: full-width input conversion on numeric questions
+            if (dynQ.type === "numeric") {
+              // Convert answer to full-width string
+              const ansStr = String(dynQ.correctAnswer);
+              const fwStr = ansStr.replace(/[!-~]/g, ch => String.fromCharCode(ch.charCodeAt(0) + 0xfee0));
+              
+              // Reset state to unattempted
+              StudyStorage.updateQuestionState(q.id, { status: "unattempted", userAttempts: 0, lastSelected: null });
+              input.value = fwStr;
+              submitNumericAnswer(q.id);
+              const fwState = StudyStorage.getQuestionState(q.id);
+              if (fwState.status !== "mastered") {
+                results.submissionErrors.push({ id: q.id, error: `Full-width numeric submission failed. Expected mastered, got ${fwState.status}` });
+              }
+
+              // Test malformed input rejection (e.g. "1.2.3" or "12abc")
+              input.value = ansStr + "abc";
+              submitNumericAnswer(q.id);
+              const feedbackEl = document.getElementById(`numeric-feedback-${q.id}`);
+              if (!feedbackEl || !feedbackEl.textContent.includes("請輸入合法的數字格式")) {
+                results.submissionErrors.push({ id: q.id, error: `Malformed input "${input.value}" was not properly rejected` });
+              }
+            }
           } else if (dynQ.type === "mcq") {
             handleMcqSelect(q.id, dynQ.correctAnswer);
             const state = StudyStorage.getQuestionState(q.id);
@@ -130,6 +153,22 @@ html = """<!DOCTYPE html>
           results.uiErrors.push({ id: q.id, error: err.message });
         }
       });
+
+      // 3. Test btnLogo home reset
+      try {
+        currentUnitId = "ch13-decision";
+        currentLevel = 4;
+        renderMainContent();
+        const logo = document.getElementById("btnLogo");
+        if (logo) {
+          logo.click();
+          if (currentUnitId !== "ch02-descriptive" || currentLevel !== 0) {
+            results.uiErrors.push({ id: "btnLogo", error: `Expected unit ch02-descriptive and level 0, got ${currentUnitId}, ${currentLevel}` });
+          }
+        }
+      } catch (err) {
+        results.uiErrors.push({ id: "btnLogo", error: err.message });
+      }
 
       document.getElementById("results").textContent = JSON.stringify(results);
     });

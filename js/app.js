@@ -100,17 +100,21 @@ function setupGlobalActions() {
   const btnMobileWeakness = document.getElementById("btnMobileWeakness");
   const toggleWeakness = () => {
     isWeaknessMode = !isWeaknessMode;
-    btnWeakness.classList.toggle("btn-amber", isWeaknessMode);
-    btnWeakness.classList.toggle("btn-secondary", !isWeaknessMode);
+    if (btnWeakness) {
+      btnWeakness.classList.toggle("btn-amber", isWeaknessMode);
+      btnWeakness.classList.toggle("btn-secondary", !isWeaknessMode);
+    }
     if (btnMobileWeakness) {
       btnMobileWeakness.classList.toggle("btn-amber", isWeaknessMode);
       btnMobileWeakness.classList.toggle("btn-secondary", !isWeaknessMode);
     }
-    elActiveModeBadge.textContent = isWeaknessMode ? "🎯 弱點清剿中" : "全部單元";
-    elActiveModeBadge.className = `badge ${isWeaknessMode ? "badge-review" : "badge-unattempted"}`;
+    if (elActiveModeBadge) {
+      elActiveModeBadge.textContent = isWeaknessMode ? "🎯 弱點清剿中" : "全部單元";
+      elActiveModeBadge.className = `badge ${isWeaknessMode ? "badge-review" : "badge-unattempted"}`;
+    }
     renderMainContent();
   };
-  btnWeakness.addEventListener("click", toggleWeakness);
+  if (btnWeakness) btnWeakness.addEventListener("click", toggleWeakness);
   if (btnMobileWeakness) btnMobileWeakness.addEventListener("click", toggleWeakness);
 
   // 考前救急包彈窗
@@ -120,13 +124,15 @@ function setupGlobalActions() {
   const btnCloseCram = document.getElementById("btnCloseCramModal");
   const openCram = () => {
     renderCramModal();
-    cramModal.style.display = "flex";
+    if (cramModal) cramModal.style.display = "flex";
   };
-  btnCram.addEventListener("click", openCram);
+  if (btnCram) btnCram.addEventListener("click", openCram);
   if (btnMobileCram) btnMobileCram.addEventListener("click", openCram);
-  btnCloseCram.addEventListener("click", () => {
-    cramModal.style.display = "none";
-  });
+  if (btnCloseCram && cramModal) {
+    btnCloseCram.addEventListener("click", () => {
+      cramModal.style.display = "none";
+    });
+  }
 
   // 戰力分析儀表板彈窗
   const btnDashboard = document.getElementById("btnDashboard");
@@ -135,29 +141,62 @@ function setupGlobalActions() {
   const btnCloseDashboard = document.getElementById("btnCloseDashboardModal");
   const openDashboard = () => {
     renderDashboardModal();
-    dashboardModal.style.display = "flex";
+    if (dashboardModal) dashboardModal.style.display = "flex";
   };
-  btnDashboard.addEventListener("click", openDashboard);
+  if (btnDashboard) btnDashboard.addEventListener("click", openDashboard);
   if (btnMobileDashboard) btnMobileDashboard.addEventListener("click", openDashboard);
-  btnCloseDashboard.addEventListener("click", () => {
-    dashboardModal.style.display = "none";
-  });
+  if (btnCloseDashboard && dashboardModal) {
+    btnCloseDashboard.addEventListener("click", () => {
+      dashboardModal.style.display = "none";
+    });
+  }
 
   // 側邊欄資料備份與重設
-  document.getElementById("btnExportSidebar").addEventListener("click", () => {
-    StudyStorage.exportBackup();
-  });
-  document.getElementById("btnResetSidebar").addEventListener("click", () => {
-    if (confirm("確定要重設所有作答進度與掌握度紀錄嗎？此動作無法復原。")) {
-      StudyStorage.resetAll();
-      dynamicQuestionCache = {};
-      mcqOptionShuffledCache = {};
+  const btnExport = document.getElementById("btnExportSidebar");
+  if (btnExport) {
+    btnExport.addEventListener("click", () => {
+      StudyStorage.exportBackup();
+    });
+  }
+  const btnReset = document.getElementById("btnResetSidebar");
+  if (btnReset) {
+    btnReset.addEventListener("click", () => {
+      if (confirm("確定要重設所有作答進度與掌握度紀錄嗎？此動作無法復原。")) {
+        StudyStorage.resetAll();
+        dynamicQuestionCache = {};
+        mcqOptionShuffledCache = {};
+        renderSidebarUnits();
+        updateProgressUI();
+        renderMainContent();
+        alert("學習進度已成功重設！");
+      }
+    });
+  }
+
+  // 點擊 Logo 返回首頁
+  const btnLogo = document.getElementById("btnLogo");
+  if (btnLogo) {
+    btnLogo.addEventListener("click", (e) => {
+      e.preventDefault();
+      currentUnitId = "ch02-descriptive";
+      currentLevel = 0;
+      isWeaknessMode = false;
+      elActiveModeBadge.textContent = "全部單元";
+      elActiveModeBadge.className = "badge badge-unattempted";
+      if (btnWeakness) {
+        btnWeakness.classList.remove("btn-amber");
+        btnWeakness.classList.add("btn-secondary");
+      }
+      if (btnMobileWeakness) {
+        btnMobileWeakness.classList.remove("btn-amber");
+        btnMobileWeakness.classList.add("btn-secondary");
+      }
+      StudyStorage.setLastActive(currentUnitId, currentLevel);
       renderSidebarUnits();
-      updateProgressUI();
+      renderLevelTabs();
       renderMainContent();
-      alert("學習進度已成功重設！");
-    }
-  });
+    });
+  }
 
   // 點擊遮罩關閉彈窗
   window.addEventListener("click", (e) => {
@@ -1902,7 +1941,7 @@ function createQuestionCard(q, originalQ, indexNum) {
   // 題目敘述
   const promptHtml = `
     <div style="font-size: 1rem; color: #e2e8f0; line-height: 1.7; margin: 1rem 0; white-space: pre-line;">
-      ${q.questionPrompt}
+      ${q.questionPrompt || q.prompt || ""}
     </div>
   `;
 
@@ -2110,29 +2149,49 @@ window.submitNumericAnswer = function (qId) {
     return;
   }
 
-  // 去除千分位逗點及多餘空白，支援例如 "1,600" 或 "8,640"
-  let cleanVal = rawVal.replace(/,/g, "").trim();
+  // 1. 全形轉半形 (含全形數字、小數點、正負號、斜線、百分比、千分位逗點)
+  let cleanVal = rawVal
+    .replace(/[\uff01-\uff5e]/g, (ch) => String.fromCharCode(ch.charCodeAt(0) - 0xfee0))
+    .replace(/\u3000/g, " ")
+    .trim();
 
-  // 支援結尾含百分比符號，例如 "50%" 或 "81.82 %"
+  // 2. 處理結尾百分比符號 (含半形 % 與全形轉半形之 %)
   let hasPercentSign = false;
   if (cleanVal.endsWith("%")) {
     hasPercentSign = true;
     cleanVal = cleanVal.slice(0, -1).trim();
   }
 
-  // 支援分數格式輸入 (例如 14/15 或 1,600/2)
+  // 3. 移除題目已知單位或常見中文單位後綴 (例如 萬元, 萬, 元, 筆, 個, 人, 次, 間)
+  if (q.unitLabel && q.unitLabel.trim() && q.unitLabel.trim() !== "%") {
+    const esc = q.unitLabel.trim().replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    cleanVal = cleanVal.replace(new RegExp(esc + "$", "i"), "").trim();
+  }
+  cleanVal = cleanVal.replace(/(?:萬元|萬|元|筆|個|人|次|間|組)$/, "").trim();
+
+  // 4. 去除千分位逗點及多餘空白，支援例如 "1,600" 或 "8,640"
+  cleanVal = cleanVal.replace(/,/g, "").trim();
+
+  // 5. 支援分數格式輸入 (例如 14/15 或 1/2) 或嚴格數字格式
   let userNum = NaN;
   if (cleanVal.includes("/")) {
     const parts = cleanVal.split("/");
     if (parts.length === 2) {
-      const num = parseFloat(parts[0].trim());
-      const den = parseFloat(parts[1].trim());
-      if (den !== 0 && !isNaN(num) && !isNaN(den)) {
-        userNum = num / den;
+      const numStr = parts[0].trim();
+      const denStr = parts[1].trim();
+      if (/^[-+]?\d+(?:\.\d+)?$/.test(numStr) && /^[-+]?\d+(?:\.\d+)?$/.test(denStr)) {
+        const num = parseFloat(numStr);
+        const den = parseFloat(denStr);
+        if (den !== 0 && isFinite(num) && isFinite(den)) {
+          userNum = num / den;
+        }
       }
     }
   } else {
-    userNum = parseFloat(cleanVal);
+    // 嚴格比對合法浮點數格式，杜絕 "1.2.3" 或 "12abc" 等非法字串被 parseFloat 誤判截斷
+    if (/^[-+]?(?:\d+\.?\d*|\.\d+)(?:[eE][-+]?\d+)?$/.test(cleanVal)) {
+      userNum = Number(cleanVal);
+    }
   }
 
   if (isNaN(userNum) || !isFinite(userNum)) {
@@ -2259,16 +2318,24 @@ window.randomizeCardParam = function (qId, dynamicType) {
   });
   delete mcqOptionShuffledCache[qId];
 
-  // 取得原卡片在當前階梯中的題目序號 indexNum
+  // 取得原卡片在當前階梯或目前 DOM 中的題目序號 indexNum
   let indexNum = 1;
-  const filtered = RAW_QUESTIONS.filter((q) => q.unit === originalQ.unit && q.level === originalQ.level);
-  const foundIdx = filtered.findIndex((q) => q.id === qId);
-  if (foundIdx !== -1) {
-    indexNum = foundIdx + 1;
+  const oldCard = document.getElementById(`card-${qId}`);
+  if (oldCard) {
+    const titleMatch = oldCard.querySelector(".question-header h3")?.textContent.match(/#(\d+)\./);
+    if (titleMatch) {
+      indexNum = parseInt(titleMatch[1], 10);
+    }
+  }
+  if (!oldCard || !indexNum) {
+    const filtered = RAW_QUESTIONS.filter((q) => q.unit === originalQ.unit && q.level === originalQ.level);
+    const foundIdx = filtered.findIndex((q) => q.id === qId);
+    if (foundIdx !== -1) {
+      indexNum = foundIdx + 1;
+    }
   }
 
   // 局部重新繪製卡片
-  const oldCard = document.getElementById(`card-${qId}`);
   if (oldCard) {
     const newCard = createQuestionCard(merged, originalQ, indexNum);
     oldCard.replaceWith(newCard);

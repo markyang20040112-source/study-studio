@@ -1260,7 +1260,7 @@ const RAW_QUESTIONS = [
     options: null,
     correctAnswer: 38,
     unitLabel: "萬元",
-    tolerance: 0,
+    tolerance: 0.1,
     formulaHint: "Z(D) = 3(6) + 5(4) = 18 + 20 = 38",
     fullSolution: "【步驟一：逐一將頂點代入目標函數 Z = 3x1 + 5x2】\n- 點 A(0, 0): $Z = 3(0) + 5(0) = 0$\n- 點 B(0, 6): $Z = 3(0) + 5(6) = 30$\n- 點 C(2, 6): $Z = 3(2) + 5(6) = 6 + 30 = 36$\n- 點 D(6, 4): $Z = 3(6) + 5(4) = 18 + 20 = 38$（最大！）\n- 點 E(8, 0): $Z = 3(8) + 5(0) = 24$\n【步驟二：結論】最佳頂點為 $(6, 4)$，最大目標值 $Z^* = 38$ 萬元。",
     cramSummary: {
@@ -1284,7 +1284,7 @@ const RAW_QUESTIONS = [
     options: null,
     correctAnswer: 17,
     unitLabel: "萬元",
-    tolerance: 0,
+    tolerance: 0.1,
     formulaHint: "Z(B) = 3(3) + 4(2) = 9 + 8 = 17 \\text{ (求最小！)}",
     fullSolution: "【步驟一：檢驗極小化目標函數 Z = 3X1 + 4X2】\n- 頂點 A(0, 5): $Z = 3(0) + 4(5) = 20$\n- 頂點 B(3, 2): $Z = 3(3) + 4(2) = 9 + 8 = 17$（最小！）\n- 頂點 C(6, 0): $Z = 3(6) + 4(0) = 18$\n【步驟二：超額變數檢驗】代入 $B(3, 2)$：\n- 限制 1：$2(3) + 3(2) = 12 \\ge 12 \\implies E_1 = 0$（耗盡 Binding）\n- 限制 2：$3 + 2 = 5 \\ge 5 \\implies E_2 = 0$（耗盡 Binding）\n【步驟三：結論】最佳解為 $(3, 2)$，最低總成本 $Z^* = 17$ 萬元。",
     cramSummary: {
