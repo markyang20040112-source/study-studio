@@ -1733,18 +1733,22 @@ const RAW_QUESTIONS = [
 ];
 
 /**
- * 動態參數生成器 (Dynamic Parameter Generator)
- * 為打底練習題生成隨機參數，防止死背答案
+ * 全面題庫動態參數生成器註冊表 (Comprehensive Dynamic Question Generators)
+ * 涵蓋等級 2、等級 3 與等級 4 所有計算與推導題，防止死背答案
  */
-function generateDynamicQuestion(dynamicType) {
-  if (dynamicType === "cagr") {
-    // 隨機選一組漂亮的整數開方組合
+const DYNAMIC_GENERATORS = {
+  // ==========================================
+  // 單元一：敘述統計與位置量數
+  // ==========================================
+  "q-u1-l2-01": function(q) {
     const combos = [
-      { v0: 1000, t: 3, ratio: 8, ans: 100, label: "1,000 萬增至 8,000 萬，歷經 3 期" }, // 8^(1/3) = 2 -> 100%
-      { v0: 1600, t: 4, ratio: 5.0625, ans: 50, label: "1,600 萬增至 8,100 萬，歷經 4 期" }, // (81/16)^(1/4) = 1.5 -> 50%
-      { v0: 2000, t: 2, ratio: 2.25, ans: 50, label: "2,000 萬增至 4,500 萬，歷經 2 期" }, // (45/20)^0.5 = 1.5 -> 50%
-      { v0: 2500, t: 2, ratio: 1.44, ans: 20, label: "2,500 萬增至 3,600 萬，歷經 2 期" }, // 1.2 -> 20%
-      { v0: 1000, t: 3, ratio: 1.728, ans: 20, label: "1,000 萬增至 1,728 萬，歷經 3 期" } // 1.2 -> 20%
+      { v0: 1000, t: 3, ratio: 8, ans: 100 },
+      { v0: 1600, t: 4, ratio: 5.0625, ans: 50 },
+      { v0: 2000, t: 2, ratio: 2.25, ans: 50 },
+      { v0: 2500, t: 2, ratio: 1.44, ans: 20 },
+      { v0: 1000, t: 3, ratio: 1.728, ans: 20 },
+      { v0: 4000, t: 2, ratio: 1.5625, ans: 25 },
+      { v0: 2000, t: 3, ratio: 3.375, ans: 50 }
     ];
     const pick = combos[Math.floor(Math.random() * combos.length)];
     const vt = Math.round(pick.v0 * pick.ratio);
@@ -1758,18 +1762,15 @@ function generateDynamicQuestion(dynamicType) {
       correctAnswer: pick.ans,
       unitLabel: "%",
       tolerance: 0.1,
-      fullSolution: `【動態題解】\\(CAGR = (${vt} / ${pick.v0})^{1/${pick.t}} - 1 = (${pick.ratio})^{1/${pick.t}} - 1 = ${1 + pick.ans/100} - 1 = ${pick.ans}\\%\\)。`
+      fullSolution: `【動態題解】\n\(CAGR = (${vt} / ${pick.v0})^{1/${pick.t}} - 1 = (${pick.ratio})^{1/${pick.t}} - 1 = ${1 + pick.ans/100} - 1 = ${pick.ans}\%\)。`
     };
-  }
+  },
 
-  if (dynamicType === "percentile") {
-    // 隨機生成 9 筆已排序數值與抽測百分位數
+  "q-u1-l2-02": function(q) {
     const base = Math.floor(Math.random() * 15) + 10;
     const diffs = [5, 4, 6, 6, 6, 8, 10, 12];
     let nums = [base];
-    for (let d of diffs) {
-      nums.push(nums[nums.length - 1] + d);
-    }
+    for (let d of diffs) nums.push(nums[nums.length - 1] + d);
     const n = 9;
     const targets = [25, 40, 50, 70, 75];
     const x = targets[Math.floor(Math.random() * targets.length)];
@@ -1779,7 +1780,6 @@ function generateDynamicQuestion(dynamicType) {
     const x_p = nums[p - 1];
     const x_p1 = nums[p];
     const ans = Math.round((x_p + d * (x_p1 - x_p)) * 100) / 100;
-
     return {
       givenData: {
         "排序數列": `[${nums.join(", ")}]`,
@@ -1790,20 +1790,128 @@ function generateDynamicQuestion(dynamicType) {
       correctAnswer: ans,
       unitLabel: "",
       tolerance: 0.05,
-      fullSolution: `【動態題解】\n1. 位置 \\(L_{${x}} = \\frac{${x}}{100} \\times (9 - 1) + 1 = ${L.toFixed(2)}\\)。\n2. 整數項 \\(p = ${p}\\)，小數項 \\(0.d = ${d.toFixed(2)}\\)。\n3. 第 ${p} 筆為 ${x_p}，第 ${p+1} 筆為 ${x_p1}。\n4. 內插數值 \\(P_{${x}} = ${x_p} + ${d.toFixed(2)} \\times (${x_p1} - ${x_p}) = ${ans}\\)。`
+      fullSolution: `【動態題解】\n1. 位置 \(L_{${x}} = \frac{${x}}{100} \times (9 - 1) + 1 = ${L.toFixed(2)}\)。\n2. 整數項 \(p = ${p}\)，小數項 \(0.d = ${d.toFixed(2)}\)。\n3. 第 ${p} 筆為 ${x_p}，第 ${p+1} 筆為 ${x_p1}。\n4. 內插數值 \(P_{${x}} = ${x_p} + ${d.toFixed(2)} \times (${x_p1} - ${x_p}) = ${ans}\)。`
     };
-  }
+  },
 
-  if (dynamicType === "smc_jaccard") {
-    // 隨機微調列聯表
-    const a = Math.floor(Math.random() * 4) + 4; // 4 ~ 7 (雙0)
-    const b = Math.floor(Math.random() * 2) + 1; // 1 ~ 2
-    const c = Math.floor(Math.random() * 2) + 1; // 1 ~ 2
-    const d = Math.floor(Math.random() * 2) + 2; // 2 ~ 3
+  "q-u1-l2-03": function(q) {
+    const centers = [20, 25, 30, 40, 50];
+    const mean = centers[Math.floor(Math.random() * centers.length)];
+    const offsets = [-2, -1, 0, 1, 2];
+    const nums = offsets.map(o => mean + o);
+    const s = Math.sqrt(2.5);
+    const cv = Math.round((s / mean) * 10000) / 100;
+    return {
+      givenData: {
+        "樣本數值": `[${nums.join(", ")}]`,
+        "樣本數 n": "5"
+      },
+      questionPrompt: `抽檢 5 批零件數值為：\`${nums.join(", ")}\`。請計算該樣本之「變異係數 CV（%）」（四捨五入至小數後兩位）。`,
+      correctAnswer: cv,
+      unitLabel: "%",
+      tolerance: 0.1,
+      fullSolution: `【動態題解】\n1. 平均數 \(\bar{X} = ${mean}\)。\n2. 離均差平方和 \(\sum(X_i - ${mean})^2 = 4 + 1 + 0 + 1 + 4 = 10\)。\n3. 樣本標準差 \(S = \sqrt{10 / 4} = \sqrt{2.5} \approx 1.5811\)。\n4. \(CV = 1.5811 / ${mean} \approx ${cv}\%\)。`
+    };
+  },
+
+  "q-u1-l3-01": function(q) {
+    const combos = [
+      { v0: 5000, t: 3, cagr: 20, vt: 8640 },
+      { v0: 2000, t: 3, cagr: 20, vt: 3456 },
+      { v0: 4000, t: 2, cagr: 25, vt: 6250 },
+      { v0: 3000, t: 2, cagr: 30, vt: 5070 },
+      { v0: 1000, t: 3, cagr: 50, vt: 3375 },
+      { v0: 6000, t: 2, cagr: 10, vt: 7260 }
+    ];
+    const pick = combos[Math.floor(Math.random() * combos.length)];
+    return {
+      givenData: {
+        "基準年營收 V0": `${pick.v0.toLocaleString()} 萬元`,
+        "目標 CAGR": `${pick.cagr}%`,
+        "目標跨期 t": `${pick.t} 年`
+      },
+      questionPrompt: `某電商平台當前年營收（第 0 年）為 ${pick.v0.toLocaleString()} 萬元。董事會設定未來 ${pick.t} 年的目標複合年成長率（CAGR）需達到 ${pick.cagr}%。請問該平台在第 ${pick.t} 年年末必須達成多少營收規模（萬元）？`,
+      correctAnswer: pick.vt,
+      unitLabel: "萬元",
+      tolerance: 1.0,
+      fullSolution: `【動態題解】\n由複合成長率公式：\n\(V_t = V_0 \times (1 + CAGR)^t = ${pick.v0} \times (1 + ${pick.cagr/100})^{${pick.t}} = ${pick.vt}\text{ 萬元}\)。`
+    };
+  },
+
+  "q-u1-l3-02": function(q) {
+    const base = Math.floor(Math.random() * 12) + 10;
+    const steps = [6, 4, 6, 7, 7, 16, 7, 15];
+    let nums = [base];
+    for (let s of steps) nums.push(nums[nums.length - 1] + s);
+    const q1 = nums[2];
+    const q3 = nums[6];
+    const iqr = q3 - q1;
+    return {
+      givenData: {
+        "已排序數據列 (n=9)": `[${nums.join(", ")}]`,
+        "Q1 板書位置 L25%": "3.0",
+        "Q3 板書位置 L75%": "7.0"
+      },
+      questionPrompt: `現有一組排序後的 9 筆數據：\`${nums.join(", ")}\`（$n = 9$）。請依課堂板書唯一標準位置公式（$L_{25\%} = \frac{25}{100}(n-1)+1$、$L_{75\%} = \frac{75}{100}(n-1)+1$）計算其第 1 四分位數 $Q_1$ 與第 3 四分位數 $Q_3$，並求出「四分位距（IQR）」。`,
+      correctAnswer: iqr,
+      unitLabel: "",
+      tolerance: 0.1,
+      fullSolution: `【動態題解】\n1. 板書位置公式：\n   \(L_{25\%} = \frac{25}{100}(9 - 1) + 1 = 3.0 \implies Q_1 = X_3 = ${q1}\)\n   \(L_{75\%} = \frac{75}{100}(9 - 1) + 1 = 7.0 \implies Q_3 = X_7 = ${q3}\)\n2. 四分位距 \(IQR = Q_3 - Q_1 = ${q3} - ${q1} = ${iqr}\)。`
+    };
+  },
+
+  "q-u1-l4-01": function(q) {
+    const sets = [
+      { v0: 1000, r: [100, -50, 100, -50], v4: 1000, cagr: 0, arith: 25 },
+      { v0: 1000, r: [50, -20, 50, -20], v4: 1440, cagr: 9.54, arith: 15 },
+      { v0: 1000, r: [60, -30, 60, -30], v4: 1254.4, cagr: 5.84, arith: 15 },
+      { v0: 1000, r: [80, -40, 80, -40], v4: 1166.4, cagr: 3.92, arith: 20 }
+    ];
+    const pick = sets[Math.floor(Math.random() * sets.length)];
+    return {
+      givenData: {
+        "初期資本 V0": `${pick.v0} 萬元`,
+        "第 1 年成長率": `+${pick.r[0]}%`,
+        "第 2 年成長率": `${pick.r[1]}%`,
+        "第 3 年成長率": `+${pick.r[2]}%`,
+        "第 4 年成長率": `${pick.r[3]}%`
+      },
+      questionPrompt: `某新創生技公司成立 4 年，初期資本額為 ${pick.v0} 萬元。各年成長率依序為：第 1 年 +${pick.r[0]}%、第 2 年 ${pick.r[1]}%、第 3 年 +${pick.r[2]}%、第 4 年 ${pick.r[3]}%。\n請在紙筆上完整手算：\n(1) 4 年後之期末資本額 $V_4$；\n(2) 這 4 年成長率之「算術平均數（Arithmetic Mean）」；\n(3) 這 4 年營運之「幾何平均年成長率（CAGR）」。`,
+      fullSolution: `【動態題解】\n1. 期末資本額：\n   \(V_4 = ${pick.v0} \times (1 + ${pick.r[0]/100}) \times (1 + ${pick.r[1]/100}) \times (1 + ${pick.r[2]/100}) \times (1 + ${pick.r[3]/100}) = ${pick.v4}\text{ 萬元}\)。\n2. 算術平均成長率：\n   \(\bar{R}_a = \frac{${pick.r.join(" + ")}} {4} = ${pick.arith}\%\)。\n3. 幾何平均成長率 (CAGR)：\n   \(CAGR = (${pick.v4} / ${pick.v0})^{1/4} - 1 \approx ${pick.cagr}\%\)。`
+    };
+  },
+
+  "q-u1-l4-02": function(q) {
+    const bases = [50, 53, 60, 65, 70];
+    const mean = bases[Math.floor(Math.random() * bases.length)];
+    const offsets = [-5, -3, -1, 1, 3, 5];
+    const nums = offsets.map(o => mean + o);
+    const s2 = 14.0;
+    const s = Math.round(Math.sqrt(14) * 100) / 100;
+    const cv = Math.round((Math.sqrt(14) / mean) * 10000) / 100;
+    return {
+      givenData: {
+        "晶圓厚度樣本 (微米)": `[${nums.join(", ")}]`,
+        "樣本數 n": "6"
+      },
+      questionPrompt: `某半導體晶圓廠檢驗 6 片晶圓的表面厚度微米數（已由小至大排序）：\n\`[${nums.join(", ")}]\`（$n = 6$）。品管經理欲評估該製程的離散程度。\n請依序手算：\n(1) 樣本平均數 $\bar{X}$；\n(2) 離均差平方和 $\sum (X_i - \bar{X})^2$；\n(3) 樣本變異數 $S^2$（不偏估計量，自由度 $n-1$）；\n(4) 樣本標準差 $S$；\n(5) 變異係數 $CV$（%）。\n請在作答框填入「樣本變異數 $S^2$」的數值。`,
+      correctAnswer: s2,
+      unitLabel: "微米²",
+      tolerance: 0.1,
+      fullSolution: `【動態題解】\n1. 平均數 \(\bar{X} = \frac{\sum X_i}{6} = ${mean}.0\text{ 微米}\)。\n2. 離均差平方和 \(\sum(X_i - \bar{X})^2 = 25 + 9 + 1 + 1 + 9 + 25 = 70\)。\n3. 樣本變異數 \(S^2 = \frac{70}{6 - 1} = \frac{70}{5} = ${s2}\text{ 微米}^2\)。\n4. 樣本標準差 \(S = \sqrt{14} \approx ${s}\text{ 微米}\)。\n5. 變異係數 \(CV = \frac{S}{\bar{X}} \times 100\% \approx ${cv}\%\)。`
+    };
+  },
+
+  // ==========================================
+  // 單元二：距離與相似度度量
+  // ==========================================
+  "q-u2-l2-01": function(q) {
+    const a = Math.floor(Math.random() * 4) + 4;
+    const b = Math.floor(Math.random() * 2) + 1;
+    const c = Math.floor(Math.random() * 2) + 1;
+    const d = Math.floor(Math.random() * 2) + 2;
     const N = a + b + c + d;
     const smc = Math.round(((a + d) / N) * 100) / 100;
-    const jaccard = Math.round((d / (b + c + d)) * 100) / 100;
-
     return {
       givenData: {
         "雙0次數 a": `${a}`,
@@ -1816,36 +1924,128 @@ function generateDynamicQuestion(dynamicType) {
       correctAnswer: smc,
       unitLabel: "",
       tolerance: 0.02,
-      fullSolution: `【動態題解】\n\\(SMC = \\frac{a + d}{N} = \\frac{${a} + ${d}}{${N}} = \\frac{${a+d}}{${N}} = ${smc}\\)。\n(補充：Jaccard = \\(\\frac{d}{b+c+d} = \\frac{${d}}{${b+c+d}} = ${jaccard}\\))`
+      fullSolution: `【動態題解】\n\(SMC = \frac{a + d}{N} = \frac{${a} + ${d}}{${N}} = \frac{${a+d}}{${N}} = ${smc}\)。`
     };
-  }
+  },
 
-  if (dynamicType === "cv") {
-    const centers = [20, 30, 40, 50];
-    const mean = centers[Math.floor(Math.random() * centers.length)];
-    const offsets = [-2, -1, 0, 1, 2];
-    const nums = offsets.map(o => mean + o);
-    // mean is mean, sum of sq is 4+1+0+1+4 = 10. S^2 = 10 / 4 = 2.5, S = sqrt(2.5) ~ 1.5811
-    const s = Math.sqrt(2.5);
-    const cv = Math.round((s / mean) * 10000) / 100;
-
+  "q-u2-l2-02": function(q) {
+    const a = Math.floor(Math.random() * 4) + 4;
+    const b = Math.floor(Math.random() * 2) + 1;
+    const c = Math.floor(Math.random() * 2) + 1;
+    const d = Math.floor(Math.random() * 2) + 2;
+    const den = b + c + d;
+    const jaccard = Math.round((d / den) * 100) / 100;
     return {
       givenData: {
-        "樣本數值": `[${nums.join(", ")}]`,
-        "樣本數 n": "5"
+        "雙0次數 a": `${a}`,
+        "甲0乙1次數 b": `${b}`,
+        "甲1乙0次數 c": `${c}`,
+        "雙1次數 d": `${d}`
       },
-      questionPrompt: `抽檢 5 批零件數值為：\`${nums.join(", ")}\`。請計算該樣本之「變異係數 CV（%）」（四捨五入至小數後兩位）。`,
-      correctAnswer: cv,
-      unitLabel: "%",
-      tolerance: 0.1,
-      fullSolution: `【動態題解】\n1. 平均數 \\(\\bar{X} = ${mean}\\)。\n2. 離均差平方和 \\(\\sum(X_i - ${mean})^2 = 4 + 1 + 0 + 1 + 4 = 10\\)。\n3. 樣本標準差 \\(S = \\sqrt{10 / 4} = \\sqrt{2.5} \\approx 1.5811\\)。\n4. \\(CV = 1.5811 / ${mean} \\approx ${cv}\\%\\)。`
+      questionPrompt: `比對兩位消費者的商品購買紀錄，統計列聯表如下：雙 0 數 $a = ${a}$、甲 0 乙 1 數 $b = ${b}$、甲 1 乙 0 數 $c = ${c}$、雙 1 數 $d = ${d}$。請計算兩人之雅卡爾指數（Jaccard Index）。`,
+      correctAnswer: jaccard,
+      unitLabel: "",
+      tolerance: 0.02,
+      fullSolution: `【動態題解】\nJaccard 排除雙 0 負匹配 $a$：\n\(Jaccard = \frac{d}{b + c + d} = \frac{${d}}{${b} + ${c} + ${d}} = \frac{${d}}{${den}} \approx ${jaccard}\)。`
     };
-  }
+  },
 
-  if (dynamicType === "bayes") {
-    // 隨機微調良品率與偽陽性率
-    const pD = 0.20;
-    const pG = 0.80;
+  "q-u2-l2-03": function(q) {
+    const pyth = [
+      { dx: 3, dy: 4, dist: 5.0 },
+      { dx: 6, dy: 8, dist: 10.0 },
+      { dx: 5, dy: 12, dist: 13.0 },
+      { dx: 8, dy: 15, dist: 17.0 },
+      { dx: 9, dy: 12, dist: 15.0 },
+      { dx: 7, dy: 24, dist: 25.0 }
+    ];
+    const pick = pyth[Math.floor(Math.random() * pyth.length)];
+    const x1 = Math.floor(Math.random() * 6) + 2;
+    const y1 = Math.floor(Math.random() * 6) + 2;
+    const x2 = x1 + pick.dx;
+    const y2 = y1 + pick.dy;
+    return {
+      givenData: {
+        "顧客甲向量 A": `(${x1}, ${y1})`,
+        "顧客乙向量 B": `(${x2}, ${y2})`
+      },
+      questionPrompt: `某電商平台將兩位受訪者的特徵向量定義為 $(X_1, X_2)$，其中顧客甲的向量為 $A = (${x1}, ${y1})$，顧客乙的向量為 $B = (${x2}, ${y2})$。請計算顧客甲與顧客乙之間的「歐氏距離 (Euclidean Distance)」。`,
+      correctAnswer: pick.dist,
+      unitLabel: "",
+      tolerance: 0.05,
+      fullSolution: `【動態題解】\n\(d(A, B) = \sqrt{(${x2} - ${x1})^2 + (${y2} - ${y1})^2} = \sqrt{${pick.dx}^2 + ${pick.dy}^2} = \sqrt{${pick.dx*pick.dx + pick.dy*pick.dy}} = ${pick.dist}\)。`
+    };
+  },
+
+  "q-u2-l3-01": function(q) {
+    const scales = [50, 100, 200];
+    const s = scales[Math.floor(Math.random() * scales.length)];
+    const a = Math.round(s * 0.92);
+    const d = Math.round(s * 0.04);
+    const bc = s - a - d;
+    return {
+      givenData: {
+        "雙0無缺陷項目 a": `${a}`,
+        "單邊檢出缺陷 b + c": `${bc}`,
+        "雙1共同缺陷 d": `${d}`,
+        "總檢驗項目 N": `${s}`
+      },
+      questionPrompt: `某晶圓代工廠品管部門對兩批出廠晶圓抽檢 ${s} 項嚴格的物理缺陷特徵（1 表存在缺陷，0 表無缺陷/合格）。檢驗結果顯示：兩批晶圓在 ${a} 項缺陷特徵上皆未檢出（雙 0），在 ${d} 項特徵上皆檢出相同缺陷（雙 1），另有 ${bc} 項為單邊檢出。若欲衡量兩批產品在「品質規格一致性」上的契合度，為何此時選用 SMC 比 Jaccard 更具管理合理性？`,
+      fullSolution: `【動態題解】\n1. 在品質品管情境中，『雙 0 代表兩批產品都完美無缺陷、同時合格通過』，這是品質高度一致的關鍵實質成就，絕非無意義的空白！\n2. SMC 分子包含 a（雙方皆合格），本題 SMC = (${a} + ${d}) / ${s} = ${(a+d)/s}，真實反映兩批產品的超高良率吻合度。\n3. 若盲目套用 Jaccard 剔除 a，指標將縮水為 ${d} / (${bc} + ${d}) = ${(d/(bc+d)).toFixed(2)}，嚴重低估其一致性品質。`
+    };
+  },
+
+  "q-u2-l3-02": function(q) {
+    const combos = [
+      { d: 2, b: 1, c: 2, j: 0.40, dist: 0.60 },
+      { d: 3, b: 2, c: 1, j: 0.50, dist: 0.50 },
+      { d: 1, b: 1, c: 2, j: 0.25, dist: 0.75 },
+      { d: 2, b: 3, c: 3, j: 0.25, dist: 0.75 }
+    ];
+    const pick = combos[Math.floor(Math.random() * combos.length)];
+    const a = 8 - (pick.b + pick.c + pick.d);
+    return {
+      givenData: {
+        "總 App 數 N": "8",
+        "雙0未下載數 a": `${a}`,
+        "甲0乙1下載數 b": `${pick.b}`,
+        "甲1乙0下載數 c": `${pick.c}`,
+        "雙1共同下載數 d": `${pick.d}`
+      },
+      questionPrompt: `比對兩位使用者對 8 款手機 App 的下載紀錄，統計顯示：兩人共同下載 $d = ${pick.d}$ 款、甲下載乙未下載 $c = ${pick.c}$ 款、乙下載甲未下載 $b = ${pick.b}$ 款、兩人皆未下載 $a = ${a}$ 款。請計算兩人之「雅卡爾距離 (Jaccard Distance)」。`,
+      correctAnswer: pick.dist,
+      unitLabel: "",
+      tolerance: 0.02,
+      fullSolution: `【動態題解】\n1. \(Jaccard = \frac{d}{b + c + d} = \frac{${pick.d}}{${pick.b + pick.c + pick.d}} = ${pick.j}\)。\n2. 雅卡爾距離 \(Dist_J = 1 - Jaccard = 1 - ${pick.j} = ${pick.dist}\)。`
+    };
+  },
+
+  "q-u2-l4-01": function(q) {
+    const a_vals = [500, 1000, 2000];
+    const a_new = a_vals[Math.floor(Math.random() * a_vals.length)];
+    const d = 3, c = 2, b = 1;
+    const N_new = a_new + b + c + d;
+    const smc = Math.round(((a_new + d) / N_new) * 10000) / 10000;
+    return {
+      givenData: {
+        "共同看過 d": `${d}`,
+        "甲看乙未看 c": `${c}`,
+        "乙看甲未看 b": `${b}`,
+        "全片庫共同未看 a": `${a_new}`
+      },
+      questionPrompt: `某影音串流平台比對兩位影迷觀看紀錄：共同看過 $d = ${d}$ 部，甲看乙未看 $c = ${c}$ 部，乙看甲未看 $b = ${b}$ 部。當納入全片庫中兩人皆未看過的 ${a_new} 部冷門電影（$a = ${a_new}$）後，請計算兩人全片庫之 SMC 簡單匹配係數（請四捨五入至小數點後四位）。`,
+      correctAnswer: smc,
+      unitLabel: "",
+      tolerance: 0.005,
+      fullSolution: `【動態題解】\n全片庫總數 \(N = ${a_new} + 1 + 2 + 3 = ${N_new}\)。\n\(SMC = \frac{${a_new} + ${d}}{${N_new}} = \frac{${a_new + d}}{${N_new}} \approx ${smc}\)。\n（說明：因巨量雙 0 稀釋，SMC 虛高至 0.99 以上，失去鑑別度！）`
+    };
+  },
+
+  // ==========================================
+  // 單元三：機率論、全機率與貝氏定理
+  // ==========================================
+  "q-u3-l2-01": function(q) {
+    const pD = 0.20, pG = 0.80;
     const sensOptions = [0.90, 0.95, 0.85];
     const specFalseOptions = [0.05, 0.04, 0.08];
     const pT_D = sensOptions[Math.floor(Math.random() * sensOptions.length)];
@@ -1853,7 +2053,6 @@ function generateDynamicQuestion(dynamicType) {
     const num = pT_D * pD;
     const den = num + pT_G * pG;
     const ans = Math.round((num / den) * 10000) / 100;
-
     return {
       givenData: {
         "不良品率 P(D)": `${pD}`,
@@ -1865,9 +2064,605 @@ function generateDynamicQuestion(dynamicType) {
       correctAnswer: ans,
       unitLabel: "%",
       tolerance: 0.1,
-      fullSolution: `【動態題解】\n1. 全機率 \\(P(T^+) = (${pT_D} \\times ${pD}) + (${pT_G} \\times ${pG}) = ${num.toFixed(3)} + ${(pT_G*pG).toFixed(3)} = ${den.toFixed(3)}\\)。\n2. 後驗機率 \\(P(D|T^+) = ${num.toFixed(3)} / ${den.toFixed(3)} \\approx ${ans}\\%\\)。`
+      fullSolution: `【動態題解】\n1. 全機率 \(P(T^+) = (${pT_D} \times ${pD}) + (${pT_G} \times ${pG}) = ${num.toFixed(3)} + ${(pT_G*pG).toFixed(3)} = ${den.toFixed(3)}\)。\n2. 後驗機率 \(P(D|T^+) = ${num.toFixed(3)} / ${den.toFixed(3)} \approx ${ans}\%\)。`
+    };
+  },
+
+  "q-u3-l2-02": function(q) {
+    const sets = [
+      { pA: 0.35, pB: 0.25, pAB: 0.10, ans: 0.50 },
+      { pA: 0.40, pB: 0.30, pAB: 0.15, ans: 0.55 },
+      { pA: 0.50, pB: 0.20, pAB: 0.10, ans: 0.60 },
+      { pA: 0.45, pB: 0.35, pAB: 0.20, ans: 0.60 },
+      { pA: 0.30, pB: 0.40, pAB: 0.12, ans: 0.58 }
+    ];
+    const pick = sets[Math.floor(Math.random() * sets.length)];
+    return {
+      givenData: {
+        "連線異常機率 P(A)": `${pick.pA}`,
+        "資料庫逾時機率 P(B)": `${pick.pB}`,
+        "同時發生機率 P(A∩B)": `${pick.pAB}`
+      },
+      questionPrompt: `伺服器運行日誌統計顯示：網路連線異常機率為 $P(A) = ${pick.pA}$，資料庫讀寫逾時機率為 $P(B) = ${pick.pB}$，兩者同時發生機率為 $P(A \cap B) = ${pick.pAB}$。請問伺服器出現「至少一種異常」的聯集機率 $P(A \cup B)$ 為何？`,
+      correctAnswer: pick.ans,
+      unitLabel: "",
+      tolerance: 0.02,
+      fullSolution: `【動態題解】\n由加法定律：\n\(P(A \cup B) = P(A) + P(B) - P(A \cap B) = ${pick.pA} + ${pick.pB} - ${pick.pAB} = ${pick.ans}\)。`
+    };
+  },
+
+  "q-u3-l2-03": function(q) {
+    const combos = [
+      { n: 100, p: 0.20, ans: 20.0 },
+      { n: 200, p: 0.15, ans: 30.0 },
+      { n: 150, p: 0.20, ans: 30.0 },
+      { n: 250, p: 0.20, ans: 50.0 },
+      { n: 400, p: 0.25, ans: 100.0 },
+      { n: 50, p: 0.40, ans: 20.0 }
+    ];
+    const pick = combos[Math.floor(Math.random() * combos.length)];
+    return {
+      givenData: {
+        "抽樣樣本數 n": `${pick.n}`,
+        "成功轉換率 p": `${pick.p}`
+      },
+      questionPrompt: `某電商廣告轉換率為 $p = ${pick.p}$。業務部隨機抽樣 $n = ${pick.n}$ 名點擊廣告訪客，令隨機變數 $X$ 代表最終下單購買人數。請計算 $X$ 的期望值 $E(X)$。`,
+      correctAnswer: pick.ans,
+      unitLabel: "人",
+      tolerance: 0.1,
+      fullSolution: `【動態題解】\n二項分配期望值公式：\(E(X) = n \cdot p = ${pick.n} \times ${pick.p} = ${pick.ans}\text{ 人}\)。`
+    };
+  },
+
+  "q-u3-l3-01": function(q) {
+    const combos = [
+      { pA: 0.60, dA: 0.02, pB: 0.40, dB: 0.05, num: 0.020, den: 0.032, ans: 62.5 },
+      { pA: 0.70, dA: 0.02, pB: 0.30, dB: 0.06, num: 0.018, den: 0.032, ans: 56.25 },
+      { pA: 0.50, dA: 0.02, pB: 0.50, dB: 0.06, num: 0.030, den: 0.040, ans: 75.0 },
+      { pA: 0.60, dA: 0.01, pB: 0.40, dB: 0.04, num: 0.016, den: 0.022, ans: 72.73 }
+    ];
+    const pick = combos[Math.floor(Math.random() * combos.length)];
+    return {
+      givenData: {
+        "產線 A 產量佔比": `${Math.round(pick.pA * 100)}%`,
+        "產線 A 不良率": `${Math.round(pick.dA * 100)}%`,
+        "產線 B 產量佔比": `${Math.round(pick.pB * 100)}%`,
+        "產線 B 不良率": `${Math.round(pick.dB * 100)}%`
+      },
+      questionPrompt: `某工廠由產線 A 與產線 B 生產零件。產線 A 佔全廠產量 ${Math.round(pick.pA*100)}%，不良率為 ${Math.round(pick.dA*100)}%；產線 B 佔全廠產量 ${Math.round(pick.pB*100)}%，不良率為 ${Math.round(pick.dB*100)}%。若品管抽得 1 件不良品，請問該不良品來自產線 B 的後驗機率為多少 %？`,
+      correctAnswer: pick.ans,
+      unitLabel: "%",
+      tolerance: 0.1,
+      fullSolution: `【動態題解】\n1. 全機率分母 \(P(D) = (${pick.pA} \times ${pick.dA}) + (${pick.pB} \times ${pick.dB}) = ${pick.den}\)。\n2. 分子 \(P(B \cap D) = ${pick.pB} \times ${pick.dB} = ${pick.num}\)。\n3. 後驗機率 \(P(B|D) = ${pick.num} / ${pick.den} = ${pick.ans}\%\)。`
+    };
+  },
+
+  "q-u3-l3-02": function(q) {
+    const combos = [
+      { pA: 0.50, dA: 0.01, pB: 0.30, dB: 0.02, pC: 0.20, dC: 0.03, ans: 35.29 },
+      { pA: 0.40, dA: 0.01, pB: 0.40, dB: 0.02, pC: 0.20, dC: 0.04, ans: 40.00 },
+      { pA: 0.50, dA: 0.02, pB: 0.30, dB: 0.03, pC: 0.20, dC: 0.05, ans: 31.03 }
+    ];
+    const pick = combos[Math.floor(Math.random() * combos.length)];
+    const den = pick.pA * pick.dA + pick.pB * pick.dB + pick.pC * pick.dC;
+    const num = pick.pB * pick.dB;
+    return {
+      givenData: {
+        "產線佔比 (A, B, C)": `(${pick.pA*100}%, ${pick.pB*100}%, ${pick.pC*100}%)`,
+        "各線不良率 (A, B, C)": `(${pick.dA*100}%, ${pick.dB*100}%, ${pick.dC*100}%)`
+      },
+      questionPrompt: `某電子廠有 A、B、C 三條生產線，產量佔比分別為 ${pick.pA*100}%、${pick.pB*100}%、${pick.pC*100}%。已知不良品率分別為 ${pick.dA*100}%、${pick.dB*100}%、${pick.dC*100}%。若抽得一件瑕疵品，求其來自產線 B 的後驗機率（%）。`,
+      correctAnswer: pick.ans,
+      unitLabel: "%",
+      tolerance: 0.1,
+      fullSolution: `【動態題解】\n1. 全機率 \(P(D) = (${pick.pA}\times${pick.dA}) + (${pick.pB}\times${pick.dB}) + (${pick.pC}\times${pick.dC}) = ${den.toFixed(4)}\)。\n2. 分子 \(P(B \cap D) = ${num.toFixed(4)}\)。\n3. 後驗 \(P(B|D) = ${num.toFixed(4)} / ${den.toFixed(4)} \approx ${pick.ans}\%\)。`
+    };
+  },
+
+  "q-u3-l4-01": function(q) {
+    const combos = [
+      { pF: 0.001, sens: 0.95, fa: 0.01, ans: 8.68 },
+      { pF: 0.002, sens: 0.90, fa: 0.01, ans: 15.28 },
+      { pF: 0.001, sens: 0.98, fa: 0.01, ans: 8.93 },
+      { pF: 0.005, sens: 0.95, fa: 0.02, ans: 19.27 }
+    ];
+    const pick = combos[Math.floor(Math.random() * combos.length)];
+    const pNF = 1 - pick.pF;
+    const num = pick.sens * pick.pF;
+    const den = num + pick.fa * pNF;
+    return {
+      givenData: {
+        "真實詐欺率 P(F)": `${(pick.pF * 100).toFixed(2)}%`,
+        "警報敏感度 P(Alarm|F)": `${(pick.sens * 100).toFixed(1)}%`,
+        "正常交易誤報率 P(Alarm|NF)": `${(pick.fa * 100).toFixed(1)}%`
+      },
+      questionPrompt: `某數位銀行建立 AI 盜刷防偽系統。已知信用卡真實盜刷率僅 ${(pick.pF*100).toFixed(2)}%。當為盜刷時系統警報機率為 ${(pick.sens*100).toFixed(1)}%，正常交易時誤報率為 ${(pick.fa*100).toFixed(1)}%。若系統觸發盜刷警報，求該筆交易真正為盜刷的後驗機率（%）。`,
+      correctAnswer: pick.ans,
+      unitLabel: "%",
+      tolerance: 0.1,
+      fullSolution: `【動態題解】\n1. 分子（真盜刷警報）\(= ${pick.sens} \times ${pick.pF} = ${num.toFixed(5)}\)。\n2. 分母（總警報機率）\(= ${num.toFixed(5)} + (${pick.fa} \times ${pNF.toFixed(3)}) = ${den.toFixed(5)}\)。\n3. 後驗機率 \(P(F|Alarm) = ${num.toFixed(5)} / ${den.toFixed(5)} \approx ${pick.ans}\%\)。`
+    };
+  },
+
+  "q-u3-l4-02": function(q) {
+    const sets = [
+      { pAS: 0.70, pAF: 0.30, pBS_AS: 0.90, pBF_AF: 0.85, pBS: 0.675, pAS_BS: "93.33%", pAS_BF: "21.54%" },
+      { pAS: 0.60, pAF: 0.40, pBS_AS: 0.90, pBF_AF: 0.80, pBS: 0.620, pAS_BS: "87.10%", pAS_BF: "15.79%" },
+      { pAS: 0.80, pAF: 0.20, pBS_AS: 0.90, pBF_AF: 0.85, pBS: 0.750, pAS_BS: "96.00%", pAS_BF: "32.00%" }
+    ];
+    const pick = sets[Math.floor(Math.random() * sets.length)];
+    return {
+      givenData: {
+        "全面開店先驗機率": `P(AS) = ${pick.pAS}, P(AF) = ${pick.pAF}`,
+        "分店試驗條件精度": `P(BS|AS) = ${pick.pBS_AS}, P(BF|AF) = ${pick.pBF_AF}`
+      },
+      questionPrompt: `【企3B 作業 EX1 & EX2 動態題】某連鎖手搖飲品牌評估展店：全面開店成功先驗機率 $P(AS) = ${pick.pAS}$，失敗 $P(AF) = ${pick.pAF}$。先行開設分店試驗的精度為：$P(BS|AS) = ${pick.pBS_AS}$，$P(BF|AF) = ${pick.pBF_AF}$。\n請在紙筆上完整手算：\n(1) 分店試驗成功的全機率 $P(BS)$；\n(2) 當分店成功時全面開店成功之條件機率 $P(AS|BS)$；\n(3) 當分店失敗時全面開店成功之條件機率 $P(AS|BF)$。`,
+      fullSolution: `【動態題解】\n1. 全機率定理：\n   \(P(BS) = (${pick.pBS_AS} \times ${pick.pAS}) + (${(1-pick.pBF_AF).toFixed(2)} \times ${pick.pAF}) = ${pick.pBS}\)。\n2. 後驗機率：\n   \(P(AS|BS) = \frac{${pick.pBS_AS} \times ${pick.pAS}}{${pick.pBS}} \approx ${pick.pAS_BS}\)。\n   \(P(AS|BF) = \frac{${(1-pick.pBS_AS).toFixed(2)} \times ${pick.pAS}}{${(1-pick.pBS).toFixed(3)}} \approx ${pick.pAS_BF}\)。`
+    };
+  },
+
+  // ==========================================
+  // 單元四：迴歸分析與交互作用
+  // ==========================================
+  "q-u4-l2-01": function(q) {
+    const combos = [
+      { sst: 500, sse: 125, ssr: 375, r2: 0.75 },
+      { sst: 800, sse: 160, ssr: 640, r2: 0.80 },
+      { sst: 1000, sse: 150, ssr: 850, r2: 0.85 },
+      { sst: 400, sse: 80, ssr: 320, r2: 0.80 },
+      { sst: 600, sse: 180, ssr: 420, r2: 0.70 }
+    ];
+    const pick = combos[Math.floor(Math.random() * combos.length)];
+    return {
+      givenData: {
+        "總平方和 SST": `${pick.sst}`,
+        "殘差平方和 SSE": `${pick.sse}`
+      },
+      questionPrompt: `某計量模型評估研發投資對專利產出的解釋力。統計顯示依變數的總變異平方和為 $SST = ${pick.sst}$，殘差平方和為 $SSE = ${pick.sse}$。請計算該模型之「判定係數 $R^2$」（四捨五入至小數後兩位）。`,
+      correctAnswer: pick.r2,
+      unitLabel: "",
+      tolerance: 0.02,
+      fullSolution: `【動態題解】\n\(SSR = SST - SSE = ${pick.sst} - ${pick.sse} = ${pick.ssr}\)。\n\(R^2 = \frac{SSR}{SST} = 1 - \frac{SSE}{SST} = 1 - \frac{${pick.sse}}{${pick.sst}} = ${pick.r2}\)。`
+    };
+  },
+
+  "q-u4-l2-02": function(q) {
+    const combos = [
+      { ssxy: 120, ssxx: 40, xbar: 10, ybar: 50, b1: 3.0, b0: 20.0 },
+      { ssxy: 150, ssxx: 50, xbar: 12, ybar: 60, b1: 3.0, b0: 24.0 },
+      { ssxy: 80, ssxx: 40, xbar: 15, ybar: 45, b1: 2.0, b0: 15.0 },
+      { ssxy: 200, ssxx: 50, xbar: 8, ybar: 50, b1: 4.0, b0: 18.0 }
+    ];
+    const pick = combos[Math.floor(Math.random() * combos.length)];
+    return {
+      givenData: {
+        "SSxy": `${pick.ssxy}`,
+        "SSxx": `${pick.ssxx}`,
+        "X̄ (廣告支出平均)": `${pick.xbar}`,
+        "Ȳ (營收平均)": `${pick.ybar}`
+      },
+      questionPrompt: `某連鎖餐飲建立廣告支出 $X$ 對營收 $Y$ 的迴歸模型：$SS_{xy} = ${pick.ssxy}$，$SS_{xx} = ${pick.ssxx}$，廣告平均 $\bar{X} = ${pick.xbar}$ 萬元，營收平均 $\bar{Y} = ${pick.ybar}$ 萬元。請計算該迴歸直線的「截距項 $b_0$」（萬元）。`,
+      correctAnswer: pick.b0,
+      unitLabel: "萬元",
+      tolerance: 0.05,
+      fullSolution: `【動態題解】\n1. 斜率 \(b_1 = \frac{SS_{xy}}{SS_{xx}} = \frac{${pick.ssxy}}{${pick.ssxx}} = ${pick.b1}\)。\n2. 截距 \(b_0 = \bar{Y} - b_1 \bar{X} = ${pick.ybar} - (${pick.b1} \times ${pick.xbar}) = ${pick.b0}\text{ 萬元}\)。`
+    };
+  },
+
+  "q-u4-l2-03": function(q) {
+    const combos = [
+      { sst: 500, sse: 125, r2: 0.75, n: 25 },
+      { sst: 600, sse: 120, r2: 0.80, n: 30 },
+      { sst: 800, sse: 200, r2: 0.75, n: 28 },
+      { sst: 1000, sse: 200, r2: 0.80, n: 35 }
+    ];
+    const pick = combos[Math.floor(Math.random() * combos.length)];
+    return {
+      givenData: {
+        "總平方和 SST": `${pick.sst}`,
+        "殘差平方和 SSE": `${pick.sse}`,
+        "樣本數 n": `${pick.n}`
+      },
+      questionPrompt: `某產品研發迴歸模型樣本數 $n = ${pick.n}$，依變數總變異平方和 $SST = ${pick.sst}$，殘差平方和 $SSE = ${pick.sse}$。請計算判定係數 $R^2$。`,
+      correctAnswer: pick.r2,
+      unitLabel: "",
+      tolerance: 0.02,
+      fullSolution: `【動態題解】\n\(R^2 = 1 - \frac{SSE}{SST} = 1 - \frac{${pick.sse}}{${pick.sst}} = ${pick.r2}\)。`
+    };
+  },
+
+  "q-u4-l3-01": function(q) {
+    const combos = [
+      { b1: 4, b3: 1.5, x2: 4, ans: 10.0 },
+      { b1: 5, b3: 2.0, x2: 3, ans: 11.0 },
+      { b1: 3, b3: 1.2, x2: 5, ans: 9.0 },
+      { b1: 6, b3: 2.5, x2: 2, ans: 11.0 },
+      { b1: 4, b3: 1.8, x2: 5, ans: 13.0 }
+    ];
+    const pick = combos[Math.floor(Math.random() * combos.length)];
+    return {
+      givenData: {
+        "迴歸方程式": `Ŷ = 10 + ${pick.b1}*X1 + 6*X2 + ${pick.b3}*(X1*X2)`,
+        "指定會員等級 X2": `${pick.x2}`
+      },
+      questionPrompt: `某平台營收預測模型：$\hat{Y} = 10 + ${pick.b1} X_1 + 6 X_2 + ${pick.b3} (X_1 \cdot X_2)$，其中 $X_1$ 為折價券面額，$X_2$ 為會員等級。若目標客群會員等級為 $X_2 = ${pick.x2}$，請問 $X_1$ 每增加 1 單位對營收的邊際增加效果（邊際斜率 $\frac{\Delta \hat{Y}}{\Delta X_1}$）為何？`,
+      correctAnswer: pick.ans,
+      unitLabel: "萬元",
+      tolerance: 0.05,
+      fullSolution: `【動態題解】\n邊際斜率求導：\(\frac{\partial \hat{Y}}{\partial X_1} = b_1 + b_3 X_2 = ${pick.b1} + ${pick.b3}(${pick.x2}) = ${pick.ans}\text{ 萬元}\)。`
+    };
+  },
+
+  "q-u4-l3-02": function(q) {
+    const noiseList = [3, 4, 5];
+    const noise = noiseList[Math.floor(Math.random() * noiseList.length)];
+    return {
+      questionPrompt: `某計量分析師在原有包含 2 個有效自變數（$R^2 = 0.65$）的模型中，硬是額外加入 ${noise} 個與依變數毫無關聯的雜訊變數。下列有關自由度、殘差平方和與 $R^2_{adj}$ 的統計變化，何者完全符合學理？`,
+      fullSolution: `【動態題解】\n1. 每多加入 1 個雜訊變數，殘差自由度 $n - k - 1$ 便消耗 1（此處消耗 ${noise} 個自由度）。\n2. 雜訊變數無法顯著降低 $SSE$，使得均方誤差 $MSE = SSE / (n-k-1)$ 不降反升。\n3. 自由度懲罰效應壓過微不足道的殘差縮減，導致調整後判定係數 $R^2_{adj}$ 明顯下滑！`
+    };
+  },
+
+  "q-u4-l4-01": function(q) {
+    const combos = [
+      { n: 34, k: 3, sst: 800, sse: 200, ans: 0.73 },
+      { n: 25, k: 2, sst: 1000, sse: 200, ans: 0.78 },
+      { n: 31, k: 3, sst: 600, sse: 120, ans: 0.78 }
+    ];
+    const pick = combos[Math.floor(Math.random() * combos.length)];
+    const df_e = pick.n - pick.k - 1;
+    const df_t = pick.n - 1;
+    const mse = pick.sse / df_e;
+    const mst = pick.sst / df_t;
+    return {
+      givenData: {
+        "自變數個數 k": `${pick.k}`,
+        "樣本數 n": `${pick.n}`,
+        "總平方和 SST": `${pick.sst}`,
+        "殘差平方和 SSE": `${pick.sse}`
+      },
+      questionPrompt: `某顧問公司建立多元迴歸模型（自變數個數 $k = ${pick.k}$，樣本數 $n = ${pick.n}$）。已知 $SST = ${pick.sst}$，$SSE = ${pick.sse}$。請計算調整後判定係數 $R^2_{adj}$（四捨五入至小數點後兩位）。`,
+      correctAnswer: pick.ans,
+      unitLabel: "",
+      tolerance: 0.02,
+      fullSolution: `【動態題解】\n\(R^2_{adj} = 1 - \left[ \frac{SSE / (n - k - 1)}{SST / (n - 1)} \right] = 1 - \left[ \frac{${pick.sse} / ${df_e}}{${pick.sst} / ${df_t}} \right] = 1 - \left[ \frac{${mse.toFixed(4)}}{${mst.toFixed(4)}} \right] \approx ${pick.ans}\)。`
+    };
+  },
+
+  // ==========================================
+  // 單元五：線性規劃與敏感度分析
+  // ==========================================
+  "q-u5-l2-01": function(q) {
+    const combos = [
+      { c1: 3, c2: 5, ans: 38 },
+      { c1: 4, c2: 4, ans: 40 },
+      { c1: 5, c2: 3, ans: 42 },
+      { c1: 4, c2: 5, ans: 44 },
+      { c1: 2, c2: 3, ans: 24 }
+    ];
+    const pick = combos[Math.floor(Math.random() * combos.length)];
+    return {
+      givenData: {
+        "目標函數": `Max Z = ${pick.c1}*x1 + ${pick.c2}*x2`,
+        "限制條件": "2*x1 + x2 <= 16; x1 + 2*x2 <= 14"
+      },
+      questionPrompt: `考慮線性規劃：$\text{極大化 } Z = ${pick.c1} x_1 + ${pick.c2} x_2$，受限於 $2 x_1 + x_2 \le 16$ 與 $x_1 + 2 x_2 \le 14$（$x_1, x_2 \ge 0$）。圖解法已求得最佳頂點出現在兩限制線交點 $(6, 4)$。請計算該頂點之最大總利潤 $Z$。`,
+      correctAnswer: pick.ans,
+      unitLabel: "萬元",
+      tolerance: 0.1,
+      fullSolution: `【動態題解】\n代入最佳頂點 $(6, 4)$：\n\(Z^* = ${pick.c1}(6) + ${pick.c2}(4) = ${pick.c1*6} + ${pick.c2*4} = ${pick.ans}\text{ 萬元}\)。`
+    };
+  },
+
+  "q-u5-l2-02": function(q) {
+    const points = [
+      { x1: 10, x2: 6, ans: 10.0 },
+      { x1: 12, x2: 5, ans: 13.0 },
+      { x1: 8, x2: 8, ans: 12.0 },
+      { x1: 11, x2: 6, ans: 14.0 },
+      { x1: 9, x2: 7, ans: 11.0 }
+    ];
+    const pick = points[Math.floor(Math.random() * points.length)];
+    const lhs = 4 * pick.x1 + 5 * pick.x2;
+    return {
+      givenData: {
+        "限制條件": "4*x1 + 5*x2 >= 60",
+        "目前解 (x1, x2)": `(${pick.x1}, ${pick.x2})`
+      },
+      questionPrompt: `蛋白質最低攝取量限制式：$$4 x_1 + 5 x_2 \ge 60$$\n目前調配使用 $x_1 = ${pick.x1}$ 單位、$x_2 = ${pick.x2}$ 單位。請計算該限制條件在目前方案下的「超額變數（Surplus Variable $E_1$）」數值。`,
+      correctAnswer: pick.ans,
+      unitLabel: "單位",
+      tolerance: 0.05,
+      fullSolution: `【動態題解】\n超額變數 \(E_1 = 4(${pick.x1}) + 5(${pick.x2}) - 60 = ${lhs} - 60 = ${pick.ans}\text{ 單位}\)。`
+    };
+  },
+
+  "q-u5-l3-01": function(q) {
+    const combos = [
+      { c1: 3, c2: 4, ans: 17 },
+      { c1: 4, c2: 5, ans: 22 },
+      { c1: 5, c2: 6, ans: 27 },
+      { c1: 7, c2: 9, ans: 39 }
+    ];
+    const pick = combos[Math.floor(Math.random() * combos.length)];
+    return {
+      givenData: {
+        "目標函數": `Min Z = ${pick.c1}*X1 + ${pick.c2}*X2`,
+        "限制式": "2*X1 + 3*X2 >= 12; X1 + X2 >= 5"
+      },
+      questionPrompt: `無人車搬運成本極小化：$$\text{極小化 } Z = ${pick.c1} X_1 + ${pick.c2} X_2$$\n受限於 $2 X_1 + 3 X_2 \ge 12$ 與 $X_1 + X_2 \ge 5$（$X_1, X_2 \ge 0$）。可行解頂點有 $(6, 0)$、$(3, 2)$、$(0, 5)$。請計算達成最低總成本之最佳解 $Z$ 數值。`,
+      correctAnswer: pick.ans,
+      unitLabel: "萬元",
+      tolerance: 0.1,
+      fullSolution: `【動態題解】\n各頂點成本比較：\n- $(6, 0): ${pick.c1}(6) + 0 = ${pick.c1*6}$\n- $(3, 2): ${pick.c1}(3) + ${pick.c2}(2) = ${pick.ans}$\n- $(0, 5): 0 + ${pick.c2}(5) = ${pick.c2*5}$\n故最低成本為 ${pick.ans} 萬元（出現在頂點 $(3, 2)$）。`
+    };
+  },
+
+  "q-u5-l3-02": function(q) {
+    const c2_list = [4, 5, 6, 8, 10];
+    const c2 = c2_list[Math.floor(Math.random() * c2_list.length)];
+    const lower = c2 / 2;
+    const upper = c2 * 2;
+    return {
+      givenData: {
+        "目標函數": `Max Z = c1*x1 + ${c2}*x2`,
+        "邊界斜率": "m1 = -1/2, m2 = -2"
+      },
+      questionPrompt: `承接線性規劃：$\text{Max } Z = c_1 x_1 + ${c2} x_2$，最佳頂點落在點 $D(6, 4)$，該點由兩條緊縮邊界 $x_1 + 2 x_2 = 14$（斜率 $-1/2$）與 $2 x_1 + x_2 = 16$（斜率 $-2$）相交而成。\n若欲使原最佳頂點維持不變，請在紙筆上完整求出 $c_1$ 的允許變動範圍（Range of Optimality）。`,
+      fullSolution: `【動態題解】\n等利潤線斜率夾擠：\n$$-2 \le -\frac{c_1}{${c2}} \le -\frac{1}{2}$$\n同乘以 $-${c2}$（不等號轉向）：\n$$${upper} \ge c_1 \ge ${lower} \iff ${lower} \le c_1 \le ${upper}$$`
+    };
+  },
+
+  "q-u5-l3-03": function(q) {
+    const c2_list = [30, 24, 36, 45, 20];
+    const c2 = c2_list[Math.floor(Math.random() * c2_list.length)];
+    const upper = c2 * 2;
+    return {
+      givenData: {
+        "目標函數": `Max Z = c1*x1 + ${c2}*x2`,
+        "限制線 1 斜率": "-2/3",
+        "限制線 2 斜率": "-2"
+      },
+      questionPrompt: `工廠生產利潤極大化：$\text{Max } Z = c_1 x_1 + ${c2} x_2$。最佳解落在斜率分別為 $-2/3$ 與 $-2$ 的兩條緊縮限制線交點頂點上。根據斜率夾擠準則（$-2 \le -\frac{c_1}{${c2}} \le -\frac{2}{3}$），請計算產品 1 單位利潤 $c_1$ 之「容許變動上限」。`,
+      correctAnswer: upper,
+      unitLabel: "元",
+      tolerance: 0.1,
+      fullSolution: `【動態題解】\n由 $-2 \le -\frac{c_1}{${c2}}$ 同乘 $-${c2}$ 得 $c_1 \le 2 \times ${c2} = ${upper}$。\n故 $c_1$ 變動上限為 ${upper} 元。`
+    };
+  },
+
+  "q-u5-l4-01": function(q) {
+    const sets = [
+      { A: 12, B: 8, C: 10 },
+      { A: 15, B: 10, C: 12 },
+      { A: 16, B: 12, C: 8 }
+    ];
+    const pick = sets[Math.floor(Math.random() * sets.length)];
+    return {
+      givenData: {
+        "各廠區面積上限": `A: ${pick.A}, B: ${pick.B}, C: ${pick.C} 公頃`,
+        "公平比例條件": `(xA1+xA2)/${pick.A} = (xB1+xB2)/${pick.B} = (xC1+xC2)/${pick.C}`
+      },
+      questionPrompt: `【情境描述】科學園區管委會為 A、B、C 三個廠區規劃生產面積，廠房面積分別為 A: ${pick.A}、B: ${pick.B}、C: ${pick.C} 公頃。【公平條款】**三個廠區各自的「總生產面積與其廠房面積」的比例要求完全相等**。\n請在紙筆上完整寫出該公平比例限制式之無分母線性化等式。`,
+      fullSolution: `【動態題解】\n連比例式：\(\frac{x_{A1} + x_{A2}}{${pick.A}} = \frac{x_{B1} + x_{B2}}{${pick.B}} = \frac{x_{C1} + x_{C2}}{${pick.C}}\)。\n交叉相乘線性化：\n1. A 與 B 比：\(${pick.B}(x_{A1} + x_{A2}) - ${pick.A}(x_{B1} + x_{B2}) = 0\)\n2. B 與 C 比：\(${pick.C}(x_{B1} + x_{B2}) - ${pick.B}(x_{C1} + x_{C2}) = 0\)`
+    };
+  },
+
+  "q-u5-l4-02": function(q) {
+    const combos = [
+      { shadow: 250, delta: 40, cost: 6000, net: 4000 },
+      { shadow: 300, delta: 50, cost: 8000, net: 7000 },
+      { shadow: 200, delta: 60, cost: 7000, net: 5000 },
+      { shadow: 400, delta: 30, cost: 5000, net: 7000 }
+    ];
+    const pick = combos[Math.floor(Math.random() * combos.length)];
+    const gross = pick.shadow * pick.delta;
+    return {
+      givenData: {
+        "機時影子價格": `${pick.shadow} 元/小時`,
+        "可擴充機時上限": `${pick.delta} 小時`,
+        "擴充總固定成本": `${pick.cost.toLocaleString()} 元`
+      },
+      questionPrompt: `某機械製造商最佳解總利潤為 45,000 元。敏感度報表顯示：組裝機時上限的影子價格為每小時 ${pick.shadow} 元（允許增加量為 80 小時）。現有外包商報價以總成本 ${pick.cost.toLocaleString()} 元提供額外 ${pick.delta} 小時機時。請計算接受此外包擴充方案能為公司帶來的「淨利潤增額」（元）。`,
+      correctAnswer: pick.net,
+      unitLabel: "元",
+      tolerance: 1.0,
+      fullSolution: `【動態題解】\n1. 產能擴充帶來之毛利增加 \(= ${pick.shadow} \times ${pick.delta} = ${gross}\text{ 元}\)。\n2. 扣除擴充成本 \(= ${gross} - ${pick.cost} = ${pick.net}\text{ 元}\)。`
+    };
+  },
+
+  // ==========================================
+  // 單元六：不確定情況下之決策準則
+  // ==========================================
+  "q-u6-l2-01": function(q) {
+    const matrices = [
+      {
+        table: "| 方案 | 繁榮 (S1) | 平平 (S2) | 蕭條 (S3) |\n| 方案 A | 100 | 40 | -20 |\n| 方案 B | 70 | 50 | 10 |\n| 方案 C | 50 | 50 | 40 |",
+        mins: { A: -20, B: 10, C: 40 },
+        ansKey: "C",
+        ansName: "方案 C",
+        ansVal: 40
+      },
+      {
+        table: "| 方案 | 繁榮 (S1) | 平平 (S2) | 蕭條 (S3) |\n| 方案 A | 90 | 60 | 35 |\n| 方案 B | 120 | 50 | 10 |\n| 方案 C | 80 | 40 | -10 |",
+        mins: { A: 35, B: 10, C: -10 },
+        ansKey: "A",
+        ansName: "方案 A",
+        ansVal: 35
+      },
+      {
+        table: "| 方案 | 繁榮 (S1) | 平平 (S2) | 蕭條 (S3) |\n| 方案 A | 80 | 40 | -5 |\n| 方案 B | 75 | 60 | 30 |\n| 方案 C | 60 | 50 | 25 |",
+        mins: { A: -5, B: 30, C: 25 },
+        ansKey: "B",
+        ansName: "方案 B",
+        ansVal: 30
+      }
+    ];
+    const pick = matrices[Math.floor(Math.random() * matrices.length)];
+    return {
+      givenData: {
+        "報酬矩陣": pick.table
+      },
+      questionPrompt: `給定投資專案在三種景氣下的獲利報酬矩陣如下表：\n\n${pick.table}\n\n若依據「悲觀準則 (Maximin)」，決策者應選擇哪一個方案？`,
+      options: [
+        { key: "A", text: "方案 A", distractorFeedback: pick.ansKey === "A" ? null : `方案 A 最差獲利為 ${pick.mins.A}` },
+        { key: "B", text: "方案 B", distractorFeedback: pick.ansKey === "B" ? null : `方案 B 最差獲利為 ${pick.mins.B}` },
+        { key: "C", text: "方案 C", distractorFeedback: pick.ansKey === "C" ? null : `方案 C 最差獲利為 ${pick.mins.C}` },
+        { key: "D", text: "方案 A 與 B 均可", distractorFeedback: "非最優方案" }
+      ],
+      correctAnswer: pick.ansKey,
+      fullSolution: `【動態題解】\n1. 各方案在最差景氣下之最低獲利：\n   - A 最差：${pick.mins.A}\n   - B 最差：${pick.mins.B}\n   - C 最差：${pick.mins.C}\n2. 悲觀準則大中取小：最大值為 ${pick.ansVal}，故挑選「${pick.ansName}」。`
+    };
+  },
+
+  "q-u6-l2-02": function(q) {
+    const combos = [
+      { vA: [80, 10], vB: [45, 35], max2: 35, ans: 25.0 },
+      { vA: [90, 15], vB: [50, 40], max2: 40, ans: 25.0 },
+      { vA: [100, 20], vB: [60, 50], max2: 50, ans: 30.0 },
+      { vA: [75, 12], vB: [40, 32], max2: 32, ans: 20.0 }
+    ];
+    const pick = combos[Math.floor(Math.random() * combos.length)];
+    return {
+      givenData: {
+        "方案 A 獲利 (晴天, 雨天)": `(${pick.vA[0]}, ${pick.vA[1]})`,
+        "方案 B 獲利 (晴天, 雨天)": `(${pick.vB[0]}, ${pick.vB[1]})`,
+        "實際發生情境": "雨天 (S2)"
+      },
+      questionPrompt: `超商面對兩種天氣（晴天 S1、雨天 S2）的冰品叫貨獲利：\n- 方案 A（大量叫貨）：晴天獲利 ${pick.vA[0]} 萬，雨天獲利 ${pick.vA[1]} 萬\n- 方案 B（保守叫貨）：晴天獲利 ${pick.vB[0]} 萬，雨天獲利 ${pick.vB[1]} 萬\n若最終為雨天 (S2)，超商若選了方案 A，求雨天情境下之「機會損失（後悔值）」為多少萬元？`,
+      correctAnswer: pick.ans,
+      unitLabel: "萬元",
+      tolerance: 0.05,
+      fullSolution: `【動態題解】\n1. 雨天全場最佳獲利 \(= \max(${pick.vA[1]}, ${pick.vB[1]}) = ${pick.max2}\text{ 萬元}\)。\n2. 方案 A 後悔值 \(= ${pick.max2} - ${pick.vA[1]} = ${pick.ans}\text{ 萬元}\)。`
+    };
+  },
+
+  "q-u6-l2-03": function(q) {
+    const sets = [
+      { v: [180, 90, 30], ans: 100.0 },
+      { v: [210, 120, 60], ans: 130.0 },
+      { v: [150, 90, 60], ans: 100.0 },
+      { v: [240, 150, 60], ans: 150.0 },
+      { v: [120, 80, 40], ans: 80.0 }
+    ];
+    const pick = sets[Math.floor(Math.random() * sets.length)];
+    const sum = pick.v[0] + pick.v[1] + pick.v[2];
+    return {
+      givenData: {
+        "繁榮 S1 獲利": `${pick.v[0]} 萬元`,
+        "平平 S2 獲利": `${pick.v[1]} 萬元`,
+        "衰退 S3 獲利": `${pick.v[2]} 萬元`
+      },
+      questionPrompt: `某零售商新策略在三種景氣下的預估獲利為：繁榮 S1 獲利 ${pick.v[0]} 萬元、平平 S2 獲利 ${pick.v[1]} 萬元、衰退 S3 獲利 ${pick.v[2]} 萬元。決策者採「機率均等準則（Laplace Criterion）」，請計算該策略的期望平均獲利（萬元）。`,
+      correctAnswer: pick.ans,
+      unitLabel: "萬元",
+      tolerance: 0.1,
+      fullSolution: `【動態題解】\nLaplace 假設各情境等機率：\n\(Avg = \frac{${pick.v[0]} + ${pick.v[1]} + ${pick.v[2]}}{3} = \frac{${sum}}{3} = ${pick.ans}\text{ 萬元}\)。`
+    };
+  },
+
+  "q-u6-l3-01": function(q) {
+    return {
+      givenData: {
+        "高需求 D1 各方案獲利": "S1:50, S2:120, S3:180, S4:250",
+        "中需求 D2 各方案獲利": "S1:50, S2:80, S3:110, S4:90",
+        "低需求 D3 各方案獲利": "S1:50, S2:40, S3:10, S4:-30"
+      },
+      questionPrompt: `某製造商評估四種擴產策略（S1 不擴、S2 小擴、S3 中擴、S4 大擴），報酬矩陣如下：\n- S1: D1=50, D2=50, D3=50\n- S2: D1=120, D2=80, D3=40\n- S3: D1=180, D2=110, D3=10\n- S4: D1=250, D2=90, D3=-30\n請依「最大機會損失最小化準則（Minimax Regret）」挑選最佳策略。`,
+      options: [
+        { key: "A", text: "挑選 S1，最大機會損失為 200", distractorFeedback: "S1 最大遺憾 200 過大" },
+        { key: "B", text: "挑選 S2，最大機會損失為 130", distractorFeedback: "70 < 130，S3 遺憾更小" },
+        { key: "C", text: "挑選 S3 (中度擴產)，其最大機會損失為 70", distractorFeedback: null },
+        { key: "D", text: "挑選 S4 (大幅擴產)，其最大機會損失為 80", distractorFeedback: "70 < 80，S3 遺憾更小" }
+      ],
+      correctAnswer: "C",
+      fullSolution: `【動態題解】\n1. 各需求行最大值：D1=250, D2=110, D3=50。\n2. 各策略最大後悔值：\n   - S1: max(200, 60, 0) = 200\n   - S2: max(130, 30, 10) = 130\n   - S3: max(70, 0, 40) = 70\n   - S4: max(0, 20, 80) = 80\n3. 最小最大後悔值為 70，對應挑選「S3 (中度擴產)」。`
+    };
+  },
+
+  "q-u6-l3-02": function(q) {
+    const combos = [
+      { d1: [40, 60, 90], d2: [50, 55, 75], d3: [70, 65, 60], ans: 30.0 },
+      { d1: [35, 55, 85], d2: [45, 50, 70], d3: [65, 60, 55], ans: 30.0 },
+      { d1: [50, 70, 100], d2: [60, 65, 85], d3: [80, 75, 70], ans: 30.0 }
+    ];
+    const pick = combos[Math.floor(Math.random() * combos.length)];
+    return {
+      givenData: {
+        "D1 方案成本 (S1, S2, S3)": `(${pick.d1.join(", ")})`,
+        "D2 方案成本 (S1, S2, S3)": `(${pick.d2.join(", ")})`,
+        "D3 方案成本 (S1, S2, S3)": `(${pick.d3.join(", ")})`
+      },
+      questionPrompt: `物流公司三種車隊方案成本（萬元）：\n- D1: S1=${pick.d1[0]}, S2=${pick.d1[1]}, S3=${pick.d1[2]}\n- D2: S1=${pick.d2[0]}, S2=${pick.d2[1]}, S3=${pick.d2[2]}\n- D3: S1=${pick.d3[0]}, S2=${pick.d3[1]}, S3=${pick.d3[2]}\n請建立成本後悔矩陣，計算最優方案之「最大機會損失（Minimax Regret）」數值（萬元）。`,
+      correctAnswer: pick.ans,
+      unitLabel: "萬元",
+      tolerance: 0.1,
+      fullSolution: `【動態題解】\n1. 各情境最低成本：S1=${pick.d1[0]}, S2=${pick.d2[1]}, S3=${pick.d3[2]}。\n2. 計算各方案最大後悔值：\n   - D1: max(${pick.d1[0]-pick.d1[0]}, ${pick.d1[1]-pick.d2[1]}, ${pick.d1[2]-pick.d3[2]}) = ${pick.d1[2]-pick.d3[2]}\n   - D2: max(${pick.d2[0]-pick.d1[0]}, ${pick.d2[1]-pick.d2[1]}, ${pick.d2[2]-pick.d3[2]}) = ${pick.d2[2]-pick.d3[2]}\n   - D3: max(${pick.d3[0]-pick.d1[0]}, ${pick.d3[1]-pick.d2[1]}, ${pick.d3[2]-pick.d3[2]}) = ${pick.d3[0]-pick.d1[0]}\n3. 最小者為 ${pick.ans} 萬元。`
+    };
+  },
+
+  "q-u6-l4-01": function(q) {
+    return {
+      givenData: {
+        "CA1 獲利 (S1-S4)": "(13, 9, 24, 18)",
+        "CA2 獲利 (S1-S4)": "(14, 15, 21, 14)",
+        "CA3 獲利 (S1-S4)": "(11, 18, 15, 28)"
+      },
+      questionPrompt: `【作業 1107 題三實戰】四促銷策略（S1-S4）面對對手三行動（CA1-CA3）獲利矩陣：\n- CA1: (13, 9, 24, 18)\n- CA2: (14, 15, 21, 14)\n- CA3: (11, 18, 15, 28)\n請在紙筆上手算完整推導四大不確定決策準則之最優策略：\n(1) 樂觀準則 (Maximax)；\n(2) 悲觀準則 (Maximin)；\n(3) 機率均等準則 (Laplace)；\n(4) 最大機會損失最小化準則 (Minimax Regret)。`,
+      fullSolution: `【動態題解】\n1. 樂觀準則：全場最大獲利 28（選 S4）。\n2. 悲觀準則：各方案最差為 S1:11, S2:9, S3:15, S4:14，取最大 15（選 S3）。\n3. Laplace 準則：平均獲利 S1:12.67, S2:14, S3:20, S4:20（S3 與 S4 並列最佳 20.0 萬）。\n4. Minimax Regret：各策略最大後悔為 S1:17, S2:15, S3:13, S4:7，最小為 7（選 S4）。`
+    };
+  },
+
+  "q-u6-l4-02": function(q) {
+    const scaleList = [1, 2];
+    const s = scaleList[Math.floor(Math.random() * scaleList.length)];
+    const ans = 7.0 * s;
+    return {
+      givenData: {
+        "CA1 獲利 (S1-S4)": `(${13*s}, ${9*s}, ${24*s}, ${18*s})`,
+        "CA2 獲利 (S1-S4)": `(${14*s}, ${15*s}, ${21*s}, ${14*s})`,
+        "CA3 獲利 (S1-S4)": `(${11*s}, ${18*s}, ${15*s}, ${28*s})`
+      },
+      questionPrompt: `承接作業 1107 題三：促銷策略（S1-S4）面對競爭行動（CA1-CA3）獲利矩陣如下：\n- CA1: S1=${13*s}, S2=${9*s}, S3=${24*s}, S4=${18*s}\n- CA2: S1=${14*s}, S2=${15*s}, S3=${21*s}, S4=${14*s}\n- CA3: S1=${11*s}, S2=${18*s}, S3=${15*s}, S4=${28*s}\n請依「最大機會損失最小化準則（Minimax Regret）」計算遺憾矩陣，求出最優決策策略之「最小最大機會損失數值」（萬元）。`,
+      correctAnswer: ans,
+      unitLabel: "萬元",
+      tolerance: 0.1,
+      fullSolution: `【動態題解】\n1. 各行動行最大獲利：CA1=${24*s}, CA2=${21*s}, CA3=${28*s}。\n2. 各策略最大後悔值：\n   - S1 最大後悔：${17*s}\n   - S2 最大後悔：${15*s}\n   - S3 最大後悔：${13*s}\n   - S4 最大後悔：${7*s}\n3. 最小最大機會損失為 ${ans} 萬元（對應最佳策略 S4）。`
     };
   }
+};
 
+/**
+ * 動態參數生成器呼叫介面
+ */
+function generateDynamicQuestion(dynamicType, originalQ) {
+  if (originalQ && typeof originalQ.generator === "function") {
+    return originalQ.generator(originalQ);
+  }
+  if (DYNAMIC_GENERATORS[dynamicType]) {
+    return DYNAMIC_GENERATORS[dynamicType](originalQ);
+  }
+  if (dynamicType === "cagr") return DYNAMIC_GENERATORS["q-u1-l2-01"](originalQ);
+  if (dynamicType === "percentile") return DYNAMIC_GENERATORS["q-u1-l2-02"](originalQ);
+  if (dynamicType === "cv") return DYNAMIC_GENERATORS["q-u1-l2-03"](originalQ);
+  if (dynamicType === "smc_jaccard") return DYNAMIC_GENERATORS["q-u2-l2-01"](originalQ);
+  if (dynamicType === "bayes") return DYNAMIC_GENERATORS["q-u3-l2-01"](originalQ);
   return null;
+}
+
+// 自動將生成器與動態標記綁定至 RAW_QUESTIONS 中等級 2 以上之題目
+if (typeof RAW_QUESTIONS !== "undefined" && Array.isArray(RAW_QUESTIONS)) {
+  RAW_QUESTIONS.forEach(q => {
+    if (DYNAMIC_GENERATORS[q.id]) {
+      q.hasDynamic = true;
+      q.hasDynamicGenerator = true;
+      q.dynamicType = q.id;
+      q.generator = DYNAMIC_GENERATORS[q.id];
+    }
+  });
+}
+
+// 註冊至全域 window 物件
+if (typeof window !== "undefined") {
+  window.DYNAMIC_GENERATORS = DYNAMIC_GENERATORS;
+  window.generateDynamicQuestion = generateDynamicQuestion;
 }

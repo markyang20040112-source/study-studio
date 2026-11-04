@@ -50,4 +50,47 @@ assert smc_big > 0.99
 assert jaccard_big == 0.4000
 print(f"✓ Dilution verified: a=500 -> SMC={smc_big}, Jaccard={jaccard_big} (Jaccard completely stable)")
 
+# Test 5: Verify all Level 2+ calculation questions have dynamic generators registered in js/questions.js
+with open("js/questions.js", "r", encoding="utf-8") as f:
+    q_js = f.read()
+
+assert "const DYNAMIC_GENERATORS = {" in q_js, "DYNAMIC_GENERATORS table missing in js/questions.js"
+assert "q.hasDynamic = true;" in q_js, "Dynamic auto-binding missing in js/questions.js"
+assert "q.generator = DYNAMIC_GENERATORS[q.id];" in q_js, "Generator binding missing in js/questions.js"
+
+# Extract registered generator keys
+import re
+gen_keys = re.findall(r'"(q-u\d-l[234]-\d+)":\s*function', q_js)
+print(f"✓ Found {len(gen_keys)} dynamic question generators in DYNAMIC_GENERATORS")
+assert len(gen_keys) >= 38, f"Expected at least 38 dynamic generators, got {len(gen_keys)}"
+
+# Test 6: Verify Empirical Rule coffee filling example and Q1=L25%, Q3=L75% in app.js and knowledge base
+with open("js/app.js", "r", encoding="utf-8") as f:
+    app_js = f.read()
+
+with open("EXAM_KNOWLEDGE_BASE.md", "r", encoding="utf-8") as f:
+    kb_md = f.read()
+
+# Check Empirical Rule coffee filling scenario
+for src, name in [(app_js, "js/app.js"), (kb_md, "EXAM_KNOWLEDGE_BASE.md")]:
+    assert "咖啡" in src, f"Coffee scenario missing in {name}"
+    assert "300" in src, f"Mean 300ml missing in {name}"
+    assert "10" in src, f"Std Dev 10ml missing in {name}"
+    assert "68.3%" in src or "68%" in src, f"68% missing in {name}"
+    assert "95.4%" in src or "95%" in src, f"95% missing in {name}"
+    assert "99.7%" in src, f"99.7% missing in {name}"
+    assert "密集" in src, f"Density clustering explanation missing in {name}"
+
+# Check Q1 = L25% and Q3 = L75% board formulas
+for src, name in [(app_js, "js/app.js"), (kb_md, "EXAM_KNOWLEDGE_BASE.md")]:
+    assert "L_{25\\%}" in src or "L_{25%}" in src or "L_{25}" in src, f"L25% missing in {name}"
+    assert "L_{75\\%}" in src or "L_{75%}" in src or "L_{75}" in src, f"L75% missing in {name}"
+    assert "IQR = Q_3 - Q_1" in src, f"IQR formula missing in {name}"
+
+print("✓ Empirical Rule coffee example and explicit Q1=L25%, Q3=L75% verified in app.js and EXAM_KNOWLEDGE_BASE.md.")
+
+# Test 7: Verify app.js renders randomize button on self-check and mcq as well as numeric
+assert "originalQ.hasDynamicGenerator || originalQ.hasDynamic" in app_js, "app.js must check hasDynamic"
+assert "randomizeCardParam" in app_js, "randomizeCardParam must exist in app.js"
+
 print("\n🎉 ALL MATHEMATICAL GENERATORS AND EDGE CASES VERIFIED!")
