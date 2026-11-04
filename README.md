@@ -53,10 +53,10 @@ ba-study-studio/
 │   ├── storage.js              # HTML5 localStorage (BA_STUDY_PROGRESS_V1) 讀寫、掌握度統計、JSON 備份
 │   └── questions.js            # 完整題庫資料庫 (含 6 大單元 Level 1-4 全部題目與動態隨機生成器)
 │
-├── docs/                       # 知識庫與題庫文件
-│   ├── EXAM_KNOWLEDGE_BASE.md  # 考試核心知識庫完整歸納（含官方筆誤勘誤）
-│   ├── QUESTION_BANK_LEVEL1_TO_4.md # 四層題庫與步驟詳解
-│   └── WEB_APP_BLUEPRINT.md    # 系統藍圖規格書
+├── EXAM_KNOWLEDGE_BASE.md      # 考試核心知識庫完整歸納（含官方筆誤勘誤）
+├── QUESTION_BANK_LEVEL1_TO_4.md # 四層題庫與步驟詳解 (共56題)
+├── WEB_APP_BLUEPRINT.md        # 系統藍圖規格書 (含最新 6.7 互動與輸入規格)
+├── course_materials/           # 原始教材歸檔（投影片、作業、筆記照片、PDF講義）
 │
 ├── README.md                   # 專案介紹與部署指引
 └── .gitignore                  # Git 忽略檔
