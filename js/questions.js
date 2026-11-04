@@ -107,22 +107,22 @@ const RAW_QUESTIONS = [
     options: [
       {
         key: "A",
-        text: "L_x = \\frac{x}{100} \\times n",
+        text: "$L_x = \\frac{x}{100} \\times n$",
         distractorFeedback: "這是某些簡易概算法，但未考量起點坐標為 1，不符合課堂板書標準。"
       },
       {
         key: "B",
-        text: "L_x = \\frac{x}{100} \\times (n - 1) + 1",
+        text: "$L_x = \\frac{x}{100} \\times (n - 1) + 1$",
         distractorFeedback: null
       },
       {
         key: "C",
-        text: "L_x = \\frac{x}{100} \\times (n + 1)",
+        text: "$L_x = \\frac{x}{100} \\times (n + 1)$",
         distractorFeedback: "這是舊版教科書或少數統計軟體公式（投影片 Slide 31 筆誤處即在此），課堂板書 IMG_0130 明確規定採 (n-1)+1。"
       },
       {
         key: "D",
-        text: "L_x = \\frac{x}{100} \\times (n + 1) - 1",
+        text: "$L_x = \\frac{x}{100} \\times (n + 1) - 1$",
         distractorFeedback: "此公式純屬拼湊，並無此統計學規範。"
       }
     ],
