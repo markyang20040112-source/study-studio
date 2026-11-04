@@ -46,11 +46,11 @@ html = """<!DOCTYPE html>
 
       function checkTextForBadEscapes(str, context) {
         if (!str || typeof str !== "string") return;
-        if (str.includes("\\x08")) {
-          issues.push({ context, error: "Contains \\x08 (unescaped \\b, e.g. \\bar)", snippet: str.slice(0, 120) });
+        if (str.indexOf(String.fromCharCode(8)) !== -1) {
+          issues.push({ context, error: "Contains ASCII 0x08 (unescaped \\b, e.g. \\bar)", snippet: str.slice(0, 120) });
         }
-        if (str.includes("\\x0c")) {
-          issues.push({ context, error: "Contains \\x0c (unescaped \\f, e.g. \\frac)", snippet: str.slice(0, 120) });
+        if (str.indexOf(String.fromCharCode(12)) !== -1) {
+          issues.push({ context, error: "Contains ASCII 0x0c (unescaped \\f, e.g. \\frac)", snippet: str.slice(0, 120) });
         }
         // Test KaTeX parse directly on every $...$, $$...$$, \\(...\\)
         const testEl = document.createElement("div");
@@ -84,8 +84,8 @@ html = """<!DOCTYPE html>
             katexHTML: e.outerHTML
           });
         });
-        if (elContentArea.innerHTML.includes("\\x08") || elContentArea.innerHTML.includes("\\x0c")) {
-          issues.push({ context: "walkthrough:" + u, error: "Walkthrough HTML contains \\x08 or \\x0c" });
+        if (elContentArea.innerHTML.indexOf(String.fromCharCode(8)) !== -1 || elContentArea.innerHTML.indexOf(String.fromCharCode(12)) !== -1) {
+          issues.push({ context: "walkthrough:" + u, error: "Walkthrough HTML contains 0x08 or 0x0c" });
         }
       });
 
