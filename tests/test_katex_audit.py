@@ -139,6 +139,7 @@ cmd = [
     edge_path,
     "--headless",
     "--disable-gpu",
+    "--virtual-time-budget=8000",
     "--dump-dom",
     f"http://127.0.0.1:{PORT}/temp_test_katex.html"
 ]
@@ -146,9 +147,11 @@ cmd = [
 try:
     res = subprocess.run(cmd, capture_output=True, text=True, encoding="utf-8", errors="ignore")
     dom = res.stdout
+    print("DOM length:", len(dom))
     start = dom.find('<div id="results">') + len('<div id="results">')
     end = dom.find('</div>', start)
     json_str = dom[start:end]
+    print("json_str:", repr(json_str[:200]))
     data = json.loads(json_str)
     
     with open("katex_errors.json", "w", encoding="utf-8") as f_err:

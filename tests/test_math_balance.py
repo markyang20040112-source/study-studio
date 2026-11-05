@@ -74,6 +74,7 @@ cmd = [
     edge_path,
     "--headless",
     "--disable-gpu",
+    "--virtual-time-budget=5000",
     "--dump-dom",
     f"http://127.0.0.1:{PORT}/temp_test_math.html"
 ]

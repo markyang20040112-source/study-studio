@@ -164,7 +164,6 @@ function setupGlobalActions() {
       if (confirm("確定要重設所有作答進度與掌握度紀錄嗎？此動作無法復原。")) {
         StudyStorage.resetAll();
         dynamicQuestionCache = {};
-        mcqOptionShuffledCache = {};
         renderSidebarUnits();
         updateProgressUI();
         renderMainContent();
@@ -693,6 +692,129 @@ function renderConceptWalkthrough(unitId) {
     adjustDualZero(5);
   } else if (unitId === "ch03-probability") {
     container.innerHTML = `
+      <!-- Card 0: 集合論基石與機率測度：交集 ∩ vs 連集 ∪ 圖解 & 「加 P 與沒加 P」的本質差異 -->
+      <div class="concept-card">
+        <div class="visual-card-header">
+          <span style="color: #38bdf8; font-size: 1.15rem;">📐 集合論基底：交集 ($A \\cap B$)、連集 ($A \\cup B$) 凡氏圖解與「加 P 與沒加 P」的根本差異</span>
+          <span class="badge badge-mastered">必備基礎</span>
+        </div>
+        <p style="color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 0.75rem;">
+          機率論建立在集合論之上。在進入計算前，必須徹底釐清<strong>「交集與連集的幾何概念」</strong>以及<strong>「加 P（機率數值）與沒有 P（事件集合）」的巨大本質差異</strong>：
+        </p>
+
+        <!-- 凡氏圖雙欄圖解 -->
+        <div class="visual-card-grid" style="margin-bottom: 1rem;">
+          <!-- 交集卡片 -->
+          <div class="visual-card">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.4rem;">
+              <span style="font-weight: 700; color: #38bdf8; font-size: 1.05rem;">交集 (Intersection: $A \\cap B$)</span>
+              <span class="badge badge-unattempted" style="font-size: 0.75rem;">AND (且)</span>
+            </div>
+            <p style="font-size: 0.85rem; color: #cbd5e1; line-height: 1.5; margin-bottom: 0.5rem;">
+              <strong>定義</strong>：同時屬於事件 $A$ <strong>且</strong>屬於事件 $B$ 的所有共同結果形成的子集合。<br>
+              <strong>商務實例</strong>：既是「高資產 VIP 會員」<strong>且</strong>「近 30 天內有登入下單」的重疊受眾。
+            </p>
+            <div class="svg-diagram-container" style="background: rgba(15, 23, 42, 0.7); border-radius: 8px; padding: 0.5rem; text-anchor: middle;">
+              <svg viewBox="0 0 280 150" xmlns="http://www.w3.org/2000/svg">
+                <!-- 樣本空間外框 S -->
+                <rect x="5" y="5" width="270" height="140" rx="8" fill="none" stroke="#475569" stroke-width="1.5"/>
+                <text x="25" y="24" fill="#94a3b8" font-size="11" font-weight="700">樣本空間 S</text>
+
+                <!-- 圓 A -->
+                <circle cx="105" cy="80" r="48" fill="rgba(56, 189, 248, 0.15)" stroke="#38bdf8" stroke-width="2"/>
+                <text x="75" y="84" fill="#38bdf8" font-size="13" font-weight="700">A</text>
+
+                <!-- 圓 B -->
+                <circle cx="175" cy="80" r="48" fill="rgba(168, 85, 247, 0.15)" stroke="#c084fc" stroke-width="2"/>
+                <text x="205" y="84" fill="#c084fc" font-size="13" font-weight="700">B</text>
+
+                <!-- 重疊交集 A ∩ B 高亮著色 -->
+                <path d="M 140,40 A 48,48 0 0,1 140,120 A 48,48 0 0,1 140,40" fill="rgba(16, 185, 129, 0.6)" stroke="#10b981" stroke-width="2"/>
+                <text x="140" y="76" fill="#ffffff" font-size="11" font-weight="700">A ∩ B</text>
+                <text x="140" y="92" fill="#a7f3d0" font-size="9">共同交會區</text>
+              </svg>
+            </div>
+          </div>
+
+          <!-- 連集卡片 -->
+          <div class="visual-card">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.4rem;">
+              <span style="font-weight: 700; color: #a78bfa; font-size: 1.05rem;">連集 (Union: $A \\cup B$)</span>
+              <span class="badge badge-unattempted" style="font-size: 0.75rem;">OR (或)</span>
+            </div>
+            <p style="font-size: 0.85rem; color: #cbd5e1; line-height: 1.5; margin-bottom: 0.5rem;">
+              <strong>定義</strong>：屬於事件 $A$ <strong>或者</strong>屬於事件 $B$（包含兩者皆符合）的全部結果聚集。<br>
+              <strong>商務實例</strong>：持有「實體會員卡」<strong>或</strong>「綁定 LINE 官方帳號」的任一顧客總群體。
+            </p>
+            <div class="svg-diagram-container" style="background: rgba(15, 23, 42, 0.7); border-radius: 8px; padding: 0.5rem; text-anchor: middle;">
+              <svg viewBox="0 0 280 150" xmlns="http://www.w3.org/2000/svg">
+                <!-- 樣本空間外框 S -->
+                <rect x="5" y="5" width="270" height="140" rx="8" fill="none" stroke="#475569" stroke-width="1.5"/>
+                <text x="25" y="24" fill="#94a3b8" font-size="11" font-weight="700">樣本空間 S</text>
+
+                <!-- 圓 A 與 圓 B 填滿高亮 (代表聯集) -->
+                <circle cx="105" cy="80" r="48" fill="rgba(245, 158, 11, 0.4)" stroke="#f59e0b" stroke-width="2"/>
+                <circle cx="175" cy="80" r="48" fill="rgba(245, 158, 11, 0.4)" stroke="#f59e0b" stroke-width="2"/>
+
+                <text x="75" y="84" fill="#fde68a" font-size="13" font-weight="700">A</text>
+                <text x="205" y="84" fill="#fde68a" font-size="13" font-weight="700">B</text>
+
+                <text x="140" y="76" fill="#ffffff" font-size="12" font-weight="700">A ∪ B</text>
+                <text x="140" y="94" fill="#fde68a" font-size="9">整片著色區域 (A + B - A∩B)</text>
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        <!-- 震撼對比：加 P 與沒有 P 的本質差異 -->
+        <div class="callout-box callout-amber" style="margin-top: 1rem;">
+          <div style="font-weight: 700; color: #fbbf24; font-size: 1rem; margin-bottom: 0.5rem;">
+            ⚡ 關鍵辨析：加了「P」與沒有「P」到底差在哪裡？
+          </div>
+          <div style="overflow-x: auto;">
+            <table class="spotlight-table" style="font-size: 0.88rem; width: 100%; border-collapse: collapse; margin-top: 0.25rem;">
+              <thead>
+                <tr style="background: rgba(30, 41, 59, 0.8); color: #e2e8f0; border-bottom: 1px solid var(--border-color);">
+                  <th style="padding: 0.6rem 0.8rem; text-align: left;">比較維度</th>
+                  <th style="padding: 0.6rem 0.8rem; text-align: left; color: #38bdf8;">沒有加 P（集合 / 事件）</th>
+                  <th style="padding: 0.6rem 0.8rem; text-align: left; color: #34d399;">加了 P（機率數值度量）</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.05);">
+                  <td style="padding: 0.6rem 0.8rem; font-weight: 700;">數學本質</td>
+                  <td style="padding: 0.6rem 0.8rem; color: #94a3b8;"><strong>「一個集合（Set）」</strong>，由樣本點組成的袋子</td>
+                  <td style="padding: 0.6rem 0.8rem; color: #a7f3d0;"><strong>「一個實數（Real Number）」</strong>，介於 $0 \\le P \\le 1$</td>
+                </tr>
+                <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.05);">
+                  <td style="padding: 0.6rem 0.8rem; font-weight: 700;">常見代表符號</td>
+                  <td style="padding: 0.6rem 0.8rem;">$A, \\; B, \\; A \\cap B, \\; A \\cup B, \\; A^c$</td>
+                  <td style="padding: 0.6rem 0.8rem;">$P(A), \\; P(B), \\; P(A \\cap B), \\; P(A \\cup B)$</td>
+                </tr>
+                <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.05);">
+                  <td style="padding: 0.6rem 0.8rem; font-weight: 700;">可用之運算符</td>
+                  <td style="padding: 0.6rem 0.8rem;">集合符號：$\\cap$ (交集), $\\cup$ (連集), $\\subset$ (包含), $\\emptyset$ (空集合)</td>
+                  <td style="padding: 0.6rem 0.8rem;">代數四則運算：$+$, $-$, $\\times$, $\\div$, 比例小數</td>
+                </tr>
+                <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.05);">
+                  <td style="padding: 0.6rem 0.8rem; font-weight: 700;">白話口語表達</td>
+                  <td style="padding: 0.6rem 0.8rem;">「發生了哪些事？」、「哪些顧客屬於此群體？」</td>
+                  <td style="padding: 0.6rem 0.8rem;">「這件事發生的機率有多大？（機率為 0.3 或 30%）」</td>
+                </tr>
+                <tr>
+                  <td style="padding: 0.6rem 0.8rem; font-weight: 700; color: #f43f5e;">考場致命語病</td>
+                  <td style="padding: 0.6rem 0.8rem; color: #fca5a5;">❌ 寫出 $A \\cap B = 0.4$（大錯特錯！集合絕不能直接等於小數數字！）</td>
+                  <td style="padding: 0.6rem 0.8rem; color: #fca5a5;">❌ 寫出 $P(A) \\cap P(B)$（數字不能作集合交集，數字要相乘！）</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div style="font-size: 0.85rem; color: #fef08a; margin-top: 0.5rem; line-height: 1.5;">
+            💡 <strong>速記心法</strong>：沒有 P 是「裝有合格品或瑕疵品的箱子本體（物件群集）」；加了 P 則是「把手伸進箱子抽中它的機率（0% 到 100% 的數字）」！
+          </div>
+        </div>
+      </div>
+
       <!-- Card 1: 機率法則與互斥相依陷阱 -->
       <div class="concept-card">
         <div class="visual-card-header">
@@ -984,6 +1106,57 @@ function renderConceptWalkthrough(unitId) {
           </div>
         </div>
 
+        <!-- 白話精解 k 與 R²adj 計算原理獨立特輯 -->
+        <div class="callout-box callout-sky" style="margin-top: 1rem;">
+          <div style="font-weight: 700; color: #38bdf8; font-size: 1.05rem; margin-bottom: 0.6rem;">
+            🔍 觀念深度剖析：什麼是「k」？為什麼需要「R²adj」？（超白話偵探比喻與計算原理）
+          </div>
+
+          <!-- 區塊 1: k 的白話定義 -->
+          <div style="margin-bottom: 1rem; padding: 0.75rem; background: rgba(15, 23, 42, 0.6); border-radius: 8px; border-left: 4px solid #38bdf8;">
+            <div style="font-weight: 700; color: #7dd3fc; margin-bottom: 0.3rem;">
+              1. 什麼是「$k$」？（自變數個數 / 破案線索數）
+            </div>
+            <p style="font-size: 0.88rem; color: #cbd5e1; line-height: 1.6; margin-bottom: 0.4rem;">
+              <strong>數學嚴格定義</strong>：$k$ 是迴歸模型中放入的<strong>「自變數（預測特徵變數）的總個數」</strong>。<br>
+              ⚠️ <strong>重要考點</strong>：截距常數項 $b_0$（$\\beta_0$）<strong>不算在 $k$ 裡面</strong>！<br>
+              例如方程式 $\\hat{Y} = b_0 + b_1 X_1 + b_2 X_2$，這裡自變數只有 $X_1$ 和 $X_2$，所以 <strong>$k = 2$</strong>。
+            </p>
+            <p style="font-size: 0.88rem; color: #cbd5e1; line-height: 1.6;">
+              <strong>🕵️ 超白話比喻</strong>：把迴歸模型想像成「名偵探在破案猜兇手（預測 $Y$）」。<br>
+              $k$ 就是你找來協助破案的<strong>「助手人數 / 線索特徵數量」</strong>（例如 $X_1$ 是嫌犯腳印、$X_2$ 是通話紀錄...）。<br>
+              請助手不是免費的！每多請一位助手（$k$ 增加 1），你的手頭彈性就被吃掉一部分（消耗 1 個自由度）。
+            </p>
+          </div>
+
+          <!-- 區塊 2: R²adj 的計算原理與拔河機制 -->
+          <div style="padding: 0.75rem; background: rgba(15, 23, 42, 0.6); border-radius: 8px; border-left: 4px solid #34d399;">
+            <div style="font-weight: 700; color: #6ee7b7; margin-bottom: 0.3rem;">
+              2. 「$R^2_{adj}$」的計算原理與深層直覺（自由度懲罰稅）
+            </div>
+            <p style="font-size: 0.88rem; color: #cbd5e1; line-height: 1.6; margin-bottom: 0.5rem;">
+              <strong>為什麼原始 $R^2$ 會「自欺欺人」？（虛胖陷阱）</strong><br>
+              原始 $R^2 = 1 - \\frac{SSE}{SST}$。只要你隨便往模型裡塞任何完全無關的垃圾變數（例如今天早餐吃什麼、老闆穿什麼顏色襪子），在最小平方法 (OLS) 的數學擬合下，殘差平方和 $SSE$ 絕不會變大（頂多持平或微幅下降）。這導致<strong>原始 $R^2$ 永遠只升不降（單調不減）</strong>！哪怕塞入一堆廢物特徵，也能把 $R^2$ 刷到 0.99，但這種模型拿到真實商業戰場時會徹底崩盤（過度配適 Overfitting）。
+            </p>
+            <p style="font-size: 0.88rem; color: #cbd5e1; line-height: 1.6; margin-bottom: 0.5rem;">
+              <strong>$R^2_{adj}$ 的核心公式拆解</strong>：
+              $$R^2_{adj} = 1 - \\frac{SSE / (n - k - 1)}{SST / (n - 1)} = 1 - \\frac{MSE}{MST}$$
+            </p>
+            <div style="font-size: 0.86rem; color: #e2e8f0; line-height: 1.6;">
+              <strong>⚖️ 兩股力量的「拔河博弈」</strong>：當你在模型中多塞 1 個變數（$k$ 變成 $k + 1$）時：
+              <ul style="padding-left: 1.25rem; margin-top: 0.3rem; margin-bottom: 0.4rem;">
+                <li><strong style="color: #38bdf8;">好處（分子微降）</strong>：多了一個線索，殘差平方和 $SSE$ 可能會稍微減少一點點。</li>
+                <li><strong style="color: #f43f5e;">代價（分母懲罰稅）</strong>：殘差自由度 $(n - k - 1)$ 實打實少扣了 1！分母變小，會迫使 $\\frac{SSE}{n-k-1}$ 整體被放大！</li>
+              </ul>
+              <strong>🎯 最終勝負結果</strong>：
+              <div style="background: rgba(30, 41, 59, 0.7); padding: 0.5rem 0.75rem; border-radius: 6px; margin-top: 0.3rem;">
+                • <strong style="color: #34d399;">若新變數是「真正有用的神器」</strong>：$SSE$ 暴跌大幅減少，帶來的好處遠遠壓過自由度少 1 的懲罰，此時 $\\frac{SSE}{n-k-1}$ 下降，前方的 $1 - (\\dots)$ 就會<strong>上升</strong>（$R^2_{adj}$ 變大，獎勵真本事！）。<br>
+                • <strong style="color: #f87171;">若新變數是「無關的垃圾雜訊」</strong>：$SSE$ 幾乎沒變，但自由度卻被消耗了，$\\frac{SSE}{n-k-1}$ 不降反升，導致 $1 - (\\dots)$ <strong>不升反降</strong>（$R^2_{adj}$ 倒退下跌，重重懲罰模型虛胖！）。
+              </div>
+            </div>
+          </div>
+        </div>
+
         <!-- P-value 視覺標尺 -->
         <div style="margin-top: 1.25rem;">
           <div style="font-weight: 700; color: #a5b4fc; margin-bottom: 0.4rem;">板書 P-值判斷門檻視覺量表</div>
@@ -1188,6 +1361,44 @@ function renderConceptWalkthrough(unitId) {
             <strong>2. 坐標軸截點頂點（單邊界 Axis Intercept Single-Sided Bound）</strong>：<br>
             若最佳解落在坐標軸截點上（如 $(X_1, 0)$，由非負限制 $X_2 \\ge 0$ 與一條限制式相交），敏感度範圍為<strong>單側邊界（如 $-\\frac{c_1}{c_2} \\le m_1$）</strong>，僅受單一邊界線約束！
           </p>
+
+          <!-- 目標函數斜率敏感度旋轉夾角 SVG 圖解 -->
+          <div class="svg-diagram-container" style="background: rgba(15, 23, 42, 0.7); border-radius: 8px; padding: 0.75rem; margin-top: 0.75rem;">
+            <svg viewBox="0 0 500 240" xmlns="http://www.w3.org/2000/svg">
+              <!-- 坐標軸 -->
+              <line x1="40" y1="210" x2="470" y2="210" stroke="#475569" stroke-width="1.5"/>
+              <line x1="40" y1="210" x2="40" y2="20" stroke="#475569" stroke-width="1.5"/>
+              <text x="460" y="225" font-size="11" fill="#94a3b8">X1</text>
+              <text x="25" y="25" font-size="11" fill="#94a3b8">X2</text>
+
+              <!-- 安全錐形旋轉夾角陰影扇形區 (Safe Cone) -->
+              <polygon points="260,110 440,20 380,210" fill="rgba(16, 185, 129, 0.18)" stroke="none"/>
+              <path d="M 330,75 A 90,90 0 0,1 310,150" fill="none" stroke="#34d399" stroke-width="1.5" stroke-dasharray="3,3"/>
+              <text x="350" y="115" font-size="10" fill="#6ee7b7" font-weight="700">容許旋轉錐區 (Safe Cone)</text>
+
+              <!-- 邊界線 1: 平緩線 L1 (斜率 m1 = -1/2) -->
+              <line x1="80" y1="200" x2="440" y2="20" stroke="#38bdf8" stroke-width="2.5"/>
+              <text x="410" y="15" font-size="10" fill="#38bdf8" font-weight="700">限制線 L1: 斜率 m1 = -1/2</text>
+
+              <!-- 邊界線 2: 陡峭線 L2 (斜率 m2 = -2) -->
+              <line x1="200" y1="20" x2="380" y2="210" stroke="#f43f5e" stroke-width="2.5"/>
+              <text x="180" y="15" font-size="10" fill="#f43f5e" font-weight="700">限制線 L2: 斜率 m2 = -2</text>
+
+              <!-- 目標函數等利潤線 Z (金色虛線，位於兩斜率之間) -->
+              <line x1="140" y1="20" x2="380" y2="200" stroke="#f59e0b" stroke-width="2.5" stroke-dasharray="6,4"/>
+              <text x="270" y="180" font-size="11" fill="#fbbf24" font-weight="700">等利潤線 m_Z = -c1 / c2</text>
+
+              <!-- 最佳解頂點 D (交點) -->
+              <circle cx="260" cy="110" r="7" fill="#10b981" stroke="#ffffff" stroke-width="2"/>
+              <text x="180" y="115" font-size="11" fill="#ffffff" font-weight="700">頂點 D(6, 4) 錨定點</text>
+
+              <!-- 旋轉箭頭標記 -->
+              <path d="M 230,85 C 240,65 270,60 285,75" fill="none" stroke="#fbbf24" stroke-width="1.5" marker-end="url(#arrow)"/>
+              <text x="260" y="232" font-size="10" fill="#cbd5e1" text-anchor="middle">
+                💡 只要等利潤線斜率維持在兩限制線之間（-2 ≤ -c1/c2 ≤ -1/2），最佳解就牢牢鎖定在頂點 D！
+              </text>
+            </svg>
+          </div>
         </div>
 
         <!-- 觀念 Checkpoint -->
@@ -1949,23 +2160,17 @@ function createQuestionCard(q, originalQ, indexNum) {
   let interactiveHtml = "";
 
   if (q.type === "mcq") {
-    // 選項洗牌 (動態洗牌防死背，依 Blueprint 6.2 實作)
+    // 依題庫規範選項順序渲染並快取，確保選項代號 (A, B, C, D) 與詳解剖析 100% 吻合
     if (!mcqOptionShuffledCache[originalQ.id]) {
-      const copy = [...q.options];
-      for (let i = copy.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [copy[i], copy[j]] = [copy[j], copy[i]];
-      }
-      mcqOptionShuffledCache[originalQ.id] = copy;
+      mcqOptionShuffledCache[originalQ.id] = [...(q.options || [])];
     }
     const options = mcqOptionShuffledCache[originalQ.id];
-    const displayLetters = ["A", "B", "C", "D", "E"];
 
     interactiveHtml = `
       <div class="options-container" id="options-${originalQ.id}">
         ${options
-          .map((opt, optIdx) => {
-            const letter = displayLetters[optIdx] || opt.key;
+          .map((opt) => {
+            const letter = opt.key;
             const isSelected = qState.lastSelected === opt.key;
             let optClass = "option-btn";
             if (isSelected) {
@@ -2316,7 +2521,6 @@ window.randomizeCardParam = function (qId, dynamicType) {
     lastSelected: null,
     hintViewed: false
   });
-  delete mcqOptionShuffledCache[qId];
 
   // 取得原卡片在當前階梯或目前 DOM 中的題目序號 indexNum
   let indexNum = 1;

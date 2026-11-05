@@ -89,7 +89,7 @@ const RAW_QUESTIONS = [
     ],
     correctAnswer: "B",
     formulaHint: "CAGR = \\sqrt[t]{\\frac{V_t}{V_0}} - 1 = \\left( \\frac{V_t}{V_0} \\right)^{1/t} - 1",
-    fullSolution: "【步驟一：觀念辨析】跨期成長率具有前後期累乘的複利結構 (1+R1)(1+R2)...。\n【步驟二：數學證明】根據柯西不等式與算幾不等式，算術平均數 ≥ 幾何平均數。若直接用算術平均數相加除以期數，會忽略前期規模縮水對後期的影響，必定高估實質長期複合年成長率！\n【步驟三：結論】評估跨期複利時必須使用幾何平均數。",
+    fullSolution: "【正確選項】：(B)\n\n【步驟一：觀念辨析】跨期成長率具有前後期累乘的複利結構 (1+R1)(1+R2)...。\n【步驟二：數學證明】根據柯西不等式與算幾不等式，算術平均數 ≥ 幾何平均數。若直接用算術平均數相加除以期數，會忽略前期規模縮水對後期的影響，必定高估實質長期複合年成長率！\n【步驟三：結論】評估跨期複利時必須使用幾何平均數。",
     cramSummary: {
       conceptName: "幾何平均數 (CAGR)",
       keyTakeaway: "算術平均必高估成長率！跨期複利計算務必採用幾何平均開 t 次方根。"
@@ -128,7 +128,7 @@ const RAW_QUESTIONS = [
     ],
     correctAnswer: "B",
     formulaHint: "L_x = \\frac{x}{100} \\times (n - 1) + 1",
-    fullSolution: "【步驟一：板書對齊】課堂板書 IMG_0130 唯一指定採用公式：$L_x = \\frac{x}{100}(n-1) + 1$。\n【步驟二：幾何意涵】第一筆資料坐標為 1，最後一筆坐標為 n，總跨距為 $n-1$。依百分比 $x/100$ 切割後加上起點 1 即為精確位置。\n【步驟三：內插法】若算得小數 $p.d$，則以 $X_p + 0.d(X_{p+1} - X_p)$ 進行線性內插。",
+    fullSolution: "【正確選項】：(B)\n\n【步驟一：板書對齊】課堂板書 IMG_0130 唯一指定採用公式：$L_x = \\frac{x}{100}(n-1) + 1$。\n【步驟二：幾何意涵】第一筆資料坐標為 1，最後一筆坐標為 n，總跨距為 $n-1$。依百分比 $x/100$ 切割後加上起點 1 即為精確位置。\n【步驟三：內插法】若算得小數 $p.d$，則以 $X_p + 0.d(X_{p+1} - X_p)$ 進行線性內插。",
     cramSummary: {
       conceptName: "板書百分位數公式",
       keyTakeaway: "位置公式唯一死守：L_x = (x/100)(n-1) + 1！內插公式：X_p + 0.d(X_{p+1} - X_p)。"
@@ -167,7 +167,7 @@ const RAW_QUESTIONS = [
     ],
     correctAnswer: "C",
     formulaHint: "CV = \\frac{S}{\\bar{X}} \\times 100\\%",
-    fullSolution: "【步驟一：公式定義】變異係數 $CV = S / \\bar{X}$。\n【步驟二：統計特性】透過將標準差除以平均數，消除了測量單位（台幣點數 vs 美元）與尺度規模（20,000 vs 50）的影響，轉換為無因次的純量相對離散度。\n【步驟三：商務結論】評估不同單位或平均數差異巨大的兩組資產波動風險時，CV 為唯一標準指標。",
+    fullSolution: "【正確選項】：(C)\n\n【步驟一：公式定義】變異係數 $CV = S / \\bar{X}$。\n【步驟二：統計特性】透過將標準差除以平均數，消除了測量單位（台幣點數 vs 美元）與尺度規模（20,000 vs 50）的影響，轉換為無因次的純量相對離散度。\n【步驟三：商務結論】評估不同單位或平均數差異巨大的兩組資產波動風險時，CV 為唯一標準指標。",
     cramSummary: {
       conceptName: "變異係數 (CV)",
       keyTakeaway: "CV = S / X̄，無單位純量！專門解決「不同單位」或「平均數差距極大」的相對波動比較。"
@@ -377,7 +377,7 @@ const RAW_QUESTIONS = [
     ],
     correctAnswer: "B",
     formulaHint: "SMC = \\frac{a + d}{a + b + c + d}, \\quad Jaccard = \\frac{d}{b + c + d} = \\frac{d}{N - a}",
-    fullSolution: "【步驟一：板書核心】板書 IMG_0131 特別註記：「拿掉 a：當 a 這筆資料不重要時，使用雅卡爾指數！」\n【步驟二：列聯表結構】$a$ 為雙 0（兩者皆無），$d$ 為雙 1（兩者皆有）。超市商品有數萬種，任兩位顧客共同未買的商品數 $a$ 極為龐大。若使用 SMC，分子包含 $a$，將導致幾乎所有人的相似度都高達 0.99，失去分群鑑別度。\n【步驟三：Jaccard 優勢】Jaccard 分母與分子皆排除 $a$，聚焦於有購買行為的聯集與交集比例。",
+    fullSolution: "【正確選項】：(B)\n\n【步驟一：板書核心】板書 IMG_0131 特別註記：「拿掉 a：當 a 這筆資料不重要時，使用雅卡爾指數！」\n【步驟二：列聯表結構】$a$ 為雙 0（兩者皆無），$d$ 為雙 1（兩者皆有）。超市商品有數萬種，任兩位顧客共同未買的商品數 $a$ 極為龐大。若使用 SMC，分子包含 $a$，將導致幾乎所有人的相似度都高達 0.99，失去分群鑑別度。\n【步驟三：Jaccard 優勢】Jaccard 分母與分子皆排除 $a$，聚焦於有購買行為的聯集與交集比例。",
     cramSummary: {
       conceptName: "Jaccard 排除雙 0 原理",
       keyTakeaway: "板書口訣：拿掉 a！當雙 0 不重要或資料極稀疏時，必用 Jaccard 避免相似度虛高。"
@@ -472,7 +472,7 @@ const RAW_QUESTIONS = [
     ],
     correctAnswer: "B",
     formulaHint: "SMC = \\frac{46 + 2}{50} = 0.96, \\quad Jaccard = \\frac{2}{2 + 2} = 0.50",
-    fullSolution: "【步驟一：深入商業場景】在購物籃分析中，「沒買某物」通常無明確意義；但在此品管情境中，「兩者皆無缺陷（雙 0）」代表兩批晶圓在該規格上『共同達到合規標準』，具備極高實質品質意涵。\n【步驟二：指標對比】若用 Jaccard 排除 46 項合規特徵，相似度會暴跌至 2/(2+2)=0.50（看似一半不合），這嚴重扭曲了事實；而 SMC 為 (46+2)/50 = 0.96 (96%)，忠實反映兩批產品高度一致合格的狀態！\n【步驟三：結論】當雙 0 具備對稱實質意義時，應使用 SMC。",
+    fullSolution: "【正確選項】：(B)\n\n【步驟一：深入商業場景】在購物籃分析中，「沒買某物」通常無明確意義；但在此品管情境中，「兩者皆無缺陷（雙 0）」代表兩批晶圓在該規格上『共同達到合規標準』，具備極高實質品質意涵。\n【步驟二：指標對比】若用 Jaccard 排除 46 項合規特徵，相似度會暴跌至 2/(2+2)=0.50（看似一半不合），這嚴重扭曲了事實；而 SMC 為 (46+2)/50 = 0.96 (96%)，忠實反映兩批產品高度一致合格的狀態！\n【步驟三：結論】當雙 0 具備對稱實質意義時，應使用 SMC。",
     cramSummary: {
       conceptName: "SMC 合理應用場景",
       keyTakeaway: "當「雙 0」具備重要管理意涵（如共同合規、共同具備安全性），SMC 才是正確指標！"
@@ -512,7 +512,7 @@ const RAW_QUESTIONS = [
     ],
     correctAnswer: "B",
     formulaHint: "SMC = \\frac{a+d}{a+b+c+d}, \\quad Jaccard = \\frac{d}{b+c+d} = \\frac{d}{N-a}",
-    fullSolution: "【步驟一：板書列聯表結構】依課堂板書 IMG_0131：\n- $a$：雙方皆為 0（皆無 / 皆未買）\n- $b$：A 為 0、B 為 1（A無 B有）\n- $c$：A 為 1、B 為 0（A有 B無）\n- $d$：雙方皆為 1（皆有 / 皆購買）\n總維度數 $N = a + b + c + d$。\n【步驟二：公式結構對比】\n- SMC（簡單匹配係數）：$\\frac{a+d}{a+b+c+d}$，分母為全部維度 $N$。\n- Jaccard（雅卡爾指數）：$\\frac{d}{b+c+d} = \\frac{d}{N-a}$，分母排除 $a$（僅看至少一方具備的聯集），分子僅留 $d$（雙方皆具備之交集）。\n【步驟三：結論】選項 (B) 精確揭示了兩者分母與分子的本質差異。",
+    fullSolution: "【正確選項】：(B)\n\n【步驟一：板書列聯表結構】依課堂板書 IMG_0131：\n- $a$：雙方皆為 0（皆無 / 皆未買）\n- $b$：A 為 0、B 為 1（A無 B有）\n- $c$：A 為 1、B 為 0（A有 B無）\n- $d$：雙方皆為 1（皆有 / 皆購買）\n總維度數 $N = a + b + c + d$。\n【步驟二：公式結構對比】\n- SMC（簡單匹配係數）：$\\frac{a+d}{a+b+c+d}$，分母為全部維度 $N$。\n- Jaccard（雅卡爾指數）：$\\frac{d}{b+c+d} = \\frac{d}{N-a}$，分母排除 $a$（僅看至少一方具備的聯集），分子僅留 $d$（雙方皆具備之交集）。\n【步驟三：結論】選項 (B) 精確揭示了兩者分母與分子的本質差異。",
     cramSummary: {
       conceptName: "二元列聯表結構與公式分母",
       keyTakeaway: "SMC 分母看全部 N=a+b+c+d，分子看雙0加雙1 (a+d)；Jaccard 分母排除 a (b+c+d)，分子只看雙1 (d)。"
@@ -551,7 +551,7 @@ const RAW_QUESTIONS = [
     ],
     correctAnswer: "A",
     formulaHint: "Jaccard = \\frac{d}{b+c+d} \\implies \\text{拿掉 } a \\text{（當 } a \\text{ 資料不重要時）}",
-    fullSolution: "【步驟一：板書核心精神】板書 IMG_0131 特別強調：「拿掉 a：當 a 這筆資料不重要時，使用雅卡爾指數！」\n【步驟二：稀疏性與假性高相似度】在串流影音或電商推薦中，影片或商品數成千上萬（海量維度），任何兩位用戶共同「未看過/未購買」的項目 $a$ 高達數萬件。若將 $a$ 計入（使用 SMC），所有用戶間的相似度皆會被雙 0 灌水稀釋至 0.99 以上，失去鑑別力！因此必須「拿掉 $a$」，僅聚焦於至少一人看過的聯集中兩人的共同觀看交集（Jaccard）。\n【步驟三：對照對稱屬性】選項 (B)、(C)、(D) 的雙 0 皆具備對稱實質意義（性別、晶圓合格、硬幣反面），不應盲目拿掉 $a$。",
+    fullSolution: "【正確選項】：(A)\n\n【步驟一：板書核心精神】板書 IMG_0131 特別強調：「拿掉 a：當 a 這筆資料不重要時，使用雅卡爾指數！」\n【步驟二：稀疏性與假性高相似度】在串流影音或電商推薦中，影片或商品數成千上萬（海量維度），任何兩位用戶共同「未看過/未購買」的項目 $a$ 高達數萬件。若將 $a$ 計入（使用 SMC），所有用戶間的相似度皆會被雙 0 灌水稀釋至 0.99 以上，失去鑑別力！因此必須「拿掉 $a$」，僅聚焦於至少一人看過的聯集中兩人的共同觀看交集（Jaccard）。\n【步驟三：對照對稱屬性】選項 (B)、(C)、(D) 的雙 0 皆具備對稱實質意義（性別、晶圓合格、硬幣反面），不應盲目拿掉 $a$。",
     cramSummary: {
       conceptName: "板書「拿掉 a」使用時機",
       keyTakeaway: "板書鐵律：資料高度稀疏、雙 0 不代表共同偏好（如海量商品、串流片單）時，必拿掉 a 用 Jaccard！"
@@ -670,7 +670,7 @@ const RAW_QUESTIONS = [
     ],
     correctAnswer: "B",
     formulaHint: "\\text{互斥} \\implies P(A \\cap B) = 0; \\quad \\text{獨立} \\iff P(A \\cap B) = P(A)P(B)",
-    fullSolution: "【步驟一：互斥定義】兩事件互斥代表不可能同時發生，故交集機率 $P(A \\cap B) = 0$。\n【步驟二：獨立定義】兩事件獨立之充分必要條件為 $P(A \\cap B) = P(A) \\cdot P(B)$。\n【步驟三：聯立檢驗】因為題目給定 $P(A) > 0$ 且 $P(B) > 0$，故兩者乘積 $P(A) \\cdot P(B) > 0$。\n然而 $P(A \\cap B) = 0 \\ne P(A)P(B)$！\n【步驟四：結論】非零機率的互斥事件必定相依，絕不可能是獨立事件。",
+    fullSolution: "【正確選項】：(B)\n\n【步驟一：互斥定義】兩事件互斥代表不可能同時發生，故交集機率 $P(A \\cap B) = 0$。\n【步驟二：獨立定義】兩事件獨立之充分必要條件為 $P(A \\cap B) = P(A) \\cdot P(B)$。\n【步驟三：聯立檢驗】因為題目給定 $P(A) > 0$ 且 $P(B) > 0$，故兩者乘積 $P(A) \\cdot P(B) > 0$。\n然而 $P(A \\cap B) = 0 \\ne P(A)P(B)$！\n【步驟四：結論】非零機率的互斥事件必定相依，絕不可能是獨立事件。",
     cramSummary: {
       conceptName: "互斥 vs 獨立陷阱",
       keyTakeaway: "互斥非零必相依！P(A∩B)=0 ≠ P(A)P(B)>0。A 發生 B 就死掉，是最極端的相依。"
@@ -709,7 +709,7 @@ const RAW_QUESTIONS = [
     ],
     correctAnswer: "B",
     formulaHint: "E(X)_{Poisson} = Var(X)_{Poisson} = \\lambda",
-    fullSolution: "【步驟一：各選項檢核】\n- (A) 錯誤：連續型變數單點機率恆為 0 ($P(X=c)=0$)，機率為曲線下的面積積分。\n- (B) 正確：卜瓦松分配描述單位時間內稀有事件發生數，其數學母數 $\\lambda$ 同時為期望值與變異數。\n- (C) 錯誤：期望值 $E(X) = np = 10 \\times 0.4 = 4.0$；變異數 $Var(X) = 10 \\times 0.4 \\times 0.6 = 2.4$。\n- (D) 錯誤：$\\mu$ 決定中心位置，$\\sigma$ 決定分散胖瘦。",
+    fullSolution: "【正確選項】：(B)\n\n【步驟一：各選項檢核】\n- (A) 錯誤：連續型變數單點機率恆為 0 ($P(X=c)=0$)，機率為曲線下的面積積分。\n- (B) 正確：卜瓦松分配描述單位時間內稀有事件發生數，其數學母數 $\\lambda$ 同時為期望值與變異數。\n- (C) 錯誤：期望值 $E(X) = np = 10 \\times 0.4 = 4.0$；變異數 $Var(X) = 10 \\times 0.4 \\times 0.6 = 2.4$。\n- (D) 錯誤：$\\mu$ 決定中心位置，$\\sigma$ 決定分散胖瘦。",
     cramSummary: {
       conceptName: "隨機變數分配特徵",
       keyTakeaway: "連續型單點機率恆為 0；卜瓦松 E(X) = Var(X) = λ；二項 E = np, Var = np(1-p)。"
@@ -799,7 +799,7 @@ const RAW_QUESTIONS = [
     ],
     correctAnswer: "A",
     formulaHint: "P(M \\cup B) = P(M) + P(B) - P(M \\cap B)",
-    fullSolution: "【步驟一：加法法則求聯集】\n$P(M \\cup B) = P(M) + P(B) - P(M \\cap B) = 0.60 + 0.50 - 0.30 = 0.80$。故 (A) 正確！\n【步驟二：互斥檢定】\n因為 $P(M \\cap B) = 0.30 \ne 0$，兩事件非互斥。故 (B) 錯。\n【步驟三：條件機率檢定】\n$P(M|B) = \\frac{P(M \\cap B)}{P(B)} = \\frac{0.30}{0.50} = 0.60$。故 (C) 錯。\n【步驟四：狄摩根餘事檢定】\n$P(M^c \\cap B^c) = 1 - P(M \\cup B) = 1 - 0.80 = 0.20$。故 (D) 錯。",
+    fullSolution: "【正確選項】：(A)\n\n【步驟一：加法法則求聯集】\n$P(M \\cup B) = P(M) + P(B) - P(M \\cap B) = 0.60 + 0.50 - 0.30 = 0.80$。故 (A) 正確！\n【步驟二：互斥檢定】\n因為 $P(M \\cap B) = 0.30 \ne 0$，兩事件非互斥。故 (B) 錯。\n【步驟三：條件機率檢定】\n$P(M|B) = \\frac{P(M \\cap B)}{P(B)} = \\frac{0.30}{0.50} = 0.60$。故 (C) 錯。\n【步驟四：狄摩根餘事檢定】\n$P(M^c \\cap B^c) = 1 - P(M \\cup B) = 1 - 0.80 = 0.20$。故 (D) 錯。",
     cramSummary: {
       conceptName: "機率加法定理",
       keyTakeaway: "P(A ∪ B) = P(A) + P(B) - P(A ∩ B)！本題 0.60 + 0.50 - 0.30 = 0.80。"
@@ -958,7 +958,7 @@ const RAW_QUESTIONS = [
     ],
     correctAnswer: "B",
     formulaHint: "R_{adj}^2 = 1 - \\left[ \\frac{SSE / (n - k - 1)}{SST / (n - 1)} \\right]",
-    fullSolution: "【步驟一：板書核心】板書 IMG_0131 特別強調：「R² 代表模型的解釋能力；資料多，解釋能力不一定上升！」\n【步驟二：數學特性】每增加一個自變數，OLS 的最小化機制保證 SSE 單調不增，因此原始 $R^2 = 1 - SSE/SST$ 永遠單調不減（容易產生虛假滿意感）。\n【步驟三：自由度懲罰】調整後判定係數 $R_{adj}^2$ 對自由度消耗施加懲罰。若新增變數解釋力的微小增幅不足以彌補自由度消耗，$R_{adj}^2$ 會果斷下跌！",
+    fullSolution: "【正確選項】：(B)\n\n【步驟一：板書核心】板書 IMG_0131 特別強調：「R² 代表模型的解釋能力；資料多，解釋能力不一定上升！」\n【步驟二：數學特性】每增加一個自變數，OLS 的最小化機制保證 SSE 單調不增，因此原始 $R^2 = 1 - SSE/SST$ 永遠單調不減（容易產生虛假滿意感）。\n【步驟三：自由度懲罰】調整後判定係數 $R_{adj}^2$ 對自由度消耗施加懲罰。若新增變數解釋力的微小增幅不足以彌補自由度消耗，$R_{adj}^2$ 會果斷下跌！",
     cramSummary: {
       conceptName: "R² 虛胖陷阱",
       keyTakeaway: "多塞變數 R² 絕不減（單調不降），只有 R²_adj 才會懲罰自由度並下跌！SST 與自變數無關。"
@@ -973,8 +973,8 @@ const RAW_QUESTIONS = [
     title: "交互作用項與迴歸斜率幾何意涵（板書核心）",
     questionPrompt: "研究團隊建立行銷銷售預測模型：$\\hat{Y} = b_0 + b_1 X_1 + b_2 X_2 + b_3 (X_1 \\cdot X_2)$，其中 $X_1$ 為線上廣告預算，$X_2$ 為促銷折價券發放量，並納入交互作用項 $(X_1 \\cdot X_2)$。\n模型統計報表顯示 $b_3$ 之 $p$-值為 $0.03$。根據課堂板書與統計學理論，下列哪一項解讀最正確？",
     givenData: {
-      "迴歸方程式": "Y = b0 + b1*X1 + b2*X2 + b3*(X1*X2)",
-      "交互作用係數 p-value": "0.03"
+      "迴歸方程式": "$\\hat{Y} = b_0 + b_1 X_1 + b_2 X_2 + b_3 (X_1 \\cdot X_2)$",
+      "交互作用係數 p-value": "$0.03$"
     },
     options: [
       {
@@ -1000,7 +1000,7 @@ const RAW_QUESTIONS = [
     ],
     correctAnswer: "A",
     formulaHint: "\\frac{\\partial \\hat{Y}}{\\partial X_1} = b_1 + b_3 X_2, \\quad p < 0.05 \\iff 95\\% \\text{ 信心水準顯著}",
-    fullSolution: "【步驟一：板書 p-value 對照】板書 IMG_0131 明確註記：\n- P-值 0.05 -> 95% 信心水準（最常用標準）\n- P-值 0.01 -> 99% 信心水準\n因 $0.03 < 0.05$，已達 95% 信心水準之顯著性！\n【步驟二：交互作用意涵】對 $X_1$ 求偏微商得邊際效益為 $b_1 + b_3 X_2$。這代表廣告每多投 1 萬元的邊際回報，會隨折價券發放量 $X_2$ 的多寡而放大或縮小（兩變數不是獨立疊加，迴歸線呈現非平行交錯）。",
+    fullSolution: "【正確選項】：(A)\n\n【步驟一：板書 p-value 對照】板書 IMG_0131 明確註記：\n- P-值 0.05 -> 95% 信心水準（最常用標準）\n- P-值 0.01 -> 99% 信心水準\n因 $0.03 < 0.05$，已達 95% 信心水準之顯著性！\n【步驟二：交互作用意涵】對 $X_1$ 求偏微商得邊際效益為 $b_1 + b_3 X_2$。這代表廣告每多投 1 萬元的邊際回報，會隨折價券發放量 $X_2$ 的多寡而放大或縮小（兩變數不是獨立疊加，迴歸線呈現非平行交錯）。",
     cramSummary: {
       conceptName: "交互作用項與 p-value",
       keyTakeaway: "p < 0.05 代表 95% 顯著！交互作用顯著意味著：X1 的邊際斜率取決於 X2 的大小（非平行線）。"
@@ -1012,21 +1012,21 @@ const RAW_QUESTIONS = [
     unitName: "迴歸分析與交互作用",
     level: 2,
     type: "numeric",
-    title: "變異量拆解與判定係數 R² 計算",
-    questionPrompt: "某零售店分析客流量與銷售額的單變數線性迴歸。統計計算得出依變數總變異量 $SST = 1,000$ 萬元，迴歸模型可解釋的變異量 $SSR = 820$ 萬元。請計算該迴歸模型的判定係數 $R^2$（以小數表示，如 0.82）。",
+    title: "判定係數 R² 統計意涵與未解釋變異解讀",
+    questionPrompt: "某零售店分析客流量與門市銷售額的線性迴歸模型。統計分析報表輸出顯示判定係數 $R^2 = 0.82$（即自變數能解釋 $82\\%$ 的銷售額變異）。\n根據判定係數之定義，請問依變數 $Y$ 的總變異中，仍有「百分之多少（%）」屬於模型無法解釋的殘差隨機變異（$1 - R^2$）？",
     givenData: {
-      "總變異量 SST": "1,000",
-      "迴歸平方和 SSR": "820"
+      "模型判定係數 R²": "$0.82$ (82%)",
+      "總變異量 SST 基準": "100%"
     },
     options: null,
-    correctAnswer: 0.82,
-    unitLabel: "",
-    tolerance: 0.01,
-    formulaHint: "R^2 = \\frac{SSR}{SST} = 1 - \\frac{SSE}{SST}",
-    fullSolution: "【步驟一：變異量等式】$SST = SSR + SSE$。\n【步驟二：判定係數定義】\n$R^2 = \\frac{SSR}{SST} = \\frac{820}{1000} = 0.82$。\n【步驟三：商務解釋】該模型中，客流量能夠解釋總銷售額 $82\\%$ 的變異程度，具有極佳的擬合配適度。",
+    correctAnswer: 18.0,
+    unitLabel: "%",
+    tolerance: 0.1,
+    formulaHint: "(1 - R^2) \\times 100\\% = (1 - 0.82) \\times 100\\% = 18.0\\%",
+    fullSolution: "【步驟一：判定係數 R² 核心概念】\n判定係數 $R^2$ 代表依變數 $Y$ 的總變異中，可由迴歸模型自變數所解釋的比例：\n$$R^2 = \\frac{SSR}{SST} = 0.82 = 82.0\\%$$\n\n【步驟二：未解釋變異比例】\n依變數總變異由「可解釋變異 (SSR)」與「未解釋殘差變異 (SSE)」構成：\n$$\\frac{SSE}{SST} = 1 - R^2 = 1 - 0.82 = 0.18 = 18.0\\%$$\n\n【步驟三：商務結論】\n仍有 $18.0\\%$ 的銷售額波動屬於隨機誤差或未納入模型的其他外部因素。",
     cramSummary: {
-      conceptName: "判定係數 R² 公式",
-      keyTakeaway: "R² = SSR / SST = 可解釋變異 / 總變異。本題 820 / 1000 = 0.82。"
+      conceptName: "R² 未解釋變異解讀",
+      keyTakeaway: "R² = 82% 表可解釋變異；未解釋殘差變異 = 1 - R² = 18.0%。"
     }
   },
 
@@ -1063,7 +1063,7 @@ const RAW_QUESTIONS = [
     ],
     correctAnswer: "A",
     formulaHint: "Var(e_i) = \\sigma^2 \\quad (\\text{Homoscedasticity})",
-    fullSolution: "【步驟一：LINE 四大假定】\nOLS 迴歸殘差必須滿足：\n1. Linearity（線性關係）\n2. Independence（獨立性，無自我相關）\n3. Normality（常態分配）\n4. Equal Variance（同分散性 / 同值變異，即誤差項變異數固定為常數 $\\sigma^2$）。\n【步驟二：圖形判讀】\n當殘差散佈圖呈現漏斗形（隨預測值增大而上下發散），表示誤差變異數隨尺度改變，此現象稱為「異質變異（Heteroscedasticity）」，會使係數標準誤失真，導致 t 檢定與 p-value 不可信！",
+    fullSolution: "【正確選項】：(A)\n\n【步驟一：LINE 四大假定】\nOLS 迴歸殘差必須滿足：\n1. Linearity（線性關係）\n2. Independence（獨立性，無自我相關）\n3. Normality（常態分配）\n4. Equal Variance（同分散性 / 同值變異，即誤差項變異數固定為常數 $\\sigma^2$）。\n【步驟二：圖形判讀】\n當殘差散佈圖呈現漏斗形（隨預測值增大而上下發散），表示誤差變異數隨尺度改變，此現象稱為「異質變異（Heteroscedasticity）」，會使係數標準誤失真，導致 t 檢定與 p-value 不可信！",
     cramSummary: {
       conceptName: "LINE 假定與異質變異",
       keyTakeaway: "殘差漏斗形 = 違反同值變異（異質變異）！理想殘差應均勻隨機散佈於 0 軸兩側。"
@@ -1075,23 +1075,23 @@ const RAW_QUESTIONS = [
     unitName: "迴歸分析與交互作用",
     level: 2,
     type: "numeric",
-    title: "簡單線性迴歸斜率與截距手算",
-    questionPrompt: "某連鎖超商分析廣告支出 $X$（萬元）對門市營收 $Y$（萬元）之影響，收集 10 家門市數據計算得：\n$\\bar{X} = 10, \\quad \\bar{Y} = 50, \\quad SS_{xx} = \\sum (X_i - \\bar{X})^2 = 40, \\quad SS_{xy} = \\sum (X_i - \\bar{X})(Y_i - \\bar{Y}) = 120$。\n請依最小平方法公式計算迴歸方程式的「截距項 $b_0$」。",
+    title: "迴歸報表統計顯著性判讀與 p-value 門檻檢定",
+    questionPrompt: "某連鎖超商建立門市營收多元迴歸預測模型，報表輸出之各自變數係數檢定結果如下：\n- 廣告支出 $X_1$：$p$-value $= 0.002$\n- 折價券發放 $X_2$：$p$-value $= 0.038$\n- 門市坪數 $X_3$：$p$-value $= 0.285$\n- 常數項截距 $b_0$：$p$-value $= 0.001$\n在課堂板書所強調之標準顯著水準 $\\alpha = 0.05$（95% 信心水準）下，請問該模型共有「幾個自變數」達到統計顯著水準（$p < 0.05$，拒絕虛無假說）？",
     givenData: {
-      "X平均數 X̄": "10",
-      "Y平均數 Ȳ": "50",
-      "離均差平方和 SSxx": "40",
-      "離均差乘積和 SSxy": "120"
+      "自變數 X1 (廣告) p-value": "$0.002$",
+      "自變數 X2 (折價券) p-value": "$0.038$",
+      "自變數 X3 (坪數) p-value": "$0.285$",
+      "顯著水準 α 門檻": "$0.05$ (95% 信心水準)"
     },
     options: null,
-    correctAnswer: 20.0,
-    unitLabel: "萬元",
-    tolerance: 0.05,
-    formulaHint: "b_1 = \\frac{SS_{xy}}{SS_{xx}}, \\quad b_0 = \\bar{Y} - b_1 \\bar{X}",
-    fullSolution: "【步驟一：計算斜率 b1】\n$b_1 = \\frac{SS_{xy}}{SS_{xx}} = \\frac{120}{40} = 3.0$。\n（經濟意涵：廣告支出每增加 1 萬元，預期營收平均增加 3.0 萬元）。\n【步驟二：計算截距 b0（利用迴歸線必過重心 (X̄, Ȳ)】\n$b_0 = \\bar{Y} - b_1 \\bar{X} = 50 - 3.0 \\times 10 = 50 - 30 = 20.0$ 萬元。\n【步驟三：完整模型方程式】\n$\\hat{Y} = 20.0 + 3.0 X$。截距項為 20.0 萬元。",
+    correctAnswer: 2,
+    unitLabel: "個",
+    tolerance: 0.01,
+    formulaHint: "p < 0.05 \\implies \\text{拒絕 } H_0 (顯著)；p \\ge 0.05 \\implies \\text{無法拒絕 } H_0 (不顯著)",
+    fullSolution: "【步驟一：板書顯著性準則】\n- $p < 0.05$：達到 95% 信心水準，具備統計顯著性（拒絕 $H_0: \\beta = 0$）。\n- $p \\ge 0.05$：未達顯著水準，無法拒絕 $H_0$，自變數與依變數無足夠線性關聯證據。\n\n【步驟二：逐一檢核自變數（注意常數項截距不是自變數！）】\n1. 廣告支出 $X_1$：$p = 0.002 < 0.05$（顯著 ✅）\n2. 折價券 $X_2$：$p = 0.038 < 0.05$（顯著 ✅）\n3. 門市坪數 $X_3$：$p = 0.285 \\ge 0.05$（不顯著 ❌）\n\n【步驟三：結論】\n達到統計顯著性的自變數共有 2 個（$X_1$ 與 $X_2$）。商務決策上，$X_3$ 未提供顯著貢獻，可考慮簡化模型剔除。",
     cramSummary: {
-      conceptName: "OLS 斜率與截距公式",
-      keyTakeaway: "b1 = SSxy / SSxx = 120/40 = 3.0。b0 = Ȳ - b1*X̄ = 50 - 3*10 = 20.0。"
+      conceptName: "p-value 顯著性判讀",
+      keyTakeaway: "α = 0.05 門檻！X1(0.002) 與 X2(0.038) 顯著；X3(0.285) 不顯著。共 2 個自變數顯著。"
     }
   },
   {
@@ -1100,22 +1100,22 @@ const RAW_QUESTIONS = [
     unitName: "迴歸分析與交互作用",
     level: 2,
     type: "numeric",
-    title: "變異分解 (ANOVA) 與判定係數 R² 計算",
-    questionPrompt: "某計量模型評估產品研發預算對專利產出的解釋力，總樣本數 $n = 25$。計算結果顯示依變數的總變異平方和為 $SST = 500$，而未被模型解釋的殘差平方和為 $SSE = 125$。請計算該模型之「判定係數 $R^2$」（四捨五入至小數點後兩位）。",
+    title: "變異分解 (ANOVA) 與判定係數 R² 解釋力解讀",
+    questionPrompt: "某計量模型評估研發預算對新產品專利產出的解釋力。迴歸變異數分析 (ANOVA) 顯示：依變數總平方和 $SST = 500$，迴歸平方和 $SSR = 375$（殘差平方和 $SSE = 125$）。\n請問根據此報表，該迴歸模型成功解釋了專利產出百分之多少的總變異（%）？",
     givenData: {
-      "總平方和 SST": "500",
-      "殘差平方和 SSE": "125",
-      "樣本數 n": "25"
+      "總平方和 SST": "$500$",
+      "迴歸平方和 SSR": "$375$",
+      "殘差平方和 SSE": "$125$"
     },
     options: null,
-    correctAnswer: 0.75,
-    unitLabel: "",
-    tolerance: 0.02,
-    formulaHint: "R^2 = 1 - \\frac{SSE}{SST} = \\frac{SSR}{SST}",
-    fullSolution: "【步驟一：變異量分解恆等式】\n$SST = SSR + SSE \implies SSR = SST - SSE = 500 - 125 = 375$。\n【步驟二：計算判定係數 R²】\n$R^2 = \\frac{SSR}{SST} = \\frac{375}{500} = 0.75$（或直接以 $1 - \\frac{SSE}{SST} = 1 - \\frac{125}{500} = 1 - 0.25 = 0.75$）。\n【步驟三：商務結論】\n該迴歸模型成功解釋了專利產出 $75\\%$ 的總變異，擬合度優良。",
+    correctAnswer: 75.0,
+    unitLabel: "%",
+    tolerance: 0.1,
+    formulaHint: "R^2 = \\frac{SSR}{SST} \\times 100\\% = \\frac{375}{500} \\times 100\\% = 75.0\\%",
+    fullSolution: "【步驟一：判定係數 R² 定義】\n$$R^2 = \\frac{SSR}{SST} = \\frac{375}{500} = 0.75 = 75.0\\%$$\n\n【步驟二：概念解讀】\n$R^2$ 衡量的是「模型解釋的變異佔總變異的比例」。本題自變數成功解釋了 $75.0\\%$ 的專利產出變異，剩餘 $25.0\\%$ 為未解釋的殘差變異。",
     cramSummary: {
       conceptName: "R² 變異分解計算法",
-      keyTakeaway: "R² = 1 - SSE/SST = 1 - 125/500 = 0.75。SSR = 500 - 125 = 375。"
+      keyTakeaway: "R² = SSR / SST = 375 / 500 = 75.0%。代表模型解釋力為 75%。"
     }
   },
   {
@@ -1124,18 +1124,19 @@ const RAW_QUESTIONS = [
     unitName: "迴歸分析與交互作用",
     level: 3,
     type: "numeric",
-    title: "交互作用項調節邊際斜率計算",
-    questionPrompt: "某電子商務平台建立營收預測模型：\n$$\\hat{Y} = 10 + 4 X_1 + 6 X_2 + 1.5 (X_1 \\cdot X_2)$$\n其中 $X_1$ 為行銷折價券面額（百元），$X_2$ 為會員等級（1 到 5 級）。\n若某目標客群的會員等級為 $X_2 = 4$，請問此時行銷折價券 $X_1$ 每增加 1 單位，對營收 $\\hat{Y}$ 的邊際增加效果（即邊際斜率 $\\frac{\\Delta \\hat{Y}}{\\Delta X_1}$）為何？",
+    title: "交互作用項顯著性與調節邊際斜率解讀",
+    questionPrompt: "某電子商務平台建立營收預測模型：\n$$\\hat{Y} = 10 + 4 X_1 + 6 X_2 + 1.5 (X_1 \\cdot X_2)$$\n其中 $X_1$ 為行銷折價券面額（百元），$X_2$ 為會員等級（1 到 5 級）。模型統計報表顯示交互作用項係數 $1.5$ 之 $p$-value $= 0.02 < 0.05$（達顯著水準）。\n因交互作用顯著，$X_1$ 對營收的邊際影響斜率取決於 $X_2$（$\\frac{\\Delta \\hat{Y}}{\\Delta X_1} = 4 + 1.5 X_2$）。\n若目標客群會員等級為 $X_2 = 4$，請問折價券 $X_1$ 每增加 1 單位，預期營收增加多少萬元？",
     givenData: {
-      "迴歸方程式": "Ŷ = 10 + 4*X1 + 6*X2 + 1.5*(X1*X2)",
-      "指定會員等級 X2": "4"
+      "迴歸方程式": "$\\hat{Y} = 10 + 4 X_1 + 6 X_2 + 1.5 (X_1 \\cdot X_2)$",
+      "交互作用項 p-value": "$0.02 < 0.05$ (顯著)",
+      "指定會員等級 X2": "$4$"
     },
     options: null,
     correctAnswer: 10.0,
     unitLabel: "萬元",
     tolerance: 0.05,
-    formulaHint: "\\frac{\\partial \\hat{Y}}{\\partial X_1} = b_1 + b_3 X_2",
-    fullSolution: "【步驟一：求 X1 對 Y 的邊際效應導數】\n$\\frac{\\partial \\hat{Y}}{\\partial X_1} = b_1 + b_3 X_2 = 4 + 1.5 X_2$。\n【步驟二：代入會員等級 X2 = 4】\n邊際斜率 $= 4 + 1.5 \\times 4 = 4 + 6.0 = 10.0$。\n【步驟三：統計與商務意涵】\n交互作用項係數 $1.5 > 0$ 代表正向加乘效應。當會員等級越高時，折價券激勵買氣的邊際效益越大！在等級 4 的高階會員身上，每發 1 單位折價券能創造 10.0 單位的營收增幅。",
+    formulaHint: "\\frac{\\partial \\hat{Y}}{\\partial X_1} = b_1 + b_3 X_2 = 4 + 1.5(4) = 10.0",
+    fullSolution: "【步驟一：交互作用項統計意涵】\n交互作用項的 $p = 0.02 < 0.05$，代表折價券 $X_1$ 對營收的拉抬效果不是獨立固定的，而是會受到會員等級 $X_2$ 的調節！\n\n【步驟二：邊際斜率求導與代入】\n$$\\frac{\\partial \\hat{Y}}{\\partial X_1} = 4 + 1.5 X_2$$\n代入 $X_2 = 4$：\n$$\\text{邊際斜率} = 4 + 1.5(4) = 4 + 6.0 = 10.0\\text{ 萬元}$$\n\n【步驟三：商務結論】\n高階會員（等級 4）對促銷折價更敏感，每增發 1 單位折價券能帶來 10.0 萬元的邊際營收。",
     cramSummary: {
       conceptName: "交互作用邊際斜率求導",
       keyTakeaway: "邊際效應 = b1 + b3*X2。本題 4 + 1.5*4 = 10.0。斜率隨調節變數改變！"
@@ -1174,7 +1175,7 @@ const RAW_QUESTIONS = [
     ],
     correctAnswer: "A",
     formulaHint: "R^2_{adj} = 1 - \\left[ \\frac{SSE / (n - k - 1)}{SST / (n - 1)} \\right]",
-    fullSolution: "【步驟一：板書核心論點】板書 IMG_0131 特別註明：「$R^2 \to$ 模型的解釋能力；資料多，解釋能力不一定上升！」\n【步驟二：數學機轉】每多加入一個變數，分母自由度 $n - k - 1$ 就減少 1。若新變數為雜訊，$SSE$ 縮小幅度極其微弱，無法彌補自由度的消耗，使得均方誤差 $MSE = SSE / (n-k-1)$ 變大，最終拉低 $R^2_{adj}$！\n【步驟三：結論】選項 (A) 完美詮釋了 $R^2_{adj}$ 防範過度配適的懲罰原理。",
+    fullSolution: "【正確選項】：(A)\n\n【步驟一：板書核心論點】板書 IMG_0131 特別註明：「$R^2 \\to$ 模型的解釋能力；資料多，解釋能力不一定上升！」\n【步驟二：數學機轉】每多加入一個變數，分母自由度 $n - k - 1$ 就減少 1。若新變數為雜訊，$SSE$ 縮小幅度極其微弱，無法彌補自由度的消耗，使得均方誤差 $MSE = SSE / (n-k-1)$ 變大，最終拉低 $R^2_{adj}$！\n【步驟三：結論】選項 (A) 完美詮釋了 $R^2_{adj}$ 防範過度配適的懲罰原理。",
     cramSummary: {
       conceptName: "R²_adj 懲罰雜訊變數",
       keyTakeaway: "瞎加無關變數：原始 R² 只升不降，但 R²_adj 必然受自由度懲罰而下跌！"
@@ -1186,20 +1187,21 @@ const RAW_QUESTIONS = [
     unitName: "迴歸分析與交互作用",
     level: 4,
     type: "numeric",
-    title: "迴歸變異數分析表 (ANOVA Table) 與 F 檢定統計量重建",
-    questionPrompt: "某顧問公司建立員工績效多元迴歸模型（自變數個數 $k = 3$，樣本數 $n = 34$）。\n已知該模型的迴歸變異數分析表摘要如下：\n- 總平方和 $SST = 800$\n- 殘差平方和 $SSE = 200$\n請依據變異數分析原理計算該多元迴歸模型的「整體檢定 $F$ 統計量（$F$-statistic）」（四捨五入至小數點後兩位）。",
+    title: "多元迴歸變異數分析表 (ANOVA Table) 整體檢定與判定係數深度判讀",
+    questionPrompt: "某企業人資部門建立員工績效多元迴歸模型（自變數個數 $k = 3$，樣本數 $n = 34$）。\n統計分析輸出之變異數分析表 (ANOVA Table) 如下：\n- 迴歸平方和 $SSR = 600$（自由度 $df_R = 3$）\n- 殘差平方和 $SSE = 200$（自由度 $df_E = 30$）\n- 總平方和 $SST = 800$（自由度 $df_T = 33$）\n- 整體模型檢定統計量 $F = 30.0$（$p$-value $< 0.0001$）\n請在作答框填入報表所示之「整體模型檢定 $F$ 統計量數值」（30.0），並在下方紙筆完整寫出對此模型 $R^2$、調整後 $R^2_{adj}$ 與整體顯著性的判讀結論。",
     givenData: {
-      "自變數個數 k": "3",
-      "樣本數 n": "34",
-      "總平方和 SST": "800",
-      "殘差平方和 SSE": "200"
+      "自變數個數 k": "$3$",
+      "樣本數 n": "$34$",
+      "整體模型 F 統計量": "$30.0$ ($p < 0.0001$)",
+      "總平方和 SST": "$800$",
+      "殘差平方和 SSE": "$200$"
     },
     options: null,
     correctAnswer: 30.0,
     unitLabel: "",
     tolerance: 0.1,
-    formulaHint: "F = \\frac{MSR}{MSE} = \\frac{SSR / k}{SSE / (n - k - 1)}",
-    fullSolution: "【步驟一：變異量與自由度拆解】\n1. 迴歸平方和：$SSR = SST - SSE = 800 - 200 = 600$。\n2. 迴歸自由度：$df_R = k = 3$。\n3. 殘差自由度：$df_E = n - k - 1 = 34 - 3 - 1 = 30$。\n\n【步驟二：計算均方 (Mean Square)】\n- 迴歸均方：$MSR = \\frac{SSR}{df_R} = \\frac{600}{3} = 200.0$。\n- 殘差均方：$MSE = \\frac{SSE}{df_E} = \\frac{200}{30} = \\frac{20}{3} \\approx 6.6667$。\n\n【步驟三：計算 F 統計量】\n$F = \\frac{MSR}{MSE} = \\frac{200}{6.6667} = \\frac{200}{20/3} = 200 \\times \\frac{3}{20} = 30.0$。\n\n【步驟四：統計推論結論】\n$F = 30.0$ 遠大於臨界值，對應之 $p$-value 趨近於 0（遠小於 0.01），強烈拒絕虛無假說，代表整體迴歸模型極具顯著解釋力！",
+    formulaHint: "F = \\frac{MSR}{MSE} = \\frac{SSR / k}{SSE / (n - k - 1)} = \\frac{600/3}{200/30} = 30.0",
+    fullSolution: "【步驟一：變異量與自由度拆解】\n1. 迴歸平方和：$SSR = SST - SSE = 800 - 200 = 600$。\n2. 迴歸自由度：$df_R = k = 3$。\n3. 殘差自由度：$df_E = n - k - 1 = 34 - 3 - 1 = 30$。\n\n【步驟二：均方與 F 統計量判讀】\n- 迴歸均方：$MSR = \\frac{SSR}{df_R} = \\frac{600}{3} = 200.0$。\n- 殘差均方：$MSE = \\frac{SSE}{df_E} = \\frac{200}{30} \\approx 6.6667$。\n- 整體檢定統計量：$F = \\frac{MSR}{MSE} = \\frac{200}{6.6667} = 30.0$。\n\n【步驟三：統計推論結論】\n整體模型之 $F = 30.0$ 伴隨之 $p < 0.0001 \\ll 0.05$，強烈拒絕虛無假說 $H_0: \\beta_1 = \\beta_2 = \\beta_3 = 0$，證明該自變數群整體具備極為顯著之預測解釋力！\n判定係數 $R^2 = \\frac{600}{800} = 75.0\\%$，擬合度優良。",
     cramSummary: {
       conceptName: "ANOVA F 統計量手算",
       keyTakeaway: "SSR = 600, dfR = 3 -> MSR = 200。SSE = 200, dfE = 30 -> MSE = 6.6667。F = 200 / 6.6667 = 30.0。"
@@ -1242,7 +1244,7 @@ const RAW_QUESTIONS = [
     ],
     correctAnswer: "C",
     formulaHint: "\\text{可行解區域朝目標方向開放無界} \\implies \\text{無限制解 (Unbounded)}",
-    fullSolution: "【步驟一：定義核對】可行解空間在目標增長方向開放無界，目標函數值可以達到無限大，稱為「無限制解 (Unbounded)」。\n【步驟二：管理意涵】實務上出現無限制解，代表建模時「遺漏了關鍵的資源上限或市場產能限制式」。",
+    fullSolution: "【正確選項】：(C)\n\n【步驟一：定義核對】可行解空間在目標增長方向開放無界，目標函數值可以達到無限大，稱為「無限制解 (Unbounded)」。\n【步驟二：管理意涵】實務上出現無限制解，代表建模時「遺漏了關鍵的資源上限或市場產能限制式」。",
     cramSummary: {
       conceptName: "LP 特例：無限制解",
       keyTakeaway: "目標值可推到無限大 = 無限制解 (Unbounded)！通常代表漏列了資源上限限制式。"
@@ -1257,15 +1259,15 @@ const RAW_QUESTIONS = [
     title: "線性規劃圖解法最大利潤計算",
     questionPrompt: "考慮線性規劃問題：\n$$\\text{極大化 } Z = 3 x_1 + 5 x_2$$\n受限於：\n1. $2 x_1 + x_2 \\le 16$（資源 A）\n2. $x_1 + 2 x_2 \\le 14$（資源 B）\n3. $x_2 \\le 6$（市場上限）\n4. $x_1, x_2 \\ge 0$\n已知可行解頂點包含：$(0, 0), (0, 6), (2, 6), (6, 4), (8, 0)$。請計算本問題之「最大目標利潤值 Z*」。",
     givenData: {
-      "目標函數": "Max Z = 3*x1 + 5*x2",
-      "可行頂點坐標": "A(0,0), B(0,6), C(2,6), D(6,4), E(8,0)"
+      "目標函數": "$\\text{Max } Z = 3 x_1 + 5 x_2$",
+      "可行頂點坐標": "$A(0,0), B(0,6), C(2,6), D(6,4), E(8,0)$"
     },
     options: null,
     correctAnswer: 38,
     unitLabel: "萬元",
     tolerance: 0.1,
     formulaHint: "Z(D) = 3(6) + 5(4) = 18 + 20 = 38",
-    fullSolution: "【步驟一：逐一將頂點代入目標函數 Z = 3x1 + 5x2】\n- 點 A(0, 0): $Z = 3(0) + 5(0) = 0$\n- 點 B(0, 6): $Z = 3(0) + 5(6) = 30$\n- 點 C(2, 6): $Z = 3(2) + 5(6) = 6 + 30 = 36$\n- 點 D(6, 4): $Z = 3(6) + 5(4) = 18 + 20 = 38$（最大！）\n- 點 E(8, 0): $Z = 3(8) + 5(0) = 24$\n【步驟二：結論】最佳頂點為 $(6, 4)$，最大目標值 $Z^* = 38$ 萬元。",
+    fullSolution: "<div style=\"white-space: normal; margin: 16px 0; text-align: center; background: #0f172a; border-radius: 8px; padding: 12px; border: 1px solid #1e293b;\"><div style=\"color: #94a3b8; font-size: 0.85rem; margin-bottom: 8px; font-weight: 600;\">📐 圖解法頂點評估與等利潤線圖解</div><svg viewBox=\"0 0 460 250\" style=\"max-width: 100%; height: auto;\" xmlns=\"http://www.w3.org/2000/svg\"><line x1=\"40\" y1=\"210\" x2=\"430\" y2=\"210\" stroke=\"#64748b\" stroke-width=\"2\"/><line x1=\"40\" y1=\"210\" x2=\"40\" y2=\"20\" stroke=\"#64748b\" stroke-width=\"2\"/><text x=\"435\" y=\"214\" fill=\"#94a3b8\" font-size=\"12\">x₁</text><text x=\"35\" y=\"16\" fill=\"#94a3b8\" font-size=\"12\">x₂</text><polygon points=\"40,210 40,78 110,78 250,122 320,210\" fill=\"rgba(16, 185, 129, 0.25)\" stroke=\"#10b981\" stroke-width=\"2\"/><line x1=\"20\" y1=\"78\" x2=\"380\" y2=\"78\" stroke=\"#ef4444\" stroke-dasharray=\"3\" stroke-width=\"1.5\"/><text x=\"320\" y=\"72\" fill=\"#ef4444\" font-size=\"10\">x₂ ≤ 6 (市場)</text><line x1=\"20\" y1=\"56\" x2=\"380\" y2=\"188\" stroke=\"#38bdf8\" stroke-dasharray=\"3\" stroke-width=\"1.5\"/><text x=\"320\" y=\"170\" fill=\"#38bdf8\" font-size=\"10\">x₁ + 2x₂ ≤ 14 (資源B)</text><line x1=\"110\" y1=\"20\" x2=\"340\" y2=\"225\" stroke=\"#a855f7\" stroke-dasharray=\"3\" stroke-width=\"1.5\"/><text x=\"120\" y=\"35\" fill=\"#a855f7\" font-size=\"10\">2x₁ + x₂ ≤ 16 (資源A)</text><circle cx=\"40\" cy=\"210\" r=\"4\" fill=\"#64748b\"/><text x=\"48\" y=\"205\" fill=\"#94a3b8\" font-size=\"10\">A(0,0): Z=0</text><circle cx=\"40\" cy=\"78\" r=\"4\" fill=\"#38bdf8\"/><text x=\"48\" y=\"74\" fill=\"#cbd5e1\" font-size=\"10\">B(0,6): Z=30</text><circle cx=\"110\" cy=\"78\" r=\"4\" fill=\"#38bdf8\"/><text x=\"115\" y=\"72\" fill=\"#cbd5e1\" font-size=\"10\">C(2,6): Z=36</text><circle cx=\"320\" cy=\"210\" r=\"4\" fill=\"#38bdf8\"/><text x=\"290\" y=\"228\" fill=\"#cbd5e1\" font-size=\"10\">E(8,0): Z=24</text><line x1=\"170\" y1=\"74\" x2=\"330\" y2=\"170\" stroke=\"#f59e0b\" stroke-width=\"2.5\"/><circle cx=\"250\" cy=\"122\" r=\"7\" fill=\"#f59e0b\" stroke=\"#ffffff\" stroke-width=\"2\"/><text x=\"262\" y=\"118\" fill=\"#f59e0b\" font-size=\"12\" font-weight=\"bold\">★ D(6,4): Z*=38 (最大!)</text><text x=\"210\" y=\"152\" fill=\"#fbbf24\" font-size=\"10\">等利潤線 3x₁ + 5x₂ = 38</text></svg></div>\n【步驟一：逐一將頂點代入目標函數 Z = 3x1 + 5x2】\n- 點 A(0, 0): $Z = 3(0) + 5(0) = 0$\n- 點 B(0, 6): $Z = 3(0) + 5(6) = 30$\n- 點 C(2, 6): $Z = 3(2) + 5(6) = 6 + 30 = 36$\n- 點 D(6, 4): $Z = 3(6) + 5(4) = 18 + 20 = 38$（最大！）\n- 點 E(8, 0): $Z = 3(8) + 5(0) = 24$\n【步驟二：結論】最佳頂點為 $(6, 4)$，最大目標值 $Z^* = 38$ 萬元。",
     cramSummary: {
       conceptName: "LP 頂點代入求極值",
       keyTakeaway: "極值點定理：最佳解必在頂點！逐一代入比較：Z(6,4) = 3*6 + 5*4 = 38 最高。"
@@ -1280,16 +1282,16 @@ const RAW_QUESTIONS = [
     title: "線性規劃極小化 (Min) 總成本求解",
     questionPrompt: "某倉儲中心配置無人車搬運路徑：\n$$\\text{極小化總成本 } Z = 3 X_1 + 4 X_2$$\n受限於：\n1. $2 X_1 + 3 X_2 \\ge 12$（每日最低搬運量）\n2. $X_1 + X_2 \\ge 5$（高峰調度保證）\n3. $X_1, X_2 \\ge 0$\n可行解區域邊界頂點為：$A(0, 5), B(3, 2), C(6, 0)$。請求出本問題之「最低總成本 Z*」。",
     givenData: {
-      "目標函數": "Min Z = 3*X1 + 4*X2",
-      "限制式邊界": "2*X1 + 3*X2 >= 12, X1 + X2 >= 5",
-      "可行頂點": "A(0, 5), B(3, 2), C(6, 0)"
+      "目標函數": "$\\text{Min } Z = 3 X_1 + 4 X_2$",
+      "限制式邊界": "$2 X_1 + 3 X_2 \\ge 12,\\; X_1 + X_2 \\ge 5$",
+      "可行頂點": "$A(0, 5), B(3, 2), C(6, 0)$"
     },
     options: null,
     correctAnswer: 17,
     unitLabel: "萬元",
     tolerance: 0.1,
     formulaHint: "Z(B) = 3(3) + 4(2) = 9 + 8 = 17 \\text{ (求最小！)}",
-    fullSolution: "【步驟一：檢驗極小化目標函數 Z = 3X1 + 4X2】\n- 頂點 A(0, 5): $Z = 3(0) + 4(5) = 20$\n- 頂點 B(3, 2): $Z = 3(3) + 4(2) = 9 + 8 = 17$（最小！）\n- 頂點 C(6, 0): $Z = 3(6) + 4(0) = 18$\n【步驟二：超額變數檢驗】代入 $B(3, 2)$：\n- 限制 1：$2(3) + 3(2) = 12 \\ge 12 \\implies E_1 = 0$（耗盡 Binding）\n- 限制 2：$3 + 2 = 5 \\ge 5 \\implies E_2 = 0$（耗盡 Binding）\n【步驟三：結論】最佳解為 $(3, 2)$，最低總成本 $Z^* = 17$ 萬元。",
+    fullSolution: "<div style=\"white-space: normal; margin: 16px 0; text-align: center; background: #0f172a; border-radius: 8px; padding: 12px; border: 1px solid #1e293b;\"><div style=\"color: #94a3b8; font-size: 0.85rem; margin-bottom: 8px; font-weight: 600;\">📉 極小化 (Min Z) 可行解區域與等成本線圖解</div><svg viewBox=\"0 0 460 230\" style=\"max-width: 100%; height: auto;\" xmlns=\"http://www.w3.org/2000/svg\"><line x1=\"40\" y1=\"190\" x2=\"420\" y2=\"190\" stroke=\"#64748b\" stroke-width=\"2\"/><line x1=\"40\" y1=\"190\" x2=\"40\" y2=\"20\" stroke=\"#64748b\" stroke-width=\"2\"/><text x=\"425\" y=\"194\" fill=\"#94a3b8\" font-size=\"12\">X₁</text><text x=\"35\" y=\"16\" fill=\"#94a3b8\" font-size=\"12\">X₂</text><polygon points=\"40,65 190,140 340,190 420,190 420,20 40,20\" fill=\"rgba(56, 189, 248, 0.18)\" stroke=\"#38bdf8\" stroke-width=\"2\"/><line x1=\"20\" y1=\"45\" x2=\"280\" y2=\"190\" stroke=\"#a855f7\" stroke-dasharray=\"3\" stroke-width=\"1.5\"/><text x=\"240\" y=\"170\" fill=\"#a855f7\" font-size=\"10\">X₁ + X₂ ≥ 5</text><line x1=\"20\" y1=\"92\" x2=\"380\" y2=\"195\" stroke=\"#ec4899\" stroke-dasharray=\"3\" stroke-width=\"1.5\"/><text x=\"330\" y=\"175\" fill=\"#ec4899\" font-size=\"10\">2X₁ + 3X₂ ≥ 12</text><circle cx=\"40\" cy=\"65\" r=\"4\" fill=\"#cbd5e1\"/><text x=\"48\" y=\"62\" fill=\"#cbd5e1\" font-size=\"10\">A(0, 5): Z = 20</text><circle cx=\"340\" cy=\"190\" r=\"4\" fill=\"#cbd5e1\"/><text x=\"310\" y=\"208\" fill=\"#cbd5e1\" font-size=\"10\">C(6, 0): Z = 18</text><line x1=\"120\" y1=\"88\" x2=\"260\" y2=\"192\" stroke=\"#10b981\" stroke-width=\"2.5\"/><circle cx=\"190\" cy=\"140\" r=\"7\" fill=\"#10b981\" stroke=\"#ffffff\" stroke-width=\"2\"/><text x=\"198\" y=\"135\" fill=\"#10b981\" font-size=\"12\" font-weight=\"bold\">★ 最優解 B(3, 2): Z* = 17 萬元 (最低!)</text><text x=\"70\" y=\"125\" fill=\"#34d399\" font-size=\"10\">等成本線 3X₁ + 4X₂ = 17 (朝原點壓低)</text></svg></div>\n【步驟一：檢驗極小化目標函數 Z = 3X1 + 4X2】\n- 頂點 A(0, 5): $Z = 3(0) + 4(5) = 20$\n- 頂點 B(3, 2): $Z = 3(3) + 4(2) = 9 + 8 = 17$（最小！）\n- 頂點 C(6, 0): $Z = 3(6) + 4(0) = 18$\n【步驟二：超額變數檢驗】代入 $B(3, 2)$：\n- 限制 1：$2(3) + 3(2) = 12 \\ge 12 \\implies E_1 = 0$（耗盡 Binding）\n- 限制 2：$3 + 2 = 5 \\ge 5 \\implies E_2 = 0$（耗盡 Binding）\n【步驟三：結論】最佳解為 $(3, 2)$，最低總成本 $Z^* = 17$ 萬元。",
     cramSummary: {
       conceptName: "LP 極小化圖解法",
       keyTakeaway: "Min 問題往原點方向壓！代入各頂點選最小：Z(3,2) = 3*3 + 4*2 = 17。"
@@ -1304,11 +1306,11 @@ const RAW_QUESTIONS = [
     title: "目標函數係數 c1 最佳解範圍（斜率夾擠分析）",
     questionPrompt: "承接問題：$\\text{Max } Z = c_1 x_1 + 5 x_2$，已知最佳頂點落在點 $D(6, 4)$，該點由兩條緊縮限制線相交而成：\n- 邊界一：$x_1 + 2 x_2 = 14$（斜率 $m_1 = -1/2$）\n- 邊界二：$2 x_1 + x_2 = 16$（斜率 $m_2 = -2$）\n若欲使原最佳頂點 $D(6, 4)$ 維持不變，請求出目標函數係數 $c_1$ 的允許變動範圍（Range of Optimality）。",
     givenData: {
-      "目標線斜率": "m_Z = -c1 / 5",
-      "相交邊界斜率": "m1 = -1/2, m2 = -2"
+      "目標線斜率": "$m_Z = -c_1 / 5$",
+      "相交邊界斜率": "$m_1 = -1/2,\\; m_2 = -2$"
     },
     formulaHint: "-2 \\le -\\frac{c_1}{5} \\le -\\frac{1}{2} \\iff 2.5 \\le c_1 \\le 10",
-    fullSolution: "【步驟一：等利潤線斜率】\n目標函數 $Z = c_1 x_1 + 5 x_2 \\implies x_2 = -\\frac{c_1}{5} x_1 + \\frac{Z}{5}$，斜率為 $m_Z = -\\frac{c_1}{5}$。\n【步驟二：建立斜率夾擠不等式】\n為使最佳解鎖定於交點 D，等利潤線斜率必須夾在兩相交邊界斜率之間：\n$$-2 \\le -\\frac{c_1}{5} \\le -\\frac{1}{2}$$\n【步驟三：解不等式】\n同乘以 $-5$（注意負數相乘，不等號必須反向）：\n$$10 \\ge c_1 \\ge 2.5 \\iff 2.5 \\le c_1 \\le 10$$\n【步驟四：管理意涵】只要產品 1 的單位利潤 $c_1$ 保持在 2.5 到 10 萬元之間，最優生產排程維持 $(6, 4)$ 完全不變！",
+    fullSolution: "<div style=\"white-space: normal; margin: 16px 0; text-align: center; background: #0f172a; border-radius: 8px; padding: 12px; border: 1px solid #1e293b;\"><div style=\"color: #94a3b8; font-size: 0.85rem; margin-bottom: 8px; font-weight: 600;\">📐 目標函數斜率敏感度 Safe Cone 夾擠分析圖解</div><svg viewBox=\"0 0 460 210\" style=\"max-width: 100%; height: auto;\" xmlns=\"http://www.w3.org/2000/svg\"><line x1=\"60\" y1=\"30\" x2=\"380\" y2=\"190\" stroke=\"#38bdf8\" stroke-width=\"2\"/><text x=\"280\" y=\"170\" fill=\"#38bdf8\" font-size=\"11\">邊界 1: m₁ = -1/2 (上限邊界 c₁ = 2.5)</text><line x1=\"170\" y1=\"10\" x2=\"270\" y2=\"210\" stroke=\"#f43f5e\" stroke-width=\"2\"/><text x=\"180\" y=\"200\" fill=\"#f43f5e\" font-size=\"11\">邊界 2: m₂ = -2 (下限邊界 c₁ = 10)</text><path d=\"M 220 110 L 380 190 L 270 210 Z\" fill=\"rgba(16, 185, 129, 0.25)\"/><path d=\"M 220 110 L 60 30 L 170 10 Z\" fill=\"rgba(16, 185, 129, 0.25)\"/><circle cx=\"220\" cy=\"110\" r=\"7\" fill=\"#f59e0b\" stroke=\"#ffffff\" stroke-width=\"2\"/><text x=\"232\" y=\"105\" fill=\"#f59e0b\" font-size=\"13\" font-weight=\"bold\">錨定頂點 D(6, 4)</text><text x=\"245\" y=\"135\" fill=\"#10b981\" font-size=\"12\" font-weight=\"bold\">安全旋轉錐區 (Safe Cone)</text><text x=\"60\" y=\"125\" fill=\"#94a3b8\" font-size=\"11\">斜率夾擠：-2 ≤ -c₁/5 ≤ -1/2</text><text x=\"60\" y=\"145\" fill=\"#34d399\" font-size=\"12\" font-weight=\"bold\">➔ 容許範圍：2.5 ≤ c₁ ≤ 10 萬元</text></svg></div>\n【步驟一：等利潤線斜率】\n目標函數 $Z = c_1 x_1 + 5 x_2 \\implies x_2 = -\\frac{c_1}{5} x_1 + \\frac{Z}{5}$，斜率為 $m_Z = -\\frac{c_1}{5}$。\n【步驟二：建立斜率夾擠不等式】\n為使最佳解鎖定於交點 D，等利潤線斜率必須夾在兩相交邊界斜率之間：\n$$-2 \\le -\\frac{c_1}{5} \\le -\\frac{1}{2}$$\n【步驟三：解不等式】\n同乘以 $-5$（注意負數相乘，不等號必須反向）：\n$$10 \\ge c_1 \\ge 2.5 \\iff 2.5 \\le c_1 \\le 10$$\n【步驟四：管理意涵】只要產品 1 的單位利潤 $c_1$ 保持在 2.5 到 10 萬元之間，最優生產排程維持 $(6, 4)$ 完全不變！",
     cramSummary: {
       conceptName: "敏感度斜率夾擠法",
       keyTakeaway: "目標線斜率 -c1/c2 夾在相交兩邊界斜率之間！同乘負數不等號記得轉向：2.5 ≤ c1 ≤ 10。"
@@ -1369,7 +1371,7 @@ const RAW_QUESTIONS = [
     ],
     correctAnswer: "B",
     formulaHint: "\\text{Extreme Point Theorem: Optima at Corner Points}",
-    fullSolution: "【步驟一：極值點定理 (Corner Point Theorem)】\n由於目標函數與限制條件皆為線性，可行解空間必定為凸集合（Convex Set）。最佳解若存在，必然出現在可行解多邊形的頂點（極值點）上！\n【步驟二：多重最佳解幾何條件】\n若等利潤線的斜率恰好等於某條緊縮限制線的斜率，當等利潤線平移至該邊界時，整條線段上的所有點皆產生相同的最大利潤，此時具備無限多組最佳解（多重最佳解）。\n【步驟三：結論】選項 (B) 完全正確。",
+    fullSolution: "【正確選項】：(B)\n\n<div style=\"white-space: normal; margin: 16px 0; text-align: center; background: #0f172a; border-radius: 8px; padding: 12px; border: 1px solid #1e293b;\"><div style=\"color: #94a3b8; font-size: 0.85rem; margin-bottom: 8px; font-weight: 600;\">📊 極值點定理與等利潤線平移幾何圖解</div><svg viewBox=\"0 0 460 220\" style=\"max-width: 100%; height: auto;\" xmlns=\"http://www.w3.org/2000/svg\"><line x1=\"40\" y1=\"180\" x2=\"420\" y2=\"180\" stroke=\"#64748b\" stroke-width=\"2\"/><line x1=\"40\" y1=\"180\" x2=\"40\" y2=\"20\" stroke=\"#64748b\" stroke-width=\"2\"/><text x=\"425\" y=\"184\" fill=\"#94a3b8\" font-size=\"12\">x₁</text><text x=\"35\" y=\"16\" fill=\"#94a3b8\" font-size=\"12\">x₂</text><polygon points=\"40,180 40,70 120,70 260,110 320,180\" fill=\"rgba(16, 185, 129, 0.2)\" stroke=\"#10b981\" stroke-width=\"2\"/><text x=\"110\" y=\"140\" fill=\"#34d399\" font-size=\"12\" font-weight=\"bold\">凸可行解區域 (Convex)</text><circle cx=\"40\" cy=\"180\" r=\"4\" fill=\"#10b981\"/><circle cx=\"40\" cy=\"70\" r=\"4\" fill=\"#10b981\"/><circle cx=\"120\" cy=\"70\" r=\"4\" fill=\"#10b981\"/><circle cx=\"260\" cy=\"110\" r=\"6\" fill=\"#f59e0b\" stroke=\"#ffffff\" stroke-width=\"2\"/><circle cx=\"320\" cy=\"180\" r=\"4\" fill=\"#10b981\"/><line x1=\"60\" y1=\"180\" x2=\"160\" y2=\"50\" stroke=\"#38bdf8\" stroke-dasharray=\"4\" stroke-width=\"1.5\"/><line x1=\"140\" y1=\"180\" x2=\"240\" y2=\"50\" stroke=\"#38bdf8\" stroke-dasharray=\"4\" stroke-width=\"1.5\"/><line x1=\"200\" y1=\"190\" x2=\"300\" y2=\"60\" stroke=\"#f59e0b\" stroke-width=\"2.5\"/><line x1=\"120\" y1=\"130\" x2=\"190\" y2=\"76\" stroke=\"#fbbf24\" stroke-width=\"2\"/><text x=\"180\" y=\"60\" fill=\"#fbbf24\" font-size=\"11\">平移推進方向 (Max Z)</text><text x=\"270\" y=\"105\" fill=\"#f59e0b\" font-size=\"12\" font-weight=\"bold\">唯一最佳解 (頂點)</text><text x=\"170\" y=\"210\" fill=\"#94a3b8\" font-size=\"11\">若等利潤線斜率與邊界重合 ➔ 邊界線上整段無限多組最佳解</text></svg></div>\n【步驟一：極值點定理 (Corner Point Theorem)】\n由於目標函數與限制條件皆為線性，可行解空間必定為凸集合（Convex Set）。最佳解若存在，必然出現在可行解多邊形的頂點（極值點）上！\n【步驟二：多重最佳解幾何條件】\n若等利潤線的斜率恰好等於某條緊縮限制線的斜率，當等利潤線平移至該邊界時，整條線段上的所有點皆產生相同的最大利潤，此時具備無限多組最佳解（多重最佳解）。\n【步驟三：結論】選項 (B) 完全正確。",
     cramSummary: {
       conceptName: "極值點定理與多重解",
       keyTakeaway: "最佳解必在頂點！若等利潤線與邊界斜率重合平行，則產生多重最佳解。"
@@ -1384,15 +1386,15 @@ const RAW_QUESTIONS = [
     title: "超額變數 (Surplus Variable) 計算",
     questionPrompt: "某營養調配問題要求每日蛋白質最低攝取量限制為：$$4 x_1 + 5 x_2 \\ge 60$$\n目前調配方案決定使用 $x_1 = 10$ 單位的第一種食材與 $x_2 = 6$ 單位的第二種食材。請計算該限制條件在目前方案下的「超額變數（Surplus Variable $E_1$）」數值。",
     givenData: {
-      "限制條件": "4*x1 + 5*x2 >= 60",
-      "目前解 (x1, x2)": "(10, 6)"
+      "限制條件": "$4 x_1 + 5 x_2 \\ge 60$",
+      "目前解 $(x_1, x_2)$": "$(10, 6)$"
     },
     options: null,
     correctAnswer: 10.0,
     unitLabel: "單位",
     tolerance: 0.05,
     formulaHint: "a_1 x_1 + a_2 x_2 - E_1 = b_1 \\iff E_1 = a_1 x_1 + a_2 x_2 - b_1",
-    fullSolution: "【步驟一：超額變數定義】\n對於「$\\ge$」大於等於型限制式，超額變數 $E_1 \\ge 0$ 代表實際提供量超越最低門檻的超額部分，標準式為：\n$4 x_1 + 5 x_2 - E_1 = 60$。\n【步驟二：代入目前方案坐標】\n實際提供量 $= 4(10) + 5(6) = 40 + 30 = 70$ 單位。\n【步驟三：計算超額量】\n$E_1 = 70 - 60 = 10$ 單位。\n【步驟四：結論】超額變數為 10 單位（代表比每日最低門檻多攝取了 10 單位蛋白質）。",
+    fullSolution: "<div style=\"white-space: normal; margin: 16px 0; text-align: center; background: #0f172a; border-radius: 8px; padding: 12px; border: 1px solid #1e293b;\"><div style=\"color: #94a3b8; font-size: 0.85rem; margin-bottom: 8px; font-weight: 600;\">📊 超額變數 (Surplus Variable E₁) 幾何超額量圖解</div><svg viewBox=\"0 0 460 220\" style=\"max-width: 100%; height: auto;\" xmlns=\"http://www.w3.org/2000/svg\"><line x1=\"40\" y1=\"180\" x2=\"420\" y2=\"180\" stroke=\"#64748b\" stroke-width=\"2\"/><line x1=\"40\" y1=\"180\" x2=\"40\" y2=\"20\" stroke=\"#64748b\" stroke-width=\"2\"/><text x=\"425\" y=\"184\" fill=\"#94a3b8\" font-size=\"12\">x₁</text><text x=\"35\" y=\"16\" fill=\"#94a3b8\" font-size=\"12\">x₂</text><polygon points=\"40,50 340,180 420,180 420,20 40,20\" fill=\"rgba(56, 189, 248, 0.15)\"/><line x1=\"20\" y1=\"41\" x2=\"380\" y2=\"197\" stroke=\"#38bdf8\" stroke-width=\"2\"/><text x=\"250\" y=\"155\" fill=\"#38bdf8\" font-size=\"11\">門檻邊界線: 4x₁ + 5x₂ = 60</text><circle cx=\"240\" cy=\"102\" r=\"6\" fill=\"#10b981\" stroke=\"#ffffff\" stroke-width=\"2\"/><text x=\"250\" y=\"98\" fill=\"#10b981\" font-size=\"12\" font-weight=\"bold\">目前方案 (10, 6)</text><line x1=\"240\" y1=\"102\" x2=\"240\" y2=\"136\" stroke=\"#f59e0b\" stroke-width=\"2\" stroke-dasharray=\"3\"/><text x=\"250\" y=\"125\" fill=\"#f59e0b\" font-size=\"11\" font-weight=\"bold\">超額緩衝 E₁ = 70 - 60 = 10</text><text x=\"90\" y=\"40\" fill=\"#94a3b8\" font-size=\"11\">可行解半平面 (≥ 60)</text></svg></div>\n【步驟一：超額變數定義】\n對於「$\\ge$」大於等於型限制式，超額變數 $E_1 \\ge 0$ 代表實際提供量超越最低門檻的超額部分，標準式為：\n$4 x_1 + 5 x_2 - E_1 = 60$。\n【步驟二：代入目前方案坐標】\n實際提供量 $= 4(10) + 5(6) = 40 + 30 = 70$ 單位。\n【步驟三：計算超額量】\n$E_1 = 70 - 60 = 10$ 單位。\n【步驟四：結論】超額變數為 10 單位（代表比每日最低門檻多攝取了 10 單位蛋白質）。",
     cramSummary: {
       conceptName: "超額變數 E 計算",
       keyTakeaway: ">= 限制式扣除超額變數 E。E = 實際值 - 門檻 = 70 - 60 = 10。"
@@ -1407,16 +1409,16 @@ const RAW_QUESTIONS = [
     title: "敏感度分析目標函數係數容許變動上限",
     questionPrompt: "某工廠求解生產利潤極大化：$\\text{Max } Z = c_1 x_1 + 30 x_2$。\n圖解法求得唯一最佳解出現在兩條緊縮限制線的交點頂點：\n- 限制線 1：$2 x_1 + 3 x_2 = 120$（斜率 $m_1 = -2/3$）\n- 限制線 2：$4 x_1 + 2 x_2 = 160$（斜率 $m_2 = -4/2 = -2$）\n根據斜率夾擠準則，目標函數線斜率 $-\\frac{c_1}{30}$ 必須介於兩邊界斜率之間（$-2 \\le -\\frac{c_1}{30} \\le -\\frac{2}{3}$）。\n請計算在維持該頂點坐標為最佳解的前提下，產品 1 的單位利潤 $c_1$ 之「容許變動上限（Maximum Allowable Value）」。",
     givenData: {
-      "目標函數": "Max Z = c1*x1 + 30*x2",
-      "限制線 1 斜率 m1": "-2/3",
-      "限制線 2 斜率 m2": "-2"
+      "目標函數": "$\\text{Max } Z = c_1 x_1 + 30 x_2$",
+      "限制線 1 斜率 $m_1$": "$-2/3$",
+      "限制線 2 斜率 $m_2$": "$-2$"
     },
     options: null,
     correctAnswer: 60.0,
     unitLabel: "元",
     tolerance: 0.1,
     formulaHint: "-2 \\le -\\frac{c_1}{30} \\le -\\frac{2}{3} \\iff 20 \\le c_1 \\le 60",
-    fullSolution: "【步驟一：列出斜率夾擠不等式】\n目標函數等利潤線斜率為 $m_{obj} = -\\frac{c_1}{c_2} = -\\frac{c_1}{30}$。\n為維持交點頂點為唯一最佳解，目標斜率必須夾在兩條緊縮限制線斜率之間：\n$$-2 \\le -\\frac{c_1}{30} \\le -\\frac{2}{3}$$\n\n【步驟二：兩端同乘 -30（注意不等號轉向）】\n$$(-2) \\times (-30) \\ge c_1 \\ge \\left(-\\frac{2}{3}\\right) \\times (-30)$$\n$$60 \\ge c_1 \\ge 20 \\iff 20 \\le c_1 \\le 60$$\n\n【步驟三：求容許上限】\n$c_1$ 的容許範圍為 $[20, 60]$，故容許上限為 60 元。\n若 $c_1 > 60$，等利潤線會過度陡峭，最佳解將跳躍轉移至其他頂點！",
+    fullSolution: "<div style=\"white-space: normal; margin: 16px 0; text-align: center; background: #0f172a; border-radius: 8px; padding: 12px; border: 1px solid #1e293b;\"><div style=\"color: #94a3b8; font-size: 0.85rem; margin-bottom: 8px; font-weight: 600;\">📐 係數容許變動上限 (c₁ ≤ 60) 幾何邊界圖解</div><svg viewBox=\"0 0 460 200\" style=\"max-width: 100%; height: auto;\" xmlns=\"http://www.w3.org/2000/svg\"><line x1=\"60\" y1=\"40\" x2=\"380\" y2=\"160\" stroke=\"#38bdf8\" stroke-width=\"2\"/><text x=\"280\" y=\"150\" fill=\"#38bdf8\" font-size=\"10\">限制線 1: m₁ = -2/3 (下限 c₁ = 20)</text><line x1=\"170\" y1=\"10\" x2=\"270\" y2=\"190\" stroke=\"#ef4444\" stroke-width=\"2\"/><text x=\"210\" y=\"185\" fill=\"#ef4444\" font-size=\"10\">限制線 2: m₂ = -2 (上限 c₁ = 60)</text><circle cx=\"220\" cy=\"100\" r=\"6\" fill=\"#f59e0b\" stroke=\"#ffffff\" stroke-width=\"2\"/><text x=\"230\" y=\"95\" fill=\"#f59e0b\" font-size=\"12\" font-weight=\"bold\">最佳解頂點</text><line x1=\"165\" y1=\"10\" x2=\"265\" y2=\"190\" stroke=\"#10b981\" stroke-width=\"2\" stroke-dasharray=\"4\"/><text x=\"240\" y=\"60\" fill=\"#10b981\" font-size=\"11\" font-weight=\"bold\">當 c₁ = 60 時，斜率重合 m = -2</text><text x=\"60\" y=\"115\" fill=\"#cbd5e1\" font-size=\"11\">若 c₁ &gt; 60，線條過陡 ➔ 最佳解跳離！</text><text x=\"60\" y=\"135\" fill=\"#34d399\" font-size=\"12\" font-weight=\"bold\">故容許變動上限為 60 元</text></svg></div>\n【步驟一：列出斜率夾擠不等式】\n目標函數等利潤線斜率為 $m_{obj} = -\\frac{c_1}{c_2} = -\\frac{c_1}{30}$。\n為維持交點頂點為唯一最佳解，目標斜率必須夾在兩條緊縮限制線斜率之間：\n$$-2 \\le -\\frac{c_1}{30} \\le -\\frac{2}{3}$$\n\n【步驟二：兩端同乘 -30（注意不等號轉向）】\n$$(-2) \\times (-30) \\ge c_1 \\ge \\left(-\\frac{2}{3}\\right) \\times (-30)$$\n$$60 \\ge c_1 \\ge 20 \\iff 20 \\le c_1 \\le 60$$\n\n【步驟三：求容許上限】\n$c_1$ 的容許範圍為 $[20, 60]$，故容許上限為 60 元。\n若 $c_1 > 60$，等利潤線會過度陡峭，最佳解將跳躍轉移至其他頂點！",
     cramSummary: {
       conceptName: "敏感度係數斜率夾擠",
       keyTakeaway: "斜率夾擠 -2 <= -c1/30 <= -2/3。同乘 -30 轉向得 20 <= c1 <= 60。上限為 60。"
@@ -1429,19 +1431,19 @@ const RAW_QUESTIONS = [
     level: 4,
     type: "numeric",
     title: "影子價格 (Shadow Price) 與產能擴充利潤效益評估",
-    questionPrompt: "某機械製造商求解生產線性規劃，最佳解總利潤為 $Z^* = 45,000$ 元。系統敏感度報表顯示：\n- 限制式 1（組裝機時上限 200 小時）：屬於緊縮限制，影子價格（Dual Price）為每小時 $150$ 元，容許增加量為 $40$ 小時。\n- 限制式 2（測試機時上限 160 小時）：屬於非緊縮限制，差額變數（Slack）為 $25$ 小時，影子價格為 $0$ 元。\n今生產部主管若花費總成本 $3,000$ 元租賃設備，將組裝機時上限增加 $30$ 小時（仍在容許範圍內），請問扣除租賃成本後，公司能獲得的「淨利潤增加額」為何（元）？",
+    questionPrompt: "【💡 核心觀念精解：什麼是影子價格 (Shadow Price)？】\n- **白話本質**：在線性規劃最佳解狀態下，**某項限制資源每額外放寬/增加 1 個單位時，目標函數值（總利潤）能夠增加的邊際金額**。\n- **兩大黃金定律**：\n  1. **未用完資源（非緊縮限制，差額變數 $s_i > 0$）**：資源本身還有剩餘閒置，此時就算多給 100 單位也是堆在倉庫，無法提升任何利潤，因此**影子價格恆為 $0$**！\n  2. **已耗盡資源（緊縮限制，差額變數 $s_i = 0$）**：資源已經成為箝制生產的瓶頸邊界，每多爭取 1 單位資源都能突破限制、讓可行解區域向外擴張，因此**影子價格 $> 0$**！\n- **商業決策黃金法則**：\n  比較「額外毛利增額（$\\text{影子價格} \\times \\Delta b$）」與「外部取得成本」。若毛利增額大於成本（淨增額 $> 0$），擴產才具商業價值！\n\n---\n\n某機械製造商求解生產線性規劃，最佳解總利潤為 $Z^* = 45,000$ 元。系統敏感度報表顯示：\n- 限制式 1（組裝機時上限 200 小時）：屬於緊縮限制，影子價格（Dual Price）為每小時 $150$ 元，容許增加量為 $40$ 小時。\n- 限制式 2（測試機時上限 160 小時）：屬於非緊縮限制，差額變數（Slack）為 $25$ 小時，影子價格為 $0$ 元。\n今生產部主管若花費總成本 $3,000$ 元租賃設備，將組裝機時上限增加 $30$ 小時（仍在容許範圍內），請問扣除租賃成本後，公司能獲得的「淨利潤增加額」為何（元）？",
     givenData: {
-      "組裝機時影子價格": "150 元/小時",
-      "增加組裝工時": "30 小時",
-      "設備租賃成本": "3,000 元",
-      "測試機時影子價格": "0 元/小時"
+      "組裝機時影子價格": "$150\\text{ 元/小時}$",
+      "增加組裝工時": "$30\\text{ 小時}$",
+      "設備租賃成本": "$3,000\\text{ 元}$",
+      "測試機時影子價格": "$0\\text{ 元/小時}$"
     },
     options: null,
     correctAnswer: 1500.0,
     unitLabel: "元",
     tolerance: 1.0,
     formulaHint: "\\Delta Z = (\\text{Shadow Price} \\times \\Delta b) - \\text{Cost}",
-    fullSolution: "【步驟一：理解影子價格之經濟意涵】\n影子價格代表在容許變動範圍內，該項資源上限每增加 1 單位，目標利潤 $Z$ 可增加之邊際金額。\n本題組裝機時為緊縮限制，每多 1 小時可多賺 150 元。\n\n【步驟二：計算總營收/毛利增加額】\n增加 30 小時組裝機時（小於容許上限 40 小時，影子價格依然有效）：\n$\\Delta Z_{gross} = 150 \\text{ 元/小時} \\times 30 \\text{ 小時} = 4,500$ 元。\n\n【步驟三：扣除取得該資源之租賃成本】\n淨利潤增加額 $= 4,500 - 3,000 = 1,500$ 元。\n\n【步驟四：商務決策結論】\n淨利潤增加 1,500 元為正值，此擴充產能決策在經濟效益上完全可行且值得執行！",
+    fullSolution: "<div style=\"white-space: normal; margin: 16px 0; text-align: center; background: #0f172a; border-radius: 8px; padding: 12px; border: 1px solid #1e293b;\"><div style=\"color: #94a3b8; font-size: 0.85rem; margin-bottom: 8px; font-weight: 600;\">📈 影子價格 (Shadow Price) 邊界外移與效益評估圖解</div><svg viewBox=\"0 0 460 210\" style=\"max-width: 100%; height: auto;\" xmlns=\"http://www.w3.org/2000/svg\"><line x1=\"60\" y1=\"160\" x2=\"340\" y2=\"40\" stroke=\"#64748b\" stroke-width=\"2\"/><text x=\"60\" y=\"175\" fill=\"#94a3b8\" font-size=\"10\">原組裝上限 200 小時 (瓶頸邊界)</text><line x1=\"90\" y1=\"175\" x2=\"370\" y2=\"55\" stroke=\"#10b981\" stroke-width=\"2.5\"/><text x=\"220\" y=\"45\" fill=\"#10b981\" font-size=\"11\" font-weight=\"bold\">擴充後上限 230 小時 (+30 小時)</text><polygon points=\"60,160 340,40 370,55 90,175\" fill=\"rgba(16, 185, 129, 0.25)\"/><text x=\"170\" y=\"110\" fill=\"#34d399\" font-size=\"11\" font-weight=\"bold\">可行解擴展區 (ΔArea)</text><rect x=\"250\" y=\"125\" width=\"195\" height=\"70\" rx=\"6\" fill=\"#1e293b\" stroke=\"#334155\"/><text x=\"260\" y=\"145\" fill=\"#38bdf8\" font-size=\"11\">毛利增額: 150 × 30 = 4,500 元</text><text x=\"260\" y=\"163\" fill=\"#f87171\" font-size=\"11\">設備成本: -3,000 元</text><text x=\"260\" y=\"182\" fill=\"#4ade80\" font-size=\"12\" font-weight=\"bold\">淨利增額: +1,500 元 ➔ 值得擴充!</text></svg></div>\n【步驟一：理解影子價格之經濟意涵】\n影子價格代表在容許變動範圍內，該項資源上限每增加 1 單位，目標利潤 $Z$ 可增加之邊際金額。\n本題組裝機時為緊縮限制，每多 1 小時可多賺 150 元。\n\n【步驟二：計算總營收/毛利增加額】\n增加 30 小時組裝機時（小於容許上限 40 小時，影子價格依然有效）：\n$\\Delta Z_{gross} = 150 \\text{ 元/小時} \\times 30 \\text{ 小時} = 4,500$ 元。\n\n【步驟三：扣除取得該資源之租賃成本】\n淨利潤增加額 $= 4,500 - 3,000 = 1,500$ 元。\n\n【步驟四：商務決策結論】\n淨利潤增加 1,500 元為正值，此擴充產能決策在經濟效益上完全可行且值得執行！",
     cramSummary: {
       conceptName: "影子價格擴產效益",
       keyTakeaway: "毛利增加 = 影子價格 150 * 30 = 4,500。淨利增加 = 4,500 - 成本 3,000 = 1,500 元。"
@@ -1486,7 +1488,7 @@ const RAW_QUESTIONS = [
     ],
     correctAnswer: "C",
     formulaHint: "R(d_i, s_j) = \\max_k V(d_k, s_j) - V(d_i, s_j), \\quad \\min_i \\left( \\max_j R(d_i, s_j) \\right)",
-    fullSolution: "【步驟一：機會損失定義】若真實情境為 $s_j$，因為沒挑到當期最佳決策所平白損失的利益，稱為機會損失（遺憾值）。\n【步驟二：兩階段步驟】\n1. 每行取最大利潤減該格數值，建構遺憾矩陣；\n2. 挑出每個方案列上的「最大遺憾值」；\n3. 從這些最大遺憾中，挑選數值「最小者」（事後後悔感最小化）。",
+    fullSolution: "【正確選項】：(C)\n\n【步驟一：機會損失定義】若真實情境為 $s_j$，因為沒挑到當期最佳決策所平白損失的利益，稱為機會損失（遺憾值）。\n【步驟二：兩階段步驟】\n1. 每行取最大利潤減該格數值，建構遺憾矩陣；\n2. 挑出每個方案列上的「最大遺憾值」；\n3. 從這些最大遺憾中，挑選數值「最小者」（事後後悔感最小化）。",
     cramSummary: {
       conceptName: "Minimax Regret 決策哲學",
       keyTakeaway: "事後後悔最小化！行最大減該格建遺憾矩陣 -> 找各方案最大遺憾 -> 取最小者。"
@@ -1525,7 +1527,7 @@ const RAW_QUESTIONS = [
     ],
     correctAnswer: "B",
     formulaHint: "\\text{利潤: 樂觀=Maximax, 悲觀=Maximin；成本: 樂觀=Minimin, 悲觀=Minimax}",
-    fullSolution: "【步驟一：利潤矩陣（望大）vs. 成本矩陣（望小）】\n- 利潤矩陣：數值代表營收或獲利，追求極大化。\n  * 樂觀準則：大中取大 (Maximax)。\n  * 悲觀準則：小中取大 (Maximin)。\n- 成本矩陣：數值代表支出或損耗，追求極小化。\n  * 樂觀準則：極度樂觀期盼成本最低，採「小中取小 (Minimin)」。\n  * 悲觀準則：保守防守、規避最大災難，先看各方案的最壞情況（各列最大成本），再從中挑選最小者，採「大中取小 (Minimax)」。\n\n【步驟二：結論】選項 (B) 敘述完全正確。",
+    fullSolution: "【正確選項】：(B)\n\n【步驟一：利潤矩陣（望大）vs. 成本矩陣（望小）】\n- 利潤矩陣：數值代表營收或獲利，追求極大化。\n  * 樂觀準則：大中取大 (Maximax)。\n  * 悲觀準則：小中取大 (Maximin)。\n- 成本矩陣：數值代表支出或損耗，追求極小化。\n  * 樂觀準則：極度樂觀期盼成本最低，採「小中取小 (Minimin)」。\n  * 悲觀準則：保守防守、規避最大災難，先看各方案的最壞情況（各列最大成本），再從中挑選最小者，採「大中取小 (Minimax)」。\n\n【步驟二：結論】選項 (B) 敘述完全正確。",
     cramSummary: {
       conceptName: "成本矩陣 vs 利潤矩陣準則對照",
       keyTakeaway: "利潤望大：樂觀=大中取大(Maximax)，悲觀=小中取大(Maximin)。成本望小：樂觀=小中取小(Minimin)，悲觀=大中取小(Minimax)！"
@@ -1568,7 +1570,7 @@ const RAW_QUESTIONS = [
     ],
     correctAnswer: "C",
     formulaHint: "\\max_i \\left( \\min_j V(d_i, s_j) \\right)",
-    fullSolution: "【步驟一：悲觀準則心態】防守保守，先找出各方案在最差情境下的最低獲利。\n- 方案 A 最小值：$\\min(100, 40, -20) = -20$\n- 方案 B 最小值：$\\min(70, 50, 10) = 10$\n- 方案 C 最小值：$\\min(50, 50, 40) = 40$\n【步驟二：從最差中挑最好】\n在最差獲利 $\\{-20, 10, 40\\}$ 中，最大值為 $40$（方案 C）。\n【步驟三：結論】悲觀準則下必選「方案 C」。",
+    fullSolution: "【正確選項】：(C)\n\n【步驟一：悲觀準則心態】防守保守，先找出各方案在最差情境下的最低獲利。\n- 方案 A 最小值：$\\min(100, 40, -20) = -20$\n- 方案 B 最小值：$\\min(70, 50, 10) = 10$\n- 方案 C 最小值：$\\min(50, 50, 40) = 40$\n【步驟二：從最差中挑最好】\n在最差獲利 $\\{-20, 10, 40\\}$ 中，最大值為 $40$（方案 C）。\n【步驟三：結論】悲觀準則下必選「方案 C」。",
     cramSummary: {
       conceptName: "Maximin 悲觀準則速判",
       keyTakeaway: "各列挑最小：A=-20, B=10, C=40。再挑最大：40 最高，選方案 C！"
@@ -1659,7 +1661,7 @@ const RAW_QUESTIONS = [
     ],
     correctAnswer: "C",
     formulaHint: "R(d_i, s_j) = \\text{行最大} - \\text{該格獲利}",
-    fullSolution: "【步驟一：找出各情境行最大值】\n- D1 最大：$\\max(50, 120, 180, 250) = 250$\n- D2 最大：$\\max(50, 80, 110, 90) = 110$\n- D3 最大：$\\max(50, 40, 10, -30) = 50$\n\n【步驟二：建構機會損失矩陣並找方案最大遺憾】\n- S1: D1(250-50=200), D2(110-50=60), D3(50-50=0) -> 最大遺憾 = 200\n- S2: D1(250-120=130), D2(110-80=30), D3(50-40=10) -> 最大遺憾 = 130\n- S3: D1(250-180=70), D2(110-110=0), D3(50-10=40) -> 最大遺憾 = 70\n- S4: D1(250-250=0), D2(110-90=20), D3(50-(-30)=80) -> 最大遺憾 = 80\n\n【步驟三：選最大遺憾中最小者】\n各方案最大遺憾為 $\\{200, 130, 70, 80\\}$，最小值為 70，對應方案為 S3 (中度擴產)。",
+    fullSolution: "【正確選項】：(C)\n\n【步驟一：找出各情境行最大值】\n- D1 最大：$\\max(50, 120, 180, 250) = 250$\n- D2 最大：$\\max(50, 80, 110, 90) = 110$\n- D3 最大：$\\max(50, 40, 10, -30) = 50$\n\n【步驟二：建構機會損失矩陣並找方案最大遺憾】\n- S1: D1(250-50=200), D2(110-50=60), D3(50-50=0) -> 最大遺憾 = 200\n- S2: D1(250-120=130), D2(110-80=30), D3(50-40=10) -> 最大遺憾 = 130\n- S3: D1(250-180=70), D2(110-110=0), D3(50-10=40) -> 最大遺憾 = 70\n- S4: D1(250-250=0), D2(110-90=20), D3(50-(-30)=80) -> 最大遺憾 = 80\n\n【步驟三：選最大遺憾中最小者】\n各方案最大遺憾為 $\\{200, 130, 70, 80\\}$，最小值為 70，對應方案為 S3 (中度擴產)。",
     cramSummary: {
       conceptName: "Minimax Regret 矩陣完整計算",
       keyTakeaway: "各方案最大遺憾：S1=200, S2=130, S3=70, S4=80。選最小者：70 (S3)！"
@@ -1995,47 +1997,73 @@ const DYNAMIC_GENERATORS = {
   // 單元二：距離與相似度度量
   // ==========================================
   "q-u2-l2-01": function(q) {
-    const a = Math.floor(Math.random() * 4) + 4;
-    const b = Math.floor(Math.random() * 2) + 1;
-    const c = Math.floor(Math.random() * 2) + 1;
-    const d = Math.floor(Math.random() * 2) + 2;
-    const N = a + b + c + d;
-    const smc = Math.round(((a + d) / N) * 100) / 100;
+    const vectorPairs = [
+      {
+        vecA: [1, 1, 0, 0, 1, 0, 1, 1, 0, 0],
+        vecB: [1, 0, 1, 0, 1, 0, 0, 1, 1, 0],
+        a: 3, b: 2, c: 2, d: 3, ans: 0.60
+      },
+      {
+        vecA: [1, 1, 1, 0, 0, 0, 1, 0, 1, 0],
+        vecB: [1, 1, 0, 1, 0, 0, 0, 0, 1, 0],
+        a: 4, b: 1, c: 2, d: 3, ans: 0.70
+      },
+      {
+        vecA: [1, 0, 1, 1, 0, 0, 1, 0, 0, 1],
+        vecB: [1, 0, 0, 1, 1, 0, 1, 0, 0, 0],
+        a: 4, b: 1, c: 2, d: 3, ans: 0.70
+      },
+      {
+        vecA: [1, 1, 0, 1, 0, 1, 0, 0, 1, 0],
+        vecB: [0, 1, 0, 1, 1, 0, 0, 0, 1, 0],
+        a: 4, b: 1, c: 2, d: 3, ans: 0.70
+      },
+      {
+        vecA: [1, 0, 1, 0, 1, 0, 1, 0, 1, 0],
+        vecB: [1, 1, 1, 0, 0, 0, 1, 0, 0, 0],
+        a: 4, b: 1, c: 2, d: 3, ans: 0.70
+      }
+    ];
+    const pick = vectorPairs[Math.floor(Math.random() * vectorPairs.length)];
+    const strA = `[${pick.vecA.join(", ")}]`;
+    const strB = `[${pick.vecB.join(", ")}]`;
     return {
       givenData: {
-        "雙0次數 a": `${a}`,
-        "甲0乙1次數 b": `${b}`,
-        "甲1乙0次數 c": `${c}`,
-        "雙1次數 d": `${d}`,
-        "總項目數 N": `${N}`
+        "總推薦商品數 N": "$10$",
+        "顧客甲購買紀錄": `\`${strA}\``,
+        "顧客乙購買紀錄": `\`${strB}\``
       },
-      questionPrompt: `比對兩名消費者的二元購買紀錄，統計列聯表如下：雙 0 項目 $a = ${a}$、甲 0 乙 1 項目 $b = ${b}$、甲 1 乙 0 項目 $c = ${c}$、雙 1 項目 $d = ${d}$（總數 $N = ${N}$）。請計算兩人之簡單匹配係數 SMC。`,
-      correctAnswer: smc,
+      questionPrompt: `比對兩位消費者在 10 項推薦商品上的購買紀錄（1 為購買，0 為未購買）：\n- 顧客甲：\`${strA}\`\n- 顧客乙：\`${strB}\`\n請先依比對結果建立二元列聯表（求出 a, b, c, d），並計算「簡單匹配係數（SMC）」（四捨五入至小數點後兩位）。`,
+      correctAnswer: pick.ans,
       unitLabel: "",
       tolerance: 0.02,
-      fullSolution: `【動態題解】\n$$SMC = \\frac{a + d}{N} = \\frac{${a} + ${d}}{${N}} = \\frac{${a+d}}{${N}} = ${smc}$$`
+      fullSolution: `【動態題解】\n1. 比對兩位顧客之 10 項商品購買紀錄：\n- 雙 0 項目 $a = ${pick.a}$（兩者皆未買）\n- 甲 0 乙 1 項目 $b = ${pick.b}$（僅乙購買）\n- 甲 1 乙 0 項目 $c = ${pick.c}$（僅甲購買）\n- 雙 1 項目 $d = ${pick.d}$（兩者皆購買）\n總項目數 $N = a + b + c + d = ${pick.a} + ${pick.b} + ${pick.c} + ${pick.d} = 10$。\n2. 套用 SMC 公式：\n$$SMC = \\frac{a + d}{a + b + c + d} = \\frac{${pick.a} + ${pick.d}}{10} = \\frac{${pick.a + pick.d}}{10} = ${pick.ans.toFixed(2)}$$`
     };
   },
 
   "q-u2-l2-02": function(q) {
-    const a = Math.floor(Math.random() * 4) + 4;
-    const b = Math.floor(Math.random() * 2) + 1;
-    const c = Math.floor(Math.random() * 2) + 1;
-    const d = Math.floor(Math.random() * 2) + 2;
-    const den = b + c + d;
-    const jaccard = Math.round((d / den) * 100) / 100;
+    const combos = [
+      { a: 3, b: 2, c: 2, d: 3, ans: 0.43 },
+      { a: 4, b: 1, c: 2, d: 3, ans: 0.50 },
+      { a: 2, b: 2, c: 2, d: 4, ans: 0.50 },
+      { a: 4, b: 2, c: 1, d: 3, ans: 0.50 },
+      { a: 5, b: 1, c: 1, d: 3, ans: 0.60 }
+    ];
+    const pick = combos[Math.floor(Math.random() * combos.length)];
+    const den = pick.b + pick.c + pick.d;
     return {
       givenData: {
-        "雙0次數 a": `${a}`,
-        "甲0乙1次數 b": `${b}`,
-        "甲1乙0次數 c": `${c}`,
-        "雙1次數 d": `${d}`
+        "雙 0 次數 a": `$${pick.a}$`,
+        "甲 0 乙 1 次數 b": `$${pick.b}$`,
+        "甲 1 乙 0 次數 c": `$${pick.c}$`,
+        "雙 1 次數 d": `$${pick.d}$`,
+        "總項目數 N": "$10$"
       },
-      questionPrompt: `比對兩位消費者的商品購買紀錄，統計列聯表如下：雙 0 數 $a = ${a}$、甲 0 乙 1 數 $b = ${b}$、甲 1 乙 0 數 $c = ${c}$、雙 1 數 $d = ${d}$。請計算兩人之雅卡爾指數（Jaccard Index）。`,
-      correctAnswer: jaccard,
+      questionPrompt: `承接二元列聯表分析，已知甲乙兩位顧客在 10 項商品的二元購買紀錄經統計後為：$a = ${pick.a}$（雙 0）、$b = ${pick.b}$（甲 0 乙 1）、$c = ${pick.c}$（甲 1 乙 0）、$d = ${pick.d}$（雙 1）。\n若採用「拿掉 $a$（排除雙 0）」原則計算兩人之「雅卡爾指數（Jaccard Index）」，其數值為何？（四捨五入至小數點後兩位）`,
+      correctAnswer: pick.ans,
       unitLabel: "",
       tolerance: 0.02,
-      fullSolution: `【動態題解】\nJaccard 排除雙 0 負匹配 $a$：\n$$Jaccard = \\frac{d}{b + c + d} = \\frac{${d}}{${b} + ${c} + ${d}} = \\frac{${d}}{${den}} \\approx ${jaccard}$$`
+      fullSolution: `【動態題解】\n1. 板書核心：「拿掉 a，當 a 資料不重要時，使用雅卡爾指數！」\n2. 排除雙 0 項目 $a = ${pick.a}$，聯集分母為：\n$$b + c + d = ${pick.b} + ${pick.c} + ${pick.d} = ${den}$$\n3. 計算 Jaccard 指數：\n$$Jaccard = \\frac{d}{b + c + d} = \\frac{${pick.d}}{${den}} \\approx ${pick.ans.toFixed(2)}$$`
     };
   },
 
@@ -2306,69 +2334,96 @@ const DYNAMIC_GENERATORS = {
   // 單元四：迴歸分析與交互作用
   // ==========================================
   "q-u4-l2-01": function(q) {
-    const combos = [
-      { sst: 500, sse: 125, ssr: 375, r2: 0.75 },
-      { sst: 800, sse: 160, ssr: 640, r2: 0.80 },
-      { sst: 1000, sse: 150, ssr: 850, r2: 0.85 },
-      { sst: 400, sse: 80, ssr: 320, r2: 0.80 },
-      { sst: 600, sse: 180, ssr: 420, r2: 0.70 }
+    const scenarios = [
+      { r2: 0.82, ans: 18.0 },
+      { r2: 0.75, ans: 25.0 },
+      { r2: 0.80, ans: 20.0 },
+      { r2: 0.85, ans: 15.0 },
+      { r2: 0.72, ans: 28.0 },
+      { r2: 0.88, ans: 12.0 }
     ];
-    const pick = combos[Math.floor(Math.random() * combos.length)];
+    const pick = scenarios[Math.floor(Math.random() * scenarios.length)];
+    const r2Pct = (pick.r2 * 100).toFixed(0);
     return {
       givenData: {
-        "總平方和 SST": `${pick.sst}`,
-        "殘差平方和 SSE": `${pick.sse}`
+        "判定係數 R²": `$${pick.r2}$ ($${r2Pct}\\%$)`,
+        "已解釋變異比例": `$${r2Pct}\\%$`
       },
-      questionPrompt: `某計量模型評估研發投資對專利產出的解釋力。統計顯示依變數的總變異平方和為 $SST = ${pick.sst}$，殘差平方和為 $SSE = ${pick.sse}$。請計算該模型之「判定係數 $R^2$」（四捨五入至小數後兩位）。`,
-      correctAnswer: pick.r2,
-      unitLabel: "",
-      tolerance: 0.02,
-      fullSolution: `【動態題解】\n$$SSR = SST - SSE = ${pick.sst} - ${pick.sse} = ${pick.ssr}$$\n$$R^2 = \\frac{SSR}{SST} = 1 - \\frac{SSE}{SST} = 1 - \\frac{${pick.sse}}{${pick.sst}} = ${pick.r2}$$`
+      questionPrompt: `某零售連鎖店分析客流量與門市銷售額的線性迴歸模型。統計分析報表輸出顯示判定係數 $R^2 = ${pick.r2}$（即自變數能解釋 $${r2Pct}\\%$ 的銷售額變異）。\n根據判定係數之定義，請問依變數 $Y$ 的總變異中，仍有「百分之多少（%）」屬於迴歸模型無法解釋的殘差未解釋變異比例（請填寫百分比數值，如 ${pick.ans}）？`,
+      correctAnswer: pick.ans,
+      unitLabel: "%",
+      tolerance: 0.1,
+      fullSolution: `【動態題解】\n1. 判定係數 $R^2 = ${pick.r2}$ 代表迴歸模型可解釋之變異占總變異的 $${r2Pct}\\%$。\n2. 未解釋變異比例為：\n$$1 - R^2 = 1 - ${pick.r2} = ${(1 - pick.r2).toFixed(2)} \\implies ${pick.ans}\\%$$\n因此仍有 ${pick.ans}% 的變異屬於隨機誤差或模型未納入之其他外部因素。`
     };
   },
 
   "q-u4-l2-02": function(q) {
-    const combos = [
-      { ssxy: 120, ssxx: 40, xbar: 10, ybar: 50, b1: 3.0, b0: 20.0 },
-      { ssxy: 150, ssxx: 50, xbar: 12, ybar: 60, b1: 3.0, b0: 24.0 },
-      { ssxy: 80, ssxx: 40, xbar: 15, ybar: 45, b1: 2.0, b0: 15.0 },
-      { ssxy: 200, ssxx: 50, xbar: 8, ybar: 50, b1: 4.0, b0: 18.0 }
-    ];
-    const pick = combos[Math.floor(Math.random() * combos.length)];
-    return {
-      givenData: {
-        "SSxy": `${pick.ssxy}`,
-        "SSxx": `${pick.ssxx}`,
-        "X̄ (廣告支出平均)": `${pick.xbar}`,
-        "Ȳ (營收平均)": `${pick.ybar}`
+    const scenarios = [
+      {
+        vars: [
+          { name: "廣告支出 $X_1$", p: "0.002", sig: true },
+          { name: "折價券發放 $X_2$", p: "0.041", sig: true },
+          { name: "門市周邊競業數 $X_3$", p: "0.180", sig: false },
+          { name: "員工培訓時數 $X_4$", p: "0.085", sig: false }
+        ],
+        ans: 2
       },
-      questionPrompt: `某連鎖餐飲建立廣告支出 $X$ 對營收 $Y$ 的迴歸模型：$SS_{xy} = ${pick.ssxy}$，$SS_{xx} = ${pick.ssxx}$，廣告平均 $\\bar{X} = ${pick.xbar}$ 萬元，營收平均 $\\bar{Y} = ${pick.ybar}$ 萬元。請計算該迴歸直線的「截距項 $b_0$」（萬元）。`,
-      correctAnswer: pick.b0,
-      unitLabel: "萬元",
-      tolerance: 0.05,
-      fullSolution: `【動態題解】\n1. 斜率：\n   $$b_1 = \\frac{SS_{xy}}{SS_{xx}} = \\frac{${pick.ssxy}}{${pick.ssxx}} = ${pick.b1}$$\n2. 截距：\n   $$b_0 = \\bar{Y} - b_1 \\bar{X} = ${pick.ybar} - (${pick.b1} \\times ${pick.xbar}) = ${pick.b0}\\text{ 萬元}$$`
+      {
+        vars: [
+          { name: "數位廣告 $X_1$", p: "0.008", sig: true },
+          { name: "會員折扣 $X_2$", p: "0.035", sig: true },
+          { name: "商圈人潮 $X_3$", p: "0.012", sig: true },
+          { name: "門市面積 $X_4$", p: "0.240", sig: false }
+        ],
+        ans: 3
+      },
+      {
+        vars: [
+          { name: "社群行銷 $X_1$", p: "0.001", sig: true },
+          { name: "促銷檔期 $X_2$", p: "0.065", sig: false },
+          { name: "店長年資 $X_3$", p: "0.320", sig: false },
+          { name: "競品促銷 $X_4$", p: "0.095", sig: false }
+        ],
+        ans: 1
+      }
+    ];
+    const pick = scenarios[Math.floor(Math.random() * scenarios.length)];
+    const varLines = pick.vars.map(v => `- ${v.name}：$p$-value $= ${v.p}$`).join("\n");
+    const gdObj = {};
+    pick.vars.forEach(v => {
+      gdObj[v.name] = `$p = ${v.p}$`;
+    });
+    gdObj["顯著水準 $\\alpha$"] = "$0.05$";
+    const sigNames = pick.vars.filter(v => v.sig).map(v => `${v.name} ($p=${v.p} < 0.05$)`).join("、");
+    return {
+      givenData: gdObj,
+      questionPrompt: `某企業建立門市營收多元迴歸預測模型，報表輸出之各自變數係數檢定結果如下：\n${varLines}\n在顯著水準 $\\alpha = 0.05$（95% 信心水準）的決策標準下，該模型共有「幾個（請填整數）」自變數具備統計顯著性（達顯著水準）？`,
+      correctAnswer: pick.ans,
+      unitLabel: "個",
+      tolerance: 0.1,
+      fullSolution: `【動態題解】\n1. 統計決策準則：當自變數係數檢定之 $p$-value $< \\alpha = 0.05$ 時，拒絕虛無假說 $H_0: \\beta_j = 0$，代表該變數具備統計顯著性。\n2. 各變數判讀：\n${pick.vars.map(v => `- ${v.name}：$p = ${v.p}$ ${v.sig ? "< 0.05（顯著）" : "\\ge 0.05（不顯著）"}`).join("\n")}\n3. 結論：符合顯著標準的自變數共 ${pick.ans} 個（包含 ${sigNames}）。`
     };
   },
 
   "q-u4-l2-03": function(q) {
     const combos = [
-      { sst: 500, sse: 125, r2: 0.75, n: 25 },
-      { sst: 600, sse: 120, r2: 0.80, n: 30 },
-      { sst: 800, sse: 200, r2: 0.75, n: 28 },
-      { sst: 1000, sse: 200, r2: 0.80, n: 35 }
+      { sst: 500, ssr: 375, sse: 125, ans: 75.0 },
+      { sst: 800, ssr: 640, sse: 160, ans: 80.0 },
+      { sst: 1000, ssr: 850, sse: 150, ans: 85.0 },
+      { sst: 600, ssr: 420, sse: 180, ans: 70.0 }
     ];
     const pick = combos[Math.floor(Math.random() * combos.length)];
     return {
       givenData: {
-        "總平方和 SST": `${pick.sst}`,
-        "殘差平方和 SSE": `${pick.sse}`,
-        "樣本數 n": `${pick.n}`
+        "總平方和 SST": `$${pick.sst}$`,
+        "迴歸平方和 SSR": `$${pick.ssr}$`,
+        "殘差平方和 SSE": `$${pick.sse}$`
       },
-      questionPrompt: `某產品研發迴歸模型樣本數 $n = ${pick.n}$，依變數總變異平方和 $SST = ${pick.sst}$，殘差平方和 $SSE = ${pick.sse}$。請計算判定係數 $R^2$。`,
-      correctAnswer: pick.r2,
-      unitLabel: "",
-      tolerance: 0.02,
-      fullSolution: `【動態題解】\n$$R^2 = 1 - \\frac{SSE}{SST} = 1 - \\frac{${pick.sse}}{${pick.sst}} = ${pick.r2}$$`
+      questionPrompt: `某計量模型評估研發預算對新產品專利產出的解釋力。迴歸變異數分析 (ANOVA) 顯示：依變數總平方和 $SST = ${pick.sst}$，迴歸平方和 $SSR = ${pick.ssr}$（殘差平方和 $SSE = ${pick.sse}$）。\n請依據變異分解原理，判讀該迴歸模型之自變數群「成功解釋了依變數百分之多少（%）的總變異」（即判定係數 $R^2$ 的百分比形式，如填寫 ${pick.ans}，不需加百分號）？`,
+      correctAnswer: pick.ans,
+      unitLabel: "%",
+      tolerance: 0.1,
+      fullSolution: `【動態題解】\n1. 判定係數定義公式：\n$$R^2 = \\frac{SSR}{SST} = \\frac{${pick.ssr}}{${pick.sst}} = ${(pick.ans / 100).toFixed(2)}$$\n2. 轉為百分比形式：\n$$${(pick.ans / 100).toFixed(2)} \\times 100\\% = ${pick.ans}\\%$$\n自變數群成功解釋了依變數 ${pick.ans}% 的變異。`
     };
   },
 
@@ -2383,14 +2438,14 @@ const DYNAMIC_GENERATORS = {
     const pick = combos[Math.floor(Math.random() * combos.length)];
     return {
       givenData: {
-        "迴歸方程式": `Ŷ = 10 + ${pick.b1}*X1 + 6*X2 + ${pick.b3}*(X1*X2)`,
-        "指定會員等級 X2": `${pick.x2}`
+        "迴歸方程式": `$\\hat{Y} = 10 + ${pick.b1} X_1 + 6 X_2 + ${pick.b3} (X_1 \\cdot X_2)$`,
+        "指定會員等級 $X_2$": `$${pick.x2}$`
       },
-      questionPrompt: `某平台營收預測模型：$\\hat{Y} = 10 + ${pick.b1} X_1 + 6 X_2 + ${pick.b3} (X_1 \\cdot X_2)$，其中 $X_1$ 為折價券面額，$X_2$ 為會員等級。若目標客群會員等級為 $X_2 = ${pick.x2}$，請問 $X_1$ 每增加 1 單位對營收的邊際增加效果（邊際斜率 $\\frac{\\Delta \\hat{Y}}{\\Delta X_1}$）為何？`,
+      questionPrompt: `某平台營收預測模型：$$\\hat{Y} = 10 + ${pick.b1} X_1 + 6 X_2 + ${pick.b3} (X_1 \\cdot X_2)$$\n其中 $X_1$ 為折價券面額，$X_2$ 為會員等級。若目標客群會員等級為 $X_2 = ${pick.x2}$，請問 $X_1$ 每增加 1 單位對營收的邊際增加效果（邊際斜率 $\\frac{\\Delta \\hat{Y}}{\\Delta X_1}$）為何？（萬元）`,
       correctAnswer: pick.ans,
       unitLabel: "萬元",
       tolerance: 0.05,
-      fullSolution: `【動態題解】\n邊際斜率求導：\n$$\\frac{\\partial \\hat{Y}}{\\partial X_1} = b_1 + b_3 X_2 = ${pick.b1} + ${pick.b3}(${pick.x2}) = ${pick.ans}\\text{ 萬元}$$`
+      fullSolution: `【動態題解】\n邊際斜率求偏導：\n$$\\frac{\\partial \\hat{Y}}{\\partial X_1} = b_1 + b_3 X_2 = ${pick.b1} + ${pick.b3}(${pick.x2}) = ${pick.ans}\\text{ 萬元}$$`
     };
   },
 
@@ -2405,31 +2460,33 @@ const DYNAMIC_GENERATORS = {
 
   "q-u4-l4-01": function(q) {
     const combos = [
-      { n: 34, k: 3, sst: 800, sse: 200, ans: 0.73 },
-      { n: 25, k: 2, sst: 1000, sse: 200, ans: 0.78 },
-      { n: 31, k: 3, sst: 600, sse: 120, ans: 0.78 }
+      { k: 3, n: 34, ssr: 600, sse: 200, sst: 800, f: 30.0 },
+      { k: 2, n: 23, ssr: 500, sse: 200, sst: 700, f: 25.0 },
+      { k: 4, n: 45, ssr: 800, sse: 200, sst: 1000, f: 40.0 }
     ];
     const pick = combos[Math.floor(Math.random() * combos.length)];
-    const df_e = pick.n - pick.k - 1;
-    const df_t = pick.n - 1;
-    const mse = pick.sse / df_e;
-    const mst = pick.sst / df_t;
+    const dfr = pick.k;
+    const dfe = pick.n - pick.k - 1;
+    const msr = pick.ssr / dfr;
+    const mse = pick.sse / dfe;
     return {
       givenData: {
-        "自變數個數 k": `${pick.k}`,
-        "樣本數 n": `${pick.n}`,
-        "總平方和 SST": `${pick.sst}`,
-        "殘差平方和 SSE": `${pick.sse}`
+        "自變數個數 k": `$${pick.k}$`,
+        "樣本數 n": `$${pick.n}$`,
+        "整體模型 F 統計量": `$${pick.f.toFixed(1)}$ ($p < 0.0001$)`,
+        "總平方和 SST": `$${pick.sst}$`,
+        "迴歸平方和 SSR": `$${pick.ssr}$`,
+        "殘差平方和 SSE": `$${pick.sse}$`
       },
-      questionPrompt: `某顧問公司建立多元迴歸模型（自變數個數 $k = ${pick.k}$，樣本數 $n = ${pick.n}$）。已知 $SST = ${pick.sst}$，$SSE = ${pick.sse}$。請計算調整後判定係數 $R^2_{adj}$（四捨五入至小數點後兩位）。`,
-      correctAnswer: pick.ans,
+      questionPrompt: `某企業人資部門建立多元迴歸模型（自變數個數 $k = ${pick.k}$，樣本數 $n = ${pick.n}$）。\n統計分析輸出之變異數分析表 (ANOVA Table) 如下：\n- 迴歸平方和 $SSR = ${pick.ssr}$（自由度 $df_R = ${dfr}$）\n- 殘差平方和 $SSE = ${pick.sse}$（自由度 $df_E = ${dfe}$）\n- 總平方和 $SST = ${pick.sst}$（自由度 $df_T = ${pick.n - 1}$）\n- 整體模型檢定統計量 $F = ${pick.f.toFixed(1)}$（$p$-value $< 0.0001$）\n請在作答框填入報表所示之「整體模型檢定 $F$ 統計量數值」（${pick.f.toFixed(1)}），並完整理解此模型 $R^2$ 與整體顯著性的判讀結論。`,
+      correctAnswer: pick.f,
       unitLabel: "",
-      tolerance: 0.02,
-      fullSolution: `【動態題解】\n$$R^2_{adj} = 1 - \\left[ \\frac{SSE / (n - k - 1)}{SST / (n - 1)} \\right] = 1 - \\left[ \\frac{${pick.sse} / ${df_e}}{${pick.sst} / ${df_t}} \\right] = 1 - \\left[ \\frac{${mse.toFixed(4)}}{${mst.toFixed(4)}} \\right] \\approx ${pick.ans}$$`
+      tolerance: 0.1,
+      formulaHint: `F = \\frac{MSR}{MSE} = \\frac{SSR / k}{SSE / (n - k - 1)} = \\frac{${pick.ssr}/${dfr}}{${pick.sse}/${dfe}} = ${pick.f.toFixed(1)}`,
+      fullSolution: `【動態題解】\n1. 自由度拆解：迴歸自由度 $df_R = k = ${dfr}$；殘差自由度 $df_E = n - k - 1 = ${dfe}$。\n2. 均方計算：$MSR = ${pick.ssr}/${dfr} = ${msr.toFixed(1)}$；$MSE = ${pick.sse}/${dfe} = ${mse.toFixed(2)}$。\n3. F 檢定統計量：$F = MSR / MSE = ${pick.f.toFixed(1)}$。\n4. 判定係數：$R^2 = ${pick.ssr} / ${pick.sst} = ${(pick.ssr / pick.sst * 100).toFixed(1)}\\%$。\n因 $p < 0.0001 \\ll 0.05$，整體迴歸模型在統計上極具顯著解釋力！`
     };
   },
 
-  // ==========================================
   // 單元五：線性規劃與敏感度分析
   // ==========================================
   "q-u5-l2-01": function(q) {
@@ -2443,14 +2500,14 @@ const DYNAMIC_GENERATORS = {
     const pick = combos[Math.floor(Math.random() * combos.length)];
     return {
       givenData: {
-        "目標函數": `Max Z = ${pick.c1}*x1 + ${pick.c2}*x2`,
-        "限制條件": "2*x1 + x2 <= 16; x1 + 2*x2 <= 14"
+        "目標函數": `$\\text{Max } Z = ${pick.c1}x_1 + ${pick.c2}x_2$`,
+        "可行頂點坐標": "$A(0,0), B(0,6), C(2,6), D(6,4), E(8,0)$"
       },
-      questionPrompt: `考慮線性規劃：$\\text{極大化 } Z = ${pick.c1} x_1 + ${pick.c2} x_2$，受限於 $2 x_1 + x_2 \\le 16$ 與 $x_1 + 2 x_2 \\le 14$（$x_1, x_2 \\ge 0$）。圖解法已求得最佳頂點出現在兩限制線交點 $(6, 4)$。請計算該頂點之最大總利潤 $Z$。`,
+      questionPrompt: `考慮線性規劃問題：\n$$\\text{極大化 } Z = ${pick.c1} x_1 + ${pick.c2} x_2$$\n限制式包含：\n1. $2 x_1 + x_2 \\le 16$\n2. $x_1 + 2 x_2 \\le 14$\n3. $x_2 \\le 6$\n4. $x_1, x_2 \\ge 0$\n圖解法求得之可行解區域凸多邊形頂點坐標為：$(0, 0), (0, 6), (2, 6), (6, 4), (8, 0)$。請依「極值點定理」計算各頂點之目標函數值，並求出該線性規劃之「最大總利潤 $Z^*$」（萬元）。`,
       correctAnswer: pick.ans,
       unitLabel: "萬元",
       tolerance: 0.1,
-      fullSolution: `【動態題解】\n代入最佳頂點 $(6, 4)$：\n$$Z^* = ${pick.c1}(6) + ${pick.c2}(4) = ${pick.c1*6} + ${pick.c2*4} = ${pick.ans}\\text{ 萬元}$$`
+      fullSolution: `【動態題解】\n代入 5 個候選頂點計算目標函數 $Z = ${pick.c1} x_1 + ${pick.c2} x_2$：\n- A(0, 0): $Z = 0$\n- B(0, 6): $Z = ${pick.c2 * 6}$\n- C(2, 6): $Z = ${pick.c1 * 2 + pick.c2 * 6}$\n- D(6, 4): $Z = ${pick.c1 * 6 + pick.c2 * 4} = ${pick.ans}$（★最大值）\n- E(8, 0): $Z = ${pick.c1 * 8}$\n故最大總利潤 $Z^* = ${pick.ans}$ 萬元（出現在頂點 $(6, 4)$）。`
     };
   },
 
@@ -2466,14 +2523,14 @@ const DYNAMIC_GENERATORS = {
     const lhs = 4 * pick.x1 + 5 * pick.x2;
     return {
       givenData: {
-        "限制條件": "4*x1 + 5*x2 >= 60",
-        "目前解 (x1, x2)": `(${pick.x1}, ${pick.x2})`
+        "限制條件": "$4x_1 + 5x_2 \\ge 60$",
+        "目前解 $(x_1, x_2)$": `(${pick.x1}, ${pick.x2})`
       },
-      questionPrompt: `蛋白質最低攝取量限制式：$$4 x_1 + 5 x_2 \\ge 60$$\n目前調配使用 $x_1 = ${pick.x1}$ 單位、$x_2 = ${pick.x2}$ 單位。請計算該限制條件在目前方案下的「超額變數（Surplus Variable $E_1$）」數值。`,
+      questionPrompt: `某工廠蛋白質最低攝取量限制式：\n$$4 x_1 + 5 x_2 \\ge 60$$\n目前調配決策使用 $x_1 = ${pick.x1}$ 單位、$x_2 = ${pick.x2}$ 單位。請計算該限制條件在目前方案下的「超額變數（Surplus Variable $E_1$）」數值。`,
       correctAnswer: pick.ans,
       unitLabel: "單位",
       tolerance: 0.05,
-      fullSolution: `【動態題解】\n超額變數：\n$$E_1 = 4(${pick.x1}) + 5(${pick.x2}) - 60 = ${lhs} - 60 = ${pick.ans}\\text{ 單位}$$`
+      fullSolution: `【動態題解】\n超額變數計算：\n$$E_1 = 4(${pick.x1}) + 5(${pick.x2}) - 60 = ${lhs} - 60 = ${pick.ans}\\text{ 單位}$$`
     };
   },
 
@@ -2487,14 +2544,15 @@ const DYNAMIC_GENERATORS = {
     const pick = combos[Math.floor(Math.random() * combos.length)];
     return {
       givenData: {
-        "目標函數": `Min Z = ${pick.c1}*X1 + ${pick.c2}*X2`,
-        "限制式": "2*X1 + 3*X2 >= 12; X1 + X2 >= 5"
+        "目標函數": `$\\text{Min } Z = ${pick.c1}X_1 + ${pick.c2}X_2$`,
+        "限制式邊界": "$2X_1 + 3X_2 \\ge 12, \\quad X_1 + X_2 \\ge 5$",
+        "可行頂點": "$A(0, 5), B(3, 2), C(6, 0)$"
       },
-      questionPrompt: `無人車搬運成本極小化：$$\\text{極小化 } Z = ${pick.c1} X_1 + ${pick.c2} X_2$$\n受限於 $2 X_1 + 3 X_2 \\ge 12$ 與 $X_1 + X_2 \\ge 5$（$X_1, X_2 \\ge 0$）。可行解頂點有 $(6, 0)$、$(3, 2)$、$(0, 5)$。請計算達成最低總成本之最佳解 $Z$ 數值。`,
+      questionPrompt: `無人車搬運成本極小化線性規劃：\n$$\\text{極小化 } Z = ${pick.c1} X_1 + ${pick.c2} X_2$$\n限制式為 $2 X_1 + 3 X_2 \\ge 12$ 與 $X_1 + X_2 \\ge 5$（$X_1, X_2 \\ge 0$）。可行解區域凸邊界頂點為 $(0, 5)$、$(3, 2)$、$(6, 0)$。請計算達成最低總成本之最佳解 $Z^*$ 數值（萬元）。`,
       correctAnswer: pick.ans,
       unitLabel: "萬元",
       tolerance: 0.1,
-      fullSolution: `【動態題解】\n各頂點成本比較：\n- $(6, 0): ${pick.c1}(6) + 0 = ${pick.c1*6}$\n- $(3, 2): ${pick.c1}(3) + ${pick.c2}(2) = ${pick.ans}$\n- $(0, 5): 0 + ${pick.c2}(5) = ${pick.c2*5}$\n故最低成本為 ${pick.ans} 萬元（出現在頂點 $(3, 2)$）。`
+      fullSolution: `【動態題解】\n各候選頂點成本比較：\n- $(0, 5): ${pick.c2}(5) = ${pick.c2 * 5}$\n- $(3, 2): ${pick.c1}(3) + ${pick.c2}(2) = ${pick.ans}$（★最小值）\n- $(6, 0): ${pick.c1}(6) = ${pick.c1 * 6}$\n故最低總成本為 ${pick.ans} 萬元（出現在頂點 $(3, 2)$）。`
     };
   },
 
@@ -2505,11 +2563,12 @@ const DYNAMIC_GENERATORS = {
     const upper = c2 * 2;
     return {
       givenData: {
-        "目標函數": `Max Z = c1*x1 + ${c2}*x2`,
-        "邊界斜率": "m1 = -1/2, m2 = -2"
+        "目標函數": `$\\text{Max } Z = c_1 x_1 + ${c2} x_2$`,
+        "邊界斜率": "$m_1 = -1/2, \\quad m_2 = -2$"
       },
-      questionPrompt: `承接線性規劃：$\\text{Max } Z = c_1 x_1 + ${c2} x_2$，最佳頂點落在點 $D(6, 4)$，該點由兩條緊縮邊界 $x_1 + 2 x_2 = 14$（斜率 $-1/2$）與 $2 x_1 + x_2 = 16$（斜率 $-2$）相交而成。\n若欲使原最佳頂點維持不變，請在紙筆上完整求出 $c_1$ 的允許變動範圍（Range of Optimality）。`,
-      fullSolution: `【動態題解】\n等利潤線斜率夾擠：\n$$-2 \\le -\\frac{c_1}{${c2}} \\le -\\frac{1}{2}$$\n同乘以 $-${c2}$（不等號轉向）：\n$$${upper} \\ge c_1 \\ge ${lower} \\iff ${lower} \\le c_1 \\le ${upper}$$`
+      questionPrompt: `承接問題：$\\text{Max } Z = c_1 x_1 + ${c2} x_2$，已知最佳頂點落在點 $D(6, 4)$，該點由兩條緊縮限制線相交而成：\n- 邊界一：$x_1 + 2 x_2 = 14$（斜率 $m_1 = -1/2$）\n- 邊界二：$2 x_1 + x_2 = 16$（斜率 $m_2 = -2$）\n若欲使原最佳頂點 $D(6, 4)$ 維持不變，請求出目標函數係數 $c_1$ 的允許變動範圍（Range of Optimality）。`,
+      formulaHint: `-2 \\le -\\frac{c_1}{${c2}} \\le -\\frac{1}{2} \\iff ${lower} \\le c_1 \\le ${upper}`,
+      fullSolution: `【動態題解】\n1. 目標線斜率：$m_Z = -\\frac{c_1}{${c2}}$。\n2. 斜率夾擠不等式：\n$$-2 \\le -\\frac{c_1}{${c2}} \\le -\\frac{1}{2}$$\n3. 兩端同乘 ($-${c2}$)（不等號反向）：\n$$${upper} \\ge c_1 \\ge ${lower} \\iff ${lower} \\le c_1 \\le ${upper}$$\n故 $c_1$ 允許變動範圍為 $[${lower}, ${upper}]$。`
     };
   },
 
@@ -2517,17 +2576,18 @@ const DYNAMIC_GENERATORS = {
     const c2_list = [30, 24, 36, 45, 20];
     const c2 = c2_list[Math.floor(Math.random() * c2_list.length)];
     const upper = c2 * 2;
+    const lower = Math.round((c2 * 2 / 3) * 10) / 10;
     return {
       givenData: {
-        "目標函數": `Max Z = c1*x1 + ${c2}*x2`,
-        "限制線 1 斜率": "-2/3",
-        "限制線 2 斜率": "-2"
+        "目標函數": `$\\text{Max } Z = c_1 x_1 + ${c2} x_2$`,
+        "限制線 1 斜率 $m_1$": "$-2/3$",
+        "限制線 2 斜率 $m_2$": "$-2$"
       },
-      questionPrompt: `工廠生產利潤極大化：$\\text{Max } Z = c_1 x_1 + ${c2} x_2$。最佳解落在斜率分別為 $-2/3$ 與 $-2$ 的兩條緊縮限制線交點頂點上。根據斜率夾擠準則（$-2 \\le -\\frac{c_1}{${c2}} \\le -\\frac{2}{3}$），請計算產品 1 單位利潤 $c_1$ 之「容許變動上限」。`,
+      questionPrompt: `某工廠求解生產利潤極大化：$\\text{Max } Z = c_1 x_1 + ${c2} x_2$。最佳解落在斜率分別為 $-2/3$ 與 $-2$ 的兩條緊縮限制線交點頂點上。根據斜率夾擠準則（$-2 \\le -\\frac{c_1}{${c2}} \\le -2/3$），請計算產品 1 單位利潤 $c_1$ 保持該頂點為最佳解之「容許變動上限」。`,
       correctAnswer: upper,
       unitLabel: "元",
       tolerance: 0.1,
-      fullSolution: `【動態題解】\n由 $-2 \\le -\\frac{c_1}{${c2}}$ 同乘 $-${c2}$ 得 $c_1 \\le 2 \\times ${c2} = ${upper}$。\n故 $c_1$ 變動上限為 ${upper} 元。`
+      fullSolution: `【動態題解】\n1. 斜率夾擠不等式：\n$$-2 \\le -\\frac{c_1}{${c2}} \\le -\\frac{2}{3}$$\n2. 兩端同乘 ($-${c2}$)（反向）：\n$$${upper} \\ge c_1 \\ge ${lower} \\iff ${lower} \\le c_1 \\le ${upper}$$\n故 $c_1$ 容許變動上限為 ${upper} 元。`
     };
   },
 
@@ -2540,10 +2600,10 @@ const DYNAMIC_GENERATORS = {
     const pick = sets[Math.floor(Math.random() * sets.length)];
     return {
       givenData: {
-        "各廠區面積上限": `A: ${pick.A}, B: ${pick.B}, C: ${pick.C} 公頃`,
+        "各廠區面積上限": `A: $${pick.A}$, B: $${pick.B}$, C: $${pick.C}$ 公頃`,
         "公平比例條件": `(xA1+xA2)/${pick.A} = (xB1+xB2)/${pick.B} = (xC1+xC2)/${pick.C}`
       },
-      questionPrompt: `【情境描述】科學園區管委會為 A、B、C 三個廠區規劃生產面積，廠房面積分別為 A: ${pick.A}、B: ${pick.B}、C: ${pick.C} 公頃。【公平條款】**三個廠區各自的「總生產面積與其廠房面積」的比例要求完全相等**。\n請在紙筆上完整寫出該公平比例限制式之無分母線性化等式。`,
+      questionPrompt: `【情境描述】科學園區管委會為 A、B、C 三個廠區規劃生產面積，廠房面積分別為 A: $${pick.A}$、B: $${pick.B}$、C: $${pick.C}$ 公頃。【公平條款】**三個廠區各自的「總生產面積與其廠房面積」的比例要求完全相等**。\n請在紙筆上完整寫出該公平比例限制式之無分母線性化等式。`,
       fullSolution: `【動態題解】\n連比例式：\n$$\\frac{x_{A1} + x_{A2}}{${pick.A}} = \\frac{x_{B1} + x_{B2}}{${pick.B}} = \\frac{x_{C1} + x_{C2}}{${pick.C}}$$\n交叉相乘線性化：\n1. A 與 B 比：$$${pick.B}(x_{A1} + x_{A2}) - ${pick.A}(x_{B1} + x_{B2}) = 0$$\n2. B 與 C 比：$$${pick.C}(x_{B1} + x_{B2}) - ${pick.B}(x_{C1} + x_{C2}) = 0$$`
     };
   },
@@ -2553,25 +2613,25 @@ const DYNAMIC_GENERATORS = {
       { shadow: 250, delta: 40, cost: 6000, net: 4000 },
       { shadow: 300, delta: 50, cost: 8000, net: 7000 },
       { shadow: 200, delta: 60, cost: 7000, net: 5000 },
-      { shadow: 400, delta: 30, cost: 5000, net: 7000 }
+      { shadow: 400, delta: 30, cost: 5000, net: 7000 },
+      { shadow: 150, delta: 30, cost: 3000, net: 1500 }
     ];
     const pick = combos[Math.floor(Math.random() * combos.length)];
     const gross = pick.shadow * pick.delta;
     return {
       givenData: {
-        "機時影子價格": `${pick.shadow} 元/小時`,
-        "可擴充機時上限": `${pick.delta} 小時`,
-        "擴充總固定成本": `${pick.cost.toLocaleString()} 元`
+        "機時影子價格": `$${pick.shadow}$ 元/小時`,
+        "可擴充機時上限": `$${pick.delta}$ 小時`,
+        "擴充總固定成本": `$${pick.cost.toLocaleString()}$ 元`
       },
-      questionPrompt: `某機械製造商最佳解總利潤為 45,000 元。敏感度報表顯示：組裝機時上限的影子價格為每小時 ${pick.shadow} 元（允許增加量為 80 小時）。現有外包商報價以總成本 ${pick.cost.toLocaleString()} 元提供額外 ${pick.delta} 小時機時。請計算接受此外包擴充方案能為公司帶來的「淨利潤增額」（元）。`,
+      questionPrompt: `【💡 核心觀念深探：什麼是影子價格（Shadow Price / 雙偶價格）？】\n1. 經濟學定義：在其他條件不變下，當某一限制式的右邊常數（資源擁有量 RHS, $b_i$）每放寬增加 1 單位時，目標函數值（最佳總利潤 $Z^*$）所能獲得的最大增加量（邊際價值 $\\frac{\\partial Z^*}{\\partial b_i}$）。\n2. 緊縮 vs. 鬆弛（互補鬆弛性）：瓶頸資源影子價格 $> 0$；富餘閒置資源影子價格恆為 $0$！\n3. 商務決策評估：淨利潤增加額 $= (\\text{影子價格} \\times \\Delta b) - \\text{取得資源之額外成本}$。\n\n【本題實戰情境】\n某機械製造商最佳解總利潤為 45,000 元。敏感度報表顯示：組裝機時上限的影子價格為每小時 $${pick.shadow}$ 元（允許增加量充足）。現有外包商報價以總成本 $${pick.cost.toLocaleString()}$ 元提供額外 $${pick.delta}$ 小時組裝工時。請問若採購此外包產能，公司獲得之「淨利潤增加額」（元）為多少？`,
       correctAnswer: pick.net,
       unitLabel: "元",
       tolerance: 1.0,
-      fullSolution: `【動態題解】\n1. 產能擴充帶來之毛利增加：\n   $$${pick.shadow} \\times ${pick.delta} = ${gross}\\text{ 元}$$\n2. 扣除擴充成本：\n   $$${gross} - ${pick.cost} = ${pick.net}\\text{ 元}$$`
+      fullSolution: `【動態題解】\n1. 毛利增加額：\n$$\\Delta Z_{gross} = \\text{影子價格} \\times \\Delta b = ${pick.shadow} \\times ${pick.delta} = ${gross.toLocaleString()}\\text{ 元}$$\n2. 扣除固定外包成本：\n$$\\text{淨利潤增加額} = ${gross.toLocaleString()} - ${pick.cost.toLocaleString()} = ${pick.net.toLocaleString()}\\text{ 元}$$`
     };
   },
 
-  // ==========================================
   // 單元六：不確定情況下之決策準則
   // ==========================================
   "q-u6-l2-01": function(q) {

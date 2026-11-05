@@ -50,6 +50,7 @@ class SilentHandler(http.server.SimpleHTTPRequestHandler):
     def log_message(self, format, *args):
         pass
 
+socketserver.TCPServer.allow_reuse_address = True
 httpd = socketserver.TCPServer(("", PORT), SilentHandler)
 t = threading.Thread(target=httpd.serve_forever, daemon=True)
 t.start()
@@ -60,6 +61,7 @@ cmd = [
     edge_path,
     "--headless",
     "--disable-gpu",
+    "--virtual-time-budget=5000",
     "--dump-dom",
     f"http://127.0.0.1:{PORT}/temp_test3.html"
 ]
