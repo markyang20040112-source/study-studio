@@ -2160,11 +2160,9 @@ function createQuestionCard(q, originalQ, indexNum) {
   let interactiveHtml = "";
 
   if (q.type === "mcq") {
-    // 依題庫規範選項順序渲染並快取，確保選項代號 (A, B, C, D) 與詳解剖析 100% 吻合
-    if (!mcqOptionShuffledCache[originalQ.id]) {
-      mcqOptionShuffledCache[originalQ.id] = [...(q.options || [])];
-    }
-    const options = mcqOptionShuffledCache[originalQ.id];
+    // 依題庫規範標準選項順序 (A, B, C, D) 渲染並同步快取，確保選項代號與詳解剖析 100% 絕對吻合
+    mcqOptionShuffledCache[originalQ.id] = [...(q.options || [])];
+    const options = q.options || [];
 
     interactiveHtml = `
       <div class="options-container" id="options-${originalQ.id}">
@@ -2513,6 +2511,7 @@ window.randomizeCardParam = function (qId, dynamicType) {
 
   const merged = { ...originalQ, ...dynamicQ };
   dynamicQuestionCache[qId] = merged;
+  delete mcqOptionShuffledCache[qId];
 
   // 徹底重置作答狀態為未作答，讓使用者有機會在新題目贏得 🟢 已精通
   StudyStorage.updateQuestionState(qId, {
